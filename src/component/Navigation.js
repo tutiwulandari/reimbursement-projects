@@ -1,5 +1,7 @@
 import React from "react";
 import { Nav, Navbar} from "react-bootstrap";
+import {faHome, faLock, faSignInAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Navigation() {
         return(
@@ -8,11 +10,11 @@ export default function Navigation() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/" style={{color:"white"}}>Home</Nav.Link>
+                            <Nav.Link href="/" style={{color:"white"}}><FontAwesomeIcon icon={faHome}/> Home</Nav.Link>
                             <Nav.Link href="/petunjuk" style={{color:"white"}}>Guide</Nav.Link>
 
                         </Nav>
-                        <Nav.Link href="/register" style={{color:"white"}}>Register/Login</Nav.Link>
+                        <Nav.Link href="/register" style={{color:"white"}}><FontAwesomeIcon icon={faSignInAlt}/> Register/Login</Nav.Link>
                     </Navbar.Collapse>
                 </Navbar>
 
