@@ -13,13 +13,13 @@ const ForgetPassword = (props) => {
                <div>
                    <a className="pass" onClick={toggle} href="#" style={{textAlign:"right", color:"#292961"}}>
                        Forget Password?</a>
-                   <Modal isOpen={modal} toggle={toggle} className={className}>
-                       <ModalHeader toggle={toggle} color="#292961">Forget Password</ModalHeader>
+                   <Modal isOpen={modal} toggle={toggle} className={className} >
+                       <ModalHeader toggle={toggle} color="#292961" style={{fontWeight:"bold",fontSize:"20px"}}>Forget Password?</ModalHeader>
                        <Form className="forget" >
                            <formgroup>
-                               <input type="text" name="email"/>
-                               <label htmlFor="email"><br/>Email</label>
-                               <span>enter your email</span>
+                               <label htmlFor="email" style={{marginTop:"-30px", fontSize:"18px", width:"300px"}}><br/>Email</label>
+                               <br/>
+                               <input type="text" name="email" style={{borderRadius:"20px",width:"400px"}}/>
                            </formgroup>
                        </Form>
 

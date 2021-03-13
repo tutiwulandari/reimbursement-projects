@@ -16,7 +16,7 @@ import Dashboard from "./component/Dashboard";
 function App() {
     return (
         <>
-
+            {/*<Dashboard/>*/}
             <BrowserRouter>
                 <Switch>
                     <Navigation/>

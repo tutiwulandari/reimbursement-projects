@@ -26,11 +26,7 @@ export default function Jumb() {
                             <Card style={{width: '18rem'}}>
                                 <Card.Img variant="top" src={Image2}/>
                                 <Card.Body>
-                                    <Card.Title>Glasses Claim</Card.Title>
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
-                                    </Card.Text>
+                                    <Card.Title style={{textAlign:"center"}}>Glasses Claim</Card.Title>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -38,11 +34,7 @@ export default function Jumb() {
                             <Card style={{width: '18rem', marginLeft: "-30px"}}>
                                 <Card.Img variant="top" src={Image3}/>
                                 <Card.Body>
-                                    <Card.Title>Birthing Claims</Card.Title>
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
-                                    </Card.Text>
+                                    <Card.Title style={{textAlign:"center"}}>Birthing Claims</Card.Title>
                                 </Card.Body>
                             </Card>
 
@@ -51,11 +43,7 @@ export default function Jumb() {
                             <Card style={{width: '18rem', marginLeft: "-80px"}}>
                                 <Card.Img variant="top" src={Image4}/>
                                 <Card.Body>
-                                    <Card.Title>Official travel Claims</Card.Title>
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
-                                    </Card.Text>
+                                    <Card.Title style={{textAlign:"center"}}>Official travel Claims</Card.Title>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -64,17 +52,11 @@ export default function Jumb() {
                             <Card style={{width: '18rem', marginLeft: "-100px"}}>
                                 <Card.Img variant="top" src={Image5}/>
                                 <Card.Body>
-                                    <Card.Title>Training Claims</Card.Title>
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the bulk of
-                                        the card's content.
-                                    </Card.Text>
+                                    <Card.Title style={{textAlign:"center"}}>Training Claims</Card.Title>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
-
-
         </div>
     )
 }
