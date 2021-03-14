@@ -14,7 +14,7 @@ export default function Login() {
     let responseGoogle = response => {
         const email = response.profileObj.email;
         console.log(email);
-        
+
         if (emailUser.includes(email)) {
             alert("Login Success")
         } else {
@@ -49,6 +49,8 @@ export default function Login() {
                     </Form>
                 </Col>
                 <Col>
+                    <a href="/dashboard" className="btn btn-primary" style={button}> Sign In</a>
+                    <br />
                     <GoogleLogin
                         clientId="567435085483-fstc21l8q7cvorh36pggrq6cjlpm46o1.apps.googleusercontent.com"
                         buttonText="Login"
@@ -57,7 +59,6 @@ export default function Login() {
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                    <a href="/dashboard" className="btn btn-primary" style={button}> Sign In</a>
                     <ForgetPassword />
                 </Col>
             </div>
