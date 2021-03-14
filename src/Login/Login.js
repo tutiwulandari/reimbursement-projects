@@ -71,7 +71,7 @@ export default class Login extends Component {
 
     render() {
         return(
-            <main style={{backgroundColor:"#F0F3F6"}}>
+            <main style={{backgroundColor:"white", marginTop:"100px"}}>
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5" >
                 <Container>
                     <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})`}} >
@@ -110,7 +110,7 @@ export default class Login extends Component {
                                             <div className="text-danger">{this.state.errors.password}</div>
                                         </Form.Group>
                                         <Button  type="submit" value="Sign In"
-                                                 style={{backgroundColor:"#292961", color:"white", fontSize:"15px", width:"300px"}}>
+                                                 style={{backgroundColor:"#292961", color:"white", fontSize:"15px", width:"300px", marginBottom:"20px"}}>
                                             Sign In
                                         </Button>
 

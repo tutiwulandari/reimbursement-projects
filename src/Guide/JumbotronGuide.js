@@ -9,7 +9,7 @@ export default function JumbotronGuide() {
         <div style={{display:"flex", justifyContent:"center"}}>
             <Jumbotron style={{backgroundColor:"white"}}>
                 <h2 style={{textAlign:"center",color:"#292961"}}>HOW TO SUBMIT A CLAIM REIMBURSEMENT</h2>
-                <p style={{textAlign:"center"}}> “Straight, simple and to the point – five easy steps to help you efficiently file a health insurance claim.”</p>
+                <p style={{textAlign:"center", fontSize:"revert"}}> “Straight, simple and to the point – three easy steps to help you efficiently file a health insurance claim.”</p>
                 <Row>
                      <Col style={{marginLeft:"100px"}}>
                        <img src={Receipts} alt="receipts"/>
@@ -27,7 +27,7 @@ export default function JumbotronGuide() {
                     </Col>
                     <Col>
                         <h3 className="float-right" style={{marginRight:"450px", marginTop:"50px"}}> STEP 2</h3>
-                        <p style={{marginTop:"100px", marginLeft:"100px", fontWeight:"bold"}}> Complete A Claim Form </p>
+                        <p style={{marginTop:"100px", marginLeft:"100px", fontWeight:"bold"}}> Complete A ClaimForm </p>
                         <p> input your name, your position and upload receipts</p>
                     </Col>
                 </Row>
