@@ -13,7 +13,7 @@ export default function Login() {
 
     let responseGoogle = response => {
         const email = response.profileObj.email;
-        console.log(email);
+        console.log(response.profileObj);
 
         if (emailUser.includes(email)) {
             alert("Login Success")
