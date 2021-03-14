@@ -1,11 +1,28 @@
 import React from "react";
-import {Button, Form, FormControl, InputGroup, Row} from "react-bootstrap";
-import {Col, Input, Label} from "reactstrap";
+import { Button, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Col, Input, Label } from "reactstrap";
 import Avatar from "../image/undraw_Profile_data_re_v81r.svg"
 import ForgetPassword from "./ForgetPassword";
+import GoogleLogin from 'react-google-login';
 
 export default function Login() {
-    return(
+
+    const button = { backgroundColor: "#292961", marginBottom: "20px", width: "120px", borderRadius: "20px" }
+
+    const emailUser = ["arsytamawisa@gmail.com", "solehsolihin2021@gmail.com"]
+
+    let responseGoogle = response => {
+        const email = response.profileObj.email;
+        console.log(email);
+        
+        if (emailUser.includes(email)) {
+            alert("Login Success")
+        } else {
+            alert("Login Failed")
+        }
+    }
+
+    return (
         <div className="content shadow p-4 mb-6 bg-white rounded" >
             <div>
                 <Col>
@@ -29,12 +46,19 @@ export default function Login() {
                                 <FormControl id="inlineFormInputGroup" type="password" />
                             </InputGroup>
                         </Form.Group>
-                        <a href="/dashboard" className="btn btn-primary" style={{backgroundColor:"#292961", marginBottom:"20px", width:"120px", borderRadius:"20px"}}  >
-                            Sign In
-                        </a>
-                        <ForgetPassword/>
-
                     </Form>
+                </Col>
+                <Col>
+                    <GoogleLogin
+                        clientId="567435085483-fstc21l8q7cvorh36pggrq6cjlpm46o1.apps.googleusercontent.com"
+                        buttonText="Login"
+                        className="btn-google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                    <a href="/dashboard" className="btn btn-primary" style={button}> Sign In</a>
+                    <ForgetPassword />
                 </Col>
             </div>
         </div>
