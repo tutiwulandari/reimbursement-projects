@@ -12,14 +12,15 @@ const ForgetPassword = (props) => {
         return(
                <div>
                    <a className="pass" onClick={toggle} href="#" style={{textAlign:"right", color:"#292961"}}>
-                       Forget Password?</a>
+                       Forgot Password?</a>
                    <Modal isOpen={modal} toggle={toggle} className={className} >
-                       <ModalHeader toggle={toggle} color="#292961" style={{fontWeight:"bold",fontSize:"20px"}}>Forget Password?</ModalHeader>
+                       <ModalHeader toggle={toggle} color="#292961" style={{fontWeight:"bold",fontSize:"20px"}}>Forgot your password?</ModalHeader>
                        <Form className="forget" >
                            <formgroup>
-                               <label htmlFor="email" style={{marginTop:"-30px", fontSize:"18px", width:"300px"}}><br/>Email</label>
+                               <p> Don't fret! Just type in your email and we will send you a code to reset your password!</p>
+                               <label htmlFor="email" style={{marginTop:"-30px", fontSize:"18px", width:"300px", fontWeight:"bold"}}><br/>Your Email</label>
                                <br/>
-                               <input type="text" name="email" style={{borderRadius:"20px",width:"400px"}}/>
+                               <input type="text" name="email" style={{width:"400px"}} placeholder="example@company.com"/>
                            </formgroup>
                        </Form>
 

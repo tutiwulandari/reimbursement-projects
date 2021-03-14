@@ -1,9 +1,9 @@
-import Jumb from "./Jumb";
+import JumbotronHome from "./JumbotronHome";
 
 export default function Home() {
     return(
         <div>
-            <Jumb/>
+            <JumbotronHome/>
         </div>
     )
 }

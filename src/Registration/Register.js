@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Col, Row, Form, InputGroup, FormControl} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAt, faCheck, faLock} from "@fortawesome/free-solid-svg-icons";
-import validate from "./Validation";
+import {faCheck, faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
 
 
 export default class Register extends Component {
@@ -26,7 +25,7 @@ export default class Register extends Component {
     handleSubmit(event) {
         event.preventDefault()
 
-        if (validate()) {
+        if (this.validate()) {
             console.log(this.state)
 
             let input = {};
@@ -38,7 +37,44 @@ export default class Register extends Component {
             alert('Demo form is Submitted')
         }
     }
+    validate() {
+        let input = this.state.input;
+        let errors = {};
+        let isValid = true;
 
+        if (!input["email"]) {
+            isValid = false;
+            errors["email"] = "Please enter your email address.";
+        }
+        if (typeof input["email"] !== "undefined") {
+            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(input["email"])) {
+                isValid = false;
+                errors["email"] = "Please enter valid email address.";
+            }
+        }
+        if (!input["password"]) {
+            isValid = false;
+            errors["password"] = "Please enter your password.";
+        }
+
+        if (!input["confirm_password"]) {
+            isValid = false;
+            errors["confirm_password"] = "Please enter your confirm password.";
+        }
+
+        if (typeof input["password"] !== "undefined" && typeof input["confirm_password"] !== "undefined") {
+
+            if (input["password"] !== input["confirm_password"]) {
+                isValid = false;
+                errors["password"] = "Passwords don't match.";
+            }
+        }
+        this.setState({
+            errors: errors
+        });
+        return isValid
+    }
 
 
 
@@ -64,14 +100,14 @@ export default class Register extends Component {
                                                 {/*<Form.Label>Email</Form.Label>*/}
                                                 <InputGroup className="mb-2">
                                                     <InputGroup.Prepend>
-                                                        <InputGroup.Text><FontAwesomeIcon icon={faAt}/>
+                                                        <InputGroup.Text><FontAwesomeIcon icon={faEnvelope}/>
                                                         </InputGroup.Text>
                                                     </InputGroup.Prepend>
                                                     <FormControl id="email" type="email"
                                                                  name="email"
                                                                  value={this.state.input.email}
                                                                  onChange={this.handleChange}
-                                                    placeholder="Enter Email"/>
+                                                    placeholder="example@company.com"/>
                                                 </InputGroup>
                                                 <div className="text-danger">{this.state.errors.email}</div>
                                                 <InputGroup className="mb-2">
@@ -81,7 +117,7 @@ export default class Register extends Component {
                                                     </InputGroup.Prepend>
                                                     <FormControl id="password" type="password"
                                                                  name="password"
-                                                                 placeholder="Enter password"
+                                                                 placeholder="Password"
                                                                  value={this.state.input.password}
                                                                  onChange={this.handleChange}/>
                                                 </InputGroup>
@@ -99,7 +135,7 @@ export default class Register extends Component {
                                                     placholder="Enter confirm password"
                                                     value={this.state.input.confirm_password}
                                                     onChange={this.handleChange}
-                                                    placeholder="Enter confirm password"/>
+                                                    placeholder="Confirm password"/>
                                                 </InputGroup>
                                                 <div className="text-danger">{this.state.errors.confirm_password}</div>
                                             </Form.Group>

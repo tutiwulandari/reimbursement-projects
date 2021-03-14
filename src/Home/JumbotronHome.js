@@ -5,12 +5,12 @@ import Image3 from "../image/pregnant.png"
 import Image4 from "../image/perjalanan_dinas.png"
 import Image5 from "../image/training.jpg"
 
-export default function Jumb() {
+export default function JumbotronHome() {
     return (
-        <div style={{padding: "50px"}}>
+        <div style={{padding: "50px", backgroundColor:"#F0F3F6"}}>
             <img src={Image} className="float-right" alt="reimbursement"
                  style={{padding: "10px", marginRight: "80px", marginTop: "30px"}}/>
-            <Jumbotron style={{backgroundColor: "snowflake"}}>
+            <Jumbotron style={{backgroundColor: "white"}}>
                 <Container>
                     <h1><b>Claims, Payment & Reimbursement</b></h1>
                     <p style={{fontStyle: "italic"}}> Convenient tools and guidelines to help you get reimbursement
@@ -21,7 +21,7 @@ export default function Jumb() {
                 </Container>
             </Jumbotron>
 
-                    <Row >
+                    <Row style={{display:"flex", justifyContent:"space-beetween"}}>
                         <Col className="d-flex align-items-stretch">
                             <Card style={{width: '18rem'}}>
                                 <Card.Img variant="top" src={Image2}/>
