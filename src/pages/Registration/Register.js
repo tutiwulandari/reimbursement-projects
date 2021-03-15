@@ -36,7 +36,7 @@ function Register({ registerEmployee, login }) {
     /* Change Path */
 
     useEffect(() => {
-        if(login) {
+        if (login) {
             console.log(login);
             if (login.data.data.code == 200) {
                 Swal.fire({
@@ -45,17 +45,17 @@ function Register({ registerEmployee, login }) {
                     text: 'Registration success..',
                     showConfirmButton: false,
                     timer: 1000,
-                  })
+                })
                 //   history.push('/login')
-                }
-                else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Ooopss..',
-                        text: 'Something went wrong!',
-                        showConfirmButton: false,
-                        timer: 2000,
-                    })
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooopss..',
+                    text: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             }
         }
     }, [login])
@@ -84,6 +84,7 @@ function Register({ registerEmployee, login }) {
         setInput(data)
         /* Set Input */
 
+        /* Just set data if changes email or password */
         if (key == "email" || key == "password") {
             setData({ ...data, [key]: value })
         }
@@ -98,12 +99,7 @@ function Register({ registerEmployee, login }) {
             error_["email"] = "Please enter your email address.";
         }
 
-        if (typeof password == "undefined" || password == "") {
-            isValid_ = false;
-            error_["password"] = "Please enter your password.";
-        }
-
-        if(password.length < 8) {
+        if (password.length < 8) {
             isValid_ = false;
             error_["password"] = "Password minimum at least 8 characters.";
         }
@@ -119,7 +115,7 @@ function Register({ registerEmployee, login }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        
+
         if (validate()) {
             console.log(data);
             registerEmployee(data)
@@ -208,7 +204,7 @@ function Register({ registerEmployee, login }) {
 /* Reducer */
 const mapStateToProps = (state) => {
     return {
-        login : state.registerEmployees.data
+        login: state.registerEmployees.data
     }
 }
 
