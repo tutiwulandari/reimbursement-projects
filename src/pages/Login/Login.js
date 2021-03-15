@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Avatar from "../image/undraw_Profile_data_re_v81r.svg"
+import Avatar from "../../assets/image/undraw_Profile_data_re_v81r.svg"
 import ForgetPassword from "./ForgetPassword";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
-import BgImage from "../image/signin.svg"
+import BgImage from "../../assets/image/signin.svg"
 import {Row, Col, FormControl,Container, InputGroup, Form, Button} from "@themesberg/react-bootstrap";
 
 const element = <FontAwesomeIcon icon={faUser} />
@@ -72,10 +72,10 @@ export default class Login extends Component {
     render() {
         return(
             <main style={{backgroundColor:"white", marginTop:"100px"}}>
-            <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5" >
-                <Container>
-                    <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})`}} >
-                        <Col xs={5} className="d-flex align-items-center justify-content-center">
+                <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5" >
+                    <Container>
+                        <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})`}} >
+                            <Col xs={5} className="d-flex align-items-center justify-content-center">
                                 <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">
                                     <div className="text-center text-md-center mb-4 mt-md-0">
                                         <h3 className="mb-0">Sign in</h3>
@@ -121,10 +121,10 @@ export default class Login extends Component {
                                     </Form>
                                 </div>
 
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
+                            </Col>
+                        </Row>
+                    </Container>
+                </section>
             </main>
         )
     }

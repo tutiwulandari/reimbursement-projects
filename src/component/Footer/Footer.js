@@ -56,8 +56,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-
-
             <div className="container">
                 <ul className="foote_bottom_ul_amrc">
                     <li><a href="http://webenlance.com">Home</a></li>

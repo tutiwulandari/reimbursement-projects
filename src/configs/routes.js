@@ -1,7 +1,7 @@
-import Home from "../Home/Home";
-import Register from "../Registration/Register";
-import Login from "../Login/Login";
-import Guide from "../Guide/Guide";
+import Home from "../pages/Home/Home";
+import Register from "../pages/Registration/Register";
+import Login from "../pages/Login/Login";
+import Guide from "../pages/Guide/Guide";
 import Dashboard from "../component/Dashboard";
 
 export default  [
