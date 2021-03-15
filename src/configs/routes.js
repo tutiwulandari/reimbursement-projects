@@ -3,6 +3,7 @@ import Register from "../pages/Registration/Register";
 import Login from "../pages/Login/Login";
 import Guide from "../pages/Guide/Guide";
 import Dashboard from "../component/Dashboard";
+import Success from './../pages/Registration/Success';
 
 export default  [
     {
@@ -28,6 +29,11 @@ export default  [
     {
         path: '/dahboard',
         component: <Dashboard/>,
+        exact: true
+    },
+    {
+        path: '/success-register',
+        component: <Success/>,
         exact: true
     }
 
