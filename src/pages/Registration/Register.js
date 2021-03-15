@@ -15,6 +15,7 @@ function Register({ registerEmployee, login }) {
 
     /* Styles */
     const button = { backgroundColor: "#292961", color: "white", fontSize: "15px", width: "300px", marginBottom: "20px" }
+    const textDanger = { color: "red", fontSize: "12px" }
     /* Styles */
 
     /* State */
@@ -23,6 +24,12 @@ function Register({ registerEmployee, login }) {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     /* State */
+
+    /* Validation Input */
+    const [isValid, setIsValid] = useState(true)
+    const [input, setInput] = useState({})
+    const [error, setError] = useState({})
+    /* Validation Input */
 
     /* Change Path */
     const history = useHistory();
@@ -71,14 +78,52 @@ function Register({ registerEmployee, login }) {
             default:
         }
 
+        /* Set Input */
+        let data = input
+        data[key] = value
+        setInput(data)
+        /* Set Input */
+
         if (key == "email" || key == "password") {
             setData({ ...data, [key]: value })
         }
     }
 
+    function validate() {
+        let error_ = {};
+        let isValid_ = true;
+
+        if (!email) {
+            isValid_ = false;
+            error_["email"] = "Please enter your email address.";
+        }
+
+        if (typeof password == "undefined" || password == "") {
+            isValid_ = false;
+            error_["password"] = "Please enter your password.";
+        }
+
+        if(password.length < 8) {
+            isValid_ = false;
+            error_["password"] = "Password minimum at least 8 characters.";
+        }
+
+        if (password !== confirmPassword) {
+            isValid_ = false;
+            error_["confirm_password"] = "Please check your password confirm";
+        }
+
+        setError(error_)
+        return isValid_
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
-        registerEmployee(data)
+        
+        if (validate()) {
+            console.log(data);
+            registerEmployee(data)
+        }
     }
 
     return (
@@ -108,7 +153,7 @@ function Register({ registerEmployee, login }) {
                                                 placeholder="Enter email"
                                             />
                                         </InputGroup>
-                                        {/* <div className="text-danger">{errorEmail}</div> */}
+                                        <div style={textDanger}>{error.email}</div>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail" className="mb-2" style={{ width: "300px" }}>
                                         <Form.Label>Password</Form.Label>
@@ -125,7 +170,7 @@ function Register({ registerEmployee, login }) {
                                                 placeholder="Enter Password"
                                             />
                                         </InputGroup>
-                                        {/* <div className="text-danger">{errorPassword}</div> */}
+                                        <div style={textDanger}>{error.password}</div>
                                     </Form.Group>
 
                                     <Form.Group controlId="formConfPass" className="mb-2">
@@ -142,7 +187,7 @@ function Register({ registerEmployee, login }) {
                                                 onChange={handleChange}
                                                 placeholder="Re-enter your Password" />
                                         </InputGroup>
-                                        {/* <div className="text-danger">{errorPasswordConfirm}</div> */}
+                                        <div style={textDanger}>{error.confirm_password}</div>
                                     </Form.Group>
 
                                     <Button type="submit" value="Sign Up" style={button}> Sign In </Button>
