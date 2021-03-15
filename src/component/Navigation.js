@@ -5,7 +5,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Navigation() {
         return(
-
                  <Navbar style={{backgroundColor:"#292961"}} expand="lg">
                      <Navbar.Brand href="#home" style={{color:"white"}}>ENIGMA CAMP</Navbar.Brand>
                      <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,7 +17,5 @@ export default function Navigation() {
                          <Nav.Link href="/register" style={{color:"white"}}><FontAwesomeIcon icon={faSignInAlt}/> Register/Login</Nav.Link>
                      </Navbar.Collapse>
                  </Navbar>
-
-
         )
     }
