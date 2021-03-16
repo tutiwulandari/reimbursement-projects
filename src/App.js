@@ -1,33 +1,36 @@
-import Register from "./component/Register";
-import './style/Register.css'
-import './style/Login.css'
-import './style/Forget.css'
+import './assets/css/Register.css'
+import './assets/css/Forget.css'
+import './assets/css/Login.css'
+import './component/Footer/Footer.css'
+import './Latihan/LatihanLogin.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import './assets/css/Dashboard.css'
+import './assets/css/Form.css'
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
-import Login from "./component/Login";
 import React from "react";
 import Navigation from "./component/Navigation";
-import Home from "./component/Home";
-import Petunjuk from "./component/Petunjuk";
-import Dashboard from "./component/Dashboard";
+import routes from "./configs/routes";
+import Dashboard from "./SideBar/Dashboard";
+import FormElement from "./pages/Registration/Form/FormElement";
+
 
 
 function App() {
     return (
-        <>
-
-            <BrowserRouter>
-                <Switch>
-                    <Navigation/>
-                    <Route exact path = "/" component={Home}/>
-                    <Route exact path = "/register" component={Register}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route path="/petunjuk" component={Petunjuk}  />
-                    <Route exact path="/dashboard" component={Dashboard}/>
-                </Switch>
-            </BrowserRouter>
-        </>
+        <div >
+            <FormElement/>
+            {/*<Dashboard/>*/}
+            {/*<Router >*/}
+            {/*    /!*<Navigation/>*!/*/}
+            {/*    <Switch style={{paddingLeft:"0"}}>*/}
+            {/*        {routes.map((route, index) =>*/}
+            {/*        <Route key={index} path={route.path} exact>*/}
+            {/*            {route.component}*/}
+            {/*        </Route>)}*/}
+            {/*    </Switch>*/}
+            {/*</Router>*/}
+        </div>
     );
 }
 
