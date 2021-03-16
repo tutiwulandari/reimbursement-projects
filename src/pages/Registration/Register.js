@@ -136,8 +136,6 @@ function Register({ registerEmployee, login, isLoading }) {
                     <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }} >
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">
-
-
                                 {isLoading ?
                                     <>
                                         <div className="text-center text-md-center mb-2 mt-md-0">
