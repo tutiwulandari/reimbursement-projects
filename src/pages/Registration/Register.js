@@ -10,14 +10,21 @@ import { registerEmployees } from './../../reducers/register';
 import { registerEmployee } from './../../actions/register';
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 
-function Register({ registerEmployee, login }) {
+function Register({ registerEmployee, login, isLoading }) {
 
     /* Styles */
     const button = { backgroundColor: "#292961", color: "white", fontSize: "15px", width: "300px", marginBottom: "20px" }
     const textDanger = { color: "red", fontSize: "12px" }
     /* Styles */
+
+    /* Loading */
+    const delay = 2000
+    const color = "#292961"
+    const type = "bars"
+    /* Loading */
 
     /* State */
     const [data, setData] = useState({})
@@ -155,10 +162,28 @@ const {handleChange, values, handleSubmit, errors} = useForm(
                     <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }} >
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">
-                                <div className="text-center text-md-center mb-2 mt-md-0">
-                                    <h3 className="mt-0">Create A New Account</h3>
-                                    {/*<hr/>*/}
-                                </div>
+                                {isLoading ?
+                                    <>
+                                        <div className="text-center text-md-center mb-2 mt-md-0">
+                                            <h3 className="mt-0">Please Wait a Seconds</h3>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-4">
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                            </div>
+                                            <div className="col-md-4">
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                            </div>
+                                            <div className="col-md-4">
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                            </div>
+                                        </div>
+                                    </>
+                                    :
+                                    <div className="text-center text-md-center mb-2">
+                                        <h3 className="mt-0">Registration</h3>
+                                    </div>
+                                }
                                 <Form onSubmit={handleSubmit} className="mt-3">
                                     <Form.Group controlId="formBasicUsername" className="mb-2" style={{ width: "300px" }}>
                                         <Form.Label>Email</Form.Label>
@@ -223,14 +248,15 @@ const {handleChange, values, handleSubmit, errors} = useForm(
                     </Row>
                 </Container>
             </section>
-        </main>
+        </main >
     );
 }
 
 /* Reducer */
 const mapStateToProps = (state) => {
     return {
-        login: state.registerEmployees.data
+        login: state.registerEmployees.data,
+        isLoading: state.registerEmployees.isLoading,
     }
 }
 
