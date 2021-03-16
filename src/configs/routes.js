@@ -48,7 +48,7 @@ export default  [
         path: '/success-register',
         component: <Success/>,
         exact: true 
-    }
+    },
     {
         path: '/home/sidebar',
         component: <HomeSideBar/>,

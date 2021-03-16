@@ -15,6 +15,7 @@ import FormElement from "./pages/Registration/Form/FormElement";
 import Login from "./pages/Login/Login";
 import { Provider } from 'react-redux';
 import store from './configs/store';
+import Navigation from './component/Navigation';
 
 
 
@@ -25,7 +26,7 @@ function App() {
 
             <Provider store={store}>
                 <Router >
-                    <Navigation />
+                    {/* <Navigation></Navigation> */}
                     <Switch style={{ paddingLeft: "0" }}>
                         {routes.map((route, index) =>
                             <Route key={index} path={route.path} exact>
@@ -34,7 +35,6 @@ function App() {
                     </Switch>
                 </Router>
             </Provider>
-            <FormElement/>
 
         </div>
     );
