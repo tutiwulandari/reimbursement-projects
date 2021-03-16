@@ -9,7 +9,6 @@ import './assets/css/Form.css'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
 import React from "react";
-import Navigation from "./component/Navigation";
 import routes from "./configs/routes";
 import Dashboard from "./SideBar/Dashboard";
 import FormElement from "./pages/Registration/Form/FormElement";
@@ -22,6 +21,8 @@ import store from './configs/store';
 function App() {
     return (
         <div >
+            {/*<FormElement/>*/}
+
             <Provider store={store}>
                 <Router >
                     <Navigation />
@@ -34,6 +35,7 @@ function App() {
                 </Router>
             </Provider>
             <FormElement/>
+
         </div>
     );
 }

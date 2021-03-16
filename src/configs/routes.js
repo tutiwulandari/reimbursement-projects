@@ -9,6 +9,13 @@ import HomeSideBar from "../SideBar/HomeSideBar";
 import Home from "../pages/Home/Home";
 import TableDashboar from "../SideBar/TableDashboard";
 import TableDashboard from "../SideBar/TableDashboard";
+import GlassesClaims from "../SideBar/FormClaims/GlassesClaims";
+import NavigationSideBar from "../SideBar/NavigationSideBar";
+import React from "react";
+import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
+import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
+import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
+import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
 
 
 export default  [
@@ -34,7 +41,7 @@ export default  [
     },
     {
         path: '/dashboard',
-        component: <Dashboard/>,
+        component:<Dashboard/>,
         exact: true
     },
     {
@@ -50,6 +57,34 @@ export default  [
     {
         path: '/dashboard/table',
         component: <TableDashboard/>,
+        exact: true
+    },
+    {
+        path: '/claims/glasses',
+        component: <GlassesClaims/>,
+        exact: true
+    },
+    {
+        path: '/claims/birthing',
+        component: <BirthingClaims/>,
+        exact: true
+
+    },
+
+    {
+        path: '/claims/training',
+        component: <TrainingClaims/>,
+        exact: true
+    },
+
+    {
+        path: '/claims/officeTravel',
+        component: <OfficeTravelClaims/>,
+        exact: true
+    },
+    {
+        path: '/claims/insurance',
+        component: <InsuranceClaims/>,
         exact: true
     }
 

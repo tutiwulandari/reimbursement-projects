@@ -6,7 +6,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   background: #1a1a1a;
-  color: #fff;
+  color: black;
 }
 
 .content-container {
@@ -37,7 +37,7 @@
 .sidebar-navigation li a {
   padding: 10px 15px 10px 30px;
   display: block;
-  color: #fff;
+  color: white;
 }
 
 .sidebar-navigation li .fa {
@@ -76,7 +76,7 @@
 }
 
 .sidebar-navigation .header::before {
-  background-color: transparent;
+  background-color: #292961;
 }
 
 .content-container {
