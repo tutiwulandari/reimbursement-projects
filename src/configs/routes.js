@@ -1,22 +1,21 @@
 import Register from "../pages/Registration/Register";
 import Login from "../pages/Login/Login";
 import Guide from "../pages/Guide/Guide";
-// import Dashboard from "../component/Dashboard";
 import Success from './../pages/Registration/Success';
-import Dashboard from "../SideBar/Dashboard";
-import FormElement from "../pages/Registration/Form/FormElement";
+import DashboardHc from "../SideBar/hc/DashboardHc";
 import HomeSideBar from "../SideBar/HomeSideBar";
 import Home from "../pages/Home/Home";
-import TableDashboar from "../SideBar/TableDashboard";
-import TableDashboard from "../SideBar/TableDashboard";
+import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
 import GlassesClaims from "../SideBar/FormClaims/GlassesClaims";
-import NavigationSideBar from "../SideBar/NavigationSideBar";
 import React from "react";
 import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
 import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
 import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
 import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
 import EmployeeList from "../pages/Employee";
+import EmployeeDetails from "../pages/Employee"
+import DashboardFinance from "../SideBar/finance/DashboardFinance";
+import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
 
 
 export default  [
@@ -40,9 +39,10 @@ export default  [
         component: <Guide/>,
         exact: true
     },
+    //warningggggg
     {
-        path: '/dashboard',
-        component:<Dashboard/>,
+        path: '/dashboard/hc',
+        component:<DashboardFinance/>,
         exact: true
     },
     {
@@ -57,9 +57,15 @@ export default  [
     },
     {
         path: '/dashboard/table',
-        component: <TableDashboard/>,
+        component: <TableDashboardHc/>,
         exact: true
     },
+    {
+        path: '/dashboard/table2',
+        component: <TableDashboardFinance/>,
+        exact: true
+    },
+
     {
         path: '/claims/glasses',
         component: <GlassesClaims/>,
@@ -91,6 +97,11 @@ export default  [
     {
         path: '/employee',
         component: <EmployeeList/>,
+        exact: true
+    },
+    {
+        path: '/employee/:id/details',
+        component: <EmployeeDetails/>,
         exact: true
     }
 

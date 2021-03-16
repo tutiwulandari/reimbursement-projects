@@ -1,6 +1,9 @@
 import {Container} from "reactstrap";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "@themesberg/react-bootstrap";
 
-export default function TableDashboard() {
+export default function TableDashboardHc() {
     return (
         <Container style={{marginTop: "100px"}}>
             <h3 style={{marginLeft: "50px"}}> List Of Claims</h3>
@@ -14,6 +17,7 @@ export default function TableDashboard() {
                     <th scope="col"> Fee</th>
                     <th scope="col"> Status</th>
                     <th scope="col"> Disbursement Date</th>
+                    <th scope="col"> Action </th>
 
                 </tr>
                 </thead>
@@ -26,6 +30,7 @@ export default function TableDashboard() {
                     <td>500.000</td>
                     <td>On Process HC Finance</td>
                     <td>27/03/2021</td>
+                    <td><Button style={{backgroundColor:"#BE2528"}}> <FontAwesomeIcon icon={faCheckCircle}/> </Button> </td>
 
                 </tr>
                 <tr>
@@ -36,6 +41,8 @@ export default function TableDashboard() {
                     <td>5000.000</td>
                     <td>On Process HC Finance</td>
                     <td>27/03/2021</td>
+                    <td><Button style={{backgroundColor:"#BE2528"}}> <FontAwesomeIcon icon={faCheckCircle}/> </Button> </td>
+
 
                 </tr>
                 </tbody>

@@ -2,7 +2,7 @@ import {
     REGISTER_EMPLOYEE,
     REGISTER_EMPLOYEE_SUCCESS,
     REGISTER_EMPLOYEE_FAILURE
-} from '../constants/actions'
+} from '../constants/actionConstant'
 
 
 const initialState = {

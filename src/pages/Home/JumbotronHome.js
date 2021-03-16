@@ -7,10 +7,9 @@ import Image5 from "../../assets/image/training.jpg"
 
 export default function JumbotronHome() {
     return (
-        <div style={{padding: "50px", backgroundColor:"white"}}>
-            <img src={Image} className="float-right" alt="reimbursement"
-                 style={{padding: "10px", marginRight: "140px", marginTop: "30px"}}/>
-            <Jumbotron style={{backgroundColor: "white"}}>
+        <div className="jumbotron_home">
+            <img src={Image} className="float-right" alt="reimbursement"/>
+            <Jumbotron className="jumbotron" style={{backgroundColor: "white"}}>
                 <Container>
                     <h1><b>Claims, Payment & Reimbursement</b></h1>
                     <p style={{fontStyle: "italic"}}> Convenient tools and guidelines to help you get reimbursement

@@ -1,24 +1,47 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ForgetPassword from "./ForgetPassword";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
-import {Row, Col, FormControl, Container, InputGroup, Form, Button} from "@themesberg/react-bootstrap";
-import UseForm from "./useForm";
+import {Row, Col, FormControl, Container, InputGroup, Form} from "@themesberg/react-bootstrap";
 import validate from "./validate";
-import Footer from "../../component/Footer/Footer";
 import Navigation from "../../component/Navigation";
+import IconButton from "@material-ui/core/IconButton";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {Button} from "@material-ui/core";
 
 const Login = () => {
-    const {
-        values,
-        errors,
-        handleChange,
-        handleSubmit,
-    } = UseForm(form, validate);
+    const [values, setValues] = useState( {
+        password:"",
+        showPassword:false,
+    });
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-    function form() {
-        console.log("No errors, submit callback called")
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setValues({
+            ...values,
+            [name]: value
+        });
+    };
+
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setErrors(validate(values));
+        setIsSubmitting(true)
+    }
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
     }
 
     return (
@@ -40,7 +63,7 @@ const Login = () => {
                                             <FormControl id="email"
                                                          name="email"
                                                          type="email"
-                                                         value={values.email}
+                                                         value={email}
                                                          onChange={handleChange}
                                                          placeholder="Enter email"
                                             />
@@ -53,11 +76,19 @@ const Login = () => {
                                             <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt}/></InputGroup.Text>
                                             <FormControl id="password"
                                                          name="password"
-                                                         value={errors.password}
-                                                         type="password"
+                                                         value={password}
+                                                         type={values.showPassword ? "text" : "password"}
                                                          placeholder="Enter Password"
                                                          onChange={handleChange}
                                             />
+                                            {/*<InputGroup.Prepend position="end">*/}
+                                            {/*    <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>*/}
+                                            {/*        <IconButton onClick={handleClickShowPassword}*/}
+                                            {/*                    onMouseDown={handleMouseDownPassword}>*/}
+                                            {/*            {values.showPassword ? <Visibility/> : <VisibilityOff/>}*/}
+                                            {/*        </IconButton>*/}
+                                            {/*    </InputGroup.Text>*/}
+                                            {/*</InputGroup.Prepend>*/}
                                         </InputGroup>
                                         <div className="text-danger">{errors.password}</div>
                                     </Form.Group>
@@ -72,7 +103,7 @@ const Login = () => {
                                     {/*    Sign In*/}
                                     {/*</Button>*/}
 
-                                    <a href="/dashboard" className="btn btn" type="submit" style={{backgroundColor:"#292961", marginBottom:"20px", width:"300px", fontSize:"15px", color:"white"}}  >
+                                    <a href="/dashboard/hc" className="btn btn" type="submit" style={{backgroundColor:"#292961", marginBottom:"20px", width:"300px", fontSize:"15px", color:"white"}}  >
                                         Sign In
                                     </a>
                                     <ForgetPassword/>
