@@ -1,6 +1,8 @@
 import Register from "../pages/Registration/Register";
 import Login from "../pages/Login/Login";
 import Guide from "../pages/Guide/Guide";
+// import Dashboard from "../component/Dashboard";
+import Success from './../pages/Registration/Success';
 import Dashboard from "../SideBar/Dashboard";
 import FormElement from "../pages/Registration/Form/FormElement";
 import HomeSideBar from "../SideBar/HomeSideBar";
@@ -35,6 +37,11 @@ export default  [
         component: <Dashboard/>,
         exact: true
     },
+    {
+        path: '/success-register',
+        component: <Success/>,
+        exact: true 
+    }
     {
         path: '/home/sidebar',
         component: <HomeSideBar/>,

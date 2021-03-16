@@ -39,7 +39,7 @@ function Register({ registerEmployee, login }) {
     useEffect(() => {
         if (login) {
             console.log(login);
-            if (login.data.data.code == 200) {
+            if (login.data.code == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
@@ -47,7 +47,7 @@ function Register({ registerEmployee, login }) {
                     showConfirmButton: false,
                     timer: 1000,
                 })
-                //   history.push('/login')
+                history.push('/success-register')
             }
             else {
                 Swal.fire({
