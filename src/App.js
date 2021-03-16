@@ -4,13 +4,14 @@ import './assets/css/Login.css'
 import './component/Footer/Footer.css'
 import './Latihan/LatihanLogin.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/Dashboard.css'
 import './assets/css/Form.css'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
 import React from "react";
 import Navigation from "./component/Navigation";
 import routes from "./configs/routes";
-import LatihanLogin from "./Latihan/LatihanLogin";
+import Dashboard from "./SideBar/Dashboard";
 import FormElement from "./pages/Registration/Form/FormElement";
 import Login from "./pages/Login/Login";
 import { Provider } from 'react-redux';
@@ -18,14 +19,9 @@ import store from './configs/store';
 
 
 
-
 function App() {
     return (
         <div >
-            {/*<Navigation/>*/}
-            {/*<LatihanLogin/>*/}
-
-            {/*<FormElement/>*/}
             <Provider store={store}>
                 <Router >
                     <Navigation />
@@ -37,6 +33,7 @@ function App() {
                     </Switch>
                 </Router>
             </Provider>
+            <FormElement/>
         </div>
     );
 }
