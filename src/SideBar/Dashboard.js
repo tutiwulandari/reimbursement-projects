@@ -29,7 +29,7 @@ export default function Dashboard() {
                         </a>
                     </li>
                     <li>
-                        <a href="/dashboard/table" style={{fontSize:"20px", marginTop:"20px", color:"white"}}>
+                        <a href="/employee" style={{fontSize:"20px", marginTop:"20px", color:"white"}}>
                             <i aria-hidden="true"/>
                             <FontAwesomeIcon icon={faHistory}/> History
                         </a>

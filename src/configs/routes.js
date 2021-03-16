@@ -16,6 +16,7 @@ import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
 import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
 import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
 import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
+import EmployeeList from "../pages/Employee";
 
 
 export default  [
@@ -85,6 +86,11 @@ export default  [
     {
         path: '/claims/insurance',
         component: <InsuranceClaims/>,
+        exact: true
+    },
+    {
+        path: '/employee',
+        component: <EmployeeList/>,
         exact: true
     }
 
