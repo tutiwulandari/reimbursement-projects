@@ -23,8 +23,8 @@ const ReimburseRow = ({ data, index }) => {
             <td>{data.employeeId.fullname}</td>
             <td>
                 {
-                    data.statusSuccess == true ? "Success" :
-                        <select className="custom-select" id="exampleFormControlSelect1">
+                    data.statusSuccess == true ? <span className="btn btn-outline-success">Success</span> :
+                        <select className="custom-select td-width">
                             <option selected={data.statusOnHc == true}> Waiting</option>
                             <option selected={data.statusOnFinance == true}> Accepted</option>
                             <option selected={data.statusReject == true}> Rejected </option>
