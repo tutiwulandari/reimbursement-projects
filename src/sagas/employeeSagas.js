@@ -30,11 +30,11 @@ function* findAllEmployee() {
 
 function* findEmployeeById(action) {
     console.log("findEmployee sagas")
-    let result = yield axios.get(`employee/${action.id}`)
+    let result = yield axios.get(`/employee/${action.id}`)
         .then(response => {
-            console.log("INI SAGAS", response)
+            console.log("FIND BY ID", response)
             return({
-                type:FIND_EMPLOYEE_BY_ID,
+                type:FIND_EMPLOYEE_BY_ID_SUCCESS,
                 data: response.data
             })
         })

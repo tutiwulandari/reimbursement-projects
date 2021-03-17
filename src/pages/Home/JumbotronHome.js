@@ -7,18 +7,20 @@ import Image5 from "../../assets/image/training.jpg"
 
 export default function JumbotronHome() {
     return (
-        <div className="jumbotron_home">
-            <img src={Image} className="float-right" alt="reimbursement"/>
-            <Jumbotron className="jumbotron" style={{backgroundColor: "white"}}>
+        <div style={{padding: "50px", backgroundColor:"white"}}>
+            <img src={Image} className="float-right" alt="reimbursement"
+                 style={{padding: "10px", marginRight: "140px", marginTop: "30px"}}/>
+            <Jumbotron style={{backgroundColor: "white"}}>
                 <Container>
                     <h1><b>Claims, Payment & Reimbursement</b></h1>
-                    <p style={{fontStyle: "italic"}}> Convenient tools and guidelines to help you get reimbursement
+                    <p style={{fontStyle: "italic", fontSize:"16px", marginLeft:"20px"}}> Convenient tools and guidelines to help you get reimbursement
                         faster.</p>
-                    <h3 style={{fontStyle: "-moz-initial", marginTop: "70px"}}>
-                        REIMBURSEMENT ?
-                    </h3>
                 </Container>
             </Jumbotron>
+
+            <h3 style={{fontStyle: "-moz-initial", marginTop: "100px", marginLeft:"150px", marginBottom:"40px"}}>
+                CATEGORY CLAIMS REIMBURSEMENT
+            </h3>
 
                   <div style={{display:"flex", justifyContent:"center"}}>
                       <Row style={{display:"flex", justifyContent:"space-between"}}>

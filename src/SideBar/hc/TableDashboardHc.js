@@ -1,11 +1,18 @@
 import {Container} from "reactstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "@themesberg/react-bootstrap";
+import {Jumbotron} from "react-bootstrap";
 
 export default function TableDashboardHc() {
     return (
         <Container style={{marginTop: "100px"}}>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+            </style>
+            <Jumbotron style={{marginLeft:"30px", marginTop:"50px",height:"10%", width:"100%", fontFamily:"roboto", backgroundColor:"#292961"}}>
+                <h4 style={{color:"white", marginBottom:"20px"}}> <FontAwesomeIcon icon={faExclamationTriangle}/> Please Validate reimbursement claims bellow!! </h4>
+            </Jumbotron>
             <h3 style={{marginLeft: "50px"}}> List Of Claims</h3>
             <table className="table" style={{marginLeft: "50px", textAlign:"center"}}>
                 <thead>

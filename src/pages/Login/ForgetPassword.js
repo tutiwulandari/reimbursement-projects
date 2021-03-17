@@ -2,8 +2,12 @@ import {useState} from "react";
 import {Button, Modal, ModalFooter,} from "reactstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {Form} from "react-bootstrap";
+import { useForm } from "react-hook-form";
+
+
 
 const ForgetPassword = (props) => {
+    const {handleSubmit, errors} = useForm();
     const  className = props;
 
     const [modal, setModal] = useState(false);
@@ -20,13 +24,13 @@ const ForgetPassword = (props) => {
                                <p> Don't fret! Just type in your email and we will send you a code to reset your password!</p>
                                <label htmlFor="email" style={{marginTop:"-30px", fontSize:"18px", width:"300px", fontWeight:"bold"}}><br/>Your Email</label>
                                <br/>
-                               <input type="text" name="email" style={{width:"400px"}} placeholder="example@company.com"/>
+                               <input type="email" name="email" style={{width:"400px"}} placeholder="example@company.com" required="required"/>
                            </formgroup>
                        </Form>
 
                        <ModalFooter>
-                           <Button className="btn-submit" onClick={toggle}>Submit</Button>
-                           <Button color="secondary" onClick={toggle}>Cancel</Button>
+                           <Button className="btn-submit" onClick={toggle} required="required">Submit</Button>
+                           <Button color="secondary" onClick={toggle} type="cancel">Cancel</Button>
 
                        </ModalFooter>
                    </Modal>

@@ -12,7 +12,7 @@ import {
 function* registerEmployee(action) {
     let data = action.data
     let result = yield axios
-        .post('/register/employee', data)
+        .post('/register/admin', data)
         .then(response => {
             return {
                 type: REGISTER_EMPLOYEE_SUCCESS,

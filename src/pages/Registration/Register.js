@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 
-function Register({registerEmployee, login, isLoading}) {
+function Register({registerEmployee, register, isLoading}) {
 
     const [values, setValues] = useState({
         password: "",
@@ -53,9 +53,9 @@ function Register({registerEmployee, login, isLoading}) {
     /* Change Path */
 
     useEffect(() => {
-        if (login) {
-            console.log(login);
-            if (login.data.code == 200) {
+        if (register) {
+            console.log(register);
+            if (register.data.code === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
@@ -74,7 +74,7 @@ function Register({registerEmployee, login, isLoading}) {
                 })
             }
         }
-    }, [login])
+    }, [register])
 
 
     function handleChange(e) {
@@ -258,7 +258,6 @@ function Register({registerEmployee, login, isLoading}) {
                                     </p>
                                 </Form>
                             </div>
-
                         </Col>
                     </Row>
                 </Container>
@@ -270,7 +269,7 @@ function Register({registerEmployee, login, isLoading}) {
 /* Reducer */
 const mapStateToProps = (state) => {
     return {
-        login: state.registerEmployees.data,
+        register: state.registerEmployees.data,
         isLoading: state.registerEmployees.isLoading,
     }
 }

@@ -1,7 +1,7 @@
 import './assets/css/Register.css'
 import './assets/css/Forget.css'
 import './assets/css/Login.css'
-import './component/Footer/Footer.css'
+import './assets/css/Footer.css'
 import './Latihan/LatihanLogin.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/Dashboard.css'

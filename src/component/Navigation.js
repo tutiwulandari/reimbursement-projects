@@ -10,8 +10,8 @@ export default function Navigation() {
                      <Navbar.Toggle aria-controls="basic-navbar-nav" />
                      <Navbar.Collapse id="basic-navbar-nav">
                          <Nav className="mr-auto">
-                             <Nav.Link href="/" style={{color:"white"}}><FontAwesomeIcon icon={faHome}/> Home</Nav.Link>
-                             <Nav.Link href="/petunjuk" style={{color:"white"}}>Guide</Nav.Link>
+                             <Nav.Link href="/" style={{color:"white"}}><FontAwesomeIcon icon={faHome} style={{fontSize:"25px"}}/></Nav.Link>
+                             <Nav.Link href="/petunjuk" style={{color:"white", fontsize:"20px"}}>Guide</Nav.Link>
 
                          </Nav>
                          <Nav.Link href="/register" style={{color:"white"}}><FontAwesomeIcon icon={faSignInAlt}/> Register/Login</Nav.Link>

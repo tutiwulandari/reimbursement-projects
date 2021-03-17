@@ -12,8 +12,7 @@ import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
 import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
 import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
 import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
-import EmployeeList from "../pages/Employee";
-import EmployeeDetails from "../pages/Employee"
+import {EmployeeDetails, EmployeeList} from "../pages"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
 
@@ -42,6 +41,11 @@ export default  [
     //warningggggg
     {
         path: '/dashboard/hc',
+        component:<DashboardHc/>,
+        exact: true
+    },
+    {
+        path: '/dashboard/finance',
         component:<DashboardFinance/>,
         exact: true
     },

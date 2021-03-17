@@ -8,7 +8,7 @@ export default function Home() {
         <div>
             <Navigation/>
             <JumbotronHome/>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     )
 }
