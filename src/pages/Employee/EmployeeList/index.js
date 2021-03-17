@@ -1,1 +1,1 @@
-export {default as EmployeeList} from './EmployeeList'
+export {default} from './EmployeeList'

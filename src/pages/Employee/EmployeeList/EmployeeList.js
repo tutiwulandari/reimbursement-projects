@@ -6,6 +6,7 @@ import {findAll} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 
 function EmployeeList({findAll, employees, error, isLoading}) {
@@ -153,6 +154,7 @@ function EmployeeList({findAll, employees, error, isLoading}) {
                     <Table striped bordered hover style={{marginTop: "15px"}}>
                         <thead>
                         <tr style={{textAlign:"center"}}>
+                            <th> Id </th>
                             <th>ID Employee</th>
                             <th>Join Date</th>
                             <th>Employee Status</th>
@@ -166,12 +168,15 @@ function EmployeeList({findAll, employees, error, isLoading}) {
                         { employees.data?.data?.list?.map((element, index) => {
                             return (
                                 <tr style={{textAlign:"center", marginTop:"20px"}}>
+                                    <td>{element.id}</td>
                                     <td>{element.nip}</td>
                                     <td>{element.joinDate}</td>
                                     <td>{element.employeeStatus}</td>
                                     <td>{element.employeeType}</td>
                                     <td>{element.grade}</td>
-                                    <Button style={{backgroundColor:"#292961"}}><FontAwesomeIcon icon={faEdit}/> </Button>
+                                    <Link to ={'/employee/'+ element.id + '/edit'}>
+                                        <Button style={{backgroundColor:"#292961"}}><FontAwesomeIcon icon={faEdit}/> </Button>
+                                    </Link>
                                 </tr>
                             )
                         })

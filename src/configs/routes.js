@@ -12,9 +12,11 @@ import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
 import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
 import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
 import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
-import {EmployeeDetails, EmployeeList} from "../pages"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
+import EditEmployee from "../pages/Employee/EditEmployee"
+import EmployeeList from "../pages/Employee/EmployeeList"
+
 
 
 export default  [
@@ -104,8 +106,8 @@ export default  [
         exact: true
     },
     {
-        path: '/employee/:id/details',
-        component: <EmployeeDetails/>,
+        path: '/employee/:id/edit',
+        component: <EditEmployee/>,
         exact: true
     }
 

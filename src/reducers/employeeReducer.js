@@ -4,7 +4,12 @@ import {
     FIND_ALL_EMPLOYEE_SUCCESS,
     FIND_EMPLOYEE_BY_ID,
     FIND_EMPLOYEE_BY_ID_SUCCESS,
-    FIND_EMPLOYEE_BY_ID_FAILURE
+    FIND_EMPLOYEE_BY_ID_FAILURE,
+    UPDATE_EMPLOYEE,
+    UPDATE_EMPLOYEE_SUCCESS,
+    SAVE_EMPLOYEE,
+    SAVE_EMPLOYEE_SUCCESS,
+    SAVE_EMPLOYEE_FAILURE
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -41,11 +46,12 @@ export function findAllEmployee(state = initialState, data) {
     }
 }
 
-export const findEmployeeById = (state = { ...initialState, data: false }, action) => {
+export const findEmployeeById = (state = {...initialState, data: false}, action) => {
     switch (action.type) {
         case FIND_EMPLOYEE_BY_ID:
             return {
                 ...state,
+                data:  null,
                 isLoading: true
             };
         case FIND_EMPLOYEE_BY_ID_SUCCESS:
@@ -63,6 +69,53 @@ export const findEmployeeById = (state = { ...initialState, data: false }, actio
         default:
             return {
                 ...state,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+export const updateEmployee = (state = {}, action) => {
+    switch (action.type) {
+        case UPDATE_EMPLOYEE:
+            console.log("updateing employee in reducers")
+            return true
+        case UPDATE_EMPLOYEE_SUCCESS:
+            console.log("updateing employee success in reducers")
+            return true
+        default:
+            return false;
+    }
+
+}
+
+export const saveEmployee = (state = {...initialState}, action) => {
+    console.log("save employee reducer")
+    switch (action.type) {
+        case SAVE_EMPLOYEE:
+            console.log("save employee reducer")
+            console.log(action.data)
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case SAVE_EMPLOYEE_SUCCESS:
+            console.log(action.data)
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case SAVE_EMPLOYEE_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
                 isLoading: false,
                 error: null
             }
