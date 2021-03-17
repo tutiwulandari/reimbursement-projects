@@ -22,7 +22,7 @@ export default function DashboardHc() {
                         </a>
                     </li>
                     <li>
-                        <a href="/employee" style={{fontSize:"20px", marginTop:"20px", color:"white",fontFamily:"Century Gothic"}}>
+                        <a href="/hc/reimburse" style={{fontSize:"20px", marginTop:"20px", color:"white",fontFamily:"Century Gothic"}}>
                             <i aria-hidden="true"/>
                             <FontAwesomeIcon icon={faHistory}/> History Claims
                         </a>

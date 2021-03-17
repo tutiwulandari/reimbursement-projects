@@ -1,14 +1,13 @@
 import { combineReducers } from 'redux';
 import { registerEmployees } from './registerReducer';
-import {findAllEmployee} from "./employeeReducer";
-import {findEmployeeById} from "./employeeReducer";
-import {loginEmployee} from "./loginReducer";
+import { findAllEmployee, findEmployeeById } from "./employeeReducer";
+import { loginEmployee } from "./loginReducer";
+import { findAllReimburse, findReimburseById } from './reimburseReducer';
 
 const rootReducer = combineReducers({
-    registerEmployees,
-    findAllEmployee,
-    findEmployeeById,
-    loginEmployee
+    registerEmployees, loginEmployee,
+    findAllEmployee, findEmployeeById,
+    findAllReimburse, findReimburseById,
 })
 
 export default rootReducer

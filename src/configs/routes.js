@@ -15,6 +15,7 @@ import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
 import {EmployeeDetails, EmployeeList} from "../pages"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
+import ReimburseList from './../pages/Reimburse/ReimburseList';
 
 
 export default  [
@@ -107,6 +108,11 @@ export default  [
         path: '/employee/:id/details',
         component: <EmployeeDetails/>,
         exact: true
-    }
+    },
+    {
+        path: '/hc/reimburse',
+        component: <ReimburseList/>,
+        exact: true
+    },
 
 ]
