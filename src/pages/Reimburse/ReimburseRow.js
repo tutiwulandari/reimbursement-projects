@@ -8,6 +8,9 @@ import {
 import { Link } from 'react-router-dom'
 import Image from "../../assets/image/details.svg"
 
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 const ReimburseRow = ({ data, index }) => {
 
     // const [dropdownOpen, setOpen] = useState(false)
@@ -28,6 +31,10 @@ const ReimburseRow = ({ data, index }) => {
         localStorage.setItem("data", JSON.stringify(storage))
     }
 
+    const renderTooltip = props => (
+        <Tooltip {...props}>Has been validated by admin finance</Tooltip>
+    );
+
     return (
         <tr>
             <td>{index + 1}</td>
@@ -35,12 +42,16 @@ const ReimburseRow = ({ data, index }) => {
             <td>{data.employeeId.fullname}</td>
             <td>
                 {
-                    data.statusSuccess == true ? <span className="btn btn-outline-success">Success</span> :
+                    data.statusSuccess == true ?
+                        <OverlayTrigger placement="bottom" overlay={renderTooltip}>
+                            <button className="btn btn-outline-success">Success</button>
+                        </OverlayTrigger> :
                         <select className="custom-select td-width">
                             <option selected={data.statusOnHc == true}> Waiting</option>
                             <option selected={data.statusOnFinance == true}> Accepted</option>
                             <option selected={data.statusReject == true}> Rejected </option>
                         </select>
+
                 }
             </td>
             <td>
@@ -67,7 +78,7 @@ const ReimburseRow = ({ data, index }) => {
                 <ModalHeader toggle={toggle}>Detail Reimbursement</ModalHeader>
                 <ModalBody>
                     <div className="row">
-                    <div className="col-md-3">
+                        <div className="col-md-3">
                             <h6>Category</h6>
                             <p>asd</p>
                         </div>

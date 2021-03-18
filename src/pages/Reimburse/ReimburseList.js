@@ -14,7 +14,8 @@ import { findAllCategory } from './../../actions/categoryAction';
 
 function ReimburseList({
     reimbursements, findAllReimburse,
-    findByCategory, categories, findAllCategory, rCategory,
+    categories, findAllCategory, 
+    findByCategory, rCategory,
     isLoading
 }) {
 
