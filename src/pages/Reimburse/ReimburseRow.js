@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faEdit, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCheck, faEdit, faPencilRuler, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import {
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
     Button, Modal, ModalHeader, ModalBody, ModalFooter
@@ -10,6 +10,7 @@ import Image from "../../assets/image/details.svg"
 
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ReimburseRow = ({ data, index }) => {
 
@@ -47,7 +48,9 @@ const ReimburseRow = ({ data, index }) => {
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-dark">Success</button>
+                            <button className="btn btn-outline-dark">
+                                Success <FontAwesomeIcon icon={faCheck} />
+                            </button>
                         </OverlayTrigger> :
                         <select className="custom-select td-width">
                             <option selected={data.statusOnHc == true}> Waiting</option>

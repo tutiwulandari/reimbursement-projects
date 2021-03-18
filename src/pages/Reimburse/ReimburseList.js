@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
 import { findAllCategory } from './../../actions/categoryAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faMoneyCheck, faMoneyCheckAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faMoneyCheck, faMoneyCheckAlt, faSearch, faSortAmountDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -45,13 +45,13 @@ function ReimburseList({
         <div className="container">
             <div className="row mt-3 bg-light pb-3">
                 <div className="col-md-6">
-                    <Link to={`/hc/dashboard`} className="btn btn-outline-dark mr-2 rounded-left zoom">
+                    <Link to={`/hc/dashboard`} className="btn btn-outline-dark mr-2 zoom">
                         <FontAwesomeIcon icon={faHome} /> Home
                     </Link>
-                    <Link to={`/hc/employee`} className="btn btn-outline-dark mr-2 rounded-left zoom">
+                    <Link to={`/hc/employee`} className="btn btn-outline-dark mr-2 zoom">
                         <FontAwesomeIcon icon={faUser} /> Employee
                     </Link>
-                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-dark mr-2 rounded-left zoom" : "btn btn-outline-dark mr-2 rounded-left zoom"}>
+                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-dark mr-2 zoom" : "btn btn-outline-dark mr-2 zoom"}>
                         <FontAwesomeIcon icon={faMoneyCheck} /> Reimbursement
                     </Link>
                 </div>
@@ -95,7 +95,7 @@ function ReimburseList({
                     </select>
                 </div>
                 <div className="offset-md-5 col-md-3">
-                    <input className="form-control rounded-pill" type="text" placeholder="Search by employee" />
+                    <input className="form-control rounded-pill search-input" type="text" placeholder="Search employee.."/>
                 </div>
             </div>
             <div className="row">
@@ -104,7 +104,7 @@ function ReimburseList({
                         <table className="table table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th>#</th>
+                                    <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                     <th>Category</th>
                                     <th>Employee</th>
                                     <th>Status</th>
