@@ -1,5 +1,5 @@
-import axios from "axios";
 // import axios from '../configs/api'
+import axios from "axios";
 import {
     FIND_ALL_EMPLOYEE,
     FIND_ALL_EMPLOYEE_FAILURE,
@@ -20,7 +20,7 @@ function* findAllEmployee() {
             console.log("INI SAGAS" , response)
             return {
                 type: FIND_ALL_EMPLOYEE_SUCCESS,
-                data: response.data
+                data: response
             }
         })
         .catch(error => {
@@ -47,6 +47,7 @@ function* findEmployeeById(action) {
         .catch(error=> {
             console.log("Error find employee by id sagas, error")
             return({
+                type:FIND_ALL_EMPLOYEE_FAILURE,
                 error
             })
         })
@@ -63,7 +64,7 @@ function* updateEmployee(action) {
 
 function* saveEmployee(action) {
     let model = action.model;
-    let method = 'POST', url = '/employee/add';
+    let method = 'POST', url = '/employee';
     if(model.id) {
         method ='PUT'
         url += `/${model.id}`
@@ -74,6 +75,7 @@ function* saveEmployee(action) {
         method: method,
         data: model
     }).then(data => {
+        console.log("SAVE SAGAS", data)
         return {
             type: SAVE_EMPLOYEE_SUCCESS,
             data: data

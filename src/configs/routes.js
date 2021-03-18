@@ -40,7 +40,6 @@ export default  [
         component: <Guide/>,
         exact: true
     },
-    //warningggggg
     {
         path: '/dashboard/hc',
         component:<DashboardHc/>,
@@ -72,34 +71,6 @@ export default  [
         exact: true
     },
 
-    {
-        path: '/claims/glasses',
-        component: <GlassesClaims/>,
-        exact: true
-    },
-    {
-        path: '/claims/birthing',
-        component: <BirthingClaims/>,
-        exact: true
-
-    },
-
-    {
-        path: '/claims/training',
-        component: <TrainingClaims/>,
-        exact: true
-    },
-
-    {
-        path: '/claims/officeTravel',
-        component: <OfficeTravelClaims/>,
-        exact: true
-    },
-    {
-        path: '/claims/insurance',
-        component: <InsuranceClaims/>,
-        exact: true
-    },
     {
         path: '/employee',
         component: <EmployeeList/>,

@@ -7,18 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/Dashboard.css'
 import './assets/css/Form.css'
 import './assets/css/EmployeeDetails.css'
+import './assets/css/CarouselElement.css'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
 import React from "react";
 import routes from "./configs/routes";
 import { Provider } from 'react-redux';
 import store from './configs/store';
+import FormElement from "./pages/Registration/Form/FormElement";
 
 
 
 function App() {
     return (
         <div >
+            {/*<FormElement/>*/}
             {/*<EmployeeDetails/>*/}
             <Provider store={store}>
                 <Router >

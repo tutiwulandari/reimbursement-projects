@@ -4,7 +4,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
 import {Row, Col, FormControl, Container, InputGroup, Form} from "@themesberg/react-bootstrap";
-import validate from "./validate";
 import Navigation from "../../component/Navigation";
 import {useHistory} from "react-router-dom";
 import {loginEmployee} from "../../actions/loginAction"
@@ -45,6 +44,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     useEffect( ()  => {
         if(login) {
+            console.log("cobacoba", login)
             if(login.data.code === 200) {
                 Swal.fire({
                     icon:'success',
@@ -53,7 +53,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                     showConfirmButton: false,
                     timer: 1000
                 })
-                console.log(login.data)
+                console.log("coba", login.data)
                 if(login.data.data.role.id === 1) {
                     history.push("/dashboard/hc")
                 } else {
@@ -72,15 +72,6 @@ const Login = ({loginEmployee, login, isLoading}) => {
         }
     }, [login])
 
-
-
-    // const handleChange = (event) => {
-    //     const {name, value} = event.target;
-    //     setValues({
-    //         ...values,
-    //         [name]: value
-    //     });
-    // };
 
     function handleChange(e) {
         const key = e.target.name
@@ -148,7 +139,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          placeholder="Enter email"
                                             />
                                         </InputGroup>
-                                        {/*<div className="text-danger">{errors.email}</div>*/}
+                                        <div className="text-danger">{errors.email}</div>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Password</Form.Label>
@@ -161,16 +152,8 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          placeholder="Enter Password"
                                                          onChange={handleChange}
                                             />
-                                            {/*<InputGroup.Prepend position="end">*/}
-                                            {/*    <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>*/}
-                                            {/*        <IconButton onClick={handleClickShowPassword}*/}
-                                            {/*                    onMouseDown={handleMouseDownPassword}>*/}
-                                            {/*            {values.showPassword ? <Visibility/> : <VisibilityOff/>}*/}
-                                            {/*        </IconButton>*/}
-                                            {/*    </InputGroup.Text>*/}
-                                            {/*</InputGroup.Prepend>*/}
                                         </InputGroup>
-                                        {/*<div className="text-danger">{errors.password}</div>*/}
+                                        <div className="text-danger">{errors.password}</div>
                                     </Form.Group>
                                     <Button type="submit" value="Sign In"
                                             style={{
@@ -182,16 +165,6 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                             }}>
                                         Sign In
                                     </Button>
-
-                                    {/*<a href="/dashboard/hc" className="btn btn" type="submit" style={{*/}
-                                    {/*    backgroundColor: "#292961",*/}
-                                    {/*    marginBottom: "20px",*/}
-                                    {/*    width: "300px",*/}
-                                    {/*    fontSize: "15px",*/}
-                                    {/*    color: "white"*/}
-                                    {/*}}>*/}
-                                    {/*    Sign In*/}
-                                    {/*</a>*/}
                                     <ForgetPassword/>
                                 </Form>
                             </div>
@@ -200,7 +173,6 @@ const Login = ({loginEmployee, login, isLoading}) => {
                     </Row>
                 </Container>
             </section>
-            {/*<Footer/>*/}
         </main>
 
     )

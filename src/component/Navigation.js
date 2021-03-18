@@ -14,7 +14,7 @@ export default function Navigation() {
                              <Nav.Link href="/petunjuk" style={{color:"white", fontsize:"20px"}}>Guide</Nav.Link>
 
                          </Nav>
-                         <Nav.Link href="/register" style={{color:"white"}}><FontAwesomeIcon icon={faSignInAlt}/> Register/Login</Nav.Link>
+                         <Nav.Link href="/login" style={{color:"white", fontSize:"22px"}}><FontAwesomeIcon icon={faSignInAlt}/> Login</Nav.Link>
                      </Navbar.Collapse>
                  </Navbar>
         )
