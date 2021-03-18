@@ -1,40 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from "react-redux";
-import { findAll } from "../../actions/reimburseAction";
 import Container from './../../component/Container/Container';
 import ReimburseRow from './ReimburseRow';
-
 import {
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
     Button, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
-function ReimburseList({ reimbursements, findAll, isLoading }) {
 
-    useEffect(() => {
-        findAll()
-    }, []);
+import React, { useEffect, useState } from 'react'
+import { connect } from "react-redux";
+import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
+import { findAllCategory } from './../../actions/categoryAction';
+
+
+function ReimburseList({
+    reimbursements, findAllReimburse,
+    findByCategory, categories, findAllCategory, rCategory,
+    isLoading
+}) {
+
+    console.log("loading",isLoading);
+
+    const handleChangeCategory = (e) => {
+        let value = e.target.value
+        findByCategory(value)
+    }
 
     const [dropdownOpen, setOpen] = useState(false)
     const toggle = () => setOpen(!dropdownOpen)
 
-    console.log(reimbursements);
+    useEffect(() => {
+        findAllReimburse()
+        findAllCategory()
+    }, [])
+
+
 
     return (
         <div className="container">
             <div className="row mt-5">
                 <div className="col-md-3">
-                    <select className="custom-select" id="exampleFormControlSelect1">
-                        <option>Filter by Category</option>
-                        <option>Glasses</option>
-                        <option>Training</option>
-                        <option>Give Birth</option>
-                        <option>Official Travel</option>
-                        <option>Insurence</option>
+                    <select className="custom-select" onChange={handleChangeCategory}>
+                        <option value="">Filter by Category</option>
+                        {
+                            categories.data?.data?.map((category, index) => {
+                                return (
+                                    <option value={category.id}>{category.categoryName}</option>
+                                )
+                            })
+                        }
                     </select>
                 </div>
                 <div className="col-md-3">
-                    <select className="custom-select" id="exampleFormControlSelect1">
+                    <select className="custom-select">
                         <option>Filter by Status</option>
                         <option>Waiting</option>
                         <option>Accepted</option>
@@ -58,12 +75,19 @@ function ReimburseList({ reimbursements, findAll, isLoading }) {
                             </tr>
                         </thead>
                         <tbody>
-
-                            {reimbursements.data?.data?.list?.map((element, index) => {
-                                return (
-                                    <ReimburseRow index={index} data={element} />
-                                )
-                            })
+                            {
+                                isLoading ? "Loading" :
+                                rCategory.length == 0 ?
+                                    reimbursements.data?.data?.list?.map((element, index) => {
+                                        return (
+                                            <ReimburseRow index={index} data={element} />
+                                        )
+                                    }) : rCategory?.data?.length == 0 ?  "Data is empty" :
+                                    rCategory.data?.map((value, key) => {
+                                        return (
+                                            <ReimburseRow index={key} data={value} />
+                                        )
+                                    })
                             }
                         </tbody>
                     </table>
@@ -73,11 +97,17 @@ function ReimburseList({ reimbursements, findAll, isLoading }) {
     )
 }
 
+/* Reducer */
 const mapStateToProps = (state) => {
     return {
         reimbursements: state.findAllReimburse.data || [],
-        isLoading: state.findAllReimburse.isLoading
+        rCategory: state.findReimburseByCategory.data || [],
+        isLoading: state.findAllReimburse.isLoading,
+        categories: state.findAllCategory.data || []
     }
 }
-const mapDispatchToProps = { findAll }
+
+/* Action */
+const mapDispatchToProps = { findAllReimburse, findByCategory, findAllCategory }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseList);

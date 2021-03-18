@@ -1,18 +1,18 @@
+import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 // import axios from '../configs/api'
+
 import {
-    FIND_ALL_REIMBURSE,
-    FIND_ALL_REIMBURSE_FAILURE,
-    FIND_ALL_REIMBURSE_SUCCESS, FIND_REIMBURSE_BY_ID, FIND_REIMBURSE_BY_ID_SUCCESS,
+    FIND_ALL_REIMBURSE, FIND_ALL_REIMBURSE_FAILURE, FIND_ALL_REIMBURSE_SUCCESS,
+    FIND_REIMBURSE_BY_CATEGORY, FIND_REIMBURSE_BY_CATEGORY_SUCCESS,  FIND_REIMBURSE_BY_CATEGORY_FAILURE,
+    FIND_REIMBURSE_BY_ID, FIND_REIMBURSE_BY_ID_SUCCESS, FIND_REIMBURSE_BY_ID_FAILURE
 } from "../constants/actionConstant";
-import { put, takeLatest } from "redux-saga/effects";
 
 
 function* findAllReimburse() {
     let result = yield axios
         .get('/reimburse')
         .then(response => {
-            console.log(response);
             return {
                 type: FIND_ALL_REIMBURSE_SUCCESS,
                 data: response.data
@@ -32,7 +32,6 @@ function* findAllReimburse() {
 function* findReimburseById(action) {
     let result = yield axios.get(`/reimburse/${action.id}`)
         .then(response => {
-            console.log("FIND BY ID", response)
             return ({
                 type: FIND_REIMBURSE_BY_ID_SUCCESS,
                 data: response.data
@@ -40,6 +39,7 @@ function* findReimburseById(action) {
         })
         .catch(error => {
             return ({
+                type: FIND_REIMBURSE_BY_ID_FAILURE,
                 error
             })
         })
@@ -48,16 +48,18 @@ function* findReimburseById(action) {
 
 
 function* findReimburseByCategory(action) {
-    let result = yield axios.get(`/employee/${action.id}`)
+
+    let result = yield axios
+        .post(`/reimburse/filter-category`, action.data)
         .then(response => {
-            console.log("FIND BY ID", response)
             return ({
-                type: FIND_REIMBURSE_BY_ID_SUCCESS,
+                type: FIND_REIMBURSE_BY_CATEGORY_SUCCESS,
                 data: response.data
             })
         })
         .catch(error => {
             return ({
+                type: FIND_REIMBURSE_BY_CATEGORY_FAILURE,
                 error
             })
         })
@@ -68,6 +70,11 @@ function* findReimburseByCategory(action) {
 export function* watchFindAllReimburse() {
     yield takeLatest(FIND_ALL_REIMBURSE, findAllReimburse)
 }
+
 export function* watchFindReimburseById() {
     yield takeLatest(FIND_REIMBURSE_BY_ID, findReimburseById)
+}
+
+export function* watchFindReimburseByCategory() {
+    yield takeLatest(FIND_REIMBURSE_BY_CATEGORY, findReimburseByCategory)
 }

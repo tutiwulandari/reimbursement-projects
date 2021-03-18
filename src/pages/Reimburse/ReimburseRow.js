@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faEdit, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -16,10 +16,22 @@ const ReimburseRow = ({ data, index }) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
+    const textInput = useRef();
+    const [storage, setStorage] = useState({})
+
+    let local = localStorage.getItem("data")
+    local = JSON.parse(local)
+    console.log(local);
+
+    const saveLocalStorage = () => {
+        setStorage(textInput.current.innerText)
+        localStorage.setItem("data", JSON.stringify(storage))
+    }
+
     return (
         <tr>
             <td>{index + 1}</td>
-            <td>{data.categoryId.categoryName}</td>
+            <td onClick={saveLocalStorage} ref={textInput}>{data.categoryId.categoryName}</td>
             <td>{data.employeeId.fullname}</td>
             <td>
                 {

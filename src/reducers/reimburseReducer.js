@@ -1,6 +1,7 @@
 import {
     FIND_ALL_REIMBURSE, FIND_ALL_REIMBURSE_FAILURE, FIND_ALL_REIMBURSE_SUCCESS,
-    FIND_REIMBURSE_BY_ID, FIND_REIMBURSE_BY_ID_SUCCESS, FIND_REIMBURSE_BY_ID_FAILURE
+    FIND_REIMBURSE_BY_ID, FIND_REIMBURSE_BY_ID_SUCCESS, FIND_REIMBURSE_BY_ID_FAILURE, 
+    FIND_REIMBURSE_BY_CATEGORY, FIND_REIMBURSE_BY_CATEGORY_SUCCESS, FIND_REIMBURSE_BY_CATEGORY_FAILURE
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -37,7 +38,37 @@ export function findAllReimburse(state = initialState, data) {
     }
 }
 
-export const findReimburseById = (state = { ...initialState, data: false }, action) => {
+
+export const findReimburseByCategory = (state = initialState, action) => {
+    switch (action.type) {
+        case FIND_REIMBURSE_BY_CATEGORY:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case FIND_REIMBURSE_BY_CATEGORY_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            }
+        case FIND_REIMBURSE_BY_CATEGORY_FAILURE:
+            return {
+                data: false,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+
+export const findReimburseById = (state = initialState, action) => {
     switch (action.type) {
         case FIND_REIMBURSE_BY_ID:
             return {
