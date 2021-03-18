@@ -4,22 +4,27 @@ import {
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
     Button, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
 import { findAllCategory } from './../../actions/categoryAction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faMoneyCheck, faMoneyCheckAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 function ReimburseList({
     reimbursements, findAllReimburse,
-    categories, findAllCategory, 
+    categories, findAllCategory,
     findByCategory, rCategory,
     isLoading
 }) {
 
-    console.log("loading",isLoading);
+    console.log("loading", isLoading);
 
     const handleChangeCategory = (e) => {
         let value = e.target.value
@@ -38,10 +43,39 @@ function ReimburseList({
 
     return (
         <div className="container">
+            <div className="row mt-3 bg-light pb-3">
+                <div className="col-md-6">
+                    <Link to={`/hc/dashboard`} className="btn btn-outline-dark mr-2 rounded-left zoom">
+                        <FontAwesomeIcon icon={faHome} /> Home
+                    </Link>
+                    <Link to={`/hc/employee`} className="btn btn-outline-dark mr-2 rounded-left zoom">
+                        <FontAwesomeIcon icon={faUser} /> Employee
+                    </Link>
+                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-dark mr-2 rounded-left zoom" : "btn btn-outline-dark mr-2 rounded-left zoom"}>
+                        <FontAwesomeIcon icon={faMoneyCheck} /> Reimbursement
+                    </Link>
+                </div>
+                <div className="offset-md-3 col-md-3">
+                    <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="float-right">
+                        <DropdownToggle color="outline-dark" caret className="zoom">
+                            <FontAwesomeIcon icon={faUserCircle} /> Account
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem>
+                                <Link to={`/hc/info`} style={{ width: 100 }} className="btn btn-outline-primary">Info</Link>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <Link to={`/logout`} style={{ width: 100 }} className="btn btn-outline-danger">Logout</Link>
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </ButtonDropdown>
+                </div>
+            </div>
+
             <div className="row mt-5">
-                <div className="col-md-3">
-                    <select className="custom-select" onChange={handleChangeCategory}>
-                        <option value="">Filter by Category</option>
+                <div className="col-md-2">
+                    <select className="custom-select rounded-pill" onChange={handleChangeCategory}>
+                        <option value="">Category</option>
                         {
                             categories.data?.data?.map((category, index) => {
                                 return (
@@ -51,47 +85,50 @@ function ReimburseList({
                         }
                     </select>
                 </div>
-                <div className="col-md-3">
-                    <select className="custom-select">
-                        <option>Filter by Status</option>
+                <div className="col-md-2">
+                    <select className="custom-select rounded-pill">
+                        <option>Status</option>
                         <option>Waiting</option>
                         <option>Accepted</option>
+                        <option>Success</option>
                         <option>Rejected</option>
                     </select>
                 </div>
-                <div className="offset-md-3 col-md-3">
-                    <input className="form-control" type="text" placeholder="Search by employee name" />
+                <div className="offset-md-5 col-md-3">
+                    <input className="form-control rounded-pill" type="text" placeholder="Search by employee" />
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-12 mt-5">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Category</th>
-                                <th>Employee</th>
-                                <th>Status</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                isLoading ? "Loading" :
-                                rCategory.length == 0 ?
-                                    reimbursements.data?.data?.list?.map((element, index) => {
-                                        return (
-                                            <ReimburseRow index={index} data={element} />
-                                        )
-                                    }) : rCategory?.data?.length == 0 ?  "Data is empty" :
-                                    rCategory.data?.map((value, key) => {
-                                        return (
-                                            <ReimburseRow index={key} data={value} />
-                                        )
-                                    })
-                            }
-                        </tbody>
-                    </table>
+                    <div className="card">
+                        <table className="table table-hover">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Employee</th>
+                                    <th>Status</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    isLoading ? "Loading" :
+                                        rCategory.length == 0 ?
+                                            reimbursements.data?.data?.list?.map((element, index) => {
+                                                return (
+                                                    <ReimburseRow index={index} data={element} />
+                                                )
+                                            }) : rCategory?.data?.length == 0 ? "Data is empty" :
+                                                rCategory.data?.map((value, key) => {
+                                                    return (
+                                                        <ReimburseRow index={key} data={value} />
+                                                    )
+                                                })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

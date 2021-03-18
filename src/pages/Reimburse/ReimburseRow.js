@@ -34,6 +34,9 @@ const ReimburseRow = ({ data, index }) => {
     const renderTooltip = props => (
         <Tooltip {...props}>Has been validated by admin finance</Tooltip>
     );
+    const statusOverlay = props => (
+        <Tooltip {...props}>Has been validated by admin finance</Tooltip>
+    );
 
     return (
         <tr>
@@ -44,7 +47,7 @@ const ReimburseRow = ({ data, index }) => {
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-success">Success</button>
+                            <button className="btn btn-outline-dark">Success</button>
                         </OverlayTrigger> :
                         <select className="custom-select td-width">
                             <option selected={data.statusOnHc == true}> Waiting</option>
