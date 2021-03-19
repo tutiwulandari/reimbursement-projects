@@ -6,14 +6,12 @@ import {Button, Container, Form, Input, Label, FormGroup} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons/faSave";
 import {findAll} from "../../../actions/gradeAction";
-import {findEmployeeById} from "../../../reducers/employeeReducer";
 
 
 
 function EditEmployee({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
 
     const {id} = useParams();
-    const [redirect, setRedirect] = useState(false);
     const history = useHistory();
     const [data, setData] = useState({
         id: null,
@@ -33,16 +31,6 @@ console.log("Error ", error)
         findAll()
         setData(employee)
     }, [findAll])
-
-    // const onReload = (id) => {
-    //     findEmployeeById()
-    // }
-    //
-    // useEffect( () =>{
-    //     if(id) {
-    //         onReload(id)
-    //     }
-    // }, [id, findEmployeeById])
 
 
     useEffect(() => {
@@ -98,7 +86,7 @@ console.log("Error ", error)
                             <Input onChange={handleChange}
                                    type="select" value={data?.grade || ''}
                                    name="gradeId">
-                                <option> --choose--</option>
+                                {/*<option> --choose--</option>*/}
                                 {
                                     grades?.data?.map( (element, index) =>
                                         <option key = {index} value={element.id}>

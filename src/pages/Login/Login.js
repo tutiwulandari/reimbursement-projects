@@ -3,7 +3,7 @@ import ForgetPassword from "./ForgetPassword/ForgetPassword";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
-import {Row, Col, FormControl, Container, InputGroup, Form} from "@themesberg/react-bootstrap";
+import {Row, Col, FormControl, Container, InputGroup, Form} from "react-bootstrap";
 import Navigation from "../../component/Navigation";
 import {useHistory} from "react-router-dom";
 import {loginEmployee} from "../../actions/loginAction"
@@ -11,10 +11,14 @@ import Swal from 'sweetalert2'
 import ReactLoading from "react-loading";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
+import IconButton from "@material-ui/core/IconButton";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 
 const Login = ({loginEmployee, login, isLoading}) => {
     const [values, setValues] = useState({
+        password:"",
+        showPassword:false
 
     });
 
@@ -23,17 +27,20 @@ const Login = ({loginEmployee, login, isLoading}) => {
     const color = "#292961"
 
     const [data, setData] = useState({})
-    const [errors, setErrors] = useState({});
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const history = useHistory();
 
 
-    const [isValid, setIsValid] = useState(true)
     const [error, setError] = useState({})
 
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    }
 
-
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
 
     console.log("login", data)
 
@@ -101,9 +108,9 @@ const Login = ({loginEmployee, login, isLoading}) => {
             error_["email"] = "Please enter your email address.";
         }
 
-        if (password.length < 8) {
+        if (!password) {
             isValid_ = false;
-            error_["password"] = "Password minimum at least 8 characters.";
+            error_["password"] = "Please enter your password";
         }
 
         setError(error_)
@@ -164,10 +171,21 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                             <FormControl id="password"
                                                          name="password"
                                                          value={password}
-                                                         type='password'
+                                                         type={values.showPassword ? "text" : "password"}
                                                          placeholder="Enter Password"
                                                          onChange={handleChange}
+                                                         aria-describedby="basic-addon2"
+                                                         style={{height:"38px"}}
                                             />
+                                            <InputGroup.Prepend position="end">
+                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
+                                                    <IconButton onClick={handleClickShowPassword}
+                                                                onMouseDown={handleMouseDownPassword}>
+                                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+
                                         </InputGroup>
                                         <div className="text-danger">{error.password}</div>
                                     </Form.Group>

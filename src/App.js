@@ -13,18 +13,13 @@ import React from "react";
 import routes from "./configs/routes";
 import { Provider } from 'react-redux';
 import store from './configs/store';
-import FormElement from "./pages/Registration/Form/FormElement";
-
 
 
 function App() {
     return (
         <div >
-            {/*<FormElement/>*/}
-            {/*<EmployeeDetails/>*/}
             <Provider store={store}>
                 <Router >
-                    {/* <Navigation></Navigation> */}
                     <Switch style={{ paddingLeft: "0" }}>
                         {routes.map((route, index) =>
                             <Route key={index} path={route.path} exact>
