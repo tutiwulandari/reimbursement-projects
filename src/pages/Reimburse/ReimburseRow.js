@@ -1,48 +1,98 @@
 import React, { useState, useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCheck, faEdit, faMoneyCheck, faPause, faPencilRuler, faSortAmountDown, faSpinner, faSquare, faTimes, faTimesCircle, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import {
-    Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
-    Button, Modal, ModalHeader, ModalBody, ModalFooter
-} from 'reactstrap';
+import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import { findReimburseId } from "../../actions/reimburseAction";
 
+/* Just for UI */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import Image from "../../../src/assets/image/modal_detail.svg";
+/* Just for UI */
 
-const ReimburseRow = ({ data, index }) => {
 
-    // const [dropdownOpen, setOpen] = useState(false)
-    // const toggle = () => setOpen(!dropdownOpen)
+const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
-    const textInput = useRef();
-    const [storage, setStorage] = useState({})
-
-    let local = localStorage.getItem("data")
-    local = JSON.parse(local)
-    console.log(local);
-
-    const saveLocalStorage = () => {
-        setStorage(textInput.current.innerText)
-        localStorage.setItem("data", JSON.stringify(storage))
+    const getId = id => {
+        findReimburseId(id)
     }
 
+    function convert_to_rupiah(number) {
+        var number_string = number.toString(),
+            sisa = number_string.length % 3,
+            rupiah = number_string.substr(0, sisa),
+            ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        return rupiah
+    }
+
+    function convert_date_format(date) {
+        var parts = date.split("-")
+        let tahun = parts[0]
+        let bulan = parts[1]
+        let tanggal = parts[2]
+
+        switch (bulan) {
+            case "01":
+                bulan = "Januari"
+                break;
+            case "02":
+                bulan = "Februari"
+                break;
+            case "03":
+                bulan = "Maret"
+                break;
+            case "04":
+                bulan = "April"
+                break;
+            case "05":
+                bulan = "Mei"
+                break;
+            case "06":
+                bulan = "Juni"
+                break;
+            case "07":
+                bulan = "Juli"
+                break;
+            case "08":
+                bulan = "Agustus"
+                break;
+            case "09":
+                bulan = "September"
+                break;
+            case "10":
+                bulan = "Oktober"
+                break;
+            case "11":
+                bulan = "November"
+                break;
+            case "12":
+                bulan = "Desember"
+                break;
+            default:
+                break;
+        }
+
+        return `${tanggal} ${bulan} ${tahun}`
+    }
+
+    /* Tooltip */
     const renderTooltip = props => (
         <Tooltip {...props}>Has been validated by admin finance</Tooltip>
-    );
-    const statusOverlay = props => (
-        <Tooltip {...props} style={{ color: 'red' }}>Has been validated by admin finance</Tooltip>
     );
 
     return (
         <tr>
             <td>{index + 1}</td>
-            <td onClick={saveLocalStorage} ref={textInput}>{data.categoryId.categoryName}</td>
+            <td>{data.categoryId.categoryName}</td>
             <td>{data.employeeId.fullname}</td>
             <td>
                 {
@@ -61,11 +111,20 @@ const ReimburseRow = ({ data, index }) => {
                 }
             </td>
             <td>
-                <button className="btn btn-outline-enigma mr-3" onClick={toggle}>
+                <button className="btn btn-outline-enigma mr-3"
+                    onClick={() => {
+                        toggle();
+                        getId(data?.id);
+                    }}>
                     Detail
                 </button>
             </td>
-            
+
+
+            {/* ============ */}
+            {/* MODAL DETAIL */}
+            {/* ============ */}
+
             <Modal className="modal-lg" isOpen={modal} toggle={toggle}>
                 <div className="modal-header">
                     <div className="offset-1 col-md-10">
@@ -73,7 +132,7 @@ const ReimburseRow = ({ data, index }) => {
                     </div>
                     <div className="col-md-2">
                         <p onClick={toggle} className="ml-4">
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon icon={faTimes} className="pointer" />
                         </p>
                     </div>
                 </div>
@@ -85,15 +144,45 @@ const ReimburseRow = ({ data, index }) => {
                         <div className="col-md-3">
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">Status</h5>
-                                <p className="p-enigma-bold">
-                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
-                                </p>
-                                <p className="p-enigma-bold">
-                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
-                                </p>
-                                <p className="p-enigma-bold">
-                                    <i className="fa fa-square-o" aria-hidden="true"></i> Done
-                                </p>
+
+                                {reimburse?.statusReject ?
+                                    <p className="p-enigma-bold">
+                                        <i className="fa fa-times" aria-hidden="true"></i> Rejected
+                                    </p>
+                                    :
+                                    <>
+                                        {
+                                            reimburse?.statusOnHc ?
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
+                                                </p>
+                                                :
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
+                                                </p>
+                                        }
+                                        {
+                                            reimburse?.statusOnFinance ?
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
+                                                </p>
+                                                :
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
+                                                </p>
+                                        }
+                                        {
+                                            reimburse?.statusSuccess ?
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
+                                                </p>
+                                                :
+                                                <p className="p-enigma-bold">
+                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Done
+                                                </p>
+                                        }
+                                    </>
+                                }
                             </div>
                         </div>
 
@@ -104,13 +193,13 @@ const ReimburseRow = ({ data, index }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
                                 </p>
-                                <p className="p-enigma">Rp. 900.000,-</p>
+                                <p className="p-enigma">Rp. {reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""},-</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
                                 </p>
-                                <p className="p-enigma">Rp. 785.000,-</p>
+                                <p className="p-enigma">Rp. {reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""},-</p>
                             </div>
                         </div>
 
@@ -121,13 +210,13 @@ const ReimburseRow = ({ data, index }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
                                     </p>
-                                <p className="p-enigma">Wisa Waskita Arsytama</p>
+                                <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-address-card-o" aria-hidden="true"></i> NIP
                                     </p>
-                                <p className="p-enigma">3212055707980002</p>
+                                <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
                     </div>
@@ -141,13 +230,21 @@ const ReimburseRow = ({ data, index }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
                                     </p>
-                                <p className="p-enigma">29 March 2021</p>
+                                <p className="p-enigma">
+                                    {reimburse?.dateOfClaimSubmission
+                                        ? convert_date_format(reimburse.dateOfClaimSubmission)
+                                        : ""}
+                                </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
                                     </p>
-                                <p className="p-enigma">29 March 2021</p>
+                                <p className="p-enigma">
+                                    {reimburse?.startDate
+                                        ? convert_date_format(reimburse.startDate)
+                                        : ""}
+                                </p>
                             </div>
                         </div>
 
@@ -156,13 +253,21 @@ const ReimburseRow = ({ data, index }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
                                     </p>
-                                <p className="p-enigma">29 March 2021</p>
+                                <p className="p-enigma">
+                                    {reimburse?.disbursementDate
+                                        ? convert_date_format(reimburse.disbursementDate)
+                                        : ""}
+                                </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
                                     </p>
-                                <p className="p-enigma">29 March 2021</p>
+                                <p className="p-enigma">
+                                    {reimburse?.endDate
+                                        ? convert_date_format(reimburse.endDate)
+                                        : ""}
+                                </p>
                             </div>
                         </div>
 
@@ -173,4 +278,15 @@ const ReimburseRow = ({ data, index }) => {
     )
 }
 
-export default ReimburseRow
+/* Reducer */
+const mapStateToProps = (state) => {
+    return {
+        reimburse: state.findReimburseById.data || [],
+        isLoading: state.findReimburseById.isLoading,
+    }
+}
+
+/* Action */
+const mapDispatchToProps = { findReimburseId }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRow);

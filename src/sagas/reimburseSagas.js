@@ -30,6 +30,7 @@ function* findAllReimburse() {
 
 
 function* findReimburseById(action) {
+    console.log("action saga", action);
     let result = yield axios.get(`/reimburse/${action.id}`)
         .then(response => {
             return ({

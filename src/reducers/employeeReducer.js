@@ -26,7 +26,6 @@ export function findAllEmployee(state = initialState, data) {
                 isLoading: true
             }
         case FIND_ALL_EMPLOYEE_SUCCESS:
-            console.log("INI REDUCER", data)
             return {
                 data: data,
                 error: null,
@@ -78,10 +77,8 @@ export const findEmployeeById = (state = {...initialState, data: false}, action)
 export const updateEmployee = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_EMPLOYEE:
-            console.log("updateing employee in reducers")
             return true
         case UPDATE_EMPLOYEE_SUCCESS:
-            console.log("updateing employee success in reducers")
             return true
         default:
             return false;
@@ -90,18 +87,14 @@ export const updateEmployee = (state = {}, action) => {
 }
 
 export const saveEmployee = (state = {...initialState}, action) => {
-    console.log("save employee reducer")
     switch (action.type) {
         case SAVE_EMPLOYEE:
-            console.log("save employee reducer")
-            console.log("ini reducer", action.data)
             return {
                 ...state,
                 data: null,
                 isLoading: true
             }
         case SAVE_EMPLOYEE_SUCCESS:
-            console.log("SUCCESS",action.data)
             return {
                 data: action.data,
                 isLoading: false,

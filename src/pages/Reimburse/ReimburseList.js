@@ -15,34 +15,27 @@ function ReimburseList({
     isLoading
 }) {
 
-    console.log("loading", isLoading);
-
     const handleChangeCategory = (e) => {
         let value = e.target.value
         findByCategory(value)
     }
-
-    const [dropdownOpen, setOpen] = useState(false)
-    const toggle = () => setOpen(!dropdownOpen)
 
     useEffect(() => {
         findAllReimburse()
         findAllCategory()
     }, [])
 
-
-
     return (
         <div className="container">
-            
-            <Navbar/>
+
+            <Navbar />
 
             <div className="row mt-5">
                 <div className="col-md-2">
                     <select className="custom-select rounded-pill text-enigma border-enigma" onChange={handleChangeCategory}>
                         <option value="">Category</option>
                         {
-                            categories.data?.data?.map((category, index) => {
+                            categories.data?.map((category, index) => {
                                 return (
                                     <option value={category.id}>{category.categoryName}</option>
                                 )
@@ -60,7 +53,7 @@ function ReimburseList({
                     </select>
                 </div>
                 <div className="offset-md-5 col-md-3">
-                    <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search employee.."/>
+                    <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search employee.." />
                 </div>
             </div>
             <div className="row">
@@ -80,12 +73,12 @@ function ReimburseList({
                                 {
                                     isLoading ? "Loading" :
                                         rCategory.length == 0 ?
-                                            reimbursements.data?.data?.list?.map((element, index) => {
+                                            reimbursements.data?.list?.map((element, index) => {
                                                 return (
                                                     <ReimburseRow index={index} data={element} />
                                                 )
-                                            }) : rCategory?.data?.length == 0 ? "Data is empty" :
-                                                rCategory.data?.map((value, key) => {
+                                            }) : rCategory?.length == 0 ? "Data is empty" :
+                                                rCategory.map((value, key) => {
                                                     return (
                                                         <ReimburseRow index={key} data={value} />
                                                     )

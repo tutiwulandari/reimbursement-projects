@@ -5,7 +5,7 @@ import {findAll} from "../../actions/employeeAction";
 import {connect} from "react-redux";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
-import "./table_index.css"
+// import "./table_index.css"
 import NavigationSideBar from "../../SideBar/NavigationSideBar";
 import DashboardHc from "../../SideBar/hc/DashboardHc";
 

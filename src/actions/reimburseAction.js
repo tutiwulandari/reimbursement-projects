@@ -9,7 +9,7 @@ export function findAllReimburse() {
     }
 }
 
-export function findById(id) {
+export function findReimburseId(id) {
     return {
         type: FIND_REIMBURSE_BY_ID,
         id

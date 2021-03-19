@@ -17,14 +17,12 @@ function* findAllEmployee() {
     let result = yield axios
         .get('/employee')
         .then(response => {
-            console.log("INI SAGAS" , response)
             return {
                 type: FIND_ALL_EMPLOYEE_SUCCESS,
                 data: response
             }
         })
         .catch(error => {
-            console.log(error);
             return {
                 type: FIND_ALL_EMPLOYEE_FAILURE,
                 error
