@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from "react-redux"
-import { Col, Row, Form, InputGroup, FormControl } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faLock, faUnlockAlt, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Button, Container } from "@themesberg/react-bootstrap";
+import React, {useState, useEffect} from 'react';
+import {connect} from "react-redux"
+import {Col, Row, Form, InputGroup, FormControl} from "react-bootstrap";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
+import {Button, Container} from "@themesberg/react-bootstrap";
 import BgImage from "../../assets/image/signin.svg";
-import { registerEmployees } from './../../reducers/register';
-import { registerEmployee } from './../../actions/register';
+import {registerEmployee} from '../../actions/registerAction';
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import IconButton from "@material-ui/core/IconButton";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 
-function Register({ registerEmployee, login, isLoading }) {
+function Register({registerEmployee, register, isLoading}) {
+
+    const [values, setValues] = useState({
+        password: "",
+        confirm_Password:"",
+        showPassword: false,
+        showConfirmPassword: false
+    });
 
     /* Styles */
-    const button = { backgroundColor: "#292961", color: "white", fontSize: "15px", width: "300px", marginBottom: "20px" }
-    const textDanger = { color: "red", fontSize: "12px" }
+    const button = {backgroundColor: "#292961", color: "white", fontSize: "15px", width: "300px", marginBottom: "20px"}
+    const textDanger = {color: "red", fontSize: "12px"}
     /* Styles */
 
     /* Loading */
@@ -30,6 +38,8 @@ function Register({ registerEmployee, login, isLoading }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     /* State */
 
     /* Validation Input */
@@ -43,9 +53,9 @@ function Register({ registerEmployee, login, isLoading }) {
     /* Change Path */
 
     useEffect(() => {
-        if (login) {
-            console.log(login);
-            if (login.data.code == 200) {
+        if (register) {
+            console.log(register);
+            if (register.data.code === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
@@ -54,8 +64,7 @@ function Register({ registerEmployee, login, isLoading }) {
                     timer: 1000,
                 })
                 history.push('/success-register')
-            }
-            else {
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Ooopss..',
@@ -65,7 +74,7 @@ function Register({ registerEmployee, login, isLoading }) {
                 })
             }
         }
-    }, [login])
+    }, [register])
 
 
     function handleChange(e) {
@@ -75,13 +84,13 @@ function Register({ registerEmployee, login, isLoading }) {
         switch (key) {
             case "email":
                 setEmail(value)
-                break
+                break;
             case "password":
                 setPassword(value)
-                break
+                break;
             case "confirm_password":
                 setConfirmPassword(value)
-                break
+                break;
             default:
         }
 
@@ -93,7 +102,7 @@ function Register({ registerEmployee, login, isLoading }) {
 
         /* Just set data if changes email or password */
         if (key == "email" || key == "password") {
-            setData({ ...data, [key]: value })
+            setData({...data, [key]: value})
         }
     }
 
@@ -129,11 +138,24 @@ function Register({ registerEmployee, login, isLoading }) {
         }
     }
 
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleClickShowConfirmPassword = () => {
+        setValues({ ...values, showConfirmPassword: !values.showConfirmPassword });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
+
+
     return (
-        <main style={{ backgroundColor: "white" }}>
-            <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5" >
+        <main style={{backgroundColor: "white"}}>
+            <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
                 <Container>
-                    <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }} >
+                    <Row className="justify-content-center form-bg-image" style={{backgroundImage: `url(${BgImage})`}}>
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">
                                 {isLoading ?
@@ -143,13 +165,13 @@ function Register({ registerEmployee, login, isLoading }) {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
                                             </div>
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
                                             </div>
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
                                             </div>
                                         </div>
                                     </>
@@ -159,37 +181,48 @@ function Register({ registerEmployee, login, isLoading }) {
                                     </div>
                                 }
                                 <Form onSubmit={handleSubmit} className="mt-3">
-                                    <Form.Group controlId="formBasicUsername" className="mb-2" style={{ width: "300px" }}>
+                                    <Form.Group controlId="formBasicUsername" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Email</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text><FontAwesomeIcon icon={faEnvelope} />
+                                                <InputGroup.Text><FontAwesomeIcon icon={faEnvelope}/>
                                                 </InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl id="email"
-                                                name="email"
-                                                type="email"
-                                                value={email}
-                                                onChange={handleChange}
-                                                placeholder="Enter email"
+                                                         name="email"
+                                                         type="email"
+                                                         value={email}
+                                                         onChange={handleChange}
+                                                         placeholder="Enter email"
                                             />
                                         </InputGroup>
                                         <div style={textDanger}>{error.email}</div>
                                     </Form.Group>
-                                    <Form.Group controlId="formBasicEmail" className="mb-2" style={{ width: "300px" }}>
+                                    <Form.Group controlId="formBasicEmail" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Password</Form.Label>
                                         <InputGroup>
-                                            <InputGroup.Prepend>
-                                                <InputGroup.Text><FontAwesomeIcon icon={faLock} />
+                                            <InputGroup.Prepend style={{height:"38px"}}>
+                                                <InputGroup.Text><FontAwesomeIcon icon={faLock}/>
                                                 </InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl id="password"
-                                                name="password"
-                                                value={password}
-                                                onChange={handleChange}
-                                                type="password"
-                                                placeholder="Enter Password"
-                                            />
+                                                         name="password"
+                                                         value={password}
+                                                         onChange={handleChange}
+                                                         type={values.showPassword ? "text" : "password"}
+                                                         placeholder="Enter Password"
+                                                         aria-describedby="basic-addon2"
+                                            style={{height:"38px"}}>
+                                            </FormControl>
+                                            <InputGroup.Prepend position="end">
+                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
+                                                    <IconButton onClick={handleClickShowPassword}
+                                                                onMouseDown={handleMouseDownPassword}>
+                                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+
                                         </InputGroup>
                                         <div style={textDanger}>{error.password}</div>
                                     </Form.Group>
@@ -198,43 +231,50 @@ function Register({ registerEmployee, login, isLoading }) {
                                         <Form.Label>Confirm Password </Form.Label>
                                         <InputGroup className="mb-2">
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text><FontAwesomeIcon icon={faLock} />
+                                                <InputGroup.Text><FontAwesomeIcon icon={faLock}/>
                                                 </InputGroup.Text>
                                             </InputGroup.Prepend>
-                                            <FormControl id="confirm_password" type="password"
-                                                name="confirm_password"
-                                                placholder="Enter confirm password"
-                                                value={confirmPassword}
-                                                onChange={handleChange}
-                                                placeholder="Re-enter your Password" />
+                                            <FormControl id="confirm_password"
+                                                         type={values.showConfirmPassword ? "text" : "password"}
+                                                         name="confirm_password"
+                                                         value={confirmPassword}
+                                                         onChange={handleChange}
+                                                         placeholder="Re-enter password"/>
+                                            <InputGroup.Prepend position="end">
+                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
+                                                    <IconButton onClick={handleClickShowConfirmPassword}
+                                                                onMouseDown={handleMouseDownPassword}>
+                                                        {values.showConfirmPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
                                         </InputGroup>
                                         <div style={textDanger}>{error.confirm_password}</div>
                                     </Form.Group>
 
-                                    <Button type="submit" value="Sign Up" style={button}> Sign In </Button>
-                                    <p style={{ fontWeight: "bold" }}>Have an Account?
-                                        <a href="/login" style={{ color: "red" }}>Sign In </a>
+                                    <Button type="submit" value="Sign Up" style={button}> Sign Up </Button>
+                                    <p style={{fontWeight: "bold"}}>Have an Account?
+                                        <a href="/login" style={{color: "red"}}>Sign In </a>
                                     </p>
                                 </Form>
                             </div>
-
                         </Col>
                     </Row>
                 </Container>
             </section>
-        </main >
+        </main>
     );
 }
 
 /* Reducer */
 const mapStateToProps = (state) => {
     return {
-        login: state.registerEmployees.data,
+        register: state.registerEmployees.data,
         isLoading: state.registerEmployees.isLoading,
     }
 }
 
 /* Action */
-const mapDispatchToProps = { registerEmployee }
+const mapDispatchToProps = {registerEmployee}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

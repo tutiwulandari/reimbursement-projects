@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Dashboard from "../../../SideBar/Dashboard";
+import DashboardHc from "../../../SideBar/hc/DashboardHc";
 
 export class FormElement extends Component {
 
@@ -7,7 +7,7 @@ export class FormElement extends Component {
         return (
 
             <div className="container">
-                {/*<Dashboard/>*/}
+                {/*<DashboardHc/>*/}
                 <form>
                     <div className="row jumbotron" style={{marginLeft: "80px", marginTop: "10px"}}>
                         <h2 className="text-center" style={{marginBottom: "20px", marginTop: "-20px"}}>Edit Employee Databases</h2>

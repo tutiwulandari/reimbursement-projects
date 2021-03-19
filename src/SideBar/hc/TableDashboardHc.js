@@ -1,8 +1,18 @@
 import {Container} from "reactstrap";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCheckCircle, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "@themesberg/react-bootstrap";
+import {Jumbotron} from "react-bootstrap";
 
-export default function TableDashboard() {
+export default function TableDashboardHc() {
     return (
         <Container style={{marginTop: "100px"}}>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+            </style>
+            <Jumbotron style={{marginLeft:"30px", marginTop:"50px",height:"10%", width:"100%", fontFamily:"roboto", backgroundColor:"#292961"}}>
+                <h4 style={{color:"white", marginBottom:"20px"}}> <FontAwesomeIcon icon={faExclamationTriangle}/> Please Validate reimbursement claims bellow!! </h4>
+            </Jumbotron>
             <h3 style={{marginLeft: "50px"}}> List Of Claims</h3>
             <table className="table" style={{marginLeft: "50px", textAlign:"center"}}>
                 <thead>
@@ -14,6 +24,7 @@ export default function TableDashboard() {
                     <th scope="col"> Fee</th>
                     <th scope="col"> Status</th>
                     <th scope="col"> Disbursement Date</th>
+                    <th scope="col"> Action </th>
 
                 </tr>
                 </thead>
@@ -26,6 +37,7 @@ export default function TableDashboard() {
                     <td>500.000</td>
                     <td>On Process HC Finance</td>
                     <td>27/03/2021</td>
+                    <td><Button style={{backgroundColor:"#BE2528"}}> <FontAwesomeIcon icon={faCheckCircle}/> </Button> </td>
 
                 </tr>
                 <tr>
@@ -36,6 +48,8 @@ export default function TableDashboard() {
                     <td>5000.000</td>
                     <td>On Process HC Finance</td>
                     <td>27/03/2021</td>
+                    <td><Button style={{backgroundColor:"#BE2528"}}> <FontAwesomeIcon icon={faCheckCircle}/> </Button> </td>
+
 
                 </tr>
                 </tbody>

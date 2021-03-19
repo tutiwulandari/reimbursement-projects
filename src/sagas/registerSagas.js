@@ -6,13 +6,13 @@ import {
     REGISTER_EMPLOYEE,
     REGISTER_EMPLOYEE_SUCCESS,
     REGISTER_EMPLOYEE_FAILURE
-} from '../constants/actions'
+} from '../constants/actionConstant'
 
 
 function* registerEmployee(action) {
     let data = action.data
     let result = yield axios
-        .post('/register/employee', data)
+        .post('/register/admin', data)
         .then(response => {
             return {
                 type: REGISTER_EMPLOYEE_SUCCESS,

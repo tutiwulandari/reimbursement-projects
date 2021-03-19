@@ -1,9 +1,4 @@
-import {
-    REGISTER_EMPLOYEE,
-    REGISTER_EMPLOYEE_SUCCESS,
-    REGISTER_EMPLOYEE_FAILURE
-} from '../constants/actions'
-
+import {LOGIN_EMPLOYEE, LOGIN_EMPLOYEE_FAILURE, LOGIN_EMPLOYEE_SUCCESS} from "../constants/actionConstant";
 
 const initialState = {
     data: null,
@@ -11,24 +6,24 @@ const initialState = {
     isLoading: false
 }
 
-export function registerEmployees(state = initialState, data) {
+export function loginEmployee(state = initialState, data) {
     switch (data.type) {
-        case REGISTER_EMPLOYEE:
+        case LOGIN_EMPLOYEE:
             return {
                 ...state,
                 isLoading: true
             }
-        case REGISTER_EMPLOYEE_SUCCESS:
+        case LOGIN_EMPLOYEE_SUCCESS:
             return {
                 data: data,
                 error: null,
                 isLoading: false
             }
-        case REGISTER_EMPLOYEE_FAILURE:
+        case LOGIN_EMPLOYEE_FAILURE:
             return {
                 data: null,
-                isLoading: false,
-                error: data.error
+                error: data.error,
+                isLoading: false
             }
         default:
             return state

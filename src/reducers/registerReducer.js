@@ -1,6 +1,9 @@
 import {
-    FIND_ALL_EMPLOYEE, FIND_ALL_EMPLOYEE_FAILURE, FIND_ALL_EMPLOYEE_SUCCESS,
-} from "../constants/actions";
+    REGISTER_EMPLOYEE,
+    REGISTER_EMPLOYEE_SUCCESS,
+    REGISTER_EMPLOYEE_FAILURE
+} from '../constants/actionConstant'
+
 
 const initialState = {
     data: null,
@@ -8,30 +11,26 @@ const initialState = {
     isLoading: false
 }
 
-export function findAllEmployee(state = initialState, data) {
+export function registerEmployees(state = initialState, data) {
     switch (data.type) {
-        case FIND_ALL_EMPLOYEE:
+        case REGISTER_EMPLOYEE:
             return {
                 ...state,
                 isLoading: true
             }
-        case FIND_ALL_EMPLOYEE_SUCCESS:
+        case REGISTER_EMPLOYEE_SUCCESS:
             return {
                 data: data,
                 error: null,
                 isLoading: false
             }
-        case FIND_ALL_EMPLOYEE_FAILURE:
+        case REGISTER_EMPLOYEE_FAILURE:
             return {
                 data: null,
                 isLoading: false,
                 error: data.error
             }
         default:
-            return {
-                ...state,
-                isLoading: false,
-                error: null
-            };
+            return state
     }
 }

@@ -1,0 +1,19 @@
+.jumbotron-home {
+    padding: 50px;
+    background-color: white;
+}
+.float-right {
+    padding: 10%;
+    margin-right: 140vw;
+    margin-top: 30%;
+}
+.jumbotron {
+background-color: white;
+}
+.p {
+    font-style: italic;
+}
+.h3 {
+    font-weight: bold;
+    margin-top: 70px;
+}
