@@ -13,11 +13,13 @@ import React from "react";
 import routes from "./configs/routes";
 import { Provider } from 'react-redux';
 import store from './configs/store';
+import TableComponent from "./pages/Tables";
 
 
 function App() {
     return (
         <div >
+            {/*<TableComponent/>*/}
             <Provider store={store}>
                 <Router >
                     <Switch style={{ paddingLeft: "0" }}>

@@ -8,14 +8,14 @@ export default function Navigation() {
                  <Navbar style={{backgroundColor:"#292961"}} expand="lg">
                      <Navbar.Brand href="#home" style={{color:"white"}}>ENIGMA CAMP</Navbar.Brand>
                      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                     <Navbar.Collapse id="basic-navbar-nav">
-                         <Nav className="mr-auto">
-                             <Nav.Link href="/" style={{color:"white"}}><FontAwesomeIcon icon={faHome} style={{fontSize:"25px"}}/></Nav.Link>
-                             <Nav.Link href="/petunjuk" style={{color:"white", fontsize:"20px"}}>Guide</Nav.Link>
+                     {/*<Navbar.Collapse id="basic-navbar-nav">*/}
+                     {/*    <Nav className="mr-auto">*/}
+                     {/*        <Nav.Link href="/" style={{color:"white"}}><FontAwesomeIcon icon={faHome} style={{fontSize:"25px"}}/></Nav.Link>*/}
+                     {/*        <Nav.Link href="/petunjuk" style={{color:"white", fontsize:"20px"}}>Guide</Nav.Link>*/}
 
-                         </Nav>
-                         <Nav.Link href="/login" style={{color:"white", fontSize:"22px"}}><FontAwesomeIcon icon={faSignInAlt}/> Login</Nav.Link>
-                     </Navbar.Collapse>
+                     {/*    </Nav>*/}
+                     {/*    <Nav.Link href="/login" style={{color:"white", fontSize:"22px"}}><FontAwesomeIcon icon={faSignInAlt}/> Login</Nav.Link>*/}
+                     {/*</Navbar.Collapse>*/}
                  </Navbar>
         )
     }

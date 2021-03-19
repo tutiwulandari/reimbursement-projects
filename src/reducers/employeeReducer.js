@@ -101,7 +101,7 @@ export const saveEmployee = (state = {...initialState}, action) => {
                 isLoading: true
             }
         case SAVE_EMPLOYEE_SUCCESS:
-            console.log(action.data)
+            console.log("SUCCESS",action.data)
             return {
                 data: action.data,
                 isLoading: false,

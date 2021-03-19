@@ -123,7 +123,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
         <main style={{backgroundColor: "white"}}>
             <Navigation/>
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
-                <Container>
+                <Container style={{marginTop:"50px"}}>
                     <Row className="justify-content-center form-bg-image" style={{backgroundImage: `url(${BgImage})`}}>
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">

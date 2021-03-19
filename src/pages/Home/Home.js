@@ -8,9 +8,7 @@ export default function Home() {
     return(
         <div>
             <Navigation/>
-            {/*<CarouselElement/>*/}
             <JumbotronHome/>
-            {/*<Footer/>*/}
         </div>
     )
 }

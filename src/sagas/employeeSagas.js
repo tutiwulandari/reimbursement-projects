@@ -63,6 +63,7 @@ function* updateEmployee(action) {
 }
 
 function* saveEmployee(action) {
+    console.log("SAVE", action)
     let model = action.model;
     let method = 'POST', url = '/employee';
     if(model.id) {

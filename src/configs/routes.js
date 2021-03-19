@@ -7,8 +7,8 @@ import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
 import React from "react";
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
-import EditEmployee from "../pages/Employee/EditEmployee"
-import EmployeeList from "../pages/Employee/EmployeeList"
+import TableComponent from "../pages/Tables";
+import EmployeeForm from "../pages/EditForm";
 
 
 
@@ -56,12 +56,12 @@ export default  [
 
     {
         path: '/employee',
-        component: <EmployeeList/>,
+        component: <TableComponent/>,
         exact: true
     },
     {
         path: '/employee/:id/edit',
-        component: <EditEmployee/>,
+        component: <EmployeeForm/>,
         exact: true
     }
 
