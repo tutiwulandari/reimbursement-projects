@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import ForgetPassword from "./ForgetPassword/ForgetPassword";
+import ForgetPassword from "./ForgetPassword";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
 import {Row, Col, FormControl, Container, InputGroup, Form} from "react-bootstrap";
-import Navigation from "../../component/Navigation";
+import NavigationHome from "../../component/navigationHome/NavigationHome";
 import {useHistory} from "react-router-dom";
 import {loginEmployee} from "../../actions/loginAction"
 import Swal from 'sweetalert2'
@@ -45,18 +45,22 @@ const Login = ({loginEmployee, login, isLoading}) => {
     console.log("login", data)
 
     useEffect( ()  => {
-        if(login) {
-            console.log("cobacoba", login)
-            if(login.data?.code === 200) {
-                Swal.fire({
-                    icon:'success',
-                    title:'success',
-                    text:'Login success...',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
+        // if (email != null) {
+        //     console.log("ini email", email)
+        // } else {
+        //     console.log("gagal email")
+        // }
+        if(login !== null) {
+            if(login?.data?.code === 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'success',
+                            text: 'Login success...',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
                 console.log("coba", login.data)
-                if(login.data?.data?.role.id === 1) {
+                if (login.data?.data?.role.id === 1) {
                     history.push("/dashboard/hc")
                 } else {
                     history.push("/dashboard/finance")
@@ -64,15 +68,44 @@ const Login = ({loginEmployee, login, isLoading}) => {
                 history.push()
             } else {
                 Swal.fire({
-                    icon:'error',
-                    title:'Ooops..',
+                    icon: 'error',
+                    title: 'Ooops..',
                     text: 'Something went wrong!',
                     showConfirmButton: false,
-                    timer:2000,
+                    timer: 2000,
                 })
             }
+        } else {
+            console.log("OUT")
         }
-    }, [login])
+        //     console.log("cobacoba", login)
+        //     if(login?.data?.code === 200) {
+        //         Swal.fire({
+        //             icon:'success',
+        //             title:'success',
+        //             text:'Login success...',
+        //             showConfirmButton: false,
+        //             timer: 1000
+        //         })
+        //         console.log("coba", login.data)
+        //         if(login.data?.data?.role.id === 1) {
+        //             history.push("/dashboard/hc")
+        //         } else {
+        //             history.push("/dashboard/finance")
+        //         }
+        //         history.push()
+        //     } else {
+        //         Swal.fire({
+        //             icon:'error',
+        //             title:'Ooops..',
+        //             text: 'Something went wrong!',
+        //             showConfirmButton: false,
+        //             timer:2000,
+        //         })
+        //     }
+        // }
+
+    })
 
 
     function handleChange(e) {
@@ -121,7 +154,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     return (
         <main style={{backgroundColor: "white"}}>
-            <Navigation/>
+            <NavigationHome/>
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
                 <Container style={{marginTop:"50px"}}>
                     <Row className="justify-content-center form-bg-image" style={{backgroundImage: `url(${BgImage})`}}>
@@ -177,14 +210,14 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          aria-describedby="basic-addon2"
                                                          style={{height:"38px"}}
                                             />
-                                            <InputGroup.Prepend position="end">
-                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
-                                                    <IconButton onClick={handleClickShowPassword}
-                                                                onMouseDown={handleMouseDownPassword}>
-                                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
-                                                    </IconButton>
-                                                </InputGroup.Text>
-                                            </InputGroup.Prepend>
+                                            {/*<InputGroup.Prepend position="end">*/}
+                                            {/*    <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>*/}
+                                            {/*        <IconButton onClick={handleClickShowPassword}*/}
+                                            {/*                    onMouseDown={handleMouseDownPassword}>*/}
+                                            {/*            {values.showPassword ? <Visibility/> : <VisibilityOff/>}*/}
+                                            {/*        </IconButton>*/}
+                                            {/*    </InputGroup.Text>*/}
+                                            {/*</InputGroup.Prepend>*/}
 
                                         </InputGroup>
                                         <div className="text-danger">{error.password}</div>
@@ -214,7 +247,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
 const mapStateToProps = (state) => {
     return {
-        login : state.loginEmployee.data,
+        login : state.loginEmployee.data || null,
         isLoading: state.loginEmployee.isLoading
     }
 }

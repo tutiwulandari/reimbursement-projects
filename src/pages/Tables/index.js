@@ -1,1 +1,1 @@
-export {default} from "./TableComponent"
+export {default} from "./EmployeeList"

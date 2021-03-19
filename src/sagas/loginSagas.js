@@ -13,6 +13,7 @@ function* loginEmployee(action) {
     let result = yield axios
         .post('/login', data)
         .then(response => {
+            console.log("saga data", response)
             return{
                 type : LOGIN_EMPLOYEE_SUCCESS,
                 data: response

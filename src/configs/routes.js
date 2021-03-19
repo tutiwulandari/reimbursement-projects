@@ -1,27 +1,22 @@
 import Login from "../pages/Login/Login";
-import Guide from "../pages/Guide/Guide";
-import Success from './../pages/Registration/Success';
-import DashboardHc from "../SideBar/hc/DashboardHc";
-import HomeSideBar from "../SideBar/HomeSideBar";
-import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
+import Success from '../pages/registration/Success';
+import DashboardHomeHc from "../dashboard/dashboardHc/DashboardHomeHc";
+import TableDashboardHc from "../dashboard/dashboardHc/TableDashboardHc";
 import React from "react";
-import DashboardFinance from "../SideBar/finance/DashboardFinance";
-import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
-import ReimburseList from './../pages/Reimburse/ReimburseList';
-import ReimburseForm from './../pages/Reimburse/ReimburseForm';
-import TableComponent from "../pages/Tables";
+import DashboardFinance from "../dashboard/dashboardFinance/DashboardFinance";
+import TableDashboardFinance from "../dashboard/dashboardFinance/TableDashboardFinance";
+import ReimburseList from '../pages/reimburse/ReimburseList';
+import ReimburseForm from '../pages/reimburse/ReimburseForm';
+import EmployeeList from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
+import DashboardHc from "../dashboard/dashboardHc/DashboardHc";
+import Verifikasi from "../pages/Tables/Verifikasi";
 
 
 export default  [
     {
         path:'/',
         component: <Login/>,
-        exact: true
-    },
-    {
-        path: '/petunjuk',
-        component: <Guide/>,
         exact: true
     },
     {
@@ -41,7 +36,7 @@ export default  [
     },
     {
         path: '/home/sidebar',
-        component: <HomeSideBar/>,
+        component: <DashboardHomeHc/>,
         exact: true
     },
     {
@@ -57,7 +52,7 @@ export default  [
 
     {
         path: '/employee',
-        component: <TableComponent/>,
+        component: <EmployeeList/>,
         exact: true
     },
     {
