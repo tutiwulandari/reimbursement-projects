@@ -1,9 +1,10 @@
 import {Card, Col, Container, Jumbotron, Row} from "react-bootstrap";
-import Image from "../../assets/image/money.svg"
-import Image2 from "../../assets/image/glasses2.png"
-import Image3 from "../../assets/image/pregnant.png"
-import Image4 from "../../assets/image/perjalanan_dinas.png"
-import Image5 from "../../assets/image/training.jpg"
+import Image from "../../../assets/image/money.svg"
+import Image2 from "../../../assets/image/glasses2.png"
+import Image3 from "../../../assets/image/pregnant.png"
+import Image4 from "../../../assets/image/perjalanan_dinas.png"
+import Image5 from "../../../assets/image/training.jpg"
+import Image6 from "../../../assets/image/insurance_icon.png"
 
 export default function JumbotronHome() {
     return (
@@ -58,6 +59,15 @@ export default function JumbotronHome() {
                                   </Card.Body>
                               </Card>
                           </Col>
+
+                          {/*<Col className="d-flex align-items-stretch" >*/}
+                          {/*    <Card style={{width: '18rem', marginLeft: "-100px"}}>*/}
+                          {/*        <Card.Img variant="top" src={Image6}/>*/}
+                          {/*        <Card.Body>*/}
+                          {/*            <Card.Title style={{textAlign:"center"}}>Insurance Claims</Card.Title>*/}
+                          {/*        </Card.Body>*/}
+                          {/*    </Card>*/}
+                          {/*</Col>*/}
                       </Row>
                   </div>
         </div>

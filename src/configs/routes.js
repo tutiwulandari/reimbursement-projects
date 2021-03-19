@@ -1,37 +1,25 @@
-import Register from "../pages/Registration/Register";
 import Login from "../pages/Login/Login";
 import Guide from "../pages/Guide/Guide";
 import Success from './../pages/Registration/Success';
 import DashboardHc from "../SideBar/hc/DashboardHc";
 import HomeSideBar from "../SideBar/HomeSideBar";
-import Home from "../pages/Home/Home";
 import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
-import GlassesClaims from "../SideBar/FormClaims/GlassesClaims";
 import React from "react";
-import BirthingClaims from "../SideBar/FormClaims/BirthingClaims";
-import TrainingClaims from "../SideBar/FormClaims/TrainingClaims";
-import OfficeTravelClaims from "../SideBar/FormClaims/OfficeTravelClaims";
-import InsuranceClaims from "../SideBar/FormClaims/InsuranceClaims";
-import {EmployeeDetails, EmployeeList} from "../pages"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
+<<<<<<< HEAD
 import ReimburseList from './../pages/Reimburse/ReimburseList';
 import ReimburseForm from './../pages/Reimburse/ReimburseForm';
+=======
+import TableComponent from "../pages/Tables";
+import EmployeeForm from "../pages/EditForm";
+
+>>>>>>> origin/15-TableComponent
 
 
 export default  [
     {
         path:'/',
-        component: <Home/>,
-        exact: true
-    },
-    {
-        path:'/register',
-        component: <Register/>,
-        exact: true
-    },
-    {
-        path:'/login',
         component: <Login/>,
         exact: true
     },
@@ -40,7 +28,6 @@ export default  [
         component: <Guide/>,
         exact: true
     },
-    //warningggggg
     {
         path: '/dashboard/hc',
         component:<DashboardHc/>,
@@ -73,41 +60,13 @@ export default  [
     },
 
     {
-        path: '/claims/glasses',
-        component: <GlassesClaims/>,
-        exact: true
-    },
-    {
-        path: '/claims/birthing',
-        component: <BirthingClaims/>,
-        exact: true
-
-    },
-
-    {
-        path: '/claims/training',
-        component: <TrainingClaims/>,
-        exact: true
-    },
-
-    {
-        path: '/claims/officeTravel',
-        component: <OfficeTravelClaims/>,
-        exact: true
-    },
-    {
-        path: '/claims/insurance',
-        component: <InsuranceClaims/>,
-        exact: true
-    },
-    {
         path: '/employee',
-        component: <EmployeeList/>,
+        component: <TableComponent/>,
         exact: true
     },
     {
-        path: '/employee/:id/details',
-        component: <EmployeeDetails/>,
+        path: '/employee/:id/edit',
+        component: <EmployeeForm/>,
         exact: true
     },
     {

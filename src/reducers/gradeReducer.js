@@ -1,15 +1,11 @@
 import {
-    FIND_ALL_EMPLOYEE,
-    FIND_ALL_EMPLOYEE_FAILURE,
-    FIND_ALL_EMPLOYEE_SUCCESS,
-    FIND_EMPLOYEE_BY_ID,
-    FIND_EMPLOYEE_BY_ID_SUCCESS,
-    FIND_EMPLOYEE_BY_ID_FAILURE,
-    UPDATE_EMPLOYEE,
-    UPDATE_EMPLOYEE_SUCCESS,
-    SAVE_EMPLOYEE,
-    SAVE_EMPLOYEE_SUCCESS,
-    SAVE_EMPLOYEE_FAILURE
+    FIND_ALL_GRADE, FIND_ALL_GRADE_FAILURE, FIND_ALL_GRADE_SUCCESS,
+    FIND_GRADE_BY_ID,
+    FIND_GRADE_BY_ID_FAILURE,
+    FIND_GRADE_BY_ID_SUCCESS,
+    SAVE_GRADE, SAVE_GRADE_FAILURE, SAVE_GRADE_SUCCESS,
+    UPDATE_GRADE,
+    UPDATE_GRADE_SUCCESS
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -18,21 +14,20 @@ const initialState = {
     isLoading: false
 }
 
-export function findAllEmployee(state = initialState, data) {
+export function findAllGrade(state = initialState, data) {
     switch (data.type) {
-        case FIND_ALL_EMPLOYEE:
+        case FIND_ALL_GRADE:
             return {
                 ...state,
                 isLoading: true
             }
-        case FIND_ALL_EMPLOYEE_SUCCESS:
-            console.log("INI REDUCER", data)
+        case FIND_ALL_GRADE_SUCCESS:
             return {
                 data: data,
                 error: null,
                 isLoading: false
             }
-        case FIND_ALL_EMPLOYEE_FAILURE:
+        case FIND_ALL_GRADE_FAILURE:
             return {
                 data: null,
                 isLoading: false,
@@ -47,21 +42,22 @@ export function findAllEmployee(state = initialState, data) {
     }
 }
 
-export const findEmployeeById = (state = {...initialState, data: false}, action) => {
+
+export const findGradeById = (state = {...initialState, data: false}, action) => {
     switch (action.type) {
-        case FIND_EMPLOYEE_BY_ID:
+        case FIND_GRADE_BY_ID:
             return {
                 ...state,
-                data:  null,
+                data: null,
                 isLoading: true
             };
-        case FIND_EMPLOYEE_BY_ID_SUCCESS:
+        case FIND_GRADE_BY_ID_SUCCESS:
             return {
                 data: action.data,
                 isLoading: false,
                 error: null
             }
-        case FIND_EMPLOYEE_BY_ID_FAILURE:
+        case FIND_GRADE_BY_ID_FAILURE:
             return {
                 data: false,
                 isLoading: false,
@@ -75,13 +71,13 @@ export const findEmployeeById = (state = {...initialState, data: false}, action)
             }
     }
 }
-export const updateEmployee = (state = {}, action) => {
+
+
+export const updateGrade = (state = {}, action) => {
     switch (action.type) {
-        case UPDATE_EMPLOYEE:
-            console.log("updateing employee in reducers")
+        case UPDATE_GRADE:
             return true
-        case UPDATE_EMPLOYEE_SUCCESS:
-            console.log("updateing employee success in reducers")
+        case UPDATE_GRADE_SUCCESS:
             return true
         default:
             return false;
@@ -89,10 +85,11 @@ export const updateEmployee = (state = {}, action) => {
 
 }
 
-export const saveEmployee = (state = {...initialState}, action) => {
+
+export const saveGrade = (state = {...initialState}, action) => {
     console.log("save employee reducer")
     switch (action.type) {
-        case SAVE_EMPLOYEE:
+        case SAVE_GRADE:
             console.log("save employee reducer")
             console.log("ini reducer", action.data)
             return {
@@ -100,14 +97,14 @@ export const saveEmployee = (state = {...initialState}, action) => {
                 data: null,
                 isLoading: true
             }
-        case SAVE_EMPLOYEE_SUCCESS:
-            console.log("SUCCESS",action.data)
+        case SAVE_GRADE_SUCCESS:
+            console.log(action.data)
             return {
                 data: action.data,
                 isLoading: false,
                 error: null
             };
-        case SAVE_EMPLOYEE_FAILURE:
+        case SAVE_GRADE_FAILURE:
             return {
                 data: null,
                 isLoading: false,

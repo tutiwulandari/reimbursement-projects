@@ -1,10 +1,11 @@
 import axios from "axios";
+// import axios from '../configs/api'
+
 import { put, takeLatest } from 'redux-saga/effects'
 import {
     LOGIN_EMPLOYEE,
     LOGIN_EMPLOYEE_FAILURE,
     LOGIN_EMPLOYEE_SUCCESS,
-    REGISTER_EMPLOYEE
 } from "../constants/actionConstant";
 
 function* loginEmployee(action) {
@@ -14,7 +15,7 @@ function* loginEmployee(action) {
         .then(response => {
             return{
                 type : LOGIN_EMPLOYEE_SUCCESS,
-                data: response.data
+                data: response
             }
         })
         .catch(error => {

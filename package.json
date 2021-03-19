@@ -26,12 +26,17 @@
     "react-github-btn": "^1.2.0",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^6.15.4",
+    "react-icons": "^4.2.0",
     "react-loading": "^2.0.3",
     "react-recaptcha": "^2.3.10",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+<<<<<<< HEAD
     "react-tooltip": "^4.2.15",
+=======
+    "react-spinners": "^0.10.6",
+>>>>>>> origin/15-TableComponent
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
@@ -64,8 +69,13 @@
     ]
   },
   "devDependencies": {
+    "mdbreact": "^5.0.1",
     "moment-timezone": "^0.5.33",
     "react-bootstrap-table-next": "^4.0.3"
   },
+<<<<<<< HEAD
   "proxy": "http://localhost:8080"
+=======
+  "proxy": "http://10.10.14.44:8080"
+>>>>>>> origin/15-TableComponent
 }
