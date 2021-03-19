@@ -45,27 +45,27 @@ function ReimburseList({
         <div className="container">
             <div className="row mt-3 bg-light pb-3">
                 <div className="col-md-6">
-                    <Link to={`/hc/dashboard`} className="btn btn-outline-dark mr-2 zoom">
+                    <Link to={`/hc/dashboard`} className="btn btn-outline-enigma mr-2 zoom">
                         <FontAwesomeIcon icon={faHome} /> Home
                     </Link>
-                    <Link to={`/hc/employee`} className="btn btn-outline-dark mr-2 zoom">
+                    <Link to={`/hc/employee`} className="btn btn-outline-enigma mr-2 zoom">
                         <FontAwesomeIcon icon={faUser} /> Employee
                     </Link>
-                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-dark mr-2 zoom" : "btn btn-outline-dark mr-2 zoom"}>
+                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-enigma mr-2 zoom" : "btn btn-outline-enigma mr-2 zoom"}>
                         <FontAwesomeIcon icon={faMoneyCheck} /> Reimbursement
                     </Link>
                 </div>
                 <div className="offset-md-3 col-md-3">
                     <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="float-right">
-                        <DropdownToggle color="outline-dark" caret className="zoom">
+                        <DropdownToggle color="outline-enigma" caret className="zoom">
                             <FontAwesomeIcon icon={faUserCircle} /> Account
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem>
-                                <Link to={`/hc/info`} style={{ width: 100 }} className="btn btn-outline-primary">Info</Link>
+                                <Link to={`/hc/info`} style={{ width: 100 }} className="btn btn-outline-enigma">Info</Link>
                             </DropdownItem>
                             <DropdownItem>
-                                <Link to={`/logout`} style={{ width: 100 }} className="btn btn-outline-danger">Logout</Link>
+                                <Link to={`/logout`} style={{ width: 100 }} className="btn btn-outline-enigma">Logout</Link>
                             </DropdownItem>
                         </DropdownMenu>
                     </ButtonDropdown>
@@ -74,7 +74,7 @@ function ReimburseList({
 
             <div className="row mt-5">
                 <div className="col-md-2">
-                    <select className="custom-select rounded-pill" onChange={handleChangeCategory}>
+                    <select className="custom-select rounded-pill text-enigma border-enigma" onChange={handleChangeCategory}>
                         <option value="">Category</option>
                         {
                             categories.data?.data?.map((category, index) => {
@@ -86,7 +86,7 @@ function ReimburseList({
                     </select>
                 </div>
                 <div className="col-md-2">
-                    <select className="custom-select rounded-pill">
+                    <select className="custom-select rounded-pill text-enigma border-enigma">
                         <option>Status</option>
                         <option>Waiting</option>
                         <option>Accepted</option>
@@ -95,14 +95,14 @@ function ReimburseList({
                     </select>
                 </div>
                 <div className="offset-md-5 col-md-3">
-                    <input className="form-control rounded-pill search-input" type="text" placeholder="Search employee.."/>
+                    <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search employee.."/>
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-12 mt-5">
                     <div className="card">
                         <table className="table table-hover">
-                            <thead className="thead-dark">
+                            <thead className="bg-enigma">
                                 <tr>
                                     <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                     <th>Category</th>
