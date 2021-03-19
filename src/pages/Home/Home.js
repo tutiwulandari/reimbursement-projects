@@ -1,4 +1,4 @@
-import JumbotronHome from "./JumbotronHome";
+import JumbotronHome from "./JumbotronHome/JumbotronHome";
 import Footer from "../../component/Footer/Footer";
 import Navigation from "../../component/Navigation";
 import React from "react";

@@ -1,7 +1,7 @@
 import {Jumbotron} from "react-bootstrap";
-import Receipts from "../../assets/image/undraw_Receipt_re_fre3.svg"
-import Form from "../../assets/image/form.svg"
-import Review from "../../assets/image/review.svg"
+import Receipts from "../../../assets/image/undraw_Receipt_re_fre3.svg"
+import Form from "../../../assets/image/form.svg"
+import Review from "../../../assets/image/review.svg"
 import {Col, Row} from "@themesberg/react-bootstrap";
 
 export default function JumbotronGuide() {

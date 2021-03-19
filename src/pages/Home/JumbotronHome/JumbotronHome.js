@@ -1,10 +1,10 @@
 import {Card, Col, Container, Jumbotron, Row} from "react-bootstrap";
-import Image from "../../assets/image/money.svg"
-import Image2 from "../../assets/image/glasses2.png"
-import Image3 from "../../assets/image/pregnant.png"
-import Image4 from "../../assets/image/perjalanan_dinas.png"
-import Image5 from "../../assets/image/training.jpg"
-import Image6 from "../../assets/image/insurance_icon.png"
+import Image from "../../../assets/image/money.svg"
+import Image2 from "../../../assets/image/glasses2.png"
+import Image3 from "../../../assets/image/pregnant.png"
+import Image4 from "../../../assets/image/perjalanan_dinas.png"
+import Image5 from "../../../assets/image/training.jpg"
+import Image6 from "../../../assets/image/insurance_icon.png"
 
 export default function JumbotronHome() {
     return (

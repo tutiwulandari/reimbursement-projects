@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import ForgetPassword from "./ForgetPassword";
+import ForgetPassword from "./ForgetPassword/ForgetPassword";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
@@ -18,34 +18,29 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     });
 
-    /* Loading */
+
     const delay = 2000
     const color = "#292961"
-    const type = "bars"
-    /* Loading */
 
-    /*state */
     const [data, setData] = useState({})
     const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory();
 
-    /* Validation Input */
+
     const [isValid, setIsValid] = useState(true)
-    const [input, setInput] = useState({})
     const [error, setError] = useState({})
 
-    /* Change Path */
-    const history = useHistory();
-    /* Change Path */
+
+
 
     console.log("login", data)
 
     useEffect( ()  => {
         if(login) {
             console.log("cobacoba", login)
-            if(login.data.code === 200) {
+            if(login.data?.code === 200) {
                 Swal.fire({
                     icon:'success',
                     title:'success',
@@ -54,7 +49,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                     timer: 1000
                 })
                 console.log("coba", login.data)
-                if(login.data.data.role.id === 1) {
+                if(login.data?.data?.role.id === 1) {
                     history.push("/dashboard/hc")
                 } else {
                     history.push("/dashboard/finance")
@@ -92,8 +87,29 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        loginEmployee(data)
+        if(validate()) {
+            loginEmployee(data)
+        }
     }
+
+    function validate() {
+        let error_ = {};
+        let isValid_ = true;
+
+        if (!email) {
+            isValid_ = false;
+            error_["email"] = "Please enter your email address.";
+        }
+
+        if (password.length < 8) {
+            isValid_ = false;
+            error_["password"] = "Password minimum at least 8 characters.";
+        }
+
+        setError(error_)
+        return isValid_
+    }
+
 
 
     return (
@@ -139,7 +155,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          placeholder="Enter email"
                                             />
                                         </InputGroup>
-                                        <div className="text-danger">{errors.email}</div>
+                                        <div className="text-danger">{error.email}</div>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicEmail" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Password</Form.Label>
@@ -153,7 +169,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          onChange={handleChange}
                                             />
                                         </InputGroup>
-                                        <div className="text-danger">{errors.password}</div>
+                                        <div className="text-danger">{error.password}</div>
                                     </Form.Group>
                                     <Button type="submit" value="Sign In"
                                             style={{
