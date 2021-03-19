@@ -6,11 +6,11 @@ import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import Image from "../../assets/image/details.svg"
 
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Image from "../../../src/assets/image/modal_detail.svg";
 
 const ReimburseRow = ({ data, index }) => {
 
@@ -64,22 +64,8 @@ const ReimburseRow = ({ data, index }) => {
                 <button className="btn btn-outline-enigma mr-3" onClick={toggle}>
                     Detail
                 </button>
-                <button className="btn btn-outline-enigma">
-                    <FontAwesomeIcon icon={faEdit} />
-                </button>
-
-                {/* <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle color="outline-dark" caret></DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>
-                            <Link to={`item/edit`} style={{ width: 100 }} className="btn btn-outline-primary mr-3">Edit</Link>
-                        </DropdownItem>
-                        <DropdownItem>
-                            <button className="btn btn-danger" style={{ width: 100 }}>Delete</button>
-                        </DropdownItem>
-                    </DropdownMenu>
-                </ButtonDropdown> */}
             </td>
+            
             <Modal className="modal-lg" isOpen={modal} toggle={toggle}>
                 <div className="modal-header">
                     <div className="offset-1 col-md-10">

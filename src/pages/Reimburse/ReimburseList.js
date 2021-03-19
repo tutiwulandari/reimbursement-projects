@@ -1,20 +1,11 @@
-import Container from './../../component/Container/Container';
-import ReimburseRow from './ReimburseRow';
-import {
-    Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
-    Button, Modal, ModalHeader, ModalBody, ModalFooter
-} from 'reactstrap';
-import { Link } from 'react-router-dom'
-
-
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
 import { findAllCategory } from './../../actions/categoryAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faMoneyCheck, faMoneyCheckAlt, faSearch, faSortAmountDown, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+import ReimburseRow from './ReimburseRow';
+import Navbar from './../../component/Navbar/Navbar';
 
 
 function ReimburseList({
@@ -43,34 +34,8 @@ function ReimburseList({
 
     return (
         <div className="container">
-            <div className="row mt-3 bg-light pb-3">
-                <div className="col-md-6">
-                    <Link to={`/hc/dashboard`} className="btn btn-outline-enigma mr-2 zoom">
-                        <FontAwesomeIcon icon={faHome} /> Home
-                    </Link>
-                    <Link to={`/hc/employee`} className="btn btn-outline-enigma mr-2 zoom">
-                        <FontAwesomeIcon icon={faUser} /> Employee
-                    </Link>
-                    <Link to={`/hc/reimburse`} className={window.location.pathname == "/hc/reimburse" ? "btn btn-enigma mr-2 zoom" : "btn btn-outline-enigma mr-2 zoom"}>
-                        <FontAwesomeIcon icon={faMoneyCheck} /> Reimbursement
-                    </Link>
-                </div>
-                <div className="offset-md-3 col-md-3">
-                    <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="float-right">
-                        <DropdownToggle color="outline-enigma" caret className="zoom">
-                            <FontAwesomeIcon icon={faUserCircle} /> Account
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem>
-                                <Link to={`/hc/info`} style={{ width: 100 }} className="btn btn-outline-enigma">Info</Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link to={`/logout`} style={{ width: 100 }} className="btn btn-outline-enigma">Logout</Link>
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </ButtonDropdown>
-                </div>
-            </div>
+            
+            <Navbar/>
 
             <div className="row mt-5">
                 <div className="col-md-2">
@@ -108,7 +73,7 @@ function ReimburseList({
                                     <th>Category</th>
                                     <th>Employee</th>
                                     <th>Status</th>
-                                    <th>Options</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
