@@ -73,9 +73,5 @@
     "moment-timezone": "^0.5.33",
     "react-bootstrap-table-next": "^4.0.3"
   },
-<<<<<<< HEAD
   "proxy": "http://localhost:8080"
-=======
-  "proxy": "http://10.10.14.44:8080"
->>>>>>> origin/15-TableComponent
 }

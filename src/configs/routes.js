@@ -7,14 +7,10 @@ import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
 import React from "react";
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
-<<<<<<< HEAD
 import ReimburseList from './../pages/Reimburse/ReimburseList';
 import ReimburseForm from './../pages/Reimburse/ReimburseForm';
-=======
 import TableComponent from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
-
->>>>>>> origin/15-TableComponent
 
 
 export default  [
