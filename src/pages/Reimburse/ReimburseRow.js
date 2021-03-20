@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { findReimburseId } from "../../actions/reimburseAction";
+import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
+
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,69 +21,9 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
     const getId = id => {
         findReimburseId(id)
-    }
-
-    function convert_to_rupiah(number) {
-        var number_string = number.toString(),
-            sisa = number_string.length % 3,
-            rupiah = number_string.substr(0, sisa),
-            ribuan = number_string.substr(sisa).match(/\d{3}/g);
-
-        if (ribuan) {
-            var separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-        return rupiah
-    }
-
-    function convert_date_format(date) {
-        var parts = date.split("-")
-        let tahun = parts[0]
-        let bulan = parts[1]
-        let tanggal = parts[2]
-
-        switch (bulan) {
-            case "01":
-                bulan = "Januari"
-                break;
-            case "02":
-                bulan = "Februari"
-                break;
-            case "03":
-                bulan = "Maret"
-                break;
-            case "04":
-                bulan = "April"
-                break;
-            case "05":
-                bulan = "Mei"
-                break;
-            case "06":
-                bulan = "Juni"
-                break;
-            case "07":
-                bulan = "Juli"
-                break;
-            case "08":
-                bulan = "Agustus"
-                break;
-            case "09":
-                bulan = "September"
-                break;
-            case "10":
-                bulan = "Oktober"
-                break;
-            case "11":
-                bulan = "November"
-                break;
-            case "12":
-                bulan = "Desember"
-                break;
-            default:
-                break;
-        }
-
-        return `${tanggal} ${bulan} ${tahun}`
+        // if (reimburse?.claimFee) {
+            // convert_to_rupiah(reimburse.claimFee) : ""
+        // }
     }
 
     /* Tooltip */
@@ -193,13 +135,13 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
                                 </p>
-                                <p className="p-enigma">Rp. {reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""},-</p>
+                                <p className="p-enigma">{reimburse?.claimFee}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
                                 </p>
-                                <p className="p-enigma">Rp. {reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""},-</p>
+                                <p className="p-enigma">{reimburse?.borneCost}</p>
                             </div>
                         </div>
 
@@ -231,9 +173,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.dateOfClaimSubmission
-                                        ? convert_date_format(reimburse.dateOfClaimSubmission)
-                                        : ""}
+                                    {reimburse?.dateOfClaimSubmission}
                                 </p>
                             </div>
                             <div className="col-md-3">
@@ -241,9 +181,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.startDate
-                                        ? convert_date_format(reimburse.startDate)
-                                        : ""}
+                                    {reimburse?.startDate}
                                 </p>
                             </div>
                         </div>
@@ -254,9 +192,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.disbursementDate
-                                        ? convert_date_format(reimburse.disbursementDate)
-                                        : ""}
+                                    {reimburse?.disbursementDate}
                                 </p>
                             </div>
                             <div className="col-md-3">
@@ -264,9 +200,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.endDate
-                                        ? convert_date_format(reimburse.endDate)
-                                        : ""}
+                                    {reimburse?.endDate}
                                 </p>
                             </div>
                         </div>

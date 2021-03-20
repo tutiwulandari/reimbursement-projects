@@ -57,7 +57,7 @@ function ReimburseList({
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-12 mt-5">
+                <div className="col-md-12 mt-5 mb-5">
                     <div className="card">
                         <table className="table table-hover">
                             <thead className="bg-enigma">

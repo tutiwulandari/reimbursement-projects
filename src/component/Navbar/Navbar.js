@@ -17,7 +17,7 @@ function Navbar() {
     const toggle = () => setOpen(!dropdownOpen)
 
     return (
-        <div className="row mt-3 bg-light pb-3">
+        <div className="row mt-3 bg-light pb-3 pt-3">
             <div className="col-md-6">
                 <Link to={`/hc/dashboard`}
                     className={window.location.pathname.match("/hc/dashboard")
@@ -30,6 +30,12 @@ function Navbar() {
                         ? "btn btn-enigma mr-2 zoom"
                         : "btn btn-outline-enigma mr-2 zoom"}>
                     <FontAwesomeIcon icon={faUser} /> Employee
+                </Link>
+                <Link to={`/hc/grade`}
+                    className={window.location.pathname.match("/hc/grade")
+                        ? "btn btn-enigma mr-2 zoom"
+                        : "btn btn-outline-enigma mr-2 zoom"}>
+                    Grade
                 </Link>
                 <Link to={`/hc/reimburse`}
                     className={window.location.pathname.match("/hc/reimburse")

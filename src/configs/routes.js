@@ -11,6 +11,7 @@ import ReimburseList from './../pages/Reimburse/ReimburseList';
 import ReimburseForm from './../pages/Reimburse/ReimburseForm';
 import TableComponent from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
+import GradeList from "../pages/Grade";
 
 
 export default  [
@@ -73,6 +74,11 @@ export default  [
     {
         path: '/hc/reimburse/:id',
         component: <ReimburseForm/>,
+        exact: true
+    },
+    {
+        path: '/hc/grade',
+        component: <GradeList/>,
         exact: true
     },
 
