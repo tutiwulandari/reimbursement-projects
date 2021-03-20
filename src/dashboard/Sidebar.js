@@ -29,9 +29,9 @@ function Sidebar() {
                     </li>
 
                     <li className="nav__items ">
-                        <li className="nav__items " style={{fontSize:"12px"}}>
+                        <li className="nav__items " style={{fontSize:"11px"}}>
                             <FontAwesomeIcon icon={faMoneyCheck} style={{marginLeft:"30px", fontSize:"30px"}}/>
-                            <a href="/hc/reimburse" style={{marginLeft:"55px"}}>Reimbursement</a>
+                            <a href="/hc/reimburse" style={{marginLeft:"50px"}}>Reimbursement</a>
                         </li>
                     </li>
                 </ul>
