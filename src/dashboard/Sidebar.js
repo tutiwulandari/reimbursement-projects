@@ -5,6 +5,8 @@ import {faMoneyCheck} from "@fortawesome/free-solid-svg-icons/faMoneyCheck";
 import React, {useState} from "react";
 import {faSignOutAlt,faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {ButtonDropdown,DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
+import "../assets/css/Sidebar.scss"
+
 
 
 function Sidebar() {

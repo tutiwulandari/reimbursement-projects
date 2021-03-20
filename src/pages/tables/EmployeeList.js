@@ -9,6 +9,7 @@ import "./table_index.css"
 import Sidebar from "../../dashboard/Sidebar";
 import Verifikasi from "./Verifikasi";
 import EmployeeForm from "../EditForm";
+import LayoutRoutesHc from "../layoutHc/LayoutRoutesHc";
 
 function EmployeeList({findAll, employees, error, isLoading}) {
     const [data, setData] = useState({})
@@ -21,8 +22,6 @@ function EmployeeList({findAll, employees, error, isLoading}) {
 
     return(
       <div>
-          <Sidebar/>
-
           <div className="container" style={{marginBottom:"50px"}}>
               <h1 style={{textAlign:"center", marginTop:"50px",color:"black" }}> List Karyawan </h1>
 

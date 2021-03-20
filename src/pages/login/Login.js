@@ -13,6 +13,8 @@ import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import '../../assets/css/Login.css'
+
 
 
 const Login = ({loginEmployee, login, isLoading}) => {
@@ -58,7 +60,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                 if (login.data?.data?.role.id === 1) {
                     history.push("/dashboard/hc")
                 } else  if (login.data?.data?.role.id === 2) {
-                    history.push("/dashboard/finance")
+                    history.push("/dashboard/hc")
                 }
                 history.push()
             } else {

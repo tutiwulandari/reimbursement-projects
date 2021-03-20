@@ -6,7 +6,6 @@ import React, {useState} from "react";
 import {faSignOutAlt,faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {ButtonDropdown,DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import DashboardHomeHc from "./DashboardHomeHc";
-import {Footer} from "../../component/footer";
 
 
 function DashboardHc() {

@@ -7,6 +7,8 @@ import './assets/css/Dashboard.css'
 import './assets/css/Form.css'
 import './assets/css/EmployeeDetails.css'
 import './assets/css/Sidebar.scss'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
 import React from "react";
@@ -19,15 +21,15 @@ function App() {
     return (
         <div >
             <Provider store={store}>
-            <Router >
-                <Switch style={{ paddingLeft: "0" }}>
-                    {routes.map((route, index) =>
-                        <Route key={index} path={route.path} exact>
-                            {route.component}
-                        </Route>)}
-                </Switch>
-            </Router>
-        </Provider>
+                <Router >
+                    <Switch style={{ paddingLeft: "0" }}>
+                        {routes.map((route, index) =>
+                            <Route key={index} path={route.path} exact>
+                                {route.component}
+                            </Route>)}
+                    </Switch>
+                </Router>
+            </Provider>
 
         </div>
     );

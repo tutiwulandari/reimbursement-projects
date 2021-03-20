@@ -10,6 +10,9 @@ import ReimburseForm from '../pages/reimburse/ReimburseForm';
 import EmployeeList from "../pages/tables";
 import EmployeeForm from "../pages/EditForm";
 import DashboardHc from "../dashboard/dashboardHc/DashboardHc";
+import LayoutRoutesHc from "../pages/layoutHc/LayoutRoutesHc";
+import ResetPassword from "../pages/resetPassword";
+import RoutesFinance from "../pages/layoutHc/RoutesFinance";
 
 
 export default  [
@@ -20,18 +23,18 @@ export default  [
     },
     {
         path: '/dashboard/hc',
-        component:<DashboardHc/>,
+        component:<LayoutRoutesHc/>,
         exact: true
     },
     {
         path: '/dashboard/finance',
-        component:<DashboardFinance/>,
+        component:<RoutesFinance/>,
         exact: true
     },
     {
         path: '/success-register',
         component: <Success/>,
-        exact: true 
+        exact: true
     },
     {
         path: '/home/sidebar',
@@ -69,5 +72,10 @@ export default  [
         component: <ReimburseForm/>,
         exact: true
     },
+    {
+        path: "/hc/resetpassword",
+        component: <ResetPassword/>,
+        exact: true
+    }
 
 ]

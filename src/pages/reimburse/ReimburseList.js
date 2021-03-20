@@ -5,6 +5,8 @@ import { findAllCategory } from '../../actions/categoryAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
+import "../../assets/css/Reimburse.css"
+
 import Sidebar from "../../dashboard/Sidebar";
 
 

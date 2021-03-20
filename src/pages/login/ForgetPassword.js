@@ -3,8 +3,7 @@ import {Button, Modal, ModalFooter,} from "reactstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {Form} from "react-bootstrap";
 import { useForm } from "react-hook-form";
-
-
+import '../../assets/css/Forget.css'
 
 const ForgetPassword = (props) => {
     const {handleSubmit, errors} = useForm();
