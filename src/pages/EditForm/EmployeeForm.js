@@ -5,8 +5,6 @@ import {connect} from "react-redux";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Container, Form, FormGroup, Input, Label} from "reactstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSave} from "@fortawesome/free-solid-svg-icons/faSave";
 
 
 function EmployeeForm({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
@@ -15,19 +13,12 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     const {id} = useParams();
     const [gradesModel, setGradesModel] = useState([])
     const history = useHistory();
-    const [data, setData] = useState({
-        id: null,
-        gradeId: null,
-        employeeType: null,
-        employeeStatus: null,
-        nip: null,
-        joinDate: null
-    })
+    const [data, setData] = useState()
 
     console.log("Error ", error)
 
-    let employeeType = [0, 1]
-    let employeeStatus = [0, 1]
+    let employeeType = ["OFFICE", "ONSITE"]
+    let employeeStatus = ["ACTIVE", "NON_ACTIVE"]
 
     useEffect( () => {
         findAll()
@@ -40,15 +31,49 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }, [])
 
     useEffect(() => {
+        if (employee != null) {
+            let employeeType;
+            let employeeStatus;
+
+            switch (employee.employeeType) {
+                case "OFFICE": employeeType = 1
+                    break
+                case "ONSITE": employeeType = 0
+            }
+
+            switch (employee.employeeStatus) {
+                case "ACTIVE": employeeStatus = 0
+                    break
+                case "NON_ACTIVE": employeeStatus = 1
+            }
+
+            console.log("EMPLOYEEEEEEE", employee)
+
+            setData({
+                id: employee.id,
+                gradeId: employee.grade.id,
+                joinDate: employee.joinDate,
+                employeeType: employeeType,
+                employeeStatus: employeeStatus,
+            })
+        }
+    }, [employee])
+
+    useEffect(() => {
+        console.log("DATAAAAAAA", data)
+    }, [data])
+
+    useEffect(() => {
         if (id && employee) {
-            setData( {
-                ...employee
-            })}
+            setData( employee
+            )}
     }, [id,employee])
+    console.log("test",findById)
 
 //Save
     useEffect(() => {
         if (savedEmployee) {
+            console.log("SUKSESS")
             history.push('/employee');
         }
     }, [savedEmployee, history])
@@ -71,24 +96,30 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(data)
+        console.log("SUBMIT")
+        save(data);
+    }
+    const handleClick = (event) => {
+        event.preventDefault();
+        console.log("SUBMIT", data)
         save(data);
     }
 
-    console.log("EDIT", data)
+    console.log("REQUESSS", data)
 
 
+    const onSelectChange = (e) => {
+        console.log("ONSELECT", e.target)
+        setData( {...data, gradeId: e.target.value})
+    }
 
     return (
-        <div>
-            <Modal.Dialog>
+        <div style={{marginTop:"30px"}}>
+            <Modal.Dialog >
                 <Modal.Header closeButton style={{backgroundColor:"#292961"}}>
                     <Modal.Title style={{color:"white"}} > Edit Karyawan </Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>
-
-                </Modal.Body>
                 <Container>
                     <div>
                         {console.log("coba yaa", data?.grade)}
@@ -98,7 +129,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Input onChange={handleChange} value={data?.id || ''}
                                            type="text" name="id" hidden={true}/>
                                     <Label style={{fontFamily: "cursive"}}>
-                                        ID Employee
+                                        NIP
                                     </Label>
                                     <Input onChange={handleChange}
                                            type="text" value={data?.nip || ''} name="nip"/>
@@ -108,10 +139,12 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Label style={{fontFamily: "cursive"}}>Grade</Label>
                                     <Input
                                         type="select"
-                                        onChange={handleChange}
-                                        value={data?.grade || ''}
-                                        // onChange={e => setData( {...data, gradeId: e.target.value})}
-                                        name="grade">
+                                        // onChange={handleChange}
+                                        onChange={e => onSelectChange(e)}
+                                    >
+                                        {
+                                            console.log("INI GRADES MODEL",gradesModel.data)
+                                        }
                                         {
                                             gradesModel.data?.map( (element, index) =>
                                                 <option key = {index} value={element.id}>
@@ -122,7 +155,6 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     </Input>
 
                                 </FormGroup>
-
                                 <FormGroup>
                                     <Label htmlFor="join_date"  style={{fontFamily: "cursive"}}>Join
                                         Date</Label>
@@ -136,15 +168,15 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Input onChange={handleChange} type="select" value={data?.employeeStatus || ''}
                                            name="employeeStatus">
 
-                                        <option value="ACTIVE"> ACTIVE</option>
-                                        <option value="NON_ACTIVE"> NON_ACTIVE</option>
+                                        {/*<option value="ACTIVE"> ACTIVE</option>*/}
+                                        {/*<option value="NON_ACTIVE"> NON_ACTIVE</option>*/}
                                         {/*<option> --choose--</option>*/}
                                         {
-                                            // employeeStatus.map ( (element, index)  =>
-                                            //     <option key = {index} value={index}>
-                                            //         {element}
-                                            //     </option>
-                                            // )
+                                            employeeStatus.map ( (element, index)  =>
+                                                <option key = {index} value={element}>
+                                                    {element}
+                                                </option>
+                                            )
                                         }
 
                                     </Input>
@@ -156,18 +188,16 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Input onChange={handleChange} type="select" value={data?.employeeType || ''}
                                            name="employeeType">
 
-                                        <option value="OFFICE">OFFICE</option>
-                                        <option value="ONSITE">ONSITE</option>
+                                        {/*<option value="OFFICE">OFFICE</option>*/}
+                                        {/*<option value="ONSITE">ONSITE</option>*/}
                                         {/*<option> --choose--</option>*/}
                                         {
-                                            // employeeType.map ((element, index)  =>
-                                            //     <option key = {index} value={index}>
-                                            //         {element}
-                                            //     </option>
-                                            // )
+                                            employeeType.map ((element, index)  =>
+                                                <option key = {index} value={element}>
+                                                    {element}
+                                                </option>
+                                            )
                                         }
-
-
 
                                     </Input>
                                 </FormGroup>
@@ -181,11 +211,11 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                 </Container>
                 <Modal.Footer>
                     <Link to="/employee">
-                        <Button style={{backgroundColor:"black"}}>Close</Button>
+                        <Button style={{backgroundColor:"black"}}>Back</Button>
                     </Link>
 
-                    <Button type="submit" style={{backgroundColor:"#292961", color:"white"}}>
-                        {id.length > 0 ? " Submit" : " save"}
+                    <Button type="submit" onClick={handleClick} style={{backgroundColor:"#292961", color:"white"}}>
+                        Submit
                     </Button>
                 </Modal.Footer>
             </Modal.Dialog>
@@ -197,7 +227,7 @@ const mapStateToProps = (state) => {
     console.log("state", state.saveEmployee.error)
     return {
         //call reducer
-        employee: state.findEmployeeById.data || [],
+        employee: state.findEmployeeById.data || null,
         isLoading: state.findEmployeeById.isLoading,
         savedEmployee: state.saveEmployee.data,
         grades: state.findAllGrade.data,

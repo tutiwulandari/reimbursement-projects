@@ -87,3 +87,11 @@ export const FIND_ALL_CATEGORY          = "FIND_ALL_CATEGORY"
 export const FIND_ALL_CATEGORY_SUCCESS  = "FIND_ALL_CATEGORY_SUCCESS"
 export const FIND_ALL_CATEGORY_FAILURE  = "FIND_ALL_CATEGORY_FAILURE"
 
+
+/* ================== */
+/*     Reset password  */
+/* ================== */
+
+export const RESET_PASSWORD          = "RESET_PASSWORD"
+export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
+export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"

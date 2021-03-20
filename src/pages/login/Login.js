@@ -45,24 +45,19 @@ const Login = ({loginEmployee, login, isLoading}) => {
     console.log("login", data)
 
     useEffect( ()  => {
-        // if (email != null) {
-        //     console.log("ini email", email)
-        // } else {
-        //     console.log("gagal email")
-        // }
         if(login !== null) {
             if(login?.data?.code === 200) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'success',
-                            text: 'Login success...',
-                            showConfirmButton: false,
-                            timer: 1000
-                        })
+                Swal.fire({
+                    icon: 'success',
+                    title: 'success',
+                    text: 'Login success...',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
                 console.log("coba", login.data)
                 if (login.data?.data?.role.id === 1) {
                     history.push("/dashboard/hc")
-                } else {
+                } else  if (login.data?.data?.role.id === 2) {
                     history.push("/dashboard/finance")
                 }
                 history.push()
@@ -75,35 +70,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                     timer: 2000,
                 })
             }
-        } else {
-            console.log("OUT")
         }
-        //     console.log("cobacoba", login)
-        //     if(login?.data?.code === 200) {
-        //         Swal.fire({
-        //             icon:'success',
-        //             title:'success',
-        //             text:'Login success...',
-        //             showConfirmButton: false,
-        //             timer: 1000
-        //         })
-        //         console.log("coba", login.data)
-        //         if(login.data?.data?.role.id === 1) {
-        //             history.push("/dashboard/hc")
-        //         } else {
-        //             history.push("/dashboard/finance")
-        //         }
-        //         history.push()
-        //     } else {
-        //         Swal.fire({
-        //             icon:'error',
-        //             title:'Ooops..',
-        //             text: 'Something went wrong!',
-        //             showConfirmButton: false,
-        //             timer:2000,
-        //         })
-        //     }
-        // }
 
     })
 
@@ -177,13 +144,13 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                             </div>
                                         </div>
                                     </>
-                               :
-                                <div className="text-center text-md-center mb-2 mt-md-0">
-                                    <h3 className="mb-0">Sign in</h3>
-                                </div>
+                                    :
+                                    <div className="text-center text-md-center mb-2 mt-md-0">
+                                        <h3 className="mb-0">Sign in</h3>
+                                    </div>
                                 }
                                 <Form onSubmit={handleSubmit} className="mt-3">
-                                    <Form.Group controlId="formBasicUsername" className="mb-2" style={{width: "300px"}}>
+                                    <Form.Group controlId="email" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Email</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
@@ -197,7 +164,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                         </InputGroup>
                                         <div className="text-danger">{error.email}</div>
                                     </Form.Group>
-                                    <Form.Group controlId="formBasicEmail" className="mb-2" style={{width: "300px"}}>
+                                    <Form.Group controlId="password" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Password</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt}/></InputGroup.Text>
@@ -210,14 +177,14 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                                          aria-describedby="basic-addon2"
                                                          style={{height:"38px"}}
                                             />
-                                            {/*<InputGroup.Prepend position="end">*/}
-                                            {/*    <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>*/}
-                                            {/*        <IconButton onClick={handleClickShowPassword}*/}
-                                            {/*                    onMouseDown={handleMouseDownPassword}>*/}
-                                            {/*            {values.showPassword ? <Visibility/> : <VisibilityOff/>}*/}
-                                            {/*        </IconButton>*/}
-                                            {/*    </InputGroup.Text>*/}
-                                            {/*</InputGroup.Prepend>*/}
+                                            <InputGroup.Prepend position="end">
+                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
+                                                    <IconButton onClick={handleClickShowPassword}
+                                                                onMouseDown={handleMouseDownPassword}>
+                                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
 
                                         </InputGroup>
                                         <div className="text-danger">{error.password}</div>

@@ -18,20 +18,20 @@ function Sidebar() {
                 <ul className="nav" >
                     <li className="nav__items " style={{marginTop:"80px", fontSize:"12px"}}>
                         <FontAwesomeIcon icon={faHome} style={{marginLeft:"30px", fontSize:"30px"}}/>
-                        <a href="/dashboard/hc" style={{marginLeft:"70px"}}>Home</a>
+                        <a href="/dashboard/hc" style={{marginLeft:"55px"}}>Home</a>
                     </li>
 
                     <li className="nav__items ">
                         <li className="nav__items " style={{fontSize:"12px"}}>
                             <FontAwesomeIcon icon={faUserAlt} style={{marginLeft:"30px", fontSize:"30px"}}/>
-                            <a href="/employee" style={{marginLeft:"70px"}}>Employee</a>
+                            <a href="/employee" style={{marginLeft:"55px"}}>Employee</a>
                         </li>
                     </li>
 
                     <li className="nav__items ">
                         <li className="nav__items " style={{fontSize:"12px"}}>
                             <FontAwesomeIcon icon={faMoneyCheck} style={{marginLeft:"30px", fontSize:"30px"}}/>
-                            <a href="/hc/reimburse" style={{marginLeft:"70px"}}>Reimbursement</a>
+                            <a href="/hc/reimburse" style={{marginLeft:"55px"}}>Reimbursement</a>
                         </li>
                     </li>
                 </ul>

@@ -1,4 +1,4 @@
-import Login from "../pages/Login/Login";
+import Login from "../pages/login/Login";
 import Success from '../pages/registration/Success';
 import DashboardHomeHc from "../dashboard/dashboardHc/DashboardHomeHc";
 import TableDashboardHc from "../dashboard/dashboardHc/TableDashboardHc";
@@ -7,10 +7,9 @@ import DashboardFinance from "../dashboard/dashboardFinance/DashboardFinance";
 import TableDashboardFinance from "../dashboard/dashboardFinance/TableDashboardFinance";
 import ReimburseList from '../pages/reimburse/ReimburseList';
 import ReimburseForm from '../pages/reimburse/ReimburseForm';
-import EmployeeList from "../pages/Tables";
+import EmployeeList from "../pages/tables";
 import EmployeeForm from "../pages/EditForm";
 import DashboardHc from "../dashboard/dashboardHc/DashboardHc";
-import Verifikasi from "../pages/Tables/Verifikasi";
 
 
 export default  [

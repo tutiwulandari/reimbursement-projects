@@ -10,7 +10,8 @@ const rootReducer = combineReducers({
     registerEmployees, loginEmployee,
     findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, 
     findAllReimburse, findReimburseById, findReimburseByCategory,
-    findAllCategory
+    findAllCategory,
+    findAllGrade, findGradeById, saveGrade, updateGrade,
 })
 
 export default rootReducer
