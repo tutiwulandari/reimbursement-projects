@@ -5,11 +5,12 @@ import { watchLoginEmployee } from "./loginSagas";
 import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCategory } from './reimburseSagas';
 import { watchFindAllCategory } from './categorySagas';
 import {watchFindAllGrade, watchFindGradeById, watchSaveGrade} from "./gradeSagas";
+import { watchForgotPassword } from './forgotPasswordSagas';
 
 
 export default function* rootSaga() {
     yield all([
-        watchLoginEmployee(), watchRegisterEmployee(),
+        watchLoginEmployee(), watchRegisterEmployee(), watchForgotPassword(),
         watchFindAllEmployee(), watchFindEmployeeById(), watchUpdateEmployee(), watchSaveEmployee(),
         watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),
         watchFindAllCategory(),

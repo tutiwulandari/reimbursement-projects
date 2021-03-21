@@ -5,9 +5,10 @@ import { loginEmployee } from "./loginReducer";
 import { findAllReimburse, findReimburseById, findReimburseByCategory } from './reimburseReducer';
 import { findAllCategory } from './categoryReducer';
 import { findAllGrade, findGradeById, saveGrade, updateGrade } from "./gradeReducer";
+import { forgotPassword } from './forgotPasswordReducer';
 
 const rootReducer = combineReducers({
-    registerEmployees, loginEmployee,
+    registerEmployees, loginEmployee, forgotPassword,
     findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, 
     findAllReimburse, findReimburseById, findReimburseByCategory,
     findAllCategory,
