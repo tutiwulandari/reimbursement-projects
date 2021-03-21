@@ -8,77 +8,76 @@ import React from "react";
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
 import ReimburseList from './../pages/Reimburse/ReimburseList';
-import ReimburseForm from './../pages/Reimburse/ReimburseForm';
 import TableComponent from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
-import GradeList from "../pages/Grade";
+import { GradeList, GradeForm } from "../pages/Grade";
 
 
-export default  [
+export default [
     {
-        path:'/',
-        component: <Login/>,
+        path: '/',
+        component: <Login />,
         exact: true
     },
     {
         path: '/petunjuk',
-        component: <Guide/>,
+        component: <Guide />,
         exact: true
     },
     {
         path: '/dashboard/hc',
-        component:<DashboardHc/>,
+        component: <DashboardHc />,
         exact: true
     },
     {
         path: '/dashboard/finance',
-        component:<DashboardFinance/>,
+        component: <DashboardFinance />,
         exact: true
     },
     {
         path: '/success-register',
-        component: <Success/>,
-        exact: true 
+        component: <Success />,
+        exact: true
     },
     {
         path: '/home/sidebar',
-        component: <HomeSideBar/>,
+        component: <HomeSideBar />,
         exact: true
     },
     {
         path: '/dashboard/table',
-        component: <TableDashboardHc/>,
+        component: <TableDashboardHc />,
         exact: true
     },
     {
         path: '/dashboard/table2',
-        component: <TableDashboardFinance/>,
+        component: <TableDashboardFinance />,
         exact: true
     },
 
     {
         path: '/employee',
-        component: <TableComponent/>,
+        component: <TableComponent />,
         exact: true
     },
     {
         path: '/employee/:id/edit',
-        component: <EmployeeForm/>,
+        component: <EmployeeForm />,
         exact: true
     },
     {
         path: '/hc/reimburse',
-        component: <ReimburseList/>,
-        exact: true
-    },
-    {
-        path: '/hc/reimburse/:id',
-        component: <ReimburseForm/>,
+        component: <ReimburseList />,
         exact: true
     },
     {
         path: '/hc/grade',
-        component: <GradeList/>,
+        component: <GradeList />,
+        exact: true
+    },
+    {
+        path: '/hc/grade/:id',
+        component: <GradeForm />,
         exact: true
     },
 

@@ -4,7 +4,7 @@ import {watchFindAllEmployee, watchFindEmployeeById, watchSaveEmployee, watchUpd
 import { watchLoginEmployee } from "./loginSagas";
 import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCategory } from './reimburseSagas';
 import { watchFindAllCategory } from './categorySagas';
-import {watchFindAllGrade, watchFindGradeById, watchSaveGrade, watchUpdateGrade} from "./gradeSagas";
+import {watchFindAllGrade, watchFindGradeById, watchSaveGrade} from "./gradeSagas";
 
 
 export default function* rootSaga() {
@@ -13,6 +13,6 @@ export default function* rootSaga() {
         watchFindAllEmployee(), watchFindEmployeeById(), watchUpdateEmployee(), watchSaveEmployee(),
         watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),
         watchFindAllCategory(),
-        watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(), watchUpdateGrade(),
+        watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(),
     ])
 }

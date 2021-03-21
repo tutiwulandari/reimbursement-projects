@@ -87,11 +87,8 @@ export const updateGrade = (state = {}, action) => {
 
 
 export const saveGrade = (state = {...initialState}, action) => {
-    console.log("save employee reducer")
     switch (action.type) {
         case SAVE_GRADE:
-            console.log("save employee reducer")
-            console.log("ini reducer", action.data)
             return {
                 ...state,
                 data: null,
