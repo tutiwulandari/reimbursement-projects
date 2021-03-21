@@ -1,11 +1,9 @@
 import React from "react";
-import EnigmaCamp from "../../assets/image/enigmacamp.png"
 import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
 
 export default function Menu() {
     return (
         <aside className="main-sidebar sidebar-light-gray-dark elevation-4" style={{backgroundColor:"white"}}>
-            {/* Brand Logo */}
             <a href="index3.html" className="brand-link">
                 <img
                     src={Image1}
@@ -19,7 +17,7 @@ export default function Menu() {
 
             <div className="sidebar">
                 <nav className="mt-2">
-                    <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeiew" role="menu" data-accordion="false">
+                    <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
                             <a href="#" className="nav-link">
                                 <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"white"}} />
@@ -27,22 +25,36 @@ export default function Menu() {
                             </a>
                         </li>
                         <li className="nav-item has-treeview">
-                            <a href="/hc/reimbursement" className="nav-link">
+                            <a href="/dashboard/hc/reimburse" className="nav-link">
                                 <i className="nav-icon fas fa-list" style={{fontSize:"20px"}} />
                                 <p style={{color:"black", fontSize:"20px",fontFamily:"roboto"}}>Reimbursement</p>
                             </a>
                         </li>
-                        <li className="nav-item has-treeview">
-                            <a href="/employee" className="nav-link">
+                        <li className="nav-item has-treeview menu-open">
+                            <a href="#" className="nav-link active">
                                 <i className="nav-icon fas fa-user-alt" style={{fontSize:"20px"}}/>
-                                <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Karyawan </p>
+                                <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Karyawan
+                                    <i className="right fas fa-angle-left" />
+                                </p>
                             </a>
+                        <ul className="nav nav-treeview">
+                            <li className="nav-item">
+                                <a href="./dashboard/hc/employee" className="nav-link">
+                                    <i className="far fa-circle nav-icon" />
+                                    <p>List Karyawan</p>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="/dashboard/hc/contract" className="nav-link">
+                                    <i className="far fa-circle nav-icon" />
+                                    <p>Detail Contract</p>
+                                </a>
+                            </li>
+                        </ul>
                         </li>
                     </ul>
                 </nav>
-                {/* /.sidebar-menu */}
             </div>
-            {/* /.sidebar */}
         </aside>
     );
 }

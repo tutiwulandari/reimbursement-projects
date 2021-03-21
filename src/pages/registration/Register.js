@@ -12,7 +12,7 @@
 // import IconButton from "@material-ui/core/IconButton";
 // import {Visibility, VisibilityOff} from "@material-ui/icons";
 // import './assets/css/Register.css'
-
+//
 //
 //
 // function Register({registerEmployee, register, isLoading}) {

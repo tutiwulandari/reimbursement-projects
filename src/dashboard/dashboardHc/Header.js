@@ -1,5 +1,5 @@
 import React from "react";
-import ResetPassword from "../resetPassword";
+import ResetPassword from "../../pages/resetPassword";
 
 export default function Header() {
     return (

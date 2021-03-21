@@ -54,9 +54,6 @@ export const UPDATE_GRADE          = "UPDATE_GRADE"
 export const UPDATE_GRADE_SUCCESS  = "UPDATE_GRADE_SUCCESS"
 export const UPDATE_GRADE_FAILURE  = "UPDATE_GRADE_FAILURE"
 
-
-
-
 /* ================== */
 /*     REIMBURSE      */
 /* ================== */
@@ -77,8 +74,6 @@ export const UPDATE_REIMBURSE                       = "UPDATE_REIMBURSE"
 export const UPDATE_REIMBURSE_SUCCESS               = "UPDATE_REIMBURSE_SUCCESS"
 export const UPDATE_REIMBURSE_FAILURE               = "UPDATE_REIMBURSE_FAILURE"
 
-
-
 /* ================== */
 /*     CATEGORY       */
 /* ================== */
@@ -90,6 +85,16 @@ export const FIND_ALL_CATEGORY_FAILURE  = "FIND_ALL_CATEGORY_FAILURE"
 
 /* ================== */
 /*     Reset password  */
+/* ================== */
+
+export const RESET_PASSWORD          = "RESET_PASSWORD"
+export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
+export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
+
+
+
+/* ================== */
+/*    Detail Contract */
 /* ================== */
 
 export const RESET_PASSWORD          = "RESET_PASSWORD"

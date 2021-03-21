@@ -1,6 +1,6 @@
 import {Modal, Button, Spinner} from "react-bootstrap";
-import {findById, save} from "../../actions/employeeAction";
-import {findAll} from "../../actions/gradeAction";
+import {findById, save} from "../../../actions/employeeAction";
+import {findAll} from "../../../actions/gradeAction";
 import {connect} from "react-redux";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -73,8 +73,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 //Save
     useEffect(() => {
         if (savedEmployee) {
-            console.log("SUKSESS")
-            history.push('/employee');
+            history.push("/dashboard/hc/employee");
         }
     }, [savedEmployee, history])
 

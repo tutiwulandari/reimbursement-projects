@@ -1,8 +1,7 @@
-import Header from "./Header";
-import Menu from "./Menu";
-import Content from "./Content";
-import Footer from "./Footer";
-import MenuFinance from "./MenuFinance";
+import Header from "./dashboardHc/Header";
+import Content from "./dashboardHc/Content";
+import Footer from "./dashboardHc/Footer";
+import MenuFinance from "./dashboardFinance/MenuFinance";
 
 function RoutesFinance() {
     return(

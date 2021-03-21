@@ -1,15 +1,14 @@
-import {Button, Table, TabPane} from "reactstrap";
+import {Button, Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faEdit} from "@fortawesome/free-solid-svg-icons";
 import {findAll} from "../../actions/employeeAction";
 import {connect} from "react-redux";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import "./table_index.css"
-import Sidebar from "../../dashboard/Sidebar";
-import Verifikasi from "./Verifikasi";
-import EmployeeForm from "../EditForm";
-import LayoutRoutesHc from "../layoutHc/LayoutRoutesHc";
+import Header from "../../dashboard/dashboardHc/Header";
+import Menu from "../../dashboard/dashboardHc/Menu";
+import Footer from "../../dashboard/dashboardHc/Footer";
 
 function EmployeeList({findAll, employees, error, isLoading}) {
     const [data, setData] = useState({})
@@ -22,7 +21,9 @@ function EmployeeList({findAll, employees, error, isLoading}) {
 
     return(
       <div>
-          <div className="container" style={{marginBottom:"50px"}}>
+          <Header/>
+          <Menu/>
+          <div className="container" style={{marginBottom:"50px", marginLeft:"40vh", marginRight:"20vh"}}>
               <h1 style={{textAlign:"center", marginTop:"50px",color:"black" }}> List Karyawan </h1>
 
               <div style={{overflowX:"auto", marginRight:"-100px"}}>
@@ -57,43 +58,169 @@ function EmployeeList({findAll, employees, error, isLoading}) {
 
                       </tr>
                       </thead>
-                      <tbody>
+                      <tbody style={{height:"70vh"}}>
                       {
                           employees?.data?.data.map((element, index) => {
                               return (
                                   <tr style={{textAlign: "center"}}>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.fullname}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.placeOfBirth}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.dateOfBirth}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.nik}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.gender}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.religion}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.bloodType}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.maritalStatus}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}> {element.verifiedHc == true ? "verified" : "not verified"}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.fullname}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.placeOfBirth}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.dateOfBirth}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.nik}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.gender}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.religion}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.bloodType}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.maritalStatus}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}> {element.verifiedHc == true ? "verified" : "not verified"}</td>
 
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>
                                           {/*<Verifikasi/>*/}
                                           <Button> <FontAwesomeIcon icon={faCheck}/></Button>
                                       </td>
 
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.numberOfChildren}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.biologicalMothersName}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.spouseName}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.accountName}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.accountNumber}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.ktpAddress}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.residenceAddress}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.postalCodeOfIdCard}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.npwpAddress}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.nip}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.joinDate}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.employeeStatus}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.employeeType}</td>
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>{element.grade.grade}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.numberOfChildren}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.biologicalMothersName}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.spouseName}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.accountName}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.accountNumber}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.ktpAddress}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.residenceAddress}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.postalCodeOfIdCard}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.npwpAddress}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.nip}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.joinDate}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.employeeStatus}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.employeeType}</td>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>{element.grade.grade}</td>
 
-                                      <td style={{verticalAlign:"middle", textAlign:"center", maxWidth:"200px", minWidth:"200px"}}>
-                                          <Link to={'/employee/' + element.id + '/edit'}>
+                                      <td style={{
+                                          verticalAlign: "middle",
+                                          textAlign: "center",
+                                          maxWidth: "200px",
+                                          minWidth: "200px"
+                                      }}>
+                                          {/*<EmployeeForm/>*/}
+                                          <Link to={'/dashboard/employee/' + element.id + '/edit'}>
                                               <Button style={{backgroundColor: "#292961"}}>
                                                   <FontAwesomeIcon icon={faEdit} className="float-left"/>
                                               </Button>
@@ -108,7 +235,7 @@ function EmployeeList({findAll, employees, error, isLoading}) {
                   </Table>
               </div>
           </div>
-
+<Footer/>
       </div>
     )
 }

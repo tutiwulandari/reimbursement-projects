@@ -6,29 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/Dashboard.css'
 import './assets/css/Form.css'
 import './assets/css/EmployeeDetails.css'
-import './assets/css/Sidebar.scss'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Switch from "react-bootstrap/Switch";
 import React from "react";
-import routes from "./configs/routes";
 import { Provider } from 'react-redux';
 import store from './configs/store';
+import Routes from "./configs/Routes";
+import ListEmployee from "./component/ListEmployee";
+import EmployeeList from "./pages/tables";
 
 
 function App() {
     return (
         <div >
             <Provider store={store}>
-                <Router >
-                    <Switch style={{ paddingLeft: "0" }}>
-                        {routes.map((route, index) =>
-                            <Route key={index} path={route.path} exact>
-                                {route.component}
-                            </Route>)}
-                    </Switch>
-                </Router>
+                <Routes/>
             </Provider>
 
         </div>

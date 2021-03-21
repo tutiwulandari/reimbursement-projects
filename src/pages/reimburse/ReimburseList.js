@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
 import "../../assets/css/Reimburse.css"
-
-import Sidebar from "../../dashboard/Sidebar";
+import Header from "../../dashboard/dashboardHc/Header";
+import Menu from "../../dashboard/dashboardHc/Menu";
+import Footer from "../../dashboard/dashboardHc/Footer";
 
 
 function ReimburseList({
@@ -35,40 +36,41 @@ function ReimburseList({
 
 
     return (
-        <div className="container">
-            
-            {/*<Sidebar/>*/}
-            <div className="row mt-5">
-                <div className="col-md-2">
-                    <select className="custom-select rounded-pill text-enigma border-enigma" onChange={handleChangeCategory}>
-                        <option value="">Category</option>
-                        {
-                            categories.data?.data?.map((category, index) => {
-                                return (
-                                    <option value={category.id}>{category.categoryName}</option>
-                                )
-                            })
-                        }
-                    </select>
+        <div>
+            {/*<Menu/>*/}
+            {/*<Header/>*/}
+            <div className="container" style={{marginLeft:"40vh"}}>
+                <div className="row mt-5">
+                    <div className="col-md-2">
+                        <select className="custom-select rounded-pill text-enigma border-enigma" onChange={handleChangeCategory}>
+                            <option value="">Category</option>
+                            {
+                                categories.data?.data?.map((category, index) => {
+                                    return (
+                                        <option value={category.id}>{category.categoryName}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div className="col-md-2">
+                        <select className="custom-select rounded-pill text-enigma border-enigma">
+                            <option>Status</option>
+                            <option>Waiting</option>
+                            <option>Accepted</option>
+                            <option>Success</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
+                    <div className="offset-md-5 col-md-3">
+                        <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search employee.."/>
+                    </div>
                 </div>
-                <div className="col-md-2">
-                    <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option>Status</option>
-                        <option>Waiting</option>
-                        <option>Accepted</option>
-                        <option>Success</option>
-                        <option>Rejected</option>
-                    </select>
-                </div>
-                <div className="offset-md-5 col-md-3">
-                    <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search employee.."/>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12 mt-5">
-                    <div className="card">
-                        <table className="table table-hover">
-                            <thead className="bg-enigma">
+                <div className="row">
+                    <div className="col-md-12 mt-5">
+                        <div className="card">
+                            <table className="table table-hover">
+                                <thead className="bg-enigma">
                                 <tr>
                                     <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                     <th>Category</th>
@@ -76,8 +78,8 @@ function ReimburseList({
                                     <th>Status</th>
                                     <th>Detail</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 {
                                     isLoading ? "Loading" :
                                         rCategory.length == 0 ?
@@ -86,18 +88,21 @@ function ReimburseList({
                                                     <ReimburseRow index={index} data={element} />
                                                 )
                                             }) : rCategory?.data?.length == 0 ? "Data is empty" :
-                                                rCategory.data?.map((value, key) => {
-                                                    return (
-                                                        <ReimburseRow index={key} data={value} />
-                                                    )
-                                                })
+                                            rCategory.data?.map((value, key) => {
+                                                return (
+                                                    <ReimburseRow index={key} data={value} />
+                                                )
+                                            })
                                 }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            {/*<Footer/>*/}
         </div>
+
     )
 }
 
