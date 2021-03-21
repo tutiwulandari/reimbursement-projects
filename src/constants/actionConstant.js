@@ -86,10 +86,10 @@ export const FIND_ALL_CATEGORY_FAILURE  = "FIND_ALL_CATEGORY_FAILURE"
 /* ================== */
 /*     Reset password  */
 /* ================== */
-
-export const RESET_PASSWORD          = "RESET_PASSWORD"
-export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
-export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
+//
+// export const RESET_PASSWORD          = "RESET_PASSWORD"
+// export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
+// export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
 
 
 
@@ -97,6 +97,6 @@ export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
 /*    Detail Contract */
 /* ================== */
 
-export const RESET_PASSWORD          = "RESET_PASSWORD"
-export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
-export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
+export const FIND_ALL_CONTRACT         = "FIND_ALL_CONTRACT"
+export const FIND_ALL_CONTRACT_SUCCESS  = "FIND_ALL_CONTRACT_SUCCESS"
+export const FIND_ALL_CONTRACT_FAILURE  = "FIND_ALL_CONTRACT_FAILURE"

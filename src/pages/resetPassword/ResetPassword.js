@@ -3,14 +3,21 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 
 function ResetPassword() {
+    const [values, setValues] =useState({
+        password:"",
+        confirmPassword:""
+    })
+
     const[error, setError] = useState({})
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const textDanger = {color: "red", fontSize: "12px"}
 
+
+    //Modal
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     function validate() {
         let error_ = {};
@@ -42,19 +49,18 @@ function ResetPassword() {
 
                 <Container>
                     <Form>
-                        <Form.Group controlId="formBasicEmail" style={{marginTop:"10px"}}>
+                        <Form.Group controlId="formBasicPassword" style={{marginTop:"10px"}}>
                             <Form.Label >Password</Form.Label>
                             <Form.Control type="password" placeholder="Enter password" name="password"
-                            value="password"/>
+                          />
                         </Form.Group>
                         <div style={textDanger}>{error.password}</div>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="password" value="password"/>
+                            <Form.Control type="password" placeholder="Password" name="confirmPassword"/>
                         </Form.Group>
                         <div style={textDanger}>{error.confirm_password}</div>
-
                     </Form>
                 </Container>
 
@@ -62,7 +68,7 @@ function ResetPassword() {
                     <Link to="/dashboard/hc">
                         <Button style={{backgroundColor:"black"}}>Back</Button>
                     </Link>
-                    <Button style={{backgroundColor:"#292961"}}>Save</Button>
+                    <Button type="submit" style={{backgroundColor:"#292961"}}>Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>

@@ -1,15 +1,27 @@
 import Header from "../../dashboard/dashboardHc/Header";
 import Menu from "../../dashboard/dashboardHc/Menu";
 import Footer from "../../dashboard/dashboardHc/Footer";
-import React from "react";
+import React, {useEffect} from "react";
+import {connect} from "react-redux";
+import {findAll} from "../../actions/detailContractAction";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "react-bootstrap";
 
-function DetailContract() {
+
+
+function DetailContract({findAll, contracts, error, isLoading}) {
+
+    useEffect( () => {
+        findAll()
+    }, [])
+
     return(
         <div>
             <Header/>
             <Menu/>
             <div className="content-wrapper">
-                <h1 style={{color:"black", marginTop:"10px", textAlign:"center"}}> DETAIL CONTRACT</h1>
+                <h1 style={{color:"black", marginTop:"10px", textAlign:"center"}}> DETAIL KONTRAK</h1>
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row">
@@ -38,70 +50,48 @@ function DetailContract() {
                                         <table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>User</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Reason</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Status Asuransi</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Karyawan Tetap</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tipe Kontrak</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Resign</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Mulai Kontrak</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Habis Kontrak</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Penempatan</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Action</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>183</td>
-                                                <td>John Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-success">Approved</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>219</td>
-                                                <td>Alexander Pierce</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-warning">Pending</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>657</td>
-                                                <td>Bob Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-primary">Approved</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>175</td>
-                                                <td>Mike Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-danger">Denied</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>134</td>
-                                                <td>Jim Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-success">Approved</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>494</td>
-                                                <td>Victoria Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-warning">Pending</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>832</td>
-                                                <td>Michael Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-primary">Approved</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>982</td>
-                                                <td>Rocky Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span className="tag tag-danger">Denied</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
+                                            {
+                                                console.log("DATA CONTRACT", contracts?.data)
+                                            }
+                                            {
+                                                contracts?.data.map((element, index) => {
+                                                    return (
+                                                        <tr style={{textAlign: "center"}} >
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.employeeId.fullname}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.employeeId.nip}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.benefitRegistrationStatus}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.dateOfAcceptancePermanentEmployee}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.typeContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.dateOfResignation}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}> {element.startDateContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.endDateContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.placement}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <Button style={{color:"#292961"}}>
+                                                                    <FontAwesomeIcon icon={faEdit}/>
+                                                                </Button>
+
+                                                            </td>
+
+
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
                                             </tbody>
                                         </table>
                                     </div>
@@ -116,8 +106,17 @@ function DetailContract() {
 
         </div>
 
-
     )
 }
 
-export default DetailContract
+const mapStateToProps = (state) => {
+    return {
+        contracts: state.findAllContract.data || null,
+        error: state.findAllContract.error,
+        isLoading: state.findAllContract.isLoading
+
+    }
+}
+
+const mapDispatchToProps = {findAll}
+export default connect(mapStateToProps, mapDispatchToProps)(DetailContract)
