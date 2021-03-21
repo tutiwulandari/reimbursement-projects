@@ -11,13 +11,13 @@ export default function DashboardReimbursement() {
             <div className="sidebar-container" style={{marginTop:"-60px", backgroundColor:"#292961"}}>
                 <ul className="sidebar-navigation" style={{marginTop:"100px"}}>
                     <li>
-                        <a href="/dashboard" style={{fontSize:"20px",color:"white", fontFamily:"sans-serif"}}>
+                        <a href="/finance/dashboard" style={{fontSize:"20px",color:"white", fontFamily:"sans-serif"}}>
                             <i aria-hidden="true" />
                             <FontAwesomeIcon icon={faHome}/> Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="/dashboard/table2" style={{fontSize:"20px", marginTop:"20px", color:"white",fontFamily:"sans-serif"}}>
+                        <a href="/finance/reimburse" style={{fontSize:"20px", marginTop:"20px", color:"white",fontFamily:"sans-serif"}}>
                             <i aria-hidden="true"/>
                             <FontAwesomeIcon icon={faMoneyBill}/> Reimbursement
                         </a>

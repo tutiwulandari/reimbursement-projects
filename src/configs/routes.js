@@ -6,11 +6,11 @@ import HomeSideBar from "../SideBar/HomeSideBar";
 import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
 import React from "react";
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
-import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
 import ReimburseList from './../pages/Reimburse/ReimburseList';
 import TableComponent from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
 import { GradeList, GradeForm } from "../pages/Grade";
+import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 
 
 export default [
@@ -30,7 +30,7 @@ export default [
         exact: true
     },
     {
-        path: '/dashboard/finance',
+        path: '/finance/dashboard',
         component: <DashboardFinance />,
         exact: true
     },
@@ -50,11 +50,15 @@ export default [
         exact: true
     },
     {
-        path: '/dashboard/table2',
-        component: <TableDashboardFinance />,
+        path: '/finance/dashboard',
+        component: <DashboardFinance />,
         exact: true
     },
-
+    {
+        path: '/finance/reimburse',
+        component: <ReimburseListFinance />,
+        exact: true
+    },
     {
         path: '/employee',
         component: <TableComponent />,
