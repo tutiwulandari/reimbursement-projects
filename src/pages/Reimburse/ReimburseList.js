@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
 import Navbar from './../../component/Navbar/Navbar';
+import ReimburseTable from './ReimburseTable';
 
 
 function ReimburseList({
@@ -59,6 +60,11 @@ function ReimburseList({
             <div className="row">
                 <div className="col-md-12 mt-5 mb-5">
                     <div className="card">
+
+                        {/* Table Generator */}
+                        {/* { typeof reimbursements.data !== 'undefined' ?
+                            <ReimburseTable reimbursements={reimbursements.data.list} /> : ""} */}
+
                         <table className="table table-hover">
                             <thead className="bg-enigma">
                                 <tr>

@@ -86,10 +86,6 @@ td, .text-enigma {
     border-bottom-right-radius: 10px !important;
 }
 
-.table > tbody > tr:first-child > td {
-    border: none !important;
-}
-
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #F8F9FA;
 }

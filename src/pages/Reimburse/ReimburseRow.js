@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { findReimburseId } from "../../actions/reimburseAction";
 import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
 
-
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -21,9 +20,6 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
     const getId = id => {
         findReimburseId(id)
-        // if (reimburse?.claimFee) {
-            // convert_to_rupiah(reimburse.claimFee) : ""
-        // }
     }
 
     /* Tooltip */
@@ -135,13 +131,13 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
                                 </p>
-                                <p className="p-enigma">{reimburse?.claimFee}</p>
+                                <p className="p-enigma">{reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
                                 </p>
-                                <p className="p-enigma">{reimburse?.borneCost}</p>
+                                <p className="p-enigma">{reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""}</p>
                             </div>
                         </div>
 
@@ -173,7 +169,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.dateOfClaimSubmission}
+                                    {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
@@ -181,7 +177,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.startDate}
+                                    {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
                             </div>
                         </div>
@@ -192,7 +188,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.disbursementDate}
+                                    {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
@@ -200,7 +196,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
                                     </p>
                                 <p className="p-enigma">
-                                    {reimburse?.endDate}
+                                    {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>
                             </div>
                         </div>

@@ -79,12 +79,6 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
         <div className="container">
             <Navbar />
 
-            <div className="row mt-5">
-                <div className="offset-md-9 col-md-3">
-                    <input className="form-control rounded-pill search-input text-enigma border-enigma" type="text" placeholder="Search grade.." />
-                </div>
-            </div>
-
             <div className="row">
                 <div className="col-md-12 mt-5 mb-5">
                     <div className="card">
