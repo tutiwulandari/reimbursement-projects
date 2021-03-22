@@ -10,8 +10,6 @@ import Header from "../dashboard/dashboardHc/Header";
 import Footer from "../dashboard/dashboardHc/Footer";
 
 function ListEmployee({findAll, employees, error, isLoading}) {
-    const [data, setData] = useState({})
-
 
     useEffect(() => {
         findAll()
@@ -24,6 +22,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
             <Header/>
             <Menu/>
             <div className="content-wrapper">
+
                 <h1 style={{color:"black", marginTop:"10px", textAlign:"center"}}> LIST KARYAWAN</h1>
                 <div className="content-header">
                     <div className="container-fluid">

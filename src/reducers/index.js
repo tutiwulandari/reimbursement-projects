@@ -5,7 +5,7 @@ import { loginEmployee } from "./loginReducer";
 import { findAllReimburse, findReimburseById, findReimburseByCategory } from './reimburseReducer';
 import { findAllCategory } from './categoryReducer';
 import { findAllGrade, findGradeById, saveGrade, updateGrade } from "./gradeReducer";
-import {findAllContract} from "./detailContractReducer";
+import {findAllContract, findContractById, updateContract, saveContract} from "./detailContractReducer";
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee,
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     findAllReimburse, findReimburseById, findReimburseByCategory,
     findAllCategory,
     findAllGrade, findGradeById, saveGrade, updateGrade,
-    findAllContract
+    findAllContract, findContractById, updateContract, saveContract
 })
 
 export default rootReducer

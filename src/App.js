@@ -12,12 +12,15 @@ import { Provider } from 'react-redux';
 import store from './configs/store';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import routes from "./configs/routes";
+import UnitList from "./component/pagination/UnitList";
 
 
 function App() {
     return (
         <div >
+
             <Provider store={store}>
+                {/*<UnitList/>*/}
                 <Router >
                     <Switch style={{ paddingLeft: "0" }}>
                         {routes.map((route, index) =>

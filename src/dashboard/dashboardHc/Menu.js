@@ -39,7 +39,7 @@ export default function Menu() {
                             </a>
                         <ul className="nav nav-treeview">
                             <li className="nav-item">
-                                <a href="/hc/employee" className="nav-link">
+                                <a href="/dashboard/hc/employee" className="nav-link">
                                     <i className="far fa-circle nav-icon" />
                                     <p>List Karyawan</p>
                                 </a>

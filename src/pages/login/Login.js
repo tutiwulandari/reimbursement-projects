@@ -60,7 +60,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
                 if (login.data?.data?.role.id === 1) {
                     history.push("/dashboard/hc")
                 } else  if (login.data?.data?.role.id === 2) {
-                    history.push("/dashboard/hc")
+                    history.push("/dashboard/finance")
                 }
                 history.push()
             } else {

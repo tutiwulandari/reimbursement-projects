@@ -4,7 +4,7 @@ import {
     FIND_ALL_EMPLOYEE,
     FIND_ALL_EMPLOYEE_FAILURE,
     FIND_ALL_EMPLOYEE_SUCCESS,
-    FIND_EMPLOYEE_BY_ID,
+    FIND_EMPLOYEE_BY_ID, FIND_EMPLOYEE_BY_ID_FAILURE,
     FIND_EMPLOYEE_BY_ID_SUCCESS,
     SAVE_EMPLOYEE, SAVE_EMPLOYEE_FAILURE,
     SAVE_EMPLOYEE_SUCCESS,
@@ -34,7 +34,6 @@ function* findAllEmployee() {
 }
 
 function* findEmployeeById(action) {
-    console.log("findEmployee sagas")
     console.log("SAGAS", action)
     let result = yield axios.get(`/employee/${action.id}`)
         .then(response => {
@@ -47,7 +46,7 @@ function* findEmployeeById(action) {
         .catch(error=> {
             console.log("Error find employee by id sagas, error")
             return({
-                type:FIND_ALL_EMPLOYEE_FAILURE,
+                type:FIND_EMPLOYEE_BY_ID_FAILURE,
                 error
             })
         })

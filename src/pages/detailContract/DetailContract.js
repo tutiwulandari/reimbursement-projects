@@ -7,6 +7,7 @@ import {findAll} from "../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
 
@@ -81,9 +82,11 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.endDateContract}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.placement}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                <Button style={{color:"#292961"}}>
-                                                                    <FontAwesomeIcon icon={faEdit}/>
-                                                                </Button>
+                                                                <Link to={'/contract/'+ element.id + '/edit'}>
+                                                                    <Button style={{backgroundColor: "#292961"}}>
+                                                                        <FontAwesomeIcon icon={faEdit} className="float-left"/>
+                                                                    </Button>
+                                                                </Link>
 
                                                             </td>
 

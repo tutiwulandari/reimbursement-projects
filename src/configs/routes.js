@@ -9,6 +9,7 @@ import ReimburseList from "../pages/reimburse/ReimburseList";
 import DetailContract from "../pages/detailContract/DetailContract";
 import Success from "../pages/registration/Success";
 import {ReimburseForm} from "../pages/reimburse";
+import DetailContractForm from "../pages/detailContractForm/DetailContractForm"
 
 
 
@@ -60,9 +61,15 @@ export default  [
     },
     {
         path: '/dashboard/hc/contract',
-        component: {DetailContract},
+        component: <DetailContract/>,
+        exact: true
+    },
+    {
+        path: '/contract/:id/edit',
+        component: <DetailContractForm/>,
         exact: true
     }
+
 
 ]
 
