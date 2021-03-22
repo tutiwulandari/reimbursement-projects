@@ -36,9 +36,7 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-enigma">
-                                Success <FontAwesomeIcon icon={faCheck} />
-                            </button>
+                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
                         </OverlayTrigger> :
                         <select className="custom-select td-width text-enigma border-enigma">
                             <option selected={data.statusOnHc == true}> Waiting</option>

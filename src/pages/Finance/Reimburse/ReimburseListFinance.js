@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from "react-redux";
 import Navbar from './../../../component/Navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+import { findAllReimburseFinance } from './../../../actions/reimburseFinanceAction';
+import ReimburseRowFinance from './ReimburseRowFinance';
 
 
-export default function ReimburseListFinance() {
+function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
+
+    useEffect(() => {
+        findAllReimburseFinance()
+    }, [])
+
     return (
         <div className="container">
-            <Navbar/>
+            <Navbar />
             <div className="row mt-5">
                 <div className="col-md-2">
                     <select className="custom-select rounded-pill text-enigma border-enigma">
@@ -37,10 +45,17 @@ export default function ReimburseListFinance() {
                                     <th>Category</th>
                                     <th>Employee</th>
                                     <th>Status</th>
-                                    <th>Detail</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {
+                                    reimbursements.data?.map((element, index) => {
+                                        return (
+                                            <ReimburseRowFinance data={element} index={index}/>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -49,3 +64,17 @@ export default function ReimburseListFinance() {
         </div>
     )
 }
+
+
+/* Reducer */
+const mapStateToProps = (state) => {
+    return {
+        reimbursements: state.findAllReimburseFinance.data || [],
+        isLoading: state.findAllReimburseFinance.isLoading,
+    }
+}
+
+/* Action */
+const mapDispatchToProps = { findAllReimburseFinance }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReimburseListFinance);

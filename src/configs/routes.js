@@ -81,14 +81,9 @@ export default [
         exact: true
     },
     {
-        path: '/hc/grade/:id',
-        component: <GradeForm />,
-        exact: true
-    },
-    {
         path: '*',
         component: <Error404/>,
-        exact: true
+        exact: false
     }
 
 ]

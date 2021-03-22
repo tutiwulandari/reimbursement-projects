@@ -6,11 +6,13 @@ import { findAllReimburse, findReimburseById, findReimburseByCategory } from './
 import { findAllCategory } from './categoryReducer';
 import { findAllGrade, findGradeById, saveGrade, updateGrade } from "./gradeReducer";
 import { forgotPassword } from './forgotPasswordReducer';
+import { findAllReimburseFinance, findReimburseFinanceById } from './reimburseFinanceReducer';
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee, forgotPassword,
     findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, 
     findAllReimburse, findReimburseById, findReimburseByCategory,
+    findAllReimburseFinance, findReimburseFinanceById,
     findAllCategory,
     findAllGrade, findGradeById, saveGrade, updateGrade, 
 })

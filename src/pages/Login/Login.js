@@ -13,7 +13,7 @@ import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-
+import sjcl from 'sjcl';
 
 const Login = ({ loginEmployee, login, isLoading }) => {
     const [values, setValues] = useState({
@@ -22,6 +22,13 @@ const Login = ({ loginEmployee, login, isLoading }) => {
 
     });
 
+
+    /* Hashing Password */
+    const myString = 'wisa'
+    const myBitArray = sjcl.hash.sha256.hash(myString)
+    const myHash = sjcl.codec.hex.fromBits(myBitArray)
+    console.log("hash", myHash);
+    /* Hashing Password */
 
     const delay = 2000
     const color = "#292961"

@@ -1,7 +1,6 @@
 import '../../../assets/css/PageNotFound.css'
 
-
-const Error404 = () => {
+export default function Error404() {
     return (
         <div className="main">
             <div>
@@ -293,4 +292,3 @@ const Error404 = () => {
         </div>
     )
 }
-export default Error404;
