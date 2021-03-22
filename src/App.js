@@ -15,22 +15,28 @@ import routes from "./configs/routes";
 import { Provider } from 'react-redux';
 import store from './configs/store';
 import TableComponent from "./pages/Tables";
+import Login from './pages/Login/Login';
 
 
 function App() {
     return (
         <div >
             {/*<TableComponent/>*/}
+
             <Provider store={store}>
                 <Router >
                     <Switch style={{ paddingLeft: "0" }}>
-                        {routes.map((route, index) =>
-                            <Route key={index} path={route.path} exact>
-                                {route.component}
-                            </Route>)}
+                        {
+                            routes.map((route, index) =>
+                                <Route key={index} path={route.path} exact>
+                                    {route.component}
+                                </Route>)
+                        }
                     </Switch>
                 </Router>
             </Provider>
+
+
 
         </div>
     );

@@ -11,6 +11,7 @@ import TableComponent from "../pages/Tables";
 import EmployeeForm from "../pages/EditForm";
 import { GradeList, GradeForm } from "../pages/Grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
+import Error404 from './../pages/Error/Error404/Error404';
 
 
 export default [
@@ -84,5 +85,10 @@ export default [
         component: <GradeForm />,
         exact: true
     },
+    {
+        path: '*',
+        component: <Error404/>,
+        exact: true
+    }
 
 ]

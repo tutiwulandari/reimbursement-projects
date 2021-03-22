@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 
 import {
     DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown,
@@ -12,9 +13,15 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 
 function Navbar() {
-
+    const history = useHistory();
     const [dropdownOpen, setOpen] = useState(false)
     const toggle = () => setOpen(!dropdownOpen)
+
+    function logout() {
+        localStorage.removeItem('email')
+        localStorage.removeItem('role')
+        history.push("/")
+    }
 
     return (
         <div className="row mt-3 bg-light pb-3 pt-3">
@@ -54,7 +61,7 @@ function Navbar() {
                             <Link to={`/hc/info`} style={{ width: 100 }} className="btn btn-outline-enigma">Info</Link>
                         </DropdownItem>
                         <DropdownItem>
-                            <Link to={`/logout`} style={{ width: 100 }} className="btn btn-outline-enigma">Logout</Link>
+                            <button onClick={logout} className="btn btn-outline-enigma" style={{ width: 100 }}>Logout</button>
                         </DropdownItem>
                     </DropdownMenu>
                 </ButtonDropdown>
