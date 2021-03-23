@@ -1,7 +1,5 @@
 import {
-    REGISTER_EMPLOYEE,
-    REGISTER_EMPLOYEE_SUCCESS,
-    REGISTER_EMPLOYEE_FAILURE
+    REGISTER_EMPLOYEE
 } from '../constants/actionConstant';
 
 

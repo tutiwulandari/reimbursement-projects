@@ -8,7 +8,6 @@ export function findAll() {
 }
 
 export function findById(id) {
-    console.log("ini action", id)
     return {
         type:FIND_GRADE_BY_ID,
         id
@@ -16,7 +15,6 @@ export function findById(id) {
 }
 
 export function save(model) {
-    console.log("save action employee")
     return {
         type: SAVE_GRADE,
         model
@@ -24,7 +22,6 @@ export function save(model) {
 }
 
 export function update(payload) {
-    console.log("update employee action")
     return {
         type: UPDATE_GRADE,
         payload

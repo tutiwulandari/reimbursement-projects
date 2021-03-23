@@ -9,21 +9,27 @@ import {useHistory} from "react-router-dom";
 import {loginEmployee} from "../../actions/loginAction"
 import Swal from 'sweetalert2'
 import ReactLoading from "react-loading";
-import {Button} from "react-bootstrap";
-import {connect} from "react-redux";
+import { Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
-import {Visibility, VisibilityOff} from "@material-ui/icons";
 import '../../assets/css/Login.css'
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import sjcl from 'sjcl';
 
-
-
-const Login = ({loginEmployee, login, isLoading}) => {
+const Login = ({ loginEmployee, login, isLoading }) => {
     const [values, setValues] = useState({
-        password:"",
-        showPassword:false
+        password: "",
+        showPassword: false
 
     });
 
+
+    /* Hashing Password */
+    const myString = 'wisa'
+    const myBitArray = sjcl.hash.sha256.hash(myString)
+    const myHash = sjcl.codec.hex.fromBits(myBitArray)
+    console.log("hash", myHash);
+    /* Hashing Password */
 
     const delay = 2000
     const color = "#292961"
@@ -46,31 +52,43 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     console.log("login", data)
 
-    useEffect( ()  => {
-        if(login !== null) {
-            if(login?.data?.code === 200) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'success',
-                    text: 'Login success...',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
-                console.log("coba", login.data)
-                if (login.data?.data?.role.id === 1) {
-                    history.push("/dashboard/hc")
-                } else  if (login.data?.data?.role.id === 2) {
-                    history.push("/dashboard/finance")
+    useEffect(() => {
+
+        if (localStorage.getItem('email') == "" || localStorage.getItem('email') == null) {
+            if (login) {
+                if (login.data?.code === 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'success',
+                        text: 'Login success...',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if (login.data?.data?.role.id === 1) {
+                        localStorage.setItem('email', login.data.data.email)
+                        localStorage.setItem('role', '1')
+                        history.push("/dashboard/hc")
+                    } else {
+                        localStorage.setItem('email', login.data.data.email)
+                        localStorage.setItem('role', '2')
+                        history.push("/dashboard/finance")
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops..',
+                        text: 'Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 2000,
+                    })
                 }
-                history.push()
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Something went wrong!',
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
+            }
+        } else {
+            if (localStorage.getItem('role') == '1') {
+                history.push("/dashboard/hc")
+            }
+            else {
+                history.push("/dashboard/finance")
             }
         }
 
@@ -84,11 +102,11 @@ const Login = ({loginEmployee, login, isLoading}) => {
         switch (key) {
             case "email":
                 setEmail(value)
-                setData({...data, [key]: value})
+                setData({ ...data, [key]: value })
                 break;
             case "password":
                 setPassword(value)
-                setData({...data, [key]: value})
+                setData({ ...data, [key]: value })
                 break;
             default:
         }
@@ -96,7 +114,7 @@ const Login = ({loginEmployee, login, isLoading}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(validate()) {
+        if (validate()) {
             loginEmployee(data)
         }
     }
@@ -124,25 +142,26 @@ const Login = ({loginEmployee, login, isLoading}) => {
     return (
         <main style={{backgroundColor: "white"}}>
             <NavigationHome/>
+            {/* <Navigation /> */}
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
-                <Container style={{marginTop:"50px"}}>
-                    <Row className="justify-content-center form-bg-image" style={{backgroundImage: `url(${BgImage})`}}>
+                <Container style={{ marginTop: "50px" }}>
+                    <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }}>
                         <Col xs={12} className="d-flex align-items-center justify-content-center">
                             <div className="bg-white shadow-soft border rounded border-light p-5 p-lg-5">
-                                {isLoading?
+                                {isLoading ?
                                     <>
                                         <div className="text-center text-md-center mb-2 mt-md-0">
                                             <h3 className="mt-0">Please Wait a Seconds</h3>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
                                             </div>
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
                                             </div>
                                             <div className="col-md-4">
-                                                <ReactLoading type={"bubbles"} color={color} delay={delay}/>
+                                                <ReactLoading type={"bubbles"} color={color} delay={delay} />
                                             </div>
                                         </div>
                                     </>
@@ -155,13 +174,13 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                     <Form.Group controlId="email" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Email</Form.Label>
                                         <InputGroup>
-                                            <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
+                                            <InputGroup.Text><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
                                             <FormControl id="email"
-                                                         name="email"
-                                                         type="email"
-                                                         value={email}
-                                                         onChange={handleChange}
-                                                         placeholder="Enter email"
+                                                name="email"
+                                                type="email"
+                                                value={email}
+                                                onChange={handleChange}
+                                                placeholder="Enter email"
                                             />
                                         </InputGroup>
                                         <div className="text-danger">{error.email}</div>
@@ -169,21 +188,21 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                     <Form.Group controlId="password" className="mb-2" style={{width: "300px"}}>
                                         <Form.Label>Password</Form.Label>
                                         <InputGroup>
-                                            <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt}/></InputGroup.Text>
+                                            <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
                                             <FormControl id="password"
-                                                         name="password"
-                                                         value={password}
-                                                         type={values.showPassword ? "text" : "password"}
-                                                         placeholder="Enter Password"
-                                                         onChange={handleChange}
-                                                         aria-describedby="basic-addon2"
-                                                         style={{height:"38px"}}
+                                                name="password"
+                                                value={password}
+                                                type={values.showPassword ? "text" : "password"}
+                                                placeholder="Enter Password"
+                                                onChange={handleChange}
+                                                aria-describedby="basic-addon2"
+                                                style={{ height: "38px" }}
                                             />
                                             <InputGroup.Prepend position="end">
-                                                <InputGroup.Text id="basic-addon2" style={{height:"38px"}}>
+                                                <InputGroup.Text id="basic-addon2" style={{ height: "38px" }}>
                                                     <IconButton onClick={handleClickShowPassword}
-                                                                onMouseDown={handleMouseDownPassword}>
-                                                        {values.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                        onMouseDown={handleMouseDownPassword}>
+                                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
                                                     </IconButton>
                                                 </InputGroup.Text>
                                             </InputGroup.Prepend>
@@ -192,16 +211,16 @@ const Login = ({loginEmployee, login, isLoading}) => {
                                         <div className="text-danger">{error.password}</div>
                                     </Form.Group>
                                     <Button type="submit" value="Sign In"
-                                            style={{
-                                                backgroundColor: "#292961",
-                                                color: "white",
-                                                fontSize: "15px",
-                                                width: "300px",
-                                                marginBottom: "20px"
-                                            }}>
+                                        style={{
+                                            backgroundColor: "#292961",
+                                            color: "white",
+                                            fontSize: "15px",
+                                            width: "300px",
+                                            marginBottom: "20px"
+                                        }}>
                                         Sign In
                                     </Button>
-                                    <ForgetPassword/>
+                                    <ForgetPassword />
                                 </Form>
                             </div>
 
@@ -221,6 +240,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = {loginEmployee}
+const mapDispatchToProps = { loginEmployee }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

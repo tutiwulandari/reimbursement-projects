@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { findReimburseId } from "../../actions/reimburseAction";
-import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
+import { findReimburseFinanceId } from './../../../actions/reimburseFinanceAction';
+import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
+
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,22 +11,30 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ModalFooter } from 'reactstrap';
 /* Just for UI */
 
 
-const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
-
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
-
-    const getId = id => {
-        findReimburseId(id)
-    }
+const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId }) => {
 
     /* Tooltip */
     const renderTooltip = props => (
         <Tooltip {...props}>Has been validated by admin finance</Tooltip>
     );
+
+    /* Modal */
+    const [modal, setModal] = useState(false);
+    const [modal2, setModal2] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const toggle2 = () => {
+        setModal2(!modal2);
+    }
+
+    const getId = id => {
+        findReimburseFinanceId(id)
+    }
 
     return (
         <tr>
@@ -33,17 +42,13 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
             <td>{data.categoryId.categoryName}</td>
             <td>{data.employeeId.fullname}</td>
             <td>
-                {
-                    data.statusSuccess == true ?
-                        <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
-                        </OverlayTrigger> :
-                        <select className="custom-select td-width text-enigma border-enigma">
-                            <option selected={data.statusOnHc == true}> Waiting</option>
-                            <option selected={data.statusOnFinance == true}> Accepted</option>
-                            <option selected={data.statusReject == true}> Rejected </option>
-                        </select>
-
+                {data.statusReject ?
+                    <button className="btn btn-outline-enigma"> Rejected </button>
+                    : data.statusSuccess ?
+                        <button className="btn btn-outline-enigma"> Success </button>
+                        : data.statusOnFinance ?
+                            <button className="btn btn-outline-enigma"> Waiting </button>
+                            : ""
                 }
             </td>
             <td>
@@ -53,6 +58,13 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         getId(data?.id);
                     }}>
                     Detail
+                </button>
+                <button className="btn btn-outline-enigma"
+                    onClick={() => {
+                        toggle2();
+                        getId(data?.id);
+                    }}>
+                    <FontAwesomeIcon icon={faEdit} />
                 </button>
             </td>
 
@@ -202,19 +214,56 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                     </div>
                 </ModalBody>
             </Modal>
-        </tr >
+
+
+
+            {/* ============ */}
+            {/* MODAL UPDATE */}
+            {/* ============ */}
+
+            <Modal className="modal-lg" isOpen={modal2} toggle={toggle2}>
+                <div className="modal-header">
+                    <h5 className="modal-title bold offset-2">Update Reimbursement</h5>
+                </div>
+                <ModalBody>
+                    <div className="row">
+                        <div className="offset-2 col-md-4 mb-4">
+                            <h6 className="text-enigma mb-3 bold">Status</h6>
+                            <select className="custom-select td-width text-enigma border-enigma">
+                                <option selected={ reimburse?.statusReject == true }> Rejected </option>
+                                <option selected={ reimburse?.statusSuccess == true }> Success </option>
+                                <option selected={ reimburse?.statusOnFinance == true }> Waiting </option>
+                            </select>
+                        </div>
+                        {
+                            reimburse?.statusSuccess && reimburse?.statusReject != true ?
+                                <div className="col-md-4">
+                                    <h6 className="text-enigma mb-3 bold">Upload File</h6>
+                                    <input type="file" className="form-control" accept="application/pdf" />
+                                </div> : ""
+                        }
+                        <hr />
+                        <div className="offset-7 col-md-3 mb-1">
+                            <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
+                            <button type="button" onClick={toggle2} className="btn btn-enigma float-right mr-3">Update</button>
+                        </div>
+                    </div>
+                </ModalBody>
+            </Modal>
+        </tr>
     )
 }
+
 
 /* Reducer */
 const mapStateToProps = (state) => {
     return {
-        reimburse: state.findReimburseById.data || [],
-        isLoading: state.findReimburseById.isLoading,
+        reimburse: state.findReimburseFinanceById.data || [],
+        isLoading: state.findReimburseFinanceById.isLoading,
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseId }
+const mapDispatchToProps = { findReimburseFinanceId }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRow);
+export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);
