@@ -9,6 +9,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 import Swal from 'sweetalert2'
+import { convert_to_rupiah, convert_to_money } from '../../utils/converter';
 
 
 function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
@@ -17,8 +18,15 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
     const [number, setNumber] = useState("")
     const [data, setData] = useState({})
 
+    const [coba, setCoba] = useState({
+        giveBirthCost: "0"
+    })
+
     useEffect(() => {
         findAll()
+        setCoba({
+            giveBirthCost: "_giveBirthCost"
+        })
     }, [])
 
     useEffect(() => {
@@ -33,11 +41,13 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
         }
     }, [grade])
 
+
     console.log("data", data);
 
     const handleChange = (e) => {
         let name = e.target.name
         let value = parseInt(e.target.value)
+        if (isNaN(value)) value = 0
         setData({ ...data, [name]: value })
     }
 
@@ -52,8 +62,8 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
                 text: "Anda yakin ingin mengubah data?",
                 icon: 'info',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#292961',
+                cancelButtonColor: '#292961',
                 confirmButtonText: 'Ubah Data',
                 cancelButtonText: 'Tidak',
             }).then(result => {
@@ -63,7 +73,7 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
                         title: 'Success',
                         text: 'Data berhasil diubah',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 1500
                     })
                     setIsEdit(false)
                     save(data)
@@ -104,35 +114,35 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
                                                     {
                                                         isEdit && number == element.id ?
                                                             <input className="form-control" type="text" value={data?.giveBirthCost} onChange={handleChange} name="giveBirthCost" />
-                                                            : element.giveBirthCost
+                                                            : convert_to_rupiah(element.giveBirthCost)
                                                     }
                                                 </td>
                                                 <td>
                                                     {
                                                         isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.hotelCost} onChange={handleChange} name="hotelCost"/>
-                                                            : element.hotelCost
+                                                            <input className="form-control" type="text" value={data?.hotelCost} onChange={handleChange} name="hotelCost" />
+                                                            : convert_to_rupiah(element.hotelCost)
                                                     }
                                                 </td>
                                                 <td>
                                                     {
                                                         isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.glasessCost} onChange={handleChange} name="glasessCost"/>
-                                                            : element.glasessCost
+                                                            <input className="form-control" type="text" value={data?.glasessCost} onChange={handleChange} name="glasessCost" />
+                                                            : convert_to_rupiah(element.glasessCost)
                                                     }
                                                 </td>
                                                 <td>
                                                     {
                                                         isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.transportationCost} onChange={handleChange} name="transportationCost"/>
-                                                            : element.transportationCost
+                                                            <input className="form-control" type="text" value={data?.transportationCost} onChange={handleChange} name="transportationCost" />
+                                                            : convert_to_rupiah(element.transportationCost)
                                                     }
                                                 </td>
                                                 <td>
                                                     {
                                                         isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.mealCost} onChange={handleChange} name="mealCost"/>
-                                                            : element.mealCost
+                                                            <input className="form-control" type="text" value={data?.mealCost} onChange={handleChange} name="mealCost" />
+                                                            : convert_to_rupiah(element.mealCost)
                                                     }
                                                 </td>
                                                 <td>

@@ -12,6 +12,7 @@ import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ModalFooter } from 'reactstrap';
 /* Just for UI */
 
 
@@ -24,7 +25,12 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
 
     /* Modal */
     const [modal, setModal] = useState(false);
+    const [modal2, setModal2] = useState(false);
     const toggle = () => setModal(!modal);
+
+    const toggle2 = () => {
+        setModal2(!modal2);
+    }
 
     const getId = id => {
         findReimburseFinanceId(id)
@@ -53,7 +59,11 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
                     }}>
                     Detail
                 </button>
-                <button className="btn btn-outline-enigma">
+                <button className="btn btn-outline-enigma"
+                    onClick={() => {
+                        toggle2();
+                        getId(data?.id);
+                    }}>
                     <FontAwesomeIcon icon={faEdit} />
                 </button>
             </td>
@@ -201,6 +211,42 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
                             </div>
                         </div>
 
+                    </div>
+                </ModalBody>
+            </Modal>
+
+
+
+            {/* ============ */}
+            {/* MODAL UPDATE */}
+            {/* ============ */}
+
+            <Modal className="modal-lg" isOpen={modal2} toggle={toggle2}>
+                <div className="modal-header">
+                    <h5 className="modal-title bold offset-2">Update Reimbursement</h5>
+                </div>
+                <ModalBody>
+                    <div className="row">
+                        <div className="offset-2 col-md-4 mb-4">
+                            <h6 className="text-enigma mb-3 bold">Status</h6>
+                            <select className="custom-select td-width text-enigma border-enigma">
+                                <option selected={ reimburse?.statusReject == true }> Rejected </option>
+                                <option selected={ reimburse?.statusSuccess == true }> Success </option>
+                                <option selected={ reimburse?.statusOnFinance == true }> Waiting </option>
+                            </select>
+                        </div>
+                        {
+                            reimburse?.statusSuccess && reimburse?.statusReject != true ?
+                                <div className="col-md-4">
+                                    <h6 className="text-enigma mb-3 bold">Upload File</h6>
+                                    <input type="file" className="form-control" accept="application/pdf" />
+                                </div> : ""
+                        }
+                        <hr />
+                        <div className="offset-7 col-md-3 mb-1">
+                            <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
+                            <button type="button" onClick={toggle2} className="btn btn-enigma float-right mr-3">Update</button>
+                        </div>
                     </div>
                 </ModalBody>
             </Modal>
