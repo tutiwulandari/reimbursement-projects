@@ -168,6 +168,10 @@ export const UPDATE_REIMBURSE_FINANCE_FAILURE               = "UPDATE_REIMBURSE_
 /*      BILL     */
 /* ============= */
 
-export const UPLOAD_FILE          = "UPLOAD_FILE"
-export const UPLOAD_FILE_SUCCESS  = "UPLOAD_FILE_SUCCESS"
-export const UPLOAD_FILE_FAILURE  = "UPLOAD_FILE_FAILURE"
+export const UPLOAD_FILE              = "UPLOAD_FILE"
+export const UPLOAD_FILE_SUCCESS      = "UPLOAD_FILE_SUCCESS"
+export const UPLOAD_FILE_FAILURE      = "UPLOAD_FILE_FAILURE"
+
+export const FIND_BILL_BY_ID          = "FIND_BILL_BY_ID"
+export const FIND_BILL_BY_ID_SUCCESS  = "FIND_BILL_BY_ID_SUCCESS"
+export const FIND_BILL_BY_ID_FAILURE  = "FIND_BILL_BY_ID_FAILURE"

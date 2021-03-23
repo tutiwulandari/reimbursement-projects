@@ -1,14 +1,14 @@
 import { all } from 'redux-saga/effects'
 import { watchRegisterEmployee } from './registerSagas'
-import { watchUploadFile } from './uploadFileSaga'
+import { watchUploadFile, watchBillById } from './billSaga'
 import { watchFindAllEmployee, watchFindEmployeeById, watchSaveEmployee, watchUpdateEmployee } from './employeeSagas'
 import { watchLoginEmployee } from "./loginSagas";
 import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCategory } from './reimburseSagas';
 import { watchFindAllReimburseFinance, watchFindReimburseFinanceById, watchFindReimburseFinanceByCategory } from './reimburseFinanceSagas';
 import { watchFindAllCategory } from './categorySagas';
 import { watchFindAllGrade, watchFindGradeById, watchSaveGrade } from "./gradeSagas";
-import { watchFindAllContract, watchFindContractById, watchSaveContract, watchUpdateContract} from "./detailContractSagas";
-import {watchFindAllCount} from "./dashboardSagas";
+import { watchFindAllContract, watchFindContractById, watchSaveContract, watchUpdateContract } from "./detailContractSagas";
+import { watchFindAllCount } from "./dashboardSagas";
 import { watchForgotPassword } from './forgotPasswordSagas';
 
 
@@ -20,8 +20,8 @@ export default function* rootSaga() {
         watchFindAllReimburseFinance(), watchFindReimburseFinanceById(), watchFindReimburseFinanceByCategory(),
         watchFindAllCategory(),
         watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(),
-        watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract(),
+        watchFindAllContract(), watchFindContractById(), watchSaveContract(), watchUpdateContract(),
         watchFindAllCount(),
-        watchUploadFile()
+        watchUploadFile(), watchBillById()
     ])
 }

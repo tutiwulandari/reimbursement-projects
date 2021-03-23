@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { findReimburseFinanceId } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
+import { isEmpty } from '../../../utils/validation';
+import { uploadFile } from './../../../actions/billAction';
 
 
 /* Just for UI */
@@ -13,19 +15,31 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ModalFooter } from 'reactstrap';
-import { uploadFile } from './../../../actions/uploadFileAction';
+import Swal from 'sweetalert2'
 /* Just for UI */
 
 
-const ReimburseRowFinance = ({ 
-    element, index, 
+const ReimburseRowFinance = ({
+    element, index,
     reimburse, findReimburseFinanceId,
-    uploadedFile, uploadFile 
+    uploadedFile, uploadFile
 }) => {
 
     const [file, setFile] = useState({})
-    const [data, setData] = useState({})
-    const [error, setError] = useState("")
+    console.log("upload", uploadedFile);
+
+    useEffect(() => {
+        if (uploadedFile?.data?.code == 200) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Data berhasil diubah',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }, [uploadedFile])
+
 
     /* Tooltip */
     const renderTooltip = props => (
@@ -53,11 +67,15 @@ const ReimburseRowFinance = ({
 
     const handleSubmit = () => {
         try {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-
-            reader.onload
-            uploadFile(reader)
+            if (file) {
+                const reader = new FormData()
+                reader.append('file', file)
+                const result = {
+                    id: reimburse.id,
+                    file: reader
+                }
+                uploadFile(result)
+            }
         }
         catch (err) {
             alert("please upload file")
@@ -243,29 +261,31 @@ const ReimburseRowFinance = ({
                     <h5 className="modal-title bold offset-2">Update Reimbursement</h5>
                 </div>
                 <ModalBody>
-                    <div className="row">
-                        <div className="offset-2 col-md-4 mb-4">
-                            <h6 className="text-enigma mb-3 bold">Status</h6>
-                            <select className="custom-select td-width text-enigma border-enigma">
-                                <option selected={reimburse?.statusOnFinance == true}> Waiting </option>
-                                <option selected={reimburse?.statusSuccess == true}> Success </option>
-                            </select>
+                    <form encType="multipart/form-data">
+                        <div className="row">
+                            <div className="offset-2 col-md-4 mb-4">
+                                <h6 className="text-enigma mb-3 bold">Status</h6>
+                                <select className="custom-select td-width text-enigma border-enigma">
+                                    <option selected={reimburse?.statusOnFinance == true}> Waiting </option>
+                                    <option selected={reimburse?.statusSuccess == true}> Success </option>
+                                </select>
+                            </div>
+                            {
+                                reimburse?.statusSuccess ?
+                                    <div className="col-md-4">
+                                        <h6 className="text-enigma mb-3 bold">Upload File</h6>
+                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" accept="application/pdf" />
+                                    </div> : ""
+                            }
+                            <hr />
+                            <div className="offset-7 col-md-3 mb-1">
+                                <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
+                                <button type="button"
+                                    onClick={handleSubmit}
+                                    className="btn btn-enigma float-right mr-3">Update</button>
+                            </div>
                         </div>
-                        {
-                            reimburse?.statusSuccess ?
-                                <div className="col-md-4">
-                                    <h6 className="text-enigma mb-3 bold">Upload File</h6>
-                                    <input onChange={handleChangeFile} type="file" className="form-control" accept="application/pdf" />
-                                </div> : ""
-                        }
-                        <hr />
-                        <div className="offset-7 col-md-3 mb-1">
-                            <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
-                            <button type="button"
-                                onClick={handleSubmit}
-                                className="btn btn-enigma float-right mr-3">Update</button>
-                        </div>
-                    </div>
+                    </form>
                 </ModalBody>
             </Modal>
         </tr>
@@ -278,7 +298,7 @@ const mapStateToProps = (state) => {
     return {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
-        uploadedFile: state.uploadFile.data || []
+        uploadedFile: state.uploadFile.data,
     }
 }
 
