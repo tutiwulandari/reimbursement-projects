@@ -82,15 +82,13 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.endDateContract}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.placement}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                <Link to={'/contract/'+ element.id + '/edit'}>
+                                                                <Link to={'/contract/'+ element.id }>
                                                                     <Button style={{backgroundColor: "#292961"}}>
                                                                         <FontAwesomeIcon icon={faEdit} className="float-left"/>
                                                                     </Button>
                                                                 </Link>
 
                                                             </td>
-
-
                                                         </tr>
                                                     )
                                                 })

@@ -1,4 +1,4 @@
-import {Modal, Button, Spinner, Container, Form, FormGroup} from "react-bootstrap";
+import {Modal, Button, Container, Form, FormGroup} from "react-bootstrap";
 import {Input, Label} from "reactstrap";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
@@ -50,6 +50,7 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
     useEffect(() => {
        if(contract) {
            setFullname({
+               id: contract?.id,
                employeeId: contract?.employeeId.id,
                typeContract: contract?.typeContract,
                benefitRegistrationStatus: contract?.benefitRegistrationStatus,
@@ -64,86 +65,10 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
     },[data])
     console.log("COBA LAGI", testFullname)
 
-    // useEffect( () => {
-    //     if(contract != null ) {
-    //         let typeContract;
-    //         let  benefitRegistrationStatus;
-    //         let  endedContract;
-    //
-    //         switch (contract.typeContract) {
-    //             case "PROBABITION": typeContract = 0
-    //                 break
-    //             case "PKWT": typeContract = 1
-    //         }
-    //         switch (contract.benefitRegistrationStatus) {
-    //             case "ON_PROCESS": benefitRegistrationStatus = 0
-    //                 break
-    //             case "DONE": benefitRegistrationStatus =1
-    //         }
-    //         switch (endedContract) {
-    //             case "YA": endedContract= true
-    //                 break
-    //             case "TIDAK": endedContract = false
-    //         }
-    //         setFullname( {
-    //             employeeId: contract?.employeeId.id,
-    //             fullname: contract?.employeeId?.fullname,
-    //             nip : contract?.employeeId?.nip,
-    //             typeContract : contract?.typeContract,
-    //             benefitRegistrationStatus: contract?.benefitRegistrationStatus,
-    //             startDateContract: contract?.startDateContract,
-    //             endDateContract : contract?.endDateContract,
-    //             dateOfAcceptancePermanentEmployee :contract?.dateOfAcceptancePermanentEmployee,
-    //             dateOfResignation: contract?.dateOfResignation,
-    //             placement: contract?.placement,
-    //             endedContract: contract?.endedContract
-    //         })
-    //
-    //     }
-    // }, [contract])
 
     useEffect(() => {
         if (id && contract) {
             setData(contract)
-            // let typeContract;
-            // let benefitRegistrationStatus;
-            // let endedContract;
-            //
-            // switch (contract.typeContract) {
-            //     case "PROBABITION":
-            //         typeContract = 0
-            //         break
-            //     case "PKWT":
-            //         typeContract = 1
-            // }
-            // switch (contract.benefitRegistrationStatus) {
-            //     case "ON_PROCESS":
-            //         benefitRegistrationStatus = 0
-            //         break
-            //     case "DONE":
-            //         benefitRegistrationStatus = 1
-            // }
-            // switch (contract?.endedContract) {
-            //     case "YA":
-            //         endedContract = true
-            //         break
-            //     case "TIDAK":
-            //         endedContract = false
-            // }
-
-            // setData({
-            //     employeeId: contract?.employeeId.id,
-            //     fullname: contract?.employeeId?.fullname,
-            //     typeContract: contract?.typeContract,
-            //     benefitRegistrationStatus: contract?.benefitRegistrationStatus,
-            //     startDateContract: contract?.startDateContract,
-            //     endDateContract: contract?.endDateContract,
-            //     dateOfAcceptancePermanentEmployee: contract?.dateOfAcceptancePermanentEmployee,
-            //     dateOfResignation: contract?.dateOfResignation,
-            //     placement: contract?.placement,
-            //     endedContract: contract?.endedContract
-
-            // })
         }
     }, [id, contract])
 

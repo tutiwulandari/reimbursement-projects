@@ -60,28 +60,57 @@ function* updateContract(action) {
         data: result
     })
 }
+//
+// function* saveContract(action) {
+//     console.log("SAVE Contract", action)
+//
+//     let model = action.model;
+//     let method = 'POST', url='/contract';
+//     if(model.id) {
+//         method ='PUT'
+//         url =`/${model.id}`
+//     }
+//
+//     let result = yield axios ({
+//         url: url,
+//         method: method,
+//         data: model
+//     }).then(data => {
+//         console.log("SAVE CONTRACT SAGAS", data)
+//         return {
+//             type: SAVE_CONTRACT_SUCCESS,
+//             data: data
+//         }
+//     })
+//         .catch(error => {
+//             console.log("error save sagas", error)
+//             return {
+//                 type: SAVE_CONTRACT_FAILURE,
+//                 error: error
+//             }
+//         })
+//     yield put(result)
+// }
+
 
 function* saveContract(action) {
-    console.log("SAVE Contract", action)
 
     let model = action.model;
-    let method = 'POST', url='/contract';
-    if(model.id) {
-        method ='PUT'
-        url =`/${model.id}`
-    }
-
-    let result = yield axios ({
-        url: url,
-        method: method,
-        data: model
-    }).then(data => {
-        console.log("SAVE CONTRACT SAGAS", data)
-        return {
-            type: SAVE_CONTRACT_SUCCESS,
-            data: data
-        }
-    })
+    console.log("SAGAS CONTRACT", model.id)
+    // let method = 'POST', url='/contract';
+    // if(model.id) {
+    //     method ='PUT'
+    //     url =`/${model.id}`
+    // }
+    let result = yield axios
+        .put (`/contract/${model.id}`, model)
+        .then(data => {
+            console.log("SAVE CONTRACT SAGAS", data)
+            return {
+                type: SAVE_CONTRACT_SUCCESS,
+                data: data
+            }
+        })
         .catch(error => {
             console.log("error save sagas", error)
             return {
@@ -90,6 +119,8 @@ function* saveContract(action) {
             }
         })
     yield put(result)
+    console.log("SAGAS CONTRACT", model.id)
+
 }
 
 export function* watchFindAllContract() {

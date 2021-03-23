@@ -65,7 +65,7 @@ export default  [
         exact: true
     },
     {
-        path: '/contract/:id/edit',
+        path: '/contract/:id',
         component: <DetailContractForm/>,
         exact: true
     }

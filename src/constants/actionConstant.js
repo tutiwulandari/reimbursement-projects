@@ -114,12 +114,21 @@ export const UPDATE_CONTRACT_SUCCESS  = "UPDATE_CONTRACT_SUCCESS"
 export const UPDATE_CONTRACT_FAILURE  = "UPDATE_CONTRACT_FAILURE"
 
 
+//
+// /* ================== */
+// /*    SORT BY ALPHABET*/
+// /* ================== */
+//
+// export const SORT_BY_ALPHABET        = "SORT_BY_ALPHABET_CONTRACT"
+// export const SORT_BY_ALPHABET_SUCCESS  = "SORT_BY_ALPHABET_SUCCESS"
+// export const SORT_BY_ALPHABET_FAILURE  = "SORT_BY_ALPHABET_FAILURE"
+
+
 
 /* ================== */
-/*    SORT BY ALPHABET*/
+/*    Dashboard        */
 /* ================== */
 
-export const SORT_BY_ALPHABET        = "SORT_BY_ALPHABET_CONTRACT"
-export const SORT_BY_ALPHABET_SUCCESS  = "SORT_BY_ALPHABET_SUCCESS"
-export const SORT_BY_ALPHABET_FAILURE  = "SORT_BY_ALPHABET_FAILURE"
-
+export const FIND_ALL_COUNT         = "FIND_ALL_COUNT"
+export const FIND_ALL_COUNT_SUCCESS  = "FIND_ALL_COUNT_SUCCESS"
+export const FIND_ALL_COUNT_FAILURE  = "FIND_ALL_CONTRACT_FAILURE"
