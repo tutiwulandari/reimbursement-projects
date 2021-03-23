@@ -84,12 +84,12 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                 }
             }
         } else {
-            // if (localStorage.getItem('role') == '1') {
-            //     history.push("/dashboard/hc")
-            // }
-            // else {
-            //     history.push("/dashboard/finance")
-            // }
+            if (localStorage.getItem('role') == '1') {
+                history.push("/dashboard/hc")
+            }
+            else {
+                history.push("/dashboard/finance")
+            }
         }
 
     })

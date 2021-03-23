@@ -9,6 +9,7 @@ import { findAllContract, findContractById, updateContract, saveContract } from 
 import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
 import { findAllReimburseFinance, findReimburseFinanceById } from './reimburseFinanceReducer';
+import { uploadFile } from './uploadFileReducer';
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee, forgotPassword,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     findAllContract, findContractById, updateContract, saveContract,
     findAllCount,
     findAllReimburseFinance, findReimburseFinanceById,
+    uploadFile
 })
 
 export default rootReducer

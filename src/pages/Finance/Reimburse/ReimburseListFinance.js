@@ -52,7 +52,7 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                 {
                                     reimbursements.data?.map((element, index) => {
                                         return (
-                                            <ReimburseRowFinance data={element} index={index}/>
+                                            <ReimburseRowFinance element={element} index={index}/>
                                         )
                                     })
                                 }

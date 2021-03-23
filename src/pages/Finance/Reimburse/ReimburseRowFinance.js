@@ -13,10 +13,19 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ModalFooter } from 'reactstrap';
+import { uploadFile } from './../../../actions/uploadFileAction';
 /* Just for UI */
 
 
-const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId }) => {
+const ReimburseRowFinance = ({ 
+    element, index, 
+    reimburse, findReimburseFinanceId,
+    uploadedFile, uploadFile 
+}) => {
+
+    const [file, setFile] = useState({})
+    const [data, setData] = useState({})
+    const [error, setError] = useState("")
 
     /* Tooltip */
     const renderTooltip = props => (
@@ -36,33 +45,48 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
         findReimburseFinanceId(id)
     }
 
+
+    /* Handle Upload File */
+    const handleChangeFile = e => {
+        setFile(e.target.files[0]);
+    }
+
+    const handleSubmit = () => {
+        try {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+
+            reader.onload
+            uploadFile(reader)
+        }
+        catch (err) {
+            alert("please upload file")
+        }
+    }
+
+
     return (
         <tr>
             <td>{index + 1}</td>
-            <td>{data.categoryId.categoryName}</td>
-            <td>{data.employeeId.fullname}</td>
+            <td>{element.categoryId.categoryName}</td>
+            <td>{element.employeeId.fullname}</td>
             <td>
-                {data.statusReject ?
-                    <button className="btn btn-outline-enigma"> Rejected </button>
-                    : data.statusSuccess ?
-                        <button className="btn btn-outline-enigma"> Success </button>
-                        : data.statusOnFinance ?
-                            <button className="btn btn-outline-enigma"> Waiting </button>
-                            : ""
+                {element.statusSuccess ? <button className="btn btn-outline-enigma"> Success </button>
+                    : element.statusOnFinance ? <button className="btn btn-outline-enigma"> Waiting </button> : ""
                 }
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
                     onClick={() => {
                         toggle();
-                        getId(data?.id);
+                        getId(element?.id);
                     }}>
                     Detail
                 </button>
                 <button className="btn btn-outline-enigma"
                     onClick={() => {
                         toggle2();
-                        getId(data?.id);
+                        getId(element?.id);
                     }}>
                     <FontAwesomeIcon icon={faEdit} />
                 </button>
@@ -92,45 +116,38 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
                         <div className="col-md-3">
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">Status</h5>
-
-                                {reimburse?.statusReject ?
-                                    <p className="p-enigma-bold">
-                                        <i className="fa fa-times" aria-hidden="true"></i> Rejected
-                                    </p>
-                                    :
-                                    <>
-                                        {
-                                            reimburse?.statusOnHc ?
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
+                                <>
+                                    {
+                                        reimburse?.statusOnHc ?
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
                                                 </p>
-                                                :
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
+                                            :
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
                                                 </p>
-                                        }
-                                        {
-                                            reimburse?.statusOnFinance ?
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
+                                    }
+                                    {
+                                        reimburse?.statusOnFinance ?
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
                                                 </p>
-                                                :
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
+                                            :
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
                                                 </p>
-                                        }
-                                        {
-                                            reimburse?.statusSuccess ?
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
+                                    }
+                                    {
+                                        reimburse?.statusSuccess ?
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
                                                 </p>
-                                                :
-                                                <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Done
+                                            :
+                                            <p className="p-enigma-bold">
+                                                <i className="fa fa-square-o" aria-hidden="true"></i> Done
                                                 </p>
-                                        }
-                                    </>
-                                }
+                                    }
+                                </>
                             </div>
                         </div>
 
@@ -230,22 +247,23 @@ const ReimburseRowFinance = ({ data, index, reimburse, findReimburseFinanceId })
                         <div className="offset-2 col-md-4 mb-4">
                             <h6 className="text-enigma mb-3 bold">Status</h6>
                             <select className="custom-select td-width text-enigma border-enigma">
-                                <option selected={ reimburse?.statusReject == true }> Rejected </option>
-                                <option selected={ reimburse?.statusSuccess == true }> Success </option>
-                                <option selected={ reimburse?.statusOnFinance == true }> Waiting </option>
+                                <option selected={reimburse?.statusOnFinance == true}> Waiting </option>
+                                <option selected={reimburse?.statusSuccess == true}> Success </option>
                             </select>
                         </div>
                         {
-                            reimburse?.statusSuccess && reimburse?.statusReject != true ?
+                            reimburse?.statusSuccess ?
                                 <div className="col-md-4">
                                     <h6 className="text-enigma mb-3 bold">Upload File</h6>
-                                    <input type="file" className="form-control" accept="application/pdf" />
+                                    <input onChange={handleChangeFile} type="file" className="form-control" accept="application/pdf" />
                                 </div> : ""
                         }
                         <hr />
                         <div className="offset-7 col-md-3 mb-1">
                             <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
-                            <button type="button" onClick={toggle2} className="btn btn-enigma float-right mr-3">Update</button>
+                            <button type="button"
+                                onClick={handleSubmit}
+                                className="btn btn-enigma float-right mr-3">Update</button>
                         </div>
                     </div>
                 </ModalBody>
@@ -260,10 +278,11 @@ const mapStateToProps = (state) => {
     return {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
+        uploadedFile: state.uploadFile.data || []
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseFinanceId }
+const mapDispatchToProps = { findReimburseFinanceId, uploadFile }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);
