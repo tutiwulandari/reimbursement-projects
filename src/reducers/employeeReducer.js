@@ -9,7 +9,12 @@ import {
     UPDATE_EMPLOYEE_SUCCESS,
     SAVE_EMPLOYEE,
     SAVE_EMPLOYEE_SUCCESS,
-    SAVE_EMPLOYEE_FAILURE
+    SAVE_EMPLOYEE_FAILURE,
+    FIND_VERIFIED_BY_ID,
+    FIND_VERIFIED_BY_ID_SUCCESS,
+    FIND_VERIFIED_BY_ID_FAILURE,
+    SAVE_VERIFIED,
+    SAVE_VERIFIED_FAILURE, SAVE_VERIFIED_SUCCESS
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -47,7 +52,7 @@ export function findAllEmployee(state = initialState, data) {
 }
 
 export const findEmployeeById = (state = {...initialState, data: false}, action) => {
-    console.log("ACTION", action)
+    // console.log("ACTION", action)
     switch (action.type) {
         case FIND_EMPLOYEE_BY_ID:
             return {
@@ -116,3 +121,64 @@ export const saveEmployee = (state = {...initialState}, action) => {
             }
     }
 }
+//
+// export const findVerifiedById = (state = {...initialState, data: false}, action) => {
+//     console.log("ACTION", action)
+//     switch (action.type) {
+//         case FIND_VERIFIED_BY_ID:
+//             return {
+//                 ...state,
+//                 data: null,
+//                 isLoading: true
+//             };
+//         case FIND_VERIFIED_BY_ID_SUCCESS:
+//             return {
+//                 data: action.data,
+//                 isLoading: false,
+//                 error: null
+//             }
+//         case FIND_VERIFIED_BY_ID_FAILURE:
+//             return {
+//                 data: false,
+//                 isLoading: false,
+//                 error: action.error
+//             }
+//         default:
+//             return {
+//                 ...state,
+//                 isLoading: false,
+//                 error: null
+//             }
+//     }
+// }
+//
+//
+// export const saveVerified = (state = {...initialState}, action) => {
+//     switch (action.type) {
+//         case SAVE_VERIFIED:
+//             return {
+//                 ...state,
+//                 data: null,
+//                 isLoading: true
+//             }
+//         case SAVE_VERIFIED_SUCCESS:
+//             return {
+//                 data: action.data,
+//                 isLoading: false,
+//                 error: null
+//             };
+//         case SAVE_VERIFIED_FAILURE:
+//             return {
+//                 data: null,
+//                 isLoading: false,
+//                 error: action.error
+//             }
+//         default:
+//             return {
+//                 ...state,
+//                 data: null,
+//                 isLoading: false,
+//                 error: null
+//             }
+//     }
+// }

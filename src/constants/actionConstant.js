@@ -35,6 +35,18 @@ export const UPDATE_EMPLOYEE          = "UPDATE_EMPLOYEE"
 export const UPDATE_EMPLOYEE_SUCCESS  = "UPDATE_EMPLOYEE_SUCCESS"
 export const UPDATE_EMPLOYEE_FAILURE  = "UPDATE_EMPLOYEE_FAILURE"
 
+
+
+export const SAVE_VERIFIED          = "SAVE_VERIFIED"
+export const SAVE_VERIFIED_SUCCESS = "SAVE_VERIFIED_SUCCESS"
+export const SAVE_VERIFIED_FAILURE  = "SAVE_VERIFIED_FAILURE"
+
+
+export const FIND_VERIFIED_BY_ID          = "FIND_ VERIFIED_BY_ID"
+export const FIND_VERIFIED_BY_ID_SUCCESS  = "FIND_VERIFIED_BY_ID_SUCCESS"
+export const FIND_VERIFIED_BY_ID_FAILURE  = "FIND_VERIFIED_BY_ID_FAILURE"
+
+
 /* ================== */
 /*     GRADE      */
 /* ================== */

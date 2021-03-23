@@ -61,8 +61,6 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Agama</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Golongan Darah</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Status pernikahan</th>
-                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Status Verifikasi</th>
-                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Verifikasi</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Jumlah Anak</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Nama Ibu Kandung</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Nama Istri/Suami</th>
@@ -77,6 +75,8 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Status Karyawan</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Tipe Karyawan</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Grade</th>
+                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Status Verifikasi</th>
+                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Verifikasi</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Action</th>
                                             </tr>
                                             </thead>
@@ -134,22 +134,6 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
                                                             }}>{element.maritalStatus}</td>
-                                                            <td style={{
-                                                                verticalAlign: "middle",
-                                                                textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
-                                                            }}> {element.verifiedHc == true ? "verified" : "not verified"}</td>
-
-                                                            <td style={{
-                                                                verticalAlign: "middle",
-                                                                textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
-                                                            }}>
-                                                                {/*<Verifikasi/>*/}
-                                                                <Button> <FontAwesomeIcon icon={faCheck}/></Button>
-                                                            </td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",
@@ -235,6 +219,24 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
                                                             }}>{element.grade.grade}</td>
+
+                                                            <td style={{
+                                                                verticalAlign: "middle",
+                                                                textAlign: "center",
+                                                                maxWidth: "200px",
+                                                                minWidth: "200px"
+                                                            }}> {element.verifiedHc == true ? "verified" : "not verified"}</td>
+
+                                                            <td style={{
+                                                                verticalAlign: "middle",
+                                                                textAlign: "center",
+                                                                maxWidth: "200px",
+                                                                minWidth: "200px"
+                                                            }}>
+                                                                <Link to={'/employee/' + element.id + '/isVerified'}>
+                                                                    <Button color="danger"> <FontAwesomeIcon icon={faCheck}/></Button>
+                                                                </Link>
+                                                            </td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",

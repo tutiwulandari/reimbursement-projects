@@ -5,6 +5,9 @@ import {connect} from "react-redux";
 import {useEffect, useState} from "react";
 import {findById, save} from "../../../actions/detailContractAction";
 import {findAll} from "../../../actions/employeeAction";
+import Header from "../../../dashboard/dashboardHc/Header";
+import Menu from "../../../dashboard/dashboardHc/Menu";
+import Footer from "../../../dashboard/dashboardHc/Footer";
 
 
 function DetailContractForm({ contract, findById, isLoading, save, error, savedContract}) {
@@ -95,15 +98,11 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
     }
 
 
-    // const handleTest = (e) => {
-    //     let name = e.target.name
-    //     let value = e.target.value
-    //     console.log("handle change", name, value)
-    //     setFullname({...testFullname, [name]: value})
-    // }
 
     return (
         <div>
+            <Header/>
+            <Menu/>
             <Modal.Dialog style={{marginTop: "30px"}}>
                 <Modal.Header closeButton style={{backgroundColor: "#292961"}}>
                     <Modal.Title style={{color: "white"}}> Edit Detail Kontrak</Modal.Title>
@@ -207,6 +206,7 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
                     </Button>
                 </Modal.Footer>
             </Modal.Dialog>
+            <Footer/>
         </div>
     )
 }

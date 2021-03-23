@@ -9,12 +9,12 @@ import ReimburseList from "../pages/reimburse/ReimburseList";
 import DetailContract from "../pages/detailContract/listForm/DetailContract";
 import Success from "../pages/registration/Success";
 import { ReimburseForm } from "../pages/reimburse";
-import DetailContractForm from "../pages/detailContract/editForm/DetailContractForm"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
-// import TableComponent from "../pages/Tables";
-import { GradeList } from "../pages/Grade";
+import { GradeList } from "../pages/grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 import Error404 from './../pages/Error/Error404/Error404';
+import DetailContractForm from "../pages/detailContract/editForm";
+import VerifiedForm from "../pages/Employee/verified";
 
 
 export default [
@@ -68,11 +68,7 @@ export default [
         component: <DetailContract/>,
         exact: true
     },
-    // {
-    //     path: '/contract/:id',
-    //     component: <DetailContractForm/>,
-    //     exact: true
-    // },
+
     {
         path: '/register-success',
         component: <Success />,
@@ -88,11 +84,6 @@ export default [
         component: <ReimburseListFinance />,
         exact: true
     },
-    // {
-    //     path: '/employee',
-    //     component: <TableComponent />,
-    //     exact: true
-    // },
     {
         path: '/employee/:id/edit',
         component: <EmployeeForm />,
@@ -104,6 +95,17 @@ export default [
         exact: true
     },
     {
+        path: '/employee/:id/isVerified',
+        component: <VerifiedForm />,
+        exact: true
+    },
+    {
+        path: '/contract/:id',
+        component: <DetailContractForm/>,
+        exact: true
+    },
+
+    {
         path: '/hc/grade',
         component: <GradeList />,
         exact: true
@@ -112,5 +114,7 @@ export default [
         path: '*',
         component: <Error404/>,
         exact: false
-    }
+    },
+
+
 ]

@@ -96,7 +96,7 @@ function* updateContract(action) {
 function* saveContract(action) {
 
     let model = action.model;
-    console.log("SAGAS CONTRACT", model.id)
+    // console.log("SAGAS CONTRACT", model.id)
     // let method = 'POST', url='/contract';
     // if(model.id) {
     //     method ='PUT'
@@ -105,7 +105,7 @@ function* saveContract(action) {
     let result = yield axios
         .put (`/contract/${model.id}`, model)
         .then(data => {
-            console.log("SAVE CONTRACT SAGAS", data)
+            // console.log("SAVE CONTRACT SAGAS", data)
             return {
                 type: SAVE_CONTRACT_SUCCESS,
                 data: data
@@ -119,7 +119,7 @@ function* saveContract(action) {
             }
         })
     yield put(result)
-    console.log("SAGAS CONTRACT", model.id)
+    // console.log("SAGAS CONTRACT", model.id)
 
 }
 

@@ -6,7 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
 import Navbar from './../../component/Navbar/Navbar';
-import ReimburseTable from './ReimburseTable';
+import Header from "../../dashboard/dashboardHc/Header";
+import Menu from "../../dashboard/dashboardHc/Menu";
+import Footer from "../../dashboard/dashboardHc/Footer";
 
 
 function ReimburseList({
@@ -27,11 +29,12 @@ function ReimburseList({
     }, [])
 
     return (
-        <div className="container">
+        <div>
 
-            <Navbar />
+      <Header/>
+      <Menu/>
 
-            <div className="row mt-5">
+            <div className="row mt-5"  style={{marginLeft:"40vh", marginRight:"20vh"}} >
                 <div className="col-md-2">
                     <select className="custom-select rounded-pill text-enigma border-enigma" onChange={handleChangeCategory}>
                         <option value="">Category</option>
@@ -95,6 +98,7 @@ function ReimburseList({
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }
