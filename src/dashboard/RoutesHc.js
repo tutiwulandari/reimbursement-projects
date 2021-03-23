@@ -1,7 +1,7 @@
 import Header from "./dashboardHc/Header";
 import Menu from "./dashboardHc/Menu";
-import Content from "./dashboardHc/Content";
 import Footer from "./dashboardHc/Footer";
+import DashboardContent from "./dashboardHc/DashboardContent";
 
 
 function RoutesHc() {
@@ -9,7 +9,7 @@ function RoutesHc() {
         <div>
             <Header/>
             <Menu />
-            <Content/>
+            <DashboardContent/>
             <Footer />
         </div>
     )

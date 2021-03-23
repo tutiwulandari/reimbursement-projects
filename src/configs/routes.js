@@ -3,13 +3,13 @@ import React from "react";
 import RoutesHc from "../dashboard/RoutesHc";
 import ResetPassword from "../pages/resetPassword";
 import RoutesFinance from "../dashboard/RoutesFinance";
-import EmployeeForm from "../pages/Employee/EditForm/EmployeeForm"
-import ListEmployee from "../component/ListEmployee";
+import EmployeeForm from "../pages/Employee/editForm/EmployeeForm"
+import ListEmployee from "../pages/Employee/listForm/ListEmployee";
 import ReimburseList from "../pages/reimburse/ReimburseList";
-import DetailContract from "../pages/detailContract/DetailContract";
+import DetailContract from "../pages/detailContract/listForm/DetailContract";
 import Success from "../pages/registration/Success";
 import {ReimburseForm} from "../pages/reimburse";
-import DetailContractForm from "../pages/detailContractForm/DetailContractForm"
+import DetailContractForm from "../pages/detailContract/editForm/DetailContractForm"
 
 
 

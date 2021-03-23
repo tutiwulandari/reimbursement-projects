@@ -5,6 +5,9 @@ import {connect} from "react-redux";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Container, Form, FormGroup, Input, Label} from "reactstrap";
+import Header from "../../../dashboard/dashboardHc/Header";
+import Menu from "../../../dashboard/dashboardHc/Menu";
+import Footer from "../../../dashboard/dashboardHc/Footer";
 
 
 function EmployeeForm({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
@@ -15,7 +18,6 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     const history = useHistory();
     const [data, setData] = useState()
 
-    console.log("Error ", error)
 
     let employeeType = ["OFFICE", "ONSITE"]
     let employeeStatus = ["ACTIVE", "NON_ACTIVE"]
@@ -60,7 +62,6 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }, [employee])
 
     useEffect(() => {
-        console.log("DATAAAAAAA", data)
     }, [data])
 
     useEffect(() => {
@@ -70,7 +71,6 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }, [id,employee])
     console.log("test",findById)
 
-//Save
     useEffect(() => {
         if (savedEmployee) {
             history.push("/dashboard/hc/employee");
@@ -108,14 +108,15 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
 
     const onSelectChange = (e) => {
-        console.log("ONSELECT", e.target)
         setData( {...data, gradeId: e.target.value})
     }
 
     return (
-        <div style={{marginTop:"30px"}}>
+        <div>
+            <Header/>
+            <Menu/>
             <Modal.Dialog >
-                <Modal.Header closeButton style={{backgroundColor:"#292961"}}>
+                <Modal.Header closeButton style={{backgroundColor:"black"}}>
                     <Modal.Title style={{color:"white"}} > Edit Karyawan </Modal.Title>
                 </Modal.Header>
 
@@ -138,12 +139,8 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Label style={{fontFamily: "cursive"}}>Grade</Label>
                                     <Input
                                         type="select"
-                                        // onChange={handleChange}
                                         onChange={e => onSelectChange(e)}
                                     >
-                                        {
-                                            console.log("INI GRADES MODEL",gradesModel.data)
-                                        }
                                         {
                                             gradesModel.data?.map( (element, index) =>
                                                 <option key = {index} value={element.id}>
@@ -203,13 +200,14 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
 
                             </Form> :
+
                             <Spinner animation={"grow"} color="#292961"/>
 
                         }
                     </div>
                 </Container>
                 <Modal.Footer>
-                    <Link to="/employee">
+                    <Link to="dashboard/hc/employee">
                         <Button style={{backgroundColor:"black"}}>Back</Button>
                     </Link>
 
@@ -218,14 +216,13 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                     </Button>
                 </Modal.Footer>
             </Modal.Dialog>
+            <Footer/>
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
-    console.log("state", state.saveEmployee.error)
     return {
-        //call reducer
         employee: state.findEmployeeById.data || null,
         isLoading: state.findEmployeeById.isLoading,
         savedEmployee: state.saveEmployee.data,

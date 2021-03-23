@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Button, Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faEdit} from "@fortawesome/free-solid-svg-icons";
-import {findAll} from "../actions/employeeAction";
+import {findAll} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import Menu from "../dashboard/dashboardHc/Menu";
-import Header from "../dashboard/dashboardHc/Header";
-import Footer from "../dashboard/dashboardHc/Footer";
+import Menu from "../../../dashboard/dashboardHc/Menu";
+import Header from "../../../dashboard/dashboardHc/Header";
+import Footer from "../../../dashboard/dashboardHc/Footer";
 
 function ListEmployee({findAll, employees, error, isLoading}) {
 
@@ -23,7 +23,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
             <Menu/>
             <div className="content-wrapper">
 
-                <h1 style={{color:"black", marginTop:"10px", textAlign:"center"}}> LIST KARYAWAN</h1>
+                <h1 style={{color:"black", marginTop:"20px", textAlign:"center"}}> LIST KARYAWAN</h1>
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row">

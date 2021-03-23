@@ -4,7 +4,7 @@ import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
 export default function Menu() {
     return (
         <aside className="main-sidebar sidebar-light-gray-dark elevation-4" style={{backgroundColor:"white"}}>
-            <a href="index3.html" className="brand-link">
+            <a href="index3.html" className="brand-link" style={{padding:"20px"}}>
                 <img
                     src={Image1}
                     alt="enigmacamp"
@@ -15,13 +15,13 @@ export default function Menu() {
             </a>
 
 
-            <div className="sidebar">
+            <div className="sidebar" style={{marginTop:"40px"}}>
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
-                            <a href="#" className="nav-link">
-                                <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"white"}} />
-                                <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
+                            <a href="/dashboard/hc" className="nav-link active" style={{backgroundColor:"#292961"}}>
+                                <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"black"}} />
+                                <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
                             </a>
                         </li>
                         <li className="nav-item has-treeview">
@@ -31,7 +31,7 @@ export default function Menu() {
                             </a>
                         </li>
                         <li className="nav-item has-treeview menu-open">
-                            <a href="#" className="nav-link active">
+                            <a href="#" className="nav-link">
                                 <i className="nav-icon fas fa-user-alt" style={{fontSize:"20px"}}/>
                                 <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Karyawan
                                     <i className="right fas fa-angle-left" />
@@ -41,13 +41,13 @@ export default function Menu() {
                             <li className="nav-item">
                                 <a href="/dashboard/hc/employee" className="nav-link">
                                     <i className="far fa-circle nav-icon" />
-                                    <p>List Karyawan</p>
+                                    <p style={{fontFamily:"roboto", fontSize:"16px"}}>List Karyawan</p>
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <a href="/dashboard/hc/contract" className="nav-link">
                                     <i className="far fa-circle nav-icon" />
-                                    <p>Detail Contract</p>
+                                    <p style={{fontFamily:"roboto", fontSize:"16px"}}>Detail Kontrak</p>
                                 </a>
                             </li>
                         </ul>

@@ -3,8 +3,8 @@ import {Input, Label} from "reactstrap";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import {useEffect, useState} from "react";
-import {findById, save} from "../../actions/detailContractAction";
-import {findAll} from "../../actions/employeeAction";
+import {findById, save} from "../../../actions/detailContractAction";
+import {findAll} from "../../../actions/employeeAction";
 
 
 function DetailContractForm({ contract, findById, isLoading, save, error, savedContract}) {

@@ -1,9 +1,9 @@
-import Header from "../../dashboard/dashboardHc/Header";
-import Menu from "../../dashboard/dashboardHc/Menu";
-import Footer from "../../dashboard/dashboardHc/Footer";
+import Header from "../../../dashboard/dashboardHc/Header";
+import Menu from "../../../dashboard/dashboardHc/Menu";
+import Footer from "../../../dashboard/dashboardHc/Footer";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {findAll} from "../../actions/detailContractAction";
+import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "react-bootstrap";

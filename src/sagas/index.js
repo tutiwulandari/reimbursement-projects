@@ -11,6 +11,7 @@ import {
     watchSaveContract,
     watchUpdateContract
 } from "./detailContractSagas";
+import {watchFindAllCount} from "./dashboardSagas";
 
 
 export default function* rootSaga() {
@@ -20,6 +21,7 @@ export default function* rootSaga() {
         watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),
         watchFindAllCategory(),
         watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(), watchUpdateGrade(),
-        watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract()
+        watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract(),
+        watchFindAllCount()
     ])
 }
