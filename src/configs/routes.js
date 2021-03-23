@@ -74,6 +74,7 @@ export default [
     //     exact: true
     // },
     {
+        path: '/register-success',
         component: <Success />,
         exact: true
     },
