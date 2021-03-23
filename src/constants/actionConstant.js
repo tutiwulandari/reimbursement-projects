@@ -54,9 +54,6 @@ export const UPDATE_GRADE          = "UPDATE_GRADE"
 export const UPDATE_GRADE_SUCCESS  = "UPDATE_GRADE_SUCCESS"
 export const UPDATE_GRADE_FAILURE  = "UPDATE_GRADE_FAILURE"
 
-
-
-
 /* ================== */
 /*     REIMBURSE      */
 /* ================== */
@@ -77,8 +74,6 @@ export const UPDATE_REIMBURSE                       = "UPDATE_REIMBURSE"
 export const UPDATE_REIMBURSE_SUCCESS               = "UPDATE_REIMBURSE_SUCCESS"
 export const UPDATE_REIMBURSE_FAILURE               = "UPDATE_REIMBURSE_FAILURE"
 
-
-
 /* ================== */
 /*     CATEGORY       */
 /* ================== */
@@ -86,3 +81,54 @@ export const UPDATE_REIMBURSE_FAILURE               = "UPDATE_REIMBURSE_FAILURE"
 export const FIND_ALL_CATEGORY          = "FIND_ALL_CATEGORY"
 export const FIND_ALL_CATEGORY_SUCCESS  = "FIND_ALL_CATEGORY_SUCCESS"
 export const FIND_ALL_CATEGORY_FAILURE  = "FIND_ALL_CATEGORY_FAILURE"
+
+
+/* ================== */
+/*     Reset password  */
+/* ================== */
+
+export const RESET_PASSWORD          = "RESET_PASSWORD"
+export const RESET_PASSWORD_SUCCESS  = "RESET_PASSWORD_SUCCESS"
+export const RESET_PASSWORD_FAILURE  = "RESET_PASSWORD_FAILURE"
+
+
+
+/* ================== */
+/*    Detail Contract */
+/* ================== */
+
+export const FIND_ALL_CONTRACT         = "FIND_ALL_CONTRACT"
+export const FIND_ALL_CONTRACT_SUCCESS  = "FIND_ALL_CONTRACT_SUCCESS"
+export const FIND_ALL_CONTRACT_FAILURE  = "FIND_ALL_CONTRACT_FAILURE"
+
+export const FIND_CONTRACT_BY_ID          = "FIND_CONTRACT_BY_ID"
+export const FIND_CONTRACT_BY_ID_SUCCESS  = "FIND_CONTRACT_BY_ID_SUCCESS"
+export const FIND_CONTRACT_BY_ID_FAILURE  = "FIND_CONTRACT_BY_ID_FAILURE"
+
+export const SAVE_CONTRACT          = "SAVE_CONTRACT"
+export const SAVE_CONTRACT_SUCCESS  = "SAVE_CONTRACT_SUCCESS"
+export const SAVE_CONTRACT_FAILURE  = "SAVE_CONTRACT_FAILURE"
+
+export const UPDATE_CONTRACT        = "UPDATE_CONTRACT"
+export const UPDATE_CONTRACT_SUCCESS  = "UPDATE_CONTRACT_SUCCESS"
+export const UPDATE_CONTRACT_FAILURE  = "UPDATE_CONTRACT_FAILURE"
+
+
+//
+// /* ================== */
+// /*    SORT BY ALPHABET*/
+// /* ================== */
+//
+// export const SORT_BY_ALPHABET        = "SORT_BY_ALPHABET_CONTRACT"
+// export const SORT_BY_ALPHABET_SUCCESS  = "SORT_BY_ALPHABET_SUCCESS"
+// export const SORT_BY_ALPHABET_FAILURE  = "SORT_BY_ALPHABET_FAILURE"
+
+
+
+/* ================== */
+/*    Dashboard        */
+/* ================== */
+
+export const FIND_ALL_COUNT         = "FIND_ALL_COUNT"
+export const FIND_ALL_COUNT_SUCCESS  = "FIND_ALL_COUNT_SUCCESS"
+export const FIND_ALL_COUNT_FAILURE  = "FIND_ALL_CONTRACT_FAILURE"

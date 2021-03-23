@@ -1,16 +1,16 @@
-import Login from "../pages/Login/Login";
-import Guide from "../pages/Guide/Guide";
-import Success from './../pages/Registration/Success';
-import DashboardHc from "../SideBar/hc/DashboardHc";
-import HomeSideBar from "../SideBar/HomeSideBar";
-import TableDashboardHc from "../SideBar/hc/TableDashboardHc";
+import Login from "../pages/login/Login";
 import React from "react";
-import DashboardFinance from "../SideBar/finance/DashboardFinance";
-import TableDashboardFinance from "../SideBar/finance/TableDashboardFinance";
-import ReimburseList from './../pages/Reimburse/ReimburseList';
-import ReimburseForm from './../pages/Reimburse/ReimburseForm';
-import TableComponent from "../pages/Tables";
-import EmployeeForm from "../pages/EditForm";
+import RoutesHc from "../dashboard/RoutesHc";
+import ResetPassword from "../pages/resetPassword";
+import RoutesFinance from "../dashboard/RoutesFinance";
+import EmployeeForm from "../pages/Employee/editForm/EmployeeForm"
+import ListEmployee from "../pages/Employee/listForm/ListEmployee";
+import ReimburseList from "../pages/reimburse/ReimburseList";
+import DetailContract from "../pages/detailContract/listForm/DetailContract";
+import Success from "../pages/registration/Success";
+import {ReimburseForm} from "../pages/reimburse";
+import DetailContractForm from "../pages/detailContract/editForm/DetailContractForm"
+
 
 
 export default  [
@@ -20,44 +20,23 @@ export default  [
         exact: true
     },
     {
-        path: '/petunjuk',
-        component: <Guide/>,
-        exact: true
-    },
-    {
         path: '/dashboard/hc',
-        component:<DashboardHc/>,
+        component:<RoutesHc/>,
         exact: true
     },
     {
         path: '/dashboard/finance',
-        component:<DashboardFinance/>,
+        component:<RoutesFinance/>,
         exact: true
     },
     {
         path: '/success-register',
         component: <Success/>,
-        exact: true 
-    },
-    {
-        path: '/home/sidebar',
-        component: <HomeSideBar/>,
         exact: true
     },
     {
-        path: '/dashboard/table',
-        component: <TableDashboardHc/>,
-        exact: true
-    },
-    {
-        path: '/dashboard/table2',
-        component: <TableDashboardFinance/>,
-        exact: true
-    },
-
-    {
-        path: '/employee',
-        component: <TableComponent/>,
+        path: '/dashboard/hc/employee',
+        component: <ListEmployee/>,
         exact: true
     },
     {
@@ -66,7 +45,7 @@ export default  [
         exact: true
     },
     {
-        path: '/hc/reimburse',
+        path: '/dashboard/hc/reimburse',
         component: <ReimburseList/>,
         exact: true
     },
@@ -75,5 +54,22 @@ export default  [
         component: <ReimburseForm/>,
         exact: true
     },
+    {
+        path: '/hc/resetpassword',
+        component: {ResetPassword},
+        exact: true
+    },
+    {
+        path: '/dashboard/hc/contract',
+        component: <DetailContract/>,
+        exact: true
+    },
+    {
+        path: '/contract/:id',
+        component: <DetailContractForm/>,
+        exact: true
+    }
+
 
 ]
+

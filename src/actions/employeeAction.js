@@ -4,6 +4,7 @@ import {
 
 
 export function findAll() {
+    console.log("ACTION")
     return {
         type: FIND_ALL_EMPLOYEE
     }
@@ -18,7 +19,7 @@ export function findById(id) {
 }
 
 export function save(model) {
-    console.log("save action employee")
+    console.log("save action employee", model)
     return {
         type: SAVE_EMPLOYEE,
         model

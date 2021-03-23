@@ -48,6 +48,7 @@ export function findAllEmployee(state = initialState, data) {
 }
 
 export const findEmployeeById = (state = {...initialState, data: false}, action) => {
+    console.log("ACTION", action)
     switch (action.type) {
         case FIND_EMPLOYEE_BY_ID:
             return {
