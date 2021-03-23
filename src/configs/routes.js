@@ -11,7 +11,7 @@ import Success from "../pages/registration/Success";
 import { ReimburseForm } from "../pages/reimburse";
 import DetailContractForm from "../pages/detailContract/editForm/DetailContractForm"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
-import TableComponent from "../pages/Tables";
+// import TableComponent from "../pages/Tables";
 import { GradeList } from "../pages/Grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 import Error404 from './../pages/Error/Error404/Error404';
@@ -87,11 +87,11 @@ export default [
         component: <ReimburseListFinance />,
         exact: true
     },
-    {
-        path: '/employee',
-        component: <TableComponent />,
-        exact: true
-    },
+    // {
+    //     path: '/employee',
+    //     component: <TableComponent />,
+    //     exact: true
+    // },
     {
         path: '/employee/:id/edit',
         component: <EmployeeForm />,

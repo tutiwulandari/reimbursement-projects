@@ -1,22 +1,12 @@
 import { useState } from "react";
 import { Button, Modal, ModalFooter, } from "reactstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
-<<<<<<< HEAD:src/pages/login/ForgetPassword.js
-import {Form} from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import '../../assets/css/Forget.css'
-
-const ForgetPassword = (props) => {
-    const {handleSubmit, errors} = useForm();
-    const  className = props;
-=======
 import { Form } from "react-bootstrap";
-import { forgotPassword } from './../../../actions/forgotPasswordAction';
+import { forgotPassword } from '../../actions/forgotPasswordAction';
 import { connect } from "react-redux"
 
 
 const ForgetPassword = ({ status, forgotPassword }) => {
->>>>>>> 16-reimbursement-2:src/pages/Login/ForgetPassword/ForgetPassword.js
 
     const [modal, setModal] = useState(false);
     const [lupa, setLupa] = useState({});
