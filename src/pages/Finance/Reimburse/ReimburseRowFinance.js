@@ -9,7 +9,7 @@ import { uploadFile } from './../../../actions/billAction';
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -29,14 +29,25 @@ const ReimburseRowFinance = ({
     console.log("upload", uploadedFile);
 
     useEffect(() => {
-        if (uploadedFile?.data?.code == 200) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Data berhasil diubah',
-                showConfirmButton: false,
-                timer: 1500
-            })
+        if (uploadedFile) {
+            if (uploadedFile?.data?.code == 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Data berhasil diubah',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops..',
+                    text: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            }
         }
     }, [uploadedFile])
 
@@ -75,10 +86,26 @@ const ReimburseRowFinance = ({
                     file: reader
                 }
                 uploadFile(result)
+                setModal2(!toggle2)
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops..',
+                    text: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             }
         }
         catch (err) {
-            alert("please upload file")
+            Swal.fire({
+                icon: 'error',
+                title: 'Ooops..',
+                text: err,
+                showConfirmButton: false,
+                timer: 2000,
+            })
         }
     }
 
@@ -89,9 +116,10 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                {element.statusSuccess ? <button className="btn btn-outline-enigma"> Success </button>
-                    : element.statusOnFinance ? <button className="btn btn-outline-enigma"> Waiting </button> : ""
-                }
+                <select className="custom-select td-width text-enigma border-enigma">
+                    <option selected={element?.statusOnFinance == true}> Waiting </option>
+                    <option selected={element?.statusSuccess == true}> Success </option>
+                </select>
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
@@ -101,13 +129,17 @@ const ReimburseRowFinance = ({
                     }}>
                     Detail
                 </button>
-                <button className="btn btn-outline-enigma"
-                    onClick={() => {
-                        toggle2();
-                        getId(element?.id);
-                    }}>
-                    <FontAwesomeIcon icon={faEdit} />
-                </button>
+            </td>
+            <td>
+                {element?.statusSuccess ?
+                    <button className="btn btn-outline-enigma"
+                        onClick={() => {
+                            toggle2();
+                            getId(element?.id);
+                        }}>
+                        <FontAwesomeIcon icon={faUpload} />
+                    </button> : ""
+                }
             </td>
 
 
@@ -256,33 +288,27 @@ const ReimburseRowFinance = ({
             {/* MODAL UPDATE */}
             {/* ============ */}
 
-            <Modal className="modal-lg" isOpen={modal2} toggle={toggle2}>
+            <Modal isOpen={modal2} toggle={toggle2}>
                 <div className="modal-header">
-                    <h5 className="modal-title bold offset-2">Update Reimbursement</h5>
+                    <h5 className="modal-title bold">Upload File</h5>
                 </div>
                 <ModalBody>
                     <form encType="multipart/form-data">
                         <div className="row">
-                            <div className="offset-2 col-md-4 mb-4">
-                                <h6 className="text-enigma mb-3 bold">Status</h6>
-                                <select className="custom-select td-width text-enigma border-enigma">
-                                    <option selected={reimburse?.statusOnFinance == true}> Waiting </option>
-                                    <option selected={reimburse?.statusSuccess == true}> Success </option>
-                                </select>
-                            </div>
                             {
                                 reimburse?.statusSuccess ?
-                                    <div className="col-md-4">
-                                        <h6 className="text-enigma mb-3 bold">Upload File</h6>
+                                    <div className="col-md-12">
+                                        <h6 className="text-enigma bold">Upload File</h6>
+                                        <p className="p-enigma mt-0 mb-3">*Format file PDF</p>
                                         <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" accept="application/pdf" />
                                     </div> : ""
                             }
                             <hr />
-                            <div className="offset-7 col-md-3 mb-1">
-                                <button type="button" onClick={toggle2} className="btn btn-outline-enigma float-right">Cancel</button>
-                                <button type="button"
-                                    onClick={handleSubmit}
-                                    className="btn btn-enigma float-right mr-3">Update</button>
+                            <div className="col-md-12 mb-1">
+                                <button type="button" onClick={toggle2}
+                                    className="btn btn-outline-enigma pull-right">Cancel</button>
+                                <button type="button" onClick={handleSubmit}
+                                    className="btn btn-enigma pull-right mr-3">Upload</button>
                             </div>
                         </div>
                     </form>

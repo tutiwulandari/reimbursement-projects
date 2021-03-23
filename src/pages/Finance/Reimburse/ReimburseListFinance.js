@@ -45,7 +45,8 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                     <th>Category</th>
                                     <th>Employee</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Detail</th>
+                                    <th>Upload</th>
                                 </tr>
                             </thead>
                             <tbody>
