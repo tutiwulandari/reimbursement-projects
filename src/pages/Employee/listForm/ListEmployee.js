@@ -244,7 +244,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
                                                             }}>
-                                                                <Link to={'/employee/' + element.id + '/edit'}>
+                                                                <Link to={'/employee/' + element.id}>
                                                                     <Button style={{backgroundColor: "#292961"}}>
                                                                         <FontAwesomeIcon icon={faEdit}
                                                                                          className="float-left"/>

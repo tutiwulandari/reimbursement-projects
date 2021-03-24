@@ -85,7 +85,7 @@ export default [
         exact: true
     },
     {
-        path: '/employee/:id/edit',
+        path: '/employee/:id',
         component: <EmployeeForm />,
         exact: true
     },

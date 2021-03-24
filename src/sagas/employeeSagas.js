@@ -61,19 +61,10 @@ function* updateEmployee(action) {
 }
 
 function* saveEmployee(action) {
-    console.log("SAVE", action)
     let model = action.model;
-    let method = 'POST', url = '/employee';
-    if (model.id) {
-        method = 'PUT'
-        url += `/${model.id}`
-    }
-
-    let result = yield axios({
-        url: url,
-        method: method,
-        data: model
-    }).then(data => {
+    let result = yield axios
+        .put(`/employee/${model.id}`, model)
+        .then(data => {
         console.log("SAVE SAGAS", data)
         return {
             type: SAVE_EMPLOYEE_SUCCESS,

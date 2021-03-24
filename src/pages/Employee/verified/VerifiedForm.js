@@ -18,7 +18,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
     useEffect(() => {
         if(id && verified) {
-            setData(verified)
+            setData({...verified})
         }
     },[id, verified])
 
@@ -34,7 +34,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
         if(verified) {
             setVerifikasi( {
                 id: verified?.id,
-                 verifiedHc: verified?.verifiedHc
+                 verifiedHc: verified?.verifiedHc === null? null : verified?.verifiedHc
             })
         }
     }, [data])
@@ -54,15 +54,13 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
         setVerifikasi({...verifikasi, [name]: value})
     }
 
-    // console.log("findall", verified?.verifiedHc)
     console.log("verifikasi", verifikasi)
 
-    // useEffect(() => {
-    //     if (savedVerified) {
-            // history.push("/dashboard/hc/employee")
-
-        // }
-    // }, [savedVerified, history])
+    useEffect(() => {
+        if (savedVerified) {
+            history.push("/dashboard/hc/employee")
+        }
+    }, [savedVerified, history])
 
     return (
         <div>
@@ -79,6 +77,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
                                     <FormGroup>
                                         <Label> Status Verifikasi Registrasi</Label>
                                         <Input type="select" name="verifiedHc" onChange={handleChange} >
+                                            <option selected disabled hidden>-- Choose --</option>
                                             <option value="true"> Verifikasi</option>
                                             <option value="false"> Belum Verifikasi</option>
                                         </Input>
@@ -97,7 +96,9 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
                     </Link>
 
                     <Link to="/dashboard/hc/employee">
-                        <Button type="submit" onClick={handleSubmit} style={{backgroundColor: "#292961", color: "white"}}>
+                        <Button type="submit" onClick={handleSubmit}
+                                // disabled={setVerifikasi(false) }
+                                style={{backgroundColor: "#292961", color: "white"}}>
                             Submit
                         </Button>
                     </Link>
@@ -112,7 +113,7 @@ const mapStateToProps = (state) => {
     return {
         verified: state.findEmployeeById.data || null,
         isLoading: state.findEmployeeById.isLoading,
-        savedVerified: state.saveVerified,
+        savedVerified: state.saveVerified.data,
         // error: state.findVerifiedById.error || state.savedVerified.error
     }
 }

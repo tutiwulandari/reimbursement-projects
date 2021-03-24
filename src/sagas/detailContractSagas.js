@@ -96,12 +96,6 @@ function* updateContract(action) {
 function* saveContract(action) {
 
     let model = action.model;
-    // console.log("SAGAS CONTRACT", model.id)
-    // let method = 'POST', url='/contract';
-    // if(model.id) {
-    //     method ='PUT'
-    //     url =`/${model.id}`
-    // }
     let result = yield axios
         .put (`/contract/${model.id}`, model)
         .then(data => {
