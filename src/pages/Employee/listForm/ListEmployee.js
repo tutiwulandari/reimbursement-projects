@@ -51,7 +51,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
 
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
                                         <Table className="table table-head-fixed text-nowrap">
-                                            <thead>
+                                            <thead >
                                             <tr>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Tempat Lahir</th>
@@ -90,7 +90,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                minWidth: "200px",
                                                             }}>{element.fullname === null ? "belum ada data" : element.fullname}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
