@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { findReimburseFinanceId } from './../../../actions/reimburseFinanceAction';
+import { findReimburseFinanceId, updateReimburseFinance } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
 import { isEmpty } from '../../../utils/validation';
 import { uploadFile } from './../../../actions/billAction';
@@ -22,11 +22,20 @@ import Swal from 'sweetalert2'
 const ReimburseRowFinance = ({
     element, index,
     reimburse, findReimburseFinanceId,
-    uploadedFile, uploadFile
+    uploadedFile, uploadFile,
+    updatedReimburse, updateReimburseFinance
 }) => {
 
-    const [file, setFile] = useState({})
-    console.log("upload", uploadedFile);
+    const [file, setFile] = useState()
+    const [status, setStatus] = useState()
+
+    console.log("status", updatedReimburse)
+    useEffect(() => {
+        if (status) {
+            console.log("status", status)
+            updateReimburseFinance(status)
+        }
+    },[status])
 
     useEffect(() => {
         if (uploadedFile) {
@@ -71,11 +80,27 @@ const ReimburseRowFinance = ({
     }
 
 
-    /* Handle Upload File */
+    /* Handle Change File */
     const handleChangeFile = e => {
         setFile(e.target.files[0]);
     }
+    
+    /* Handle Change Status */
+    const handleChangeStatus = (value, id) => {
+        if (value == "finance") {
+            setStatus({
+                id: id,
+                statusSuccess: false
+            })
+        } else {
+            setStatus({
+                id: id,
+                statusSuccess: true
+            })
+        }
+    }
 
+    /* Handle Submit Upload File */
     const handleSubmit = () => {
         try {
             if (file) {
@@ -116,9 +141,12 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                <select className="custom-select td-width text-enigma border-enigma">
-                    <option selected={element?.statusOnFinance == true}> Waiting </option>
-                    <option selected={element?.statusSuccess == true}> Success </option>
+                <select className="custom-select td-width text-enigma border-enigma" 
+                onChange={(e) => {
+                    handleChangeStatus(e.target.value, element.id)
+                }}>
+                    <option value="finance" selected={element?.statusOnFinance == true}> Waiting </option>
+                    <option value="success" selected={element?.statusSuccess == true}> Success </option>
                 </select>
             </td>
             <td>
@@ -325,10 +353,11 @@ const mapStateToProps = (state) => {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
         uploadedFile: state.uploadFile.data,
+        updatedReimburse: state.updateReimburse.data
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseFinanceId, uploadFile }
+const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);

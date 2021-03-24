@@ -8,7 +8,7 @@ import { findAllGrade, findGradeById, saveGrade, updateGrade } from "./gradeRedu
 import { findAllContract, findContractById, updateContract, saveContract } from "./detailContractReducer";
 import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
-import { findAllReimburseFinance, findReimburseFinanceById } from './reimburseFinanceReducer';
+import { findAllReimburseFinance, findReimburseFinanceById, updateReimburse } from './reimburseFinanceReducer';
 import { uploadFile, findBillById } from './billReducer';
 
 const rootReducer = combineReducers({
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     findAllGrade, findGradeById, saveGrade, updateGrade,
     findAllContract, findContractById, updateContract, saveContract,
     findAllCount,
-    findAllReimburseFinance, findReimburseFinanceById,
+    findAllReimburseFinance, findReimburseFinanceById, updateReimburse,
     uploadFile, findBillById
 })
 

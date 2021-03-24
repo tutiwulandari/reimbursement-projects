@@ -1,5 +1,8 @@
 import {
-    FIND_ALL_REIMBURSE_FINANCE, FIND_REIMBURSE_FINANCE_BY_ID, FIND_REIMBURSE_FINANCE_BY_CATEGORY
+    FIND_ALL_REIMBURSE_FINANCE, 
+    FIND_REIMBURSE_FINANCE_BY_ID, 
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY,
+    UPDATE_REIMBURSE_FINANCE
 } from '../constants/actionConstant';
 
 
@@ -22,6 +25,13 @@ export function findByCategory(id) {
         data: {
             categoryId: id
         }
+    }
+}
+
+export function updateReimburseFinance(model) {
+    return {
+        type: UPDATE_REIMBURSE_FINANCE,
+        model
     }
 }
 

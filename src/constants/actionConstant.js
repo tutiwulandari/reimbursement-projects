@@ -9,11 +9,16 @@ export const REGISTER_EMPLOYEE_FAILURE  = "REGISTER_EMPLOYEE_FAILURE"
 
 
 /* ================== */
- /*       LOGIN     */
+/*       LOGIN        */
 /* ================== */
+
 export const LOGIN_EMPLOYEE          = "LOGIN_EMPLOYEE"
 export const LOGIN_EMPLOYEE_SUCCESS  = "LOGIN_EMPLOYEE_SUCCESS"
 export const LOGIN_EMPLOYEE_FAILURE  = "LOGIN_EMPLOYEE_FAILURE"
+
+export const FIND_BY_EMAIL          = "FIND_BY_EMAIL"
+export const FIND_BY_EMAIL_SUCCESS  = "FIND_BY_EMAIL_SUCCESS"
+export const FIND_BY_EMAIL_FAILURE  = "FIND_BY_EMAIL_FAILURE"
 
 
 /* ================== */
@@ -35,9 +40,11 @@ export const UPDATE_EMPLOYEE          = "UPDATE_EMPLOYEE"
 export const UPDATE_EMPLOYEE_SUCCESS  = "UPDATE_EMPLOYEE_SUCCESS"
 export const UPDATE_EMPLOYEE_FAILURE  = "UPDATE_EMPLOYEE_FAILURE"
 
-/* ================== */
-/*     GRADE      */
-/* ================== */
+
+/* ============= */
+/*     GRADE     */
+/* ============= */
+
 export const FIND_ALL_GRADE          = "FIND_ALL_GRADE"
 export const FIND_ALL_GRADE_SUCCESS  = "FIND_ALL_GRADE_SUCCESS"
 export const FIND_ALL_GRADE_FAILURE  = "FIND_ALL_GRADE_FAILURE"

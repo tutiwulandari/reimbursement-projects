@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ForgetPassword from "./ForgetPassword";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faUnlockAlt, faUser} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUnlockAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import BgImage from "../../assets/image/signin.svg"
-import {Row, Col, FormControl, Container, InputGroup, Form} from "react-bootstrap";
+import { Row, Col, FormControl, Container, InputGroup, Form } from "react-bootstrap";
 import NavigationHome from "../../component/navigationHome/NavigationHome";
-import {useHistory} from "react-router-dom";
-import {loginEmployee} from "../../actions/loginAction"
+import { useHistory } from "react-router-dom";
+import { loginEmployee } from "../../actions/loginAction"
 import Swal from 'sweetalert2'
 import ReactLoading from "react-loading";
 import { Button } from "react-bootstrap";
@@ -15,6 +15,8 @@ import IconButton from "@material-ui/core/IconButton";
 import '../../assets/css/Login.css'
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import sjcl from 'sjcl';
+import GoogleLogin from 'react-google-login';
+
 
 const Login = ({ loginEmployee, login, isLoading }) => {
     const [values, setValues] = useState({
@@ -22,6 +24,19 @@ const Login = ({ loginEmployee, login, isLoading }) => {
         showPassword: false
 
     });
+
+    const emailUser = ["arsytamawisa@gmail.com", "solehsolihin2021@gmail.com"]
+    
+    let responseGoogle = response => {
+        const email = response.profileObj.email;
+        console.log(email);
+
+        if (emailUser.includes(email)) {
+            alert("Login Success")
+        } else {
+            alert("Login Failed")
+        }
+    }
 
 
     /* Hashing Password */
@@ -140,8 +155,8 @@ const Login = ({ loginEmployee, login, isLoading }) => {
 
 
     return (
-        <main style={{backgroundColor: "white"}}>
-            <NavigationHome/>
+        <main style={{ backgroundColor: "white" }}>
+            <NavigationHome />
             {/* <Navigation /> */}
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
                 <Container style={{ marginTop: "50px" }}>
@@ -171,7 +186,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                     </div>
                                 }
                                 <Form onSubmit={handleSubmit} className="mt-3">
-                                    <Form.Group controlId="email" className="mb-2" style={{width: "300px"}}>
+                                    <Form.Group controlId="email" className="mb-2" style={{ width: "300px" }}>
                                         <Form.Label>Email</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
@@ -185,7 +200,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                         </InputGroup>
                                         <div className="text-danger">{error.email}</div>
                                     </Form.Group>
-                                    <Form.Group controlId="password" className="mb-2" style={{width: "300px"}}>
+                                    <Form.Group controlId="password" className="mb-2" style={{ width: "300px" }}>
                                         <Form.Label>Password</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
@@ -220,7 +235,22 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                         }}>
                                         Sign In
                                     </Button>
-                                    <ForgetPassword />
+                                    <br />
+                                    <div className="row">
+                                        {/* <div className="col-md-6">
+                                            <GoogleLogin
+                                                clientId="567435085483-fstc21l8q7cvorh36pggrq6cjlpm46o1.apps.googleusercontent.com"
+                                                buttonText="Login"
+                                                className="btn-google"
+                                                onSuccess={responseGoogle}
+                                                onFailure={responseGoogle}
+                                                cookiePolicy={'single_host_origin'}
+                                            />
+                                        </div> */}
+                                        <div className="col-md-6">
+                                            <ForgetPassword />
+                                        </div>
+                                    </div>
                                 </Form>
                             </div>
 
@@ -235,7 +265,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
 
 const mapStateToProps = (state) => {
     return {
-        login : state.loginEmployee.data || null,
+        login: state.loginEmployee.data || null,
         isLoading: state.loginEmployee.isLoading
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { findReimburseId } from "../../actions/reimburseAction";
@@ -15,8 +15,15 @@ import Tooltip from "react-bootstrap/Tooltip";
 
 const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const [modal, setModal] = useState(false)
+    const [status, setStatus] = useState()
+    const toggle = () => setModal(!modal)
+
+    useEffect(()=>{
+        if (status) {
+            console.log("change status");
+        }
+    },[status])
 
     const getId = id => {
         findReimburseId(id)
@@ -26,6 +33,40 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
     const renderTooltip = props => (
         <Tooltip {...props}>Has been validated by admin finance</Tooltip>
     );
+
+
+    console.log("status",status);
+    /* Handle Change Status */
+    const handleChangeStatus = (value, id) => {
+        switch (value) {
+            case "accepted":
+                setStatus({
+                    id: id,
+                    statusFinance: true,
+                    statusReject: false,
+                    statusOnHc: true,
+                })
+                break;
+            case "waiting":
+                setStatus({
+                    id: id,
+                    statusFinance: false,
+                    statusReject: false,
+                    statusOnHc: false,
+                })
+                break;
+            case "rejected":
+                setStatus({
+                    id: id,
+                    statusFinance: false,
+                    statusReject: true,
+                    statusOnHc: false,
+                })
+                break;
+            default:
+                break;
+        }
+    }
 
     return (
         <tr>
@@ -38,10 +79,13 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
                             <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
                         </OverlayTrigger> :
-                        <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}>
-                            <option selected={data.statusOnHc == true}> Waiting</option>
-                            <option selected={data.statusOnFinance == true}> Accepted</option>
-                            <option selected={data.statusReject == true}> Rejected </option>
+                        <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
+                            onChange={(e) => {
+                                handleChangeStatus(e.target.value, data.id)
+                            }}>
+                            <option value="waiting" selected={data.statusOnHc == true}> Waiting</option>
+                            <option value="accepted" selected={data.statusOnFinance == true}> Accepted</option>
+                            <option value="rejected" selected={data.statusReject == true}> Rejected </option>
                         </select>
 
                 }
