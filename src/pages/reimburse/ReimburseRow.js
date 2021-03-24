@@ -87,7 +87,6 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                             <option value="accepted" selected={data.statusOnFinance == true}> Accepted</option>
                             <option value="rejected" selected={data.statusReject == true}> Rejected </option>
                         </select>
-
                 }
             </td>
             <td>

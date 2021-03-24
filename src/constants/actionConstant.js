@@ -101,7 +101,7 @@ export const FIND_ALL_CATEGORY_FAILURE  = "FIND_ALL_CATEGORY_FAILURE"
 
 
 /* ================== */
-/*     Reset password  */
+/*     Reset password */
 /* ================== */
 
 export const RESET_PASSWORD          = "RESET_PASSWORD"

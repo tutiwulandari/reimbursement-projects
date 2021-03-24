@@ -77,7 +77,7 @@ export const findReimburseFinanceById = (state = initialState, action) => {
 }
 
 
-export const updateReimburse = (state = initialState, action) => {
+export const updateReimburseFinance = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_REIMBURSE_FINANCE:
             return {

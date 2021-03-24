@@ -3,6 +3,7 @@ import axios from "axios";
 // import axios from '../configs/api'
 
 import {
+    UPDATE_REIMBURSE_SUCCESS, UPDATE_REIMBURSE_FAILURE, UPDATE_REIMBURSE,
     FIND_ALL_REIMBURSE, FIND_ALL_REIMBURSE_FAILURE, FIND_ALL_REIMBURSE_SUCCESS,
     FIND_REIMBURSE_BY_CATEGORY, FIND_REIMBURSE_BY_CATEGORY_SUCCESS,  FIND_REIMBURSE_BY_CATEGORY_FAILURE,
     FIND_REIMBURSE_BY_ID, FIND_REIMBURSE_BY_ID_SUCCESS, FIND_REIMBURSE_BY_ID_FAILURE
@@ -68,6 +69,30 @@ function* findReimburseByCategory(action) {
 }
 
 
+function* updateReimburse(action) {
+    console.log("status saga", action);
+    let model = action.model;
+    let result = yield axios({
+        url: `/reimburse/${model.id}/finance`,
+        method: 'PUT',
+        data: model
+    }).then(response => {
+        console.log("status response", response);
+        return {
+            type: UPDATE_REIMBURSE_SUCCESS,
+            data: response
+        };
+    }).catch(err => {
+        return {
+            type: UPDATE_REIMBURSE_FAILURE,
+            error: err
+
+        }
+    })
+    yield put(result)
+}
+
+
 export function* watchFindAllReimburse() {
     yield takeLatest(FIND_ALL_REIMBURSE, findAllReimburse)
 }
@@ -78,4 +103,8 @@ export function* watchFindReimburseById() {
 
 export function* watchFindReimburseByCategory() {
     yield takeLatest(FIND_REIMBURSE_BY_CATEGORY, findReimburseByCategory)
+}
+
+export function* watchUpdateReimburse() {
+    yield takeLatest(UPDATE_REIMBURSE, updateReimburse)
 }
