@@ -4,7 +4,21 @@ import {
 
 
 const initialState = {
-    data: null,
+    data: {
+      labels: ['Female. Male'],
+      datasets:[{
+          label:"GENDER",
+          data:[],
+          backgroundColor: [
+              '#B21F00',
+              '#C9DE00',
+          ],
+          hoverBackgroundColor: [
+              '#501800',
+              '#4B5000',
+          ],
+      }]
+    },
     error: null,
     isLoading: false
 }

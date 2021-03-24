@@ -153,32 +153,33 @@ export const saveEmployee = (state = {...initialState}, action) => {
 // }
 //
 //
-// export const saveVerified = (state = {...initialState}, action) => {
-//     switch (action.type) {
-//         case SAVE_VERIFIED:
-//             return {
-//                 ...state,
-//                 data: null,
-//                 isLoading: true
-//             }
-//         case SAVE_VERIFIED_SUCCESS:
-//             return {
-//                 data: action.data,
-//                 isLoading: false,
-//                 error: null
-//             };
-//         case SAVE_VERIFIED_FAILURE:
-//             return {
-//                 data: null,
-//                 isLoading: false,
-//                 error: action.error
-//             }
-//         default:
-//             return {
-//                 ...state,
-//                 data: null,
-//                 isLoading: false,
-//                 error: null
-//             }
-//     }
-// }
+
+export const saveVerified = (state = {...initialState}, action) => {
+    switch (action.type) {
+        case SAVE_VERIFIED:
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case SAVE_VERIFIED_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case SAVE_VERIFIED_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
+                isLoading: false,
+                error: null
+            }
+    }
+}

@@ -3,9 +3,9 @@ import {Input, Label} from "reactstrap";
 import {Link, useParams, useHistory} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {findById, save} from "../../../actions/employeeAction";
+import {findById, saveVerified} from "../../../actions/employeeAction";
 
-function VerifiedForm({verified, findById, isLoading, save, error, savedVerified}) {
+function VerifiedForm({verified, findById, isLoading, saveVerified, error, savedVerified}) {
     const {id} = useParams()
     const history = useHistory();
     const [data, setData] = useState({})
@@ -33,6 +33,7 @@ function VerifiedForm({verified, findById, isLoading, save, error, savedVerified
     useEffect( () => {
         if(verified) {
             setVerifikasi( {
+                id: verified?.id,
                  verifiedHc: verified?.verifiedHc
             })
         }
@@ -44,7 +45,7 @@ function VerifiedForm({verified, findById, isLoading, save, error, savedVerified
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log("CLICK")
-        save(verifikasi)
+        saveVerified(verifikasi)
     }
 
     const handleChange = (event) => {
@@ -53,13 +54,14 @@ function VerifiedForm({verified, findById, isLoading, save, error, savedVerified
         setVerifikasi({...verifikasi, [name]: value})
     }
 
-    console.log("findall", verified?.verifiedHc)
+    // console.log("findall", verified?.verifiedHc)
     console.log("verifikasi", verifikasi)
 
     // useEffect(() => {
     //     if (savedVerified) {
-    //         history.push("/dashboard/hc/employee")
-    //     }
+            // history.push("/dashboard/hc/employee")
+
+        // }
     // }, [savedVerified, history])
 
     return (
@@ -90,13 +92,16 @@ function VerifiedForm({verified, findById, isLoading, save, error, savedVerified
 
                 </Container>
                 <Modal.Footer>
-                    <Link to="#">
+                    <Link to="/dashboard/hc/employee">
                         <Button style={{backgroundColor: "black"}}>Back</Button>
                     </Link>
 
-                    <Button type="submit" onClick={handleSubmit} style={{backgroundColor: "#292961", color: "white"}}>
-                        Submit
-                    </Button>
+                    <Link to="/dashboard/hc/employee">
+                        <Button type="submit" onClick={handleSubmit} style={{backgroundColor: "#292961", color: "white"}}>
+                            Submit
+                        </Button>
+                    </Link>
+
                 </Modal.Footer>
             </Modal.Dialog>
         </div>
@@ -107,10 +112,10 @@ const mapStateToProps = (state) => {
     return {
         verified: state.findEmployeeById.data || null,
         isLoading: state.findEmployeeById.isLoading,
-        savedVerified: state.saveEmployee,
+        savedVerified: state.saveVerified,
         // error: state.findVerifiedById.error || state.savedVerified.error
     }
 }
-const mapDispatchToProps = {findById, save}
+const mapDispatchToProps = {findById, saveVerified}
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerifiedForm)

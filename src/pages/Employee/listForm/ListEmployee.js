@@ -91,141 +91,141 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.fullname}</td>
+                                                            }}>{element.fullname === null ? "belum ada data" : element.fullname}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.placeOfBirth}</td>
+                                                            }}>{element.placeOfBirth === null ? "belum ada data" : element.placeOfBirth}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.dateOfBirth}</td>
+                                                            }}>{element.dateOfBirth === null ? "belum ada data" : element.dateOfBirth }</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.nik}</td>
+                                                            }}>{element.nik === null ? "belum ada data" : element.nik}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.gender}</td>
+                                                            }}>{element.gender === null ? "belum ada data" : element.gender}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.religion}</td>
+                                                            }}>{element.religion === null ? "belum ada data" : element.religion}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.bloodType}</td>
+                                                            }}>{element.bloodType === null ? "belum ada data" : element.bloodType}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.maritalStatus}</td>
+                                                            }}>{element.maritalStatus === null ? "belum ada data" : element.maritalStatus}</td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.numberOfChildren}</td>
+                                                            }}>{element.numberOfChildren === null ? "belum ada data" : element.numberOfChildren}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.biologicalMothersName}</td>
+                                                            }}>{element.biologicalMothersName === null ? "belum ada data" : element.biologicalMothersName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.spouseName}</td>
+                                                            }}>{element.spouseName === null ? "belum ada data" : element.spouseName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.accountName}</td>
+                                                            }}>{element.accountName === null ? "belum ada data" : element.accountName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.accountNumber}</td>
+                                                            }}>{element.accountNumber === null ? "belum ada data" : element.accountNumber}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.ktpAddress}</td>
+                                                            }}>{element.ktpAddress === null ? "belum ada data" : element.ktpAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.residenceAddress}</td>
+                                                            }}>{element.residenceAddress === null ? "belum ada data" : element.residenceAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.postalCodeOfIdCard}</td>
+                                                            }}>{element.postalCodeOfIdCard === null ? "belum ada data" : element.postalCodeOfIdCard}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.npwpAddress}</td>
+                                                            }}>{element.npwpAddress === null ? "belum ada data" : element.npwpAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.nip}</td>
+                                                            }}>{element.nip=== null? "belum ada data" : element.nip}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.joinDate}</td>
+                                                            }}>{element.joinDate === null ? "belum ada data" : element.joinDate}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.employeeStatus}</td>
+                                                            }}>{element.employeeStatus === null ? "belum ada data" : element.employeeStatus}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.employeeType}</td>
+                                                            }}>{element.employeeType === null ? "belum ada data" : element.employeeType}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}>{element.grade.grade}</td>
+                                                            }}>{element?.grade === null ? "belum ada data" : element?.grade?.grade}</td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}> {element.verifiedHc == true ? "verified" : "not verified"}</td>
+                                                            }}> {element.verifiedHc === true ? "verifikasi" : "belum diverifikasi"}</td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",

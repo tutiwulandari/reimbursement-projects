@@ -97,8 +97,6 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
         setFullname({...testFullname, [name]: value})
     }
 
-
-
     return (
         <div>
             <Header/>
@@ -118,10 +116,10 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
                                     <FormGroup>
                                         <Label> Status Asuransi</Label>
                                         <Input onChange={handleChange} type="select"
-                                               name="benefitRegistrationStatus">
+                                               name="benefitRegistrationStatus" value={data?.benefitRegistrationStatus}>
                                             {
                                                 benefitRegistrationStatus.map((element, index) =>
-                                                    <option key={index} value={element}>
+                                                    <option selected={element.id === data?.benefitRegistrationStatus} key={index} value={element}>
                                                         {element}
                                                     </option>
                                                 )
@@ -138,11 +136,11 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
 
                                     <FormGroup>
                                         <Label> Tipe Kontrak </Label>
-                                        <Input type="select" onChange={handleChange}
+                                        <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
                                                name="typeContract">
                                             {
                                                 typeContract.map((element, index) =>
-                                                    <option key={index} value={element}>
+                                                    <option selected={ element.id === data?.typeContract} key={index} value={element} >
                                                         {element}
                                                     </option>
                                                 )
@@ -176,16 +174,9 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
 
                                     <FormGroup>
                                         <Label> Habis Kontrak</Label>
-                                        <Input type="select" onChange={handleChange} name="endedContract">
+                                        <Input type="select"  onChange={handleChange} name="endedContract">
                                             <option value="true"> YA</option>
                                             <option value="false"> TIDAK</option>
-                                            {
-                                                // endedContract.map((element, index) =>
-                                                //     <option key={index} value={element}>
-                                                //         {element}
-                                                //     </option>
-                                                // )
-                                            }
                                         </Input>
                                     </FormGroup>
                                 </Form> :
@@ -197,7 +188,7 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
                     </div>
                 </Container>
                 <Modal.Footer>
-                    <Link to="#">
+                    <Link to="/dashboard/hc/contract">
                         <Button style={{backgroundColor: "black"}}>Back</Button>
                     </Link>
 
@@ -216,7 +207,6 @@ const mapStateToProps = (state) => {
         contract: state.findContractById.data || null,
         isLoading: state.findContractById.isLoading,
         savedContract: state.savedContract,
-        // employees: state.findAllEmployee.data,
         // error: state.findContractById.error || state.savedContract.error,
         update: state.updateContract
     }

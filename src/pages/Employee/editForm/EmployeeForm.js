@@ -61,6 +61,14 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         }
     }, [employee])
 
+    // useEffect( () => {
+    //     if(gradeId === null) {
+    //         setData({
+    //             gradeId : "Data belum diisi"
+    //         })
+    //     }
+    // })
+
     useEffect(() => {
     }, [data])
 
@@ -140,10 +148,12 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Input
                                         type="select"
                                         onChange={e => onSelectChange(e)}
+                                        value={data?.grade.id || ''}
                                     >
+                                        { console.log("gradesModel", gradesModel)}
                                         {
                                             gradesModel.data?.map( (element, index) =>
-                                                <option key = {index} value={element.id}>
+                                                <option selected = {element.id === data?.grade.id } key = {index} value={element.id}>
                                                     {element.grade}
                                                 </option>
                                             )
@@ -164,12 +174,9 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <Input onChange={handleChange} type="select" value={data?.employeeStatus || ''}
                                            name="employeeStatus">
 
-                                        {/*<option value="ACTIVE"> ACTIVE</option>*/}
-                                        {/*<option value="NON_ACTIVE"> NON_ACTIVE</option>*/}
-                                        {/*<option> --choose--</option>*/}
                                         {
                                             employeeStatus.map ( (element, index)  =>
-                                                <option key = {index} value={element}>
+                                                <option selected={element.id ===data?.employeeStatus} key = {index} value={element}>
                                                     {element}
                                                 </option>
                                             )
@@ -183,13 +190,9 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                         Type</Label>
                                     <Input onChange={handleChange} type="select" value={data?.employeeType || ''}
                                            name="employeeType">
-
-                                        {/*<option value="OFFICE">OFFICE</option>*/}
-                                        {/*<option value="ONSITE">ONSITE</option>*/}
-                                        {/*<option> --choose--</option>*/}
                                         {
                                             employeeType.map ((element, index)  =>
-                                                <option key = {index} value={element}>
+                                                <option selected={element.id === data?.employeeType} key = {index} value={element}>
                                                     {element}
                                                 </option>
                                             )
@@ -214,6 +217,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                     <Button type="submit" onClick={handleClick} style={{backgroundColor:"#292961", color:"white"}}>
                         Submit
                     </Button>
+
                 </Modal.Footer>
             </Modal.Dialog>
             <Footer/>

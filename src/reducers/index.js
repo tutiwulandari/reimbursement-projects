@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { registerEmployees } from './registerReducer';
-import { findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, findVerifiedById } from "./employeeReducer";
+import { findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, saveVerified} from "./employeeReducer";
 import { loginEmployee } from "./loginReducer";
 import { findAllReimburse, findReimburseById, findReimburseByCategory } from './reimburseReducer';
 import { findAllCategory } from './categoryReducer';
@@ -12,7 +12,7 @@ import { findAllReimburseFinance, findReimburseFinanceById } from './reimburseFi
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee, forgotPassword,
-    findAllEmployee, findEmployeeById, saveEmployee, updateEmployee,
+    findAllEmployee, findEmployeeById, saveEmployee, updateEmployee,saveVerified,
     findAllReimburse, findReimburseById, findReimburseByCategory,
     findAllCategory,
     findAllGrade, findGradeById, saveGrade, updateGrade,
