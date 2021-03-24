@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {findAll} from "../../actions/dashboardAction";
 import {connect} from "react-redux";
 import {Card, Col, Row} from "react-bootstrap";
+import ChartGender from "../../pages/chart/ChartGender";
 
 function DashboardContent({findAll, dashboards, error, isLoading}) {
 
@@ -80,6 +81,11 @@ function DashboardContent({findAll, dashboards, error, isLoading}) {
                                               </div>
                                           </Card.Body>
                                       </Card>
+                                  </Col>
+                              </Row>
+                              <Row>
+                                  <Col>
+                                      <ChartGender/>
                                   </Col>
                               </Row>
                           </div>

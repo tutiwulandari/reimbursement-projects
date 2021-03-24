@@ -16,15 +16,14 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     const {id} = useParams();
     const [gradesModel, setGradesModel] = useState([])
     const history = useHistory();
-    const [data, setData] = useState()
+    const [data, setData] = useState({})
 
-
+    // let gradesModelChoose = {"Choose" ,...gradesModel}
     let employeeType = ["OFFICE", "ONSITE"]
     let employeeStatus = ["ACTIVE", "NON_ACTIVE"]
 
-    useEffect( () => {
+    useEffect(() => {
         findAll()
-        setData(employee)
     }, [findAll])
 
 
@@ -34,42 +33,49 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
     useEffect(() => {
         if (employee != null) {
-            let employeeType;
-            let employeeStatus;
-
-            switch (employee.employeeType) {
-                case "OFFICE": employeeType = 1
-                    break
-                case "ONSITE": employeeType = 0
-            }
-
-            switch (employee.employeeStatus) {
-                case "ACTIVE": employeeStatus = 0
-                    break
-                case "NON_ACTIVE": employeeStatus = 1
-            }
+            // let employeeType;
+            // let employeeStatus;
+            //
+            // switch (employee.employeeType) {
+            //     case "OFFICE":
+            //         employeeType = 1
+            //         break
+            //     case "ONSITE":
+            //         employeeType = 0
+            // }
+            //
+            // switch (employee.employeeStatus) {
+            //     case "ACTIVE":
+            //         employeeStatus = 0
+            //         break
+            //     case "NON_ACTIVE":
+            //         employeeStatus = 1
+            // }
 
             console.log("EMPLOYEEEEEEE", employee)
 
             setData({
                 id: employee.id,
-                gradeId: employee.grade.id,
+                nip :employee.nip === null ? null :employee.nip,
+                gradeId: employee.grade === null ? "" : employee.grade.id,
                 joinDate: employee.joinDate,
-                employeeType: employeeType,
-                employeeStatus: employeeStatus,
+                employeeType: employee.employeeType === null ? "" : employee.employeeType,
+                employeeStatus: employee.employeeStatus === null ? "" : employee.employeeStatus
             })
         }
     }, [employee])
+    console.log("DATAAAA", data)
+
 
     useEffect(() => {
     }, [data])
 
     useEffect(() => {
         if (id && employee) {
-            setData( employee
-            )}
-    }, [id,employee])
-    console.log("test",findById)
+            setData({...data})
+        }
+    }, [id, data])
+    console.log("test", findById)
 
     useEffect(() => {
         if (savedEmployee) {
@@ -77,11 +83,11 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         }
     }, [savedEmployee, history])
 
-    useEffect( () => {
-        if(id) {
+    useEffect(() => {
+        if (id) {
             findById(id)
         }
-        if(grades) {
+        if (grades) {
             setGradesModel(grades)
         }
     }, [id, findById, grades])
@@ -93,127 +99,138 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         setData({...data, [name]: value})
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("SUBMIT")
-        save(data);
-    }
     const handleClick = (event) => {
         event.preventDefault();
-        console.log("SUBMIT", data)
         save(data);
     }
 
-    console.log("REQUESSS", data)
+    console.log("REQUESSS", employee)
 
 
     const onSelectChange = (e) => {
-        setData( {...data, gradeId: e.target.value})
+        setData({...data, gradeId: e.target.value})
     }
 
     return (
         <div>
             <Header/>
             <Menu/>
-            <Modal.Dialog >
-                <Modal.Header closeButton style={{backgroundColor:"black"}}>
-                    <Modal.Title style={{color:"white"}} > Edit Karyawan </Modal.Title>
+            <Modal.Dialog>
+                <Modal.Header closeButton style={{backgroundColor: "black"}}>
+                    <Modal.Title style={{color: "white"}}> Edit Karyawan </Modal.Title>
                 </Modal.Header>
 
                 <Container>
                     <div>
                         {console.log("coba yaa", data?.grade)}
-                        {!isLoading ? grades &&
-                            <Form onSubmit={handleSubmit}>
-                                <FormGroup>
-                                    <Input onChange={handleChange} value={data?.id || ''}
-                                           type="text" name="id" hidden={true}/>
-                                    <Label style={{fontFamily: "cursive"}}>
-                                        NIP
-                                    </Label>
-                                    <Input onChange={handleChange}
-                                           type="text" value={data?.nip || ''} name="nip"/>
-                                </FormGroup>
+                        {
+                            !isLoading ? grades &&
+                                <Form>
+                                    <FormGroup>
+                                        <Input onChange={handleChange} value={data?.id || ''}
+                                               type="text" name="id" hidden={true}/>
+                                        <Label style={{fontFamily: "cursive"}}>
+                                            NIP
+                                        </Label>
+                                        <Input onChange={handleChange}
+                                               type="text" value={data?.nip === null ? '' : data?.nip} name="nip"/>
+                                    </FormGroup>
 
-                                <FormGroup>
-                                    <Label style={{fontFamily: "cursive"}}>Grade</Label>
-                                    <Input
-                                        type="select"
-                                        onChange={e => onSelectChange(e)}
-                                    >
-                                        {
-                                            gradesModel.data?.map( (element, index) =>
-                                                <option key = {index} value={element.id}>
-                                                    {element.grade}
-                                                </option>
-                                            )
-                                        }
-                                    </Input>
+                                    <FormGroup>
+                                        <Label style={{fontFamily: "cursive"}}>Grade</Label>
+                                        <Input type="select" onChange={e => onSelectChange(e)}>
 
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="join_date"  style={{fontFamily: "cursive"}}>Join
-                                        Date</Label>
-                                    <Input onChange={handleChange} type="date" value={data?.joinDate || ''}
-                                           name="joinDate"/>
-                                </FormGroup>
+                                            <option selected disabled hidden>-- Choose --</option>
+                                            {
+                                                data?.gradeId === "" ?
+                                                    gradesModel.data?.map((element, index) =>
+                                                        <option key={index} value={element.id}>
+                                                            {element.grade}
+                                                        </option>
+                                                    ) : gradesModel.data?.map((element, index) =>
+                                                        <option selected={element.id === data?.gradeId} key={index}
+                                                                value={element.id}>
+                                                            {element.grade}
+                                                        </option>
+                                                    )
+                                            }
+                                        </Input>
+                                    </FormGroup>
 
-                                <FormGroup>
-                                    <Label style={{fontFamily: "cursive"}}>Employee
-                                        Status</Label>
-                                    <Input onChange={handleChange} type="select" value={data?.employeeStatus || ''}
-                                           name="employeeStatus">
+                                    <FormGroup>
+                                        <Label htmlFor="join_date" style={{fontFamily: "cursive"}}>Join
+                                            Date</Label>
+                                        <Input onChange={handleChange} type="date" value={data?.joinDate || ''}
+                                               name="joinDate"/>
+                                    </FormGroup>
 
-                                        {/*<option value="ACTIVE"> ACTIVE</option>*/}
-                                        {/*<option value="NON_ACTIVE"> NON_ACTIVE</option>*/}
-                                        {/*<option> --choose--</option>*/}
-                                        {
-                                            employeeStatus.map ( (element, index)  =>
-                                                <option key = {index} value={element}>
-                                                    {element}
-                                                </option>
-                                            )
-                                        }
+                                    <FormGroup>
+                                        <Label style={{fontFamily: "cursive"}}>Employee
+                                            Status</Label>
+                                        <Input onChange={handleChange} type="select"
+                                               name="employeeStatus">
 
-                                    </Input>
-                                </FormGroup>
+                                            <option selected disabled hidden>-- Choose --</option>
+                                            {
+                                                data?.employeeStatus === null ?
+                                                    employeeStatus.map((element, index) =>
+                                                        <option key={index} value={element}>
+                                                            {element}
+                                                        </option>
+                                                    ) : (
+                                                        employeeStatus.map((element, index) =>
+                                                            <option selected={element === data?.employeeStatus}
+                                                                    key={index}
+                                                                    value={element}>
+                                                                {element}
+                                                            </option>
+                                                        )
+                                                    )
+                                            }
 
-                                <FormGroup>
-                                    <Label style={{fontFamily: "cursive"}}>Employee
-                                        Type</Label>
-                                    <Input onChange={handleChange} type="select" value={data?.employeeType || ''}
-                                           name="employeeType">
+                                        </Input>
+                                    </FormGroup>
 
-                                        {/*<option value="OFFICE">OFFICE</option>*/}
-                                        {/*<option value="ONSITE">ONSITE</option>*/}
-                                        {/*<option> --choose--</option>*/}
-                                        {
-                                            employeeType.map ((element, index)  =>
-                                                <option key = {index} value={element}>
-                                                    {element}
-                                                </option>
-                                            )
-                                        }
+                                    <FormGroup>
+                                        <Label style={{fontFamily: "cursive"}}>Employee Type</Label>
+                                        <Input onChange={handleChange} type="select" name="employeeType">
+                                            <option selected disabled hidden>-- Choose --</option>
+                                            {
+                                                data?.employeeType === null ?
+                                                employeeType.map((element, index) =>
+                                                    <option  key={index} value={element}>
+                                                        {element}
+                                                    </option>
+                                                ) : (
+                                                        employeeType.map((element, index) =>
+                                                            <option selected={element === data?.employeeType} key={index}
+                                                                    value={element}>
+                                                                {element}
+                                                            </option>
+                                                        )
+                                                    )
+                                            }
 
-                                    </Input>
-                                </FormGroup>
+                                        </Input>
+                                    </FormGroup>
 
 
-                            </Form> :
+                                </Form> :
 
-                            <Spinner animation={"grow"} color="#292961"/>
+                                <Spinner animation={"grow"} color="#292961"/>
 
                         }
                     </div>
                 </Container>
                 <Modal.Footer>
-                    <Link to="dashboard/hc/employee">
-                        <Button style={{backgroundColor:"black"}}>Back</Button>
+                    <Link to="/dashboard/hc/employee">
+                        <Button style={{backgroundColor: "black"}}>Back</Button>
                     </Link>
 
-                    <Button type="submit" onClick={handleClick} style={{backgroundColor:"#292961", color:"white"}}>
+                    <Button type="submit" onClick={handleClick} style={{backgroundColor: "#292961", color: "white"}}>
                         Submit
                     </Button>
+
                 </Modal.Footer>
             </Modal.Dialog>
             <Footer/>

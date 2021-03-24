@@ -60,6 +60,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Mulai Kontrak</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Habis Kontrak</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Penempatan</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Habis Kontrak</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Action</th>
 
                                             </tr>
@@ -72,15 +73,26 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 contracts?.data.map((element, index) => {
                                                     return (
                                                         <tr style={{textAlign: "center"}} >
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.employeeId.fullname}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.employeeId.nip}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.benefitRegistrationStatus}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.dateOfAcceptancePermanentEmployee}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.typeContract}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.dateOfResignation}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}> {element.startDateContract}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.endDateContract}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>{element.placement}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.employeeId === null ? "belum ada data" : element.employeeId.fullname}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.employeeId === null ? "belum ada data" : element.employeeId.nip}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.dateOfAcceptancePermanentEmployee === null ? "belum ada data" : element.dateOfAcceptancePermanentEmployee}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.typeContract === null ? "belum ada data" : element.typeContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.dateOfResignation === null ? "belum ada data" : element.dateOfResignation}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.startDateContract === null ? "belum ada data" : element.startDateContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.endDateContract === null ? "belum ada data" : element.startDateContract}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.placement === null ? "belum ada data" : element.placement}</td>
+                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                {element.endedContract === true ? "Tidak" : "Ya"}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 <Link to={'/contract/'+ element.id }>
                                                                     <Button style={{backgroundColor: "#292961"}}>
