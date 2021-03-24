@@ -8,12 +8,11 @@ import ListEmployee from "../pages/Employee/listForm/ListEmployee";
 import ReimburseList from "../pages/reimburse/ReimburseList";
 import DetailContract from "../pages/detailContract/listForm/DetailContract";
 import Success from "../pages/registration/Success";
-import { ReimburseForm } from "../pages/reimburse";
+import DetailContractForm from "../pages/detailContract/editForm/DetailContractForm"
 import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import { GradeList } from "../pages/grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 import Error404 from './../pages/Error/Error404/Error404';
-import DetailContractForm from "../pages/detailContract/editForm";
 import VerifiedForm from "../pages/Employee/verified";
 
 
@@ -51,11 +50,6 @@ export default [
     {
         path: '/dashboard/hc/reimburse',
         component: <ReimburseList/>,
-        exact: true
-    },
-    {
-        path: '/hc/reimburse/:id',
-        component: <ReimburseForm/>,
         exact: true
     },
     {
