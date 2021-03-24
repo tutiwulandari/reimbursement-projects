@@ -70,14 +70,14 @@ function* findReimburseByCategory(action) {
 
 
 function* updateReimburse(action) {
-    console.log("status saga", action);
+    console.log("update reimburse action", action);
     let model = action.model;
     let result = yield axios({
-        url: `/reimburse/${model.id}/finance`,
+        url: `/reimburse/${model.id}/hc`,
         method: 'PUT',
         data: model
     }).then(response => {
-        console.log("status response", response);
+        console.log("update reimburse response", response);
         return {
             type: UPDATE_REIMBURSE_SUCCESS,
             data: response

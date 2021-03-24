@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/Dashboard.css'
 import './assets/css/Form.css'
 import './assets/css/EmployeeDetails.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
 import { Provider } from 'react-redux';

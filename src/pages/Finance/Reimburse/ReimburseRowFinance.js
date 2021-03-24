@@ -9,7 +9,7 @@ import { uploadFile } from './../../../actions/billAction';
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCheckSquare, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -29,10 +29,23 @@ const ReimburseRowFinance = ({
     const [file, setFile] = useState()
     const [status, setStatus] = useState()
 
-    console.log("status", updatedReimburse)
+
+    useEffect(() => {
+        if (updatedReimburse) {
+            window.location.reload();
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Success',
+            //     text: 'Update Success',
+            //     showConfirmButton: false,
+            //     timer: 1000
+            // })
+        }
+    },[updatedReimburse])
+
+
     useEffect(() => {
         if (status) {
-            console.log("status", status)
             updateReimburseFinance(status)
         }
     },[status])
@@ -43,7 +56,7 @@ const ReimburseRowFinance = ({
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
-                    text: 'Data berhasil diubah',
+                    text: 'Upload file berhasil',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -89,12 +102,12 @@ const ReimburseRowFinance = ({
     const handleChangeStatus = (value, id) => {
         if (value == "finance") {
             setStatus({
-                id: id,
+                id,
                 statusSuccess: false
             })
         } else {
             setStatus({
-                id: id,
+                id,
                 statusSuccess: true
             })
         }
@@ -353,7 +366,7 @@ const mapStateToProps = (state) => {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
         uploadedFile: state.uploadFile.data,
-        updatedReimburse: state.updateReimburse.data
+        updatedReimburse: state.updateReimburseFinance.data
     }
 }
 

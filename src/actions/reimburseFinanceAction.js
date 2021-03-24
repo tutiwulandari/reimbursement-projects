@@ -29,6 +29,7 @@ export function findByCategory(id) {
 }
 
 export function updateReimburseFinance(model) {
+    console.log("status action", model);
     return {
         type: UPDATE_REIMBURSE_FINANCE,
         model

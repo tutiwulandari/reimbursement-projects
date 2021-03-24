@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { findReimburseId } from "../../actions/reimburseAction";
+import { findReimburseId, updateReimburse } from "../../actions/reimburseAction";
 import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
 
 /* Just for UI */
@@ -10,20 +10,38 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Swal from 'sweetalert2'
 /* Just for UI */
 
 
-const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
+const ReimburseRow = ({
+    data, index,
+    updateReimburse, updatedReimburse,
+    reimburse, findReimburseId
+}) => {
 
     const [modal, setModal] = useState(false)
     const [status, setStatus] = useState()
     const toggle = () => setModal(!modal)
 
-    useEffect(()=>{
-        if (status) {
-            console.log("change status");
+    useEffect(() => {
+        if (updatedReimburse) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Update Success',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
-    },[status])
+
+    }, [updatedReimburse])
+
+    useEffect(() => {
+        if (status) {
+            updateReimburse(status)
+        }
+    }, [status])
 
     const getId = id => {
         findReimburseId(id)
@@ -35,30 +53,30 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
     );
 
 
-    console.log("status",status);
+    console.log("status", status);
     /* Handle Change Status */
     const handleChangeStatus = (value, id) => {
         switch (value) {
             case "accepted":
                 setStatus({
-                    id: id,
-                    statusFinance: true,
+                    id,
+                    statusOnFinance: true,
                     statusReject: false,
                     statusOnHc: true,
                 })
                 break;
             case "waiting":
                 setStatus({
-                    id: id,
-                    statusFinance: false,
+                    id,
+                    statusOnFinance: false,
                     statusReject: false,
                     statusOnHc: false,
                 })
                 break;
             case "rejected":
                 setStatus({
-                    id: id,
-                    statusFinance: false,
+                    id,
+                    statusOnFinance: false,
                     statusReject: true,
                     statusOnHc: false,
                 })
@@ -254,10 +272,11 @@ const mapStateToProps = (state) => {
     return {
         reimburse: state.findReimburseById.data || [],
         isLoading: state.findReimburseById.isLoading,
+        updatedReimburse: state.updateReimburse.data
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseId }
+const mapDispatchToProps = { findReimburseId, updateReimburse }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRow);
