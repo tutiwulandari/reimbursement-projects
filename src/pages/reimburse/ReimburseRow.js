@@ -220,7 +220,7 @@ const ReimburseRow = ({
                                 <h5 className="text-enigma mb-3 bold">File</h5>
                                 <Link target={"_blank"} to="your-link" style={{ color: "#292961" }}>
                                     <p className="p-enigma-bold mb-0">
-                                        <AiOutlineFilePdf /> File
+                                        <AiOutlineFilePdf size="1.2em"/> File
                                     </p>
                                     <p className="p-enigma">NamaFile.pdf</p>
                                 </Link>
