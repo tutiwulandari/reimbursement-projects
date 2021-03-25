@@ -68,9 +68,8 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
             <Header/>
             <Menu/>
             <div className="content-wrapper">
-
-                <h1 style={{color: "black", textAlign: "center"}}> LIST KARYAWAN</h1>
                 <div className="content-header">
+                    <h1 style={{color: "black", textAlign: "center", marginBottom:"2vh"}}> DAFTAR KARYAWAN</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
@@ -226,7 +225,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                     textAlign: "center",
                                                     minWidth: "200px",
                                                     maxWidth: "200px"
-                                                }}>Id Karyawan
+                                                }}>NIP
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
@@ -275,7 +274,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                     textAlign: "center",
                                                     minWidth: "200px",
                                                     maxWidth: "200px"
-                                                }}> Aksi </th>
+                                                }}> Edit Data</th>
                                             </tr>
                                             </thead>
                                             <tbody>

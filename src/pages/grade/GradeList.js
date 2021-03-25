@@ -88,9 +88,10 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
         <div>
             <Header/>
             <Menu/>
-            <h1 style={{color: "black", marginTop: "20px", textAlign: "center"}}> LIST CLAIM REIMBURSEMENT</h1>
             <div className="content-wrapper">
                 <div className="content-header">
+                    <h1 style={{color: "black",marginBottom:"3vh", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Reimbursement</h1>
+
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
@@ -102,16 +103,16 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width: "150px"}}>
-                                                <input type="text" name="table_search"
-                                                       className="form-control float-right"
-                                                       placeholder="Search"/>
-                                                <div className="input-group-append">
-                                                    <button type="submit" className="btn btn-default">
-                                                        <i className="fas fa-search">
-                                                        </i>
-                                                    </button>
+                                                {/*<input type="text" name="table_search"*/}
+                                                {/*       className="form-control float-right"*/}
+                                                {/*       placeholder="Search"/>*/}
+                                                {/*<div className="input-group-append">*/}
+                                                {/*    <button type="submit" className="btn btn-default">*/}
+                                                {/*        <i className="fas fa-search">*/}
+                                                {/*        </i>*/}
+                                                {/*    </button>*/}
 
-                                                </div>
+                                                {/*</div>*/}
 
                                             </div>
 
@@ -120,7 +121,6 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                     </div>
 
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
-
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr>
@@ -130,7 +130,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                 <th>Biaya Hotel</th>
                                                 <th>Biaya Makan</th>
                                                 <th>Biaya Transportasi</th>
-                                                <th>Aksi</th>
+                                                <th>Edit</th>
                                             </tr>
                                             </thead>
                                             <tbody>

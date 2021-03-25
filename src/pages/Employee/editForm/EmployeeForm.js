@@ -1,13 +1,14 @@
-import {Modal, Button, Spinner} from "react-bootstrap";
 import {findById, save} from "../../../actions/employeeAction";
 import {findAll} from "../../../actions/gradeAction";
 import {connect} from "react-redux";
 import {Link, useHistory, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {Container, Form, FormGroup, Input, Label} from "reactstrap";
+import React, {useEffect, useState} from "react";
+import {Input, Label} from "reactstrap";
 import Header from "../../../dashboard/dashboardHc/Header";
 import Menu from "../../../dashboard/dashboardHc/Menu";
 import Footer from "../../../dashboard/dashboardHc/Footer";
+import "../../../assets/css/EmployeeForm.css"
+import swal from 'sweetalert';
 
 
 function EmployeeForm({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
@@ -37,7 +38,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         if (id && employee) {
             setData({
                 id: employee.id,
-                nip :employee.nip === null ? null :employee.nip,
+                nip: employee.nip === null ? null : employee.nip,
                 gradeId: employee.grade === null ? null : employee.grade.id,
                 joinDate: employee.joinDate === null ? null : employee.joinDate,
                 employeeType: employee.employeeType === null ? null : employee.employeeType,
@@ -47,9 +48,9 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }, [id, employee])
 
 
-
     useEffect(() => {
         if (savedEmployee) {
+            swal("Berhasil", "Data karyawan berhasil ditambahkan!", "success")
             history.push("/dashboard/hc/employee");
         }
     }, [savedEmployee, history])
@@ -85,128 +86,169 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }
 
     return (
-        <div>
+        <div >
             <Header/>
             <Menu/>
-            <Modal.Dialog>
-                <Modal.Header closeButton style={{backgroundColor: "black"}}>
-                    <Modal.Title style={{color: "white"}}> Edit Karyawan </Modal.Title>
-                </Modal.Header>
+            <div className="content-wrapper">
+                <div className=" text-center mt-0 ">
 
-                <Container>
-                    <div>
-                        {
-                            !isLoading ? grades &&
-                                <Form onSubmit={handleClick}>
-                                    <FormGroup>
-                                        <Input onChange={handleChange} value={data?.id || ''}
-                                               type="text" name="id" hidden={true}/>
+                    <div className="row ">
+                        <div className="col-lg-7 mx-auto">
 
-                                        <Label style={{fontFamily: "cursive"}}>
-                                            NIP
-                                        </Label>
-                                        <Input onChange={handleChange}
-                                               type="text" value={data?.nip === null ? '' : data?.nip} name="nip"/>
-                                    </FormGroup>
+                            <div className="card mt-5 mx-auto p-4 bg-light">
 
-                                    <FormGroup>
-                                        <Label style={{fontFamily: "cursive"}}>Grade</Label>
-                                        <Input type="select" onChange={e => onSelectChange(e)}>
+                                <div className="card-body bg-light" >
+                                    <h1>Edit Data Karyawan</h1>
+                                    <div className="container">
+                                        {
+                                            grades ?
+                                                <form  onSubmit={handleClick}>
+                                                    <div className="controls">
 
-                                            <option selected disabled hidden>-- Choose --</option>
-                                            {
-                                                data?.gradeId === null ?
-                                                    gradesModel.data?.map((element, index) =>
-                                                        <option key={index} value={element.id}>
-                                                            {element.grade}
-                                                        </option>
-                                                    ) : gradesModel.data?.map((element, index) =>
-                                                        <option selected={element.id === data?.gradeId} key={index}
-                                                                value={element.id}>
-                                                            {element.grade}
-                                                        </option>
-                                                    )
-                                            }
-                                        </Input>
-                                    </FormGroup>
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Input onChange={handleChange} value={data?.id || ''}
+                                                                           type="text" name="id" hidden={true}/>
 
-                                    <FormGroup>
-                                        <Label htmlFor="join_date" style={{fontFamily: "cursive"}}>Join
-                                            Date</Label>
-                                        <Input onChange={handleChange} type="date"
-                                               value={data?.joinDate  === null ? '' : data?.joinDate}
-                                               name="joinDate"/>
-                                    </FormGroup>
+                                                                    <Label style={{fontFamily: "roboto"}}>
+                                                                        NIP
+                                                                    </Label>
+                                                                    <Input onChange={handleChange}
+                                                                           type="text" value={data?.nip === null ? '' : data?.nip} name="nip"/>
 
-                                    <FormGroup>
-                                        <Label style={{fontFamily: "cursive"}}>Employee
-                                            Status</Label>
-                                        <Input onChange={handleChange} type="select"
-                                               name="employeeStatus">
+                                                                </div>
 
-                                            <option selected disabled hidden>-- Choose --</option>
-                                            {
-                                                data?.employeeStatus === null ?
-                                                    employeeStatus.map((element, index) =>
-                                                        <option key={index} value={element}>
-                                                            {element}
-                                                        </option>
-                                                    ) : (
-                                                        employeeStatus.map((element, index) =>
-                                                            <option selected={element === data?.employeeStatus}
-                                                                    key={index}
-                                                                    value={element}>
-                                                                {element}
-                                                            </option>
-                                                        )
-                                                    )
-                                            }
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label style={{fontFamily: "roboto"}}>Grade</Label>
+                                                                    <Input type="select" onChange={e => onSelectChange(e)}>
 
-                                        </Input>
-                                    </FormGroup>
+                                                                        <option selected disabled hidden>-- Pilihan --</option>
+                                                                        {
+                                                                            data?.gradeId === null ?
+                                                                                gradesModel.data?.map((element, index) =>
+                                                                                    <option key={index} value={element.id}>
+                                                                                        {element.grade}
+                                                                                    </option>
+                                                                                ) : gradesModel.data?.map((element, index) =>
+                                                                                    <option selected={element.id === data?.gradeId} key={index}
+                                                                                            value={element.id}>
+                                                                                        {element.grade}
+                                                                                    </option>
+                                                                                )
+                                                                        }
+                                                                    </Input>
 
-                                    <FormGroup>
-                                        <Label style={{fontFamily: "cursive"}}>Employee Type</Label>
-                                        <Input onChange={handleChange} type="select" name="employeeType">
-                                            <option selected disabled hidden>-- Choose --</option>
-                                            {
-                                                data?.employeeType === null ?
-                                                employeeType.map((element, index) =>
-                                                    <option  key={index} value={element}>
-                                                        {element}
-                                                    </option>
-                                                ) : (
-                                                        employeeType.map((element, index) =>
-                                                            <option selected={element === data?.employeeType} key={index}
-                                                                    value={element}>
-                                                                {element}
-                                                            </option>
-                                                        )
-                                                    )
-                                            }
+                                                                </div>
 
-                                        </Input>
-                                    </FormGroup>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label htmlFor="join_date" style={{fontFamily: "roboto"}}>Tanggal Bergabung</Label>
+                                                                    <Input onChange={handleChange} type="date"
+                                                                           value={data?.joinDate  === null ? '' : data?.joinDate}
+                                                                           name="joinDate"/>
+
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label style={{fontFamily: "roboto"}}>Status Karyawan</Label>
+                                                                    <Input onChange={handleChange} type="select"
+                                                                           name="employeeStatus">
+
+                                                                        <option selected disabled hidden>-- Pilihan--</option>
+                                                                        {
+                                                                            data?.employeeStatus === null ?
+                                                                                employeeStatus.map((element, index) =>
+                                                                                    <option key={index} value={element}>
+                                                                                        {element}
+                                                                                    </option>
+                                                                                ) : (
+                                                                                    employeeStatus.map((element, index) =>
+                                                                                        <option selected={element === data?.employeeStatus}
+                                                                                                key={index}
+                                                                                                value={element}>
+                                                                                            {element}
+                                                                                        </option>
+                                                                                    )
+                                                                                )
+                                                                        }
+
+                                                                    </Input>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label style={{fontFamily: "roboto"}}> Tipe Karyawan</Label>
+                                                                    <Input onChange={handleChange} type="select" name="employeeType">
+                                                                        <option selected disabled hidden>-- Pilihan--</option>
+                                                                        {
+                                                                            data?.employeeType === null ?
+                                                                                employeeType.map((element, index) =>
+                                                                                    <option  key={index} value={element}>
+                                                                                        {element}
+                                                                                    </option>
+                                                                                ) : (
+                                                                                    employeeType.map((element, index) =>
+                                                                                        <option selected={element === data?.employeeType} key={index}
+                                                                                                value={element}>
+                                                                                            {element}
+                                                                                        </option>
+                                                                                    )
+                                                                                )
+                                                                        }
+
+                                                                    </Input>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <Input type="submit" value="Simpan" onClick={handleClick} style={{backgroundColor: "#292961", color: "white"}}>
+                                                                    Simpan
+                                                                </Input>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
 
 
-                                </Form> :
+                                                </form> :
+                                                <div>
+                                                    Loading...
+                                                </div>
+                                        }
 
-                                <Spinner animation={"grow"} color="#292961"/>
 
-                        }
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                </Container>
-                <Modal.Footer>
-                    <Link to="/dashboard/hc/employee">
-                        <Button style={{backgroundColor: "black"}}>Back</Button>
-                    </Link>
 
-                    <Button type="submit" onClick={handleClick} style={{backgroundColor: "#292961", color: "white"}}>
-                        Submit
-                    </Button>
+                </div>
+            </div>
 
-                </Modal.Footer>
-            </Modal.Dialog>
             <Footer/>
         </div>
     )

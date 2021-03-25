@@ -42,7 +42,7 @@ export default function Menu() {
                             <li className="nav-item">
                                 <Link to="/dashboard/hc/employee" className="nav-link">
                                     <i className="far fa-bar-chart nav-icon" />
-                                    <p style={{fontFamily:"roboto", fontSize:"18px"}}>List Karyawan</p>
+                                    <p style={{fontFamily:"roboto", fontSize:"18px"}}> Daftar Karyawan</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
