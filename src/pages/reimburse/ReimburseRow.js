@@ -6,13 +6,17 @@ import { convert_to_rupiah, convert_date_format } from './../../utils/converter'
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFile, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faFile, faSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Swal from 'sweetalert2'
 /* Just for UI */
 
+
+import { BiIdCard, BiUserPin, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
+import { FaRegTimesCircle } from "react-icons/fa"
+import { AiOutlineFilePdf } from "react-icons/ai"
 
 const ReimburseRow = ({
     data, index,
@@ -150,31 +154,31 @@ const ReimburseRow = ({
                                         {
                                             reimburse?.statusOnHc ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
+                                                    <BiCheckboxChecked size="1.5em" /> Admin HC
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
+                                                    <BiCheckbox size="1.5em" /> Admin HC
                                                 </p>
                                         }
                                         {
                                             reimburse?.statusOnFinance ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
+                                                    <BiCheckboxChecked size="1.5em" /> Admin Finance
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
+                                                    <BiCheckbox size="1.5em" /> Admin Finance
                                                 </p>
                                         }
                                         {
                                             reimburse?.statusSuccess ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Selesai
+                                                    <BiCheckboxChecked size="1.5em" /> Selesai
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Selesai
+                                                    <BiCheckbox size="1.5em" /> Selesai
                                                 </p>
                                         }
                                     </>
@@ -187,13 +191,13 @@ const ReimburseRow = ({
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">Biaya</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
+                                    <BiMoney size="1.3em" /> Biaya Klaim
                                 </p>
                                 <p className="p-enigma">{reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
+                                    <BiMoney size="1.3em" /> Biaya Reimburse
                                 </p>
                                 <p className="p-enigma">{reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""}</p>
                             </div>
@@ -203,15 +207,11 @@ const ReimburseRow = ({
                         <div className="col-md-3">
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">Karyawan</h5>
-                                <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
-                                    </p>
+                                <p className="p-enigma-bold mb-0"> <BiUserPin size="1.3em"/> Nama </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
-                                <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-address-card-o" aria-hidden="true"></i> NIP
-                                    </p>
+                                <p className="p-enigma-bold mb-0"> <BiIdCard size="1.3em"/> NIP </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
@@ -220,7 +220,8 @@ const ReimburseRow = ({
                                 <h5 className="text-enigma mb-3 bold">File</h5>
                                 <Link target={"_blank"} to="your-link" style={{ color: "#292961" }}>
                                     <p className="p-enigma-bold mb-0">
-                                        <FontAwesomeIcon icon={faFile} /> File </p>
+                                        <AiOutlineFilePdf /> File
+                                    </p>
                                     <p className="p-enigma">NamaFile.pdf</p>
                                 </Link>
                             </div>
@@ -234,7 +235,7 @@ const ReimburseRow = ({
                             <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
+                                    <BiCalendar size="1.3em"/> Tanggal Pengajuan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
@@ -242,7 +243,7 @@ const ReimburseRow = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
+                                    <BiCalendar size="1.3em"/> Tanggal Mulai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
@@ -253,7 +254,7 @@ const ReimburseRow = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
+                                   <BiCalendar size="1.3em"/> Tanggal Pencairan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
@@ -261,7 +262,7 @@ const ReimburseRow = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
+                                   <BiCalendar size="1.3em"/> Tanggal Selesai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}

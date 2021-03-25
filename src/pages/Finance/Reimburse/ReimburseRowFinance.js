@@ -16,6 +16,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ModalFooter } from 'reactstrap';
 import Swal from 'sweetalert2'
+import { BiIdCard, BiUserPin, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
+import { FaRegTimesCircle } from "react-icons/fa"
+import { AiOutlineFilePdf } from "react-icons/ai"
 /* Just for UI */
 
 
@@ -41,14 +44,14 @@ const ReimburseRowFinance = ({
             //     timer: 1000
             // })
         }
-    },[updatedReimburse])
+    }, [updatedReimburse])
 
 
     useEffect(() => {
         if (status) {
             updateReimburseFinance(status)
         }
-    },[status])
+    }, [status])
 
     useEffect(() => {
         if (uploadedFile) {
@@ -97,7 +100,7 @@ const ReimburseRowFinance = ({
     const handleChangeFile = e => {
         setFile(e.target.files[0]);
     }
-    
+
     /* Handle Change Status */
     const handleChangeStatus = (value, id) => {
         if (value == "finance") {
@@ -154,10 +157,10 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                <select className="custom-select td-width text-enigma border-enigma" 
-                onChange={(e) => {
-                    handleChangeStatus(e.target.value, element.id)
-                }}>
+                <select className="custom-select td-width text-enigma border-enigma"
+                    onChange={(e) => {
+                        handleChangeStatus(e.target.value, element.id)
+                    }}>
                     <option value="finance" selected={element?.statusOnFinance == true}> Waiting </option>
                     <option value="success" selected={element?.statusSuccess == true}> Success </option>
                 </select>
@@ -211,32 +214,32 @@ const ReimburseRowFinance = ({
                                     {
                                         reimburse?.statusOnHc ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
-                                                </p>
+                                                <BiCheckboxChecked size="1.5em" /> Admin HC
+                                            </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
-                                                </p>
+                                                <BiCheckbox size="1.5em" /> Admin HC
+                                            </p>
                                     }
                                     {
                                         reimburse?.statusOnFinance ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
-                                                </p>
+                                                <BiCheckboxChecked size="1.5em" /> Admin Finance
+                                            </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
-                                                </p>
+                                                <BiCheckbox size="1.5em" /> Admin Finance
+                                            </p>
                                     }
                                     {
                                         reimburse?.statusSuccess ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
-                                                </p>
+                                                <BiCheckboxChecked size="1.5em" /> Selesai
+                                        </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Done
-                                                </p>
+                                                <BiCheckbox size="1.5em" /> Selesai
+                                        </p>
                                     }
                                 </>
                             </div>
@@ -245,15 +248,15 @@ const ReimburseRowFinance = ({
                         {/* Cost */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Cost</h5>
+                                <h5 className="text-enigma mb-3 bold">Biaya</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
+                                    <BiMoney size="1.3em" /> Biaya Klaim
                                 </p>
                                 <p className="p-enigma">{reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
+                                    <BiMoney size="1.3em" /> Biaya Reimburse
                                 </p>
                                 <p className="p-enigma">{reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""}</p>
                             </div>
@@ -262,15 +265,15 @@ const ReimburseRowFinance = ({
                         {/* User */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Employee</h5>
+                                <h5 className="text-enigma mb-3 bold">Karyawan</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
+                                    <BiUserPin size="1.3em" /> Nama
                                     </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-address-card-o" aria-hidden="true"></i> NIP
+                                    <BiIdCard size="1.3em" /> NIP
                                     </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
@@ -280,11 +283,11 @@ const ReimburseRowFinance = ({
                     {/* Row Kedua */}
                     <div className="row mt-3 offset-md-1">
 
-                        <h5 className="text-enigma mb-3 bold">Date</h5>
+                        <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
+                                    <BiCalendar size="1.3em"/> Tanggal Pengajuan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
@@ -292,7 +295,7 @@ const ReimburseRowFinance = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
+                                    <BiCalendar size="1.3em"/> Tanggal Mulai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
@@ -303,7 +306,7 @@ const ReimburseRowFinance = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
+                                    <BiCalendar size="1.3em"/> Tanggal Pencairan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
@@ -311,7 +314,7 @@ const ReimburseRowFinance = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
+                                    <BiCalendar size="1.3em"/> Tanggal Selesai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
