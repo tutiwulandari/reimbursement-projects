@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
+import { findBillById } from '../../actions/billAction';
 import { findReimburseId, updateReimburse } from "../../actions/reimburseAction";
 import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
 
@@ -11,22 +12,24 @@ import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Swal from 'sweetalert2'
+import { BiIdCard, BiUserPin, BiDownload, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
+import { FaRegTimesCircle, FaDownload } from "react-icons/fa"
+import { AiOutlineFilePdf } from "react-icons/ai"
 /* Just for UI */
 
 
-import { BiIdCard, BiUserPin, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
-import { FaRegTimesCircle } from "react-icons/fa"
-import { AiOutlineFilePdf } from "react-icons/ai"
 
 const ReimburseRow = ({
     data, index,
     updateReimburse, updatedReimburse,
-    reimburse, findReimburseId
+    reimburse, findReimburseId,
+    bill, findBillById,
 }) => {
 
     const [modal, setModal] = useState(false)
     const [status, setStatus] = useState()
     const toggle = () => setModal(!modal)
+
 
     useEffect(() => {
         if (updatedReimburse) {
@@ -47,8 +50,11 @@ const ReimburseRow = ({
         }
     }, [status])
 
+
+    console.log("bill", bill);
     const getId = id => {
         findReimburseId(id)
+        findBillById(id)
     }
 
     /* Tooltip */
@@ -57,7 +63,6 @@ const ReimburseRow = ({
     );
 
 
-    console.log("status", status);
     /* Handle Change Status */
     const handleChangeStatus = (value, id) => {
         switch (value) {
@@ -207,25 +212,28 @@ const ReimburseRow = ({
                         <div className="col-md-3">
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">Karyawan</h5>
-                                <p className="p-enigma-bold mb-0"> <BiUserPin size="1.3em"/> Nama </p>
+                                <p className="p-enigma-bold mb-0"> <BiUserPin size="1.3em" /> Nama </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
-                                <p className="p-enigma-bold mb-0"> <BiIdCard size="1.3em"/> NIP </p>
+                                <p className="p-enigma-bold mb-0"> <BiIdCard size="1.3em" /> NIP </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
-                        <div className="col-md-3">
-                            <div className="row">
-                                <h5 className="text-enigma mb-3 bold">File</h5>
-                                <Link target={"_blank"} to={`/bill/files/employee-${reimburse?.id}.pdf`} style={{ color: "#292961" }}>
-                                    <p className="p-enigma-bold mb-0">
-                                        <AiOutlineFilePdf size="1.2em"/> File
-                                    </p>
-                                    <p className="p-enigma">{`employee-${reimburse?.id}.pdf`}</p>
-                                </Link>
-                            </div>
-                        </div>
+                        {
+                            bill?.code == 200 ?
+                                <div className="col-md-3">
+                                    <div className="row">
+                                        <h5 className="text-enigma mb-3 bold">File</h5>
+                                        <a target="_blank" href={bill.data.url} style={{ color: "#292961" }}>
+                                            <p className="p-enigma-bold mb-0">
+                                                <BiDownload size="1.2em" /> Unduh File
+                                            </p>
+                                            <p className="p-enigma">{bill.data.billImage}</p>
+                                        </a>
+                                    </div>
+                                </div> : ""
+                        }
                     </div>
 
                     {/* Row Kedua */}
@@ -235,7 +243,7 @@ const ReimburseRow = ({
                             <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Pengajuan
+                                    <BiCalendar size="1.3em" /> Tanggal Pengajuan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
@@ -243,7 +251,7 @@ const ReimburseRow = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Mulai
+                                    <BiCalendar size="1.3em" /> Tanggal Mulai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
@@ -254,7 +262,7 @@ const ReimburseRow = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                   <BiCalendar size="1.3em"/> Tanggal Pencairan
+                                    <BiCalendar size="1.3em" /> Tanggal Pencairan
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
@@ -262,7 +270,7 @@ const ReimburseRow = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                   <BiCalendar size="1.3em"/> Tanggal Selesai
+                                    <BiCalendar size="1.3em" /> Tanggal Selesai
                                     </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
@@ -282,11 +290,12 @@ const mapStateToProps = (state) => {
     return {
         reimburse: state.findReimburseById.data || [],
         isLoading: state.findReimburseById.isLoading,
-        updatedReimburse: state.updateReimburse.data
+        updatedReimburse: state.updateReimburse.data,
+        bill: state.findBillById.data,
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseId, updateReimburse }
+const mapDispatchToProps = { findReimburseId, updateReimburse, findBillById }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRow);

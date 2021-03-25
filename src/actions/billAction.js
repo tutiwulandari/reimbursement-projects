@@ -10,7 +10,7 @@ export function uploadFile(data) {
     }
 }
 
-export function findById(id) {
+export function findBillById(id) {
     return {
         type: FIND_BILL_BY_ID,
         id

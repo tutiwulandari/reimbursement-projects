@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 import { findReimburseFinanceId, updateReimburseFinance } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
 import { isEmpty } from '../../../utils/validation';
-import { uploadFile, findById, updateFile } from './../../../actions/billAction';
+import { uploadFile, findBillById, updateFile } from './../../../actions/billAction';
 
 
 /* Just for UI */
+import { BiUpload } from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckSquare, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
@@ -27,7 +28,7 @@ const ReimburseRowFinance = ({
     reimburse, findReimburseFinanceId,
     uploadedFile, uploadFile,
     updatedReimburse, updateReimburseFinance,
-    bill, findById,
+    bill, findBillById,
     updatedFile, updateFile
 }) => {
 
@@ -95,7 +96,7 @@ const ReimburseRowFinance = ({
 
     const getId = id => {
         findReimburseFinanceId(id)
-        findById(id)
+        findBillById(id)
     }
 
     /* Handle Change File */
@@ -194,7 +195,7 @@ const ReimburseRowFinance = ({
                             toggle2();
                             getId(element?.id);
                         }}>
-                        <FontAwesomeIcon icon={faUpload} />
+                        <BiUpload size="1.2em" />
                     </button> : ""
                 }
             </td>
@@ -389,6 +390,6 @@ const mapStateToProps = (state) => {
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance, findById, updateFile }
+const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance, findBillById, updateFile }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);
