@@ -9,7 +9,7 @@ import { findAllContract, findContractById, updateContract, saveContract } from 
 import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
 import { findAllReimburseFinance, findReimburseFinanceById, updateReimburseFinance } from './reimburseFinanceReducer';
-import { uploadFile, findBillById } from './billReducer';
+import { uploadFile, findBillById, updateFile } from './billReducer';
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee, forgotPassword,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
     findAllContract, findContractById, updateContract, saveContract,
     findAllCount,
     findAllReimburseFinance, findReimburseFinanceById, updateReimburseFinance,
-    uploadFile, findBillById
+    uploadFile, findBillById, updateFile
 })
 
 export default rootReducer

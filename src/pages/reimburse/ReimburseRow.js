@@ -218,11 +218,11 @@ const ReimburseRow = ({
                         <div className="col-md-3">
                             <div className="row">
                                 <h5 className="text-enigma mb-3 bold">File</h5>
-                                <Link target={"_blank"} to="your-link" style={{ color: "#292961" }}>
+                                <Link target={"_blank"} to={`/bill/files/employee-${reimburse?.id}.pdf`} style={{ color: "#292961" }}>
                                     <p className="p-enigma-bold mb-0">
                                         <AiOutlineFilePdf size="1.2em"/> File
                                     </p>
-                                    <p className="p-enigma">NamaFile.pdf</p>
+                                    <p className="p-enigma">{`employee-${reimburse?.id}.pdf`}</p>
                                 </Link>
                             </div>
                         </div>

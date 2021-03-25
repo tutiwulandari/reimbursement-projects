@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
 import { watchRegisterEmployee } from './registerSagas'
-import { watchUploadFile, watchBillById } from './billSaga'
+import { watchUploadFile, watchBillById, watchUpdateFile } from './billSaga'
 import { watchFindAllEmployee, watchFindEmployeeById, watchSaveEmployee, watchUpdateEmployee, watchSaveVerified } from './employeeSagas'
 import { watchLoginEmployee } from "./loginSagas";
 import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCategory, watchUpdateReimburse } from './reimburseSagas';
@@ -23,6 +23,6 @@ export default function* rootSaga() {
         watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract(),
         watchSaveVerified(),
         watchFindAllCount(),
-        watchUploadFile(), watchBillById(),
+        watchUploadFile(), watchBillById(), watchUpdateFile()
     ])
 }

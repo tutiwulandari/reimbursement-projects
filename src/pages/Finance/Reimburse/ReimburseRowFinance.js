@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { findReimburseFinanceId, updateReimburseFinance } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
 import { isEmpty } from '../../../utils/validation';
-import { uploadFile } from './../../../actions/billAction';
+import { uploadFile, findById, updateFile } from './../../../actions/billAction';
 
 
 /* Just for UI */
@@ -26,7 +26,9 @@ const ReimburseRowFinance = ({
     element, index,
     reimburse, findReimburseFinanceId,
     uploadedFile, uploadFile,
-    updatedReimburse, updateReimburseFinance
+    updatedReimburse, updateReimburseFinance,
+    bill, findById,
+    updatedFile, updateFile
 }) => {
 
     const [file, setFile] = useState()
@@ -55,7 +57,7 @@ const ReimburseRowFinance = ({
 
     useEffect(() => {
         if (uploadedFile) {
-            if (uploadedFile?.data?.code == 200) {
+            if (uploadedFile?.data?.code == 200 || updatedFile?.data?.code == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -93,8 +95,8 @@ const ReimburseRowFinance = ({
 
     const getId = id => {
         findReimburseFinanceId(id)
+        findById(id)
     }
-
 
     /* Handle Change File */
     const handleChangeFile = e => {
@@ -120,13 +122,24 @@ const ReimburseRowFinance = ({
     const handleSubmit = () => {
         try {
             if (file) {
-                const reader = new FormData()
-                reader.append('file', file)
-                const result = {
-                    id: reimburse.id,
-                    file: reader
+                if (bill) {
+                    const reader = new FormData()
+                    reader.append('file', file)
+                    const result = {
+                        id: reimburse.id,
+                        file: reader
+                    }
+                    updateFile(result)
                 }
-                uploadFile(result)
+                else {
+                    const reader = new FormData()
+                    reader.append('file', file)
+                    const result = {
+                        id: reimburse.id,
+                        file: reader
+                    }
+                    uploadFile(result)
+                }
                 setModal2(!toggle2)
             }
             else {
@@ -369,11 +382,13 @@ const mapStateToProps = (state) => {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
         uploadedFile: state.uploadFile.data,
-        updatedReimburse: state.updateReimburseFinance.data
+        updatedReimburse: state.updateReimburseFinance.data,
+        bill: state.findBillById.data,
+        updatedFile: state.updateFile.data
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance }
+const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance, findById, updateFile }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);
