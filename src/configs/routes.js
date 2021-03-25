@@ -80,7 +80,7 @@ export default [
         exact: true
     },
     {
-        path: '/finance/reimburse',
+        path: '/dashboard/finance/reimburse',
         component: <ReimburseListFinance />,
         exact: true
     },
@@ -106,7 +106,7 @@ export default [
     },
 
     {
-        path: '/hc/grade',
+        path: '/dashboard/hc/grade',
         component: <GradeList />,
         exact: true
     },

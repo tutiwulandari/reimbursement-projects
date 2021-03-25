@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from "react-redux";
-import Navbar from '../../component/Navbar/Navbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
-import { findAll, findById, save } from './../../actions/gradeAction';
-import { findAllGrade } from './../../reducers/gradeReducer';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
+import React, {useEffect, useState} from 'react'
+import {connect} from "react-redux";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {findAll, findById, save} from '../../actions/gradeAction';
+import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faSave} from '@fortawesome/free-solid-svg-icons/faSave';
 import Swal from 'sweetalert2'
-import { convert_to_rupiah, convert_to_money } from '../../utils/converter';
+import {convert_to_rupiah} from '../../utils/converter';
+import {Table} from "reactstrap";
+import Header from "../../dashboard/dashboardHc/Header";
+import Menu from "../../dashboard/dashboardHc/Menu";
+import Footer from "../../dashboard/dashboardHc/Footer";
 
 
-function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
+function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
 
     const [isEdit, setIsEdit] = useState(false)
     const [number, setNumber] = useState("")
@@ -48,7 +48,7 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
         let name = e.target.name
         let value = parseInt(e.target.value)
         if (isNaN(value)) value = 0
-        setData({ ...data, [name]: value })
+        setData({...data, [name]: value})
     }
 
     const handleUpdate = (number) => {
@@ -77,8 +77,7 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
                     })
                     setIsEdit(false)
                     save(data)
-                }
-                else {
+                } else {
 
                 }
             })
@@ -86,88 +85,145 @@ function GradeList({ findAll, findById, save, savedGrade, grades, grade }) {
     }
 
     return (
-        <div className="container">
-            <Navbar />
+        <div>
+            <Header/>
+            <Menu/>
+            <h1 style={{color: "black", marginTop: "20px", textAlign: "center"}}> LIST CLAIM REIMBURSEMENT</h1>
+            <div className="content-wrapper">
+                <div className="content-header">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="card" style={{height: "70vh"}}>
+                                    <div className="card-header">
+                                        <h3 className="card-title">
 
-            <div className="row">
-                <div className="col-md-12 mt-5 mb-5">
-                    <div className="card">
-                        <table className="table table-hover">
-                            <thead className="bg-enigma">
-                                <tr>
-                                    <th>Grade</th>
-                                    <th>Biaya Melahirkan</th>
-                                    <th>Biaya Kacamata</th>
-                                    <th>Biaya Hotel</th>
-                                    <th>Biaya Makan</th>
-                                    <th>Biaya Transportasi</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    grades.data?.map((element, index) => {
-                                        return (
-                                            <tr>
-                                                <td>{index + 1}</td>
-                                                <td>
-                                                    {
-                                                        isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.giveBirthCost} onChange={handleChange} name="giveBirthCost" />
-                                                            : convert_to_rupiah(element.giveBirthCost)
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.hotelCost} onChange={handleChange} name="hotelCost" />
-                                                            : convert_to_rupiah(element.hotelCost)
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.glasessCost} onChange={handleChange} name="glasessCost" />
-                                                            : convert_to_rupiah(element.glasessCost)
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.transportationCost} onChange={handleChange} name="transportationCost" />
-                                                            : convert_to_rupiah(element.transportationCost)
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        isEdit && number == element.id ?
-                                                            <input className="form-control" type="text" value={data?.mealCost} onChange={handleChange} name="mealCost" />
-                                                            : convert_to_rupiah(element.mealCost)
-                                                    }
-                                                </td>
-                                                <td>
-                                                    <button className="btn btn-outline-enigma"
-                                                        onClick={() => handleUpdate(element.id)}>
-                                                        {
-                                                            isEdit && number == element.id ?
-                                                                <FontAwesomeIcon icon={faSave} />
-                                                                : <FontAwesomeIcon icon={faEdit} />
-                                                        }
+                                        </h3>
+
+                                        <div className="card-tools">
+                                            <div className="input-group input-group-sm" style={{width: "150px"}}>
+                                                <input type="text" name="table_search"
+                                                       className="form-control float-right"
+                                                       placeholder="Search"/>
+                                                <div className="input-group-append">
+                                                    <button type="submit" className="btn btn-default">
+                                                        <i className="fas fa-search">
+                                                        </i>
                                                     </button>
-                                                    {/* <Link to={`/hc/grade/${element.id}`} className="btn btn-outline-enigma">
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div className="card-body table-responsive p-0" style={{height: "300px"}}>
+
+                                        <Table className="table table-head-fixed text-nowrap">
+                                            <thead>
+                                            <tr>
+                                                <th>Grade</th>
+                                                <th>Biaya Melahirkan</th>
+                                                <th>Biaya Kacamata</th>
+                                                <th>Biaya Hotel</th>
+                                                <th>Biaya Makan</th>
+                                                <th>Biaya Transportasi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {
+                                                grades.data?.map((element, index) => {
+                                                    return (
+                                                        <tr>
+                                                            <td>{index + 1}</td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.giveBirthCost}
+                                                                               onChange={handleChange}
+                                                                               name="giveBirthCost"/>
+                                                                        : convert_to_rupiah(element.giveBirthCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.hotelCost}
+                                                                               onChange={handleChange}
+                                                                               name="hotelCost"/>
+                                                                        : convert_to_rupiah(element.hotelCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.glasessCost}
+                                                                               onChange={handleChange}
+                                                                               name="glasessCost"/>
+                                                                        : convert_to_rupiah(element.glasessCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.transportationCost}
+                                                                               onChange={handleChange}
+                                                                               name="transportationCost"/>
+                                                                        : convert_to_rupiah(element.transportationCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.mealCost}
+                                                                               onChange={handleChange} name="mealCost"/>
+                                                                        : convert_to_rupiah(element.mealCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                <button className="btn btn-outline-enigma"
+                                                                        onClick={() => handleUpdate(element.id)}>
+                                                                    {
+                                                                        isEdit && number == element.id ?
+                                                                            <FontAwesomeIcon icon={faSave}/>
+                                                                            : <FontAwesomeIcon icon={faEdit}/>
+                                                                    }
+                                                                </button>
+                                                                {/* <Link to={`/hc/grade/${element.id}`} className="btn btn-outline-enigma">
                                                         <FontAwesomeIcon icon={faEdit} />
                                                     </Link> */}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                            </tbody>
+                                        </Table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
                     </div>
+
                 </div>
+
             </div>
+            <Footer/>
         </div>
+
+
     )
 }
 
@@ -183,6 +239,6 @@ const mapStateToProps = (state) => {
 }
 
 /* Action */
-const mapDispatchToProps = { findAll, findById, save }
+const mapDispatchToProps = {findAll, findById, save}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GradeList);

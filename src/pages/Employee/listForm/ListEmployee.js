@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Button, Table} from "reactstrap";
+import React, {useEffect} from "react";
+import { Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faEdit} from "@fortawesome/free-solid-svg-icons";
 import {findAll} from "../../../actions/employeeAction";
@@ -23,7 +23,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
             <Menu/>
             <div className="content-wrapper">
 
-                <h1 style={{color:"black", marginTop:"20px", textAlign:"center"}}> LIST KARYAWAN</h1>
+                <h1 style={{color:"black", textAlign:"center"}}> LIST KARYAWAN</h1>
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row">
@@ -50,8 +50,8 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                     </div>
 
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
-                                        <Table className="table table-head-fixed text-nowrap">
-                                            <thead >
+                                        <Table className="table table-head-fixed text-nowrap" hover>
+                                            <thead  >
                                             <tr>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Tempat Lahir</th>
@@ -77,7 +77,7 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Grade</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Status Verifikasi</th>
                                                 <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Verifikasi</th>
-                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}>Action</th>
+                                                <th style={{verticalAlign:"middle", textAlign:"center", minWidth:"200px", maxWidth:"200px"}}></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -234,7 +234,9 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 minWidth: "200px"
                                                             }}>
                                                                 <Link to={'/employee/' + element.id + '/isVerified'}>
-                                                                    <Button color="danger"> <FontAwesomeIcon icon={faCheck}/></Button>
+                                                                    <button className="btn btn-outline-enigma">
+                                                                        <FontAwesomeIcon icon={faCheck}/>
+                                                                    </button>
                                                                 </Link>
                                                             </td>
 
@@ -245,10 +247,9 @@ function ListEmployee({findAll, employees, error, isLoading}) {
                                                                 minWidth: "200px"
                                                             }}>
                                                                 <Link to={'/employee/' + element.id}>
-                                                                    <Button style={{backgroundColor: "#292961"}}>
-                                                                        <FontAwesomeIcon icon={faEdit}
-                                                                                         className="float-left"/>
-                                                                    </Button>
+                                                                    <button className="btn btn-outline-enigma">
+                                                                        <FontAwesomeIcon icon={faEdit} className="float-left"/>
+                                                                    </button>
                                                                 </Link>
                                                             </td>
                                                         </tr>

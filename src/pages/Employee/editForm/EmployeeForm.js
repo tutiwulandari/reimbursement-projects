@@ -18,7 +18,6 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     const history = useHistory();
     const [data, setData] = useState({})
 
-    // let gradesModelChoose = {"Choose" ,...gradesModel}
     let employeeType = ["OFFICE", "ONSITE"]
     let employeeStatus = ["ACTIVE", "NON_ACTIVE"]
 
@@ -32,50 +31,22 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }, [])
 
     useEffect(() => {
-        if (employee != null) {
-            // let employeeType;
-            // let employeeStatus;
-            //
-            // switch (employee.employeeType) {
-            //     case "OFFICE":
-            //         employeeType = 1
-            //         break
-            //     case "ONSITE":
-            //         employeeType = 0
-            // }
-            //
-            // switch (employee.employeeStatus) {
-            //     case "ACTIVE":
-            //         employeeStatus = 0
-            //         break
-            //     case "NON_ACTIVE":
-            //         employeeStatus = 1
-            // }
-
-            console.log("EMPLOYEEEEEEE", employee)
-
-            setData({
-                id: employee.id,
-                nip :employee.nip === null ? null :employee.nip,
-                gradeId: employee.grade === null ? "" : employee.grade.id,
-                joinDate: employee.joinDate,
-                employeeType: employee.employeeType === null ? "" : employee.employeeType,
-                employeeStatus: employee.employeeStatus === null ? "" : employee.employeeStatus
-            })
-        }
-    }, [employee])
-    console.log("DATAAAA", data)
-
-
-    useEffect(() => {
     }, [data])
 
     useEffect(() => {
         if (id && employee) {
-            setData({...data})
+            setData({
+                id: employee.id,
+                nip :employee.nip === null ? null :employee.nip,
+                gradeId: employee.grade === null ? null : employee.grade.id,
+                joinDate: employee.joinDate === null ? null : employee.joinDate,
+                employeeType: employee.employeeType === null ? null : employee.employeeType,
+                employeeStatus: employee.employeeStatus === null ? null : employee.employeeStatus
+            })
         }
-    }, [id, data])
-    console.log("test", findById)
+    }, [id, employee])
+
+
 
     useEffect(() => {
         if (savedEmployee) {
@@ -104,7 +75,9 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         save(data);
     }
 
+
     console.log("REQUESSS", employee)
+    console.log("DATA", data)
 
 
     const onSelectChange = (e) => {
@@ -122,13 +95,13 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
                 <Container>
                     <div>
-                        {console.log("coba yaa", data?.grade)}
                         {
                             !isLoading ? grades &&
-                                <Form>
+                                <Form onSubmit={handleClick}>
                                     <FormGroup>
                                         <Input onChange={handleChange} value={data?.id || ''}
                                                type="text" name="id" hidden={true}/>
+
                                         <Label style={{fontFamily: "cursive"}}>
                                             NIP
                                         </Label>
@@ -142,7 +115,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
                                             <option selected disabled hidden>-- Choose --</option>
                                             {
-                                                data?.gradeId === "" ?
+                                                data?.gradeId === null ?
                                                     gradesModel.data?.map((element, index) =>
                                                         <option key={index} value={element.id}>
                                                             {element.grade}
@@ -160,7 +133,8 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <FormGroup>
                                         <Label htmlFor="join_date" style={{fontFamily: "cursive"}}>Join
                                             Date</Label>
-                                        <Input onChange={handleChange} type="date" value={data?.joinDate || ''}
+                                        <Input onChange={handleChange} type="date"
+                                               value={data?.joinDate  === null ? '' : data?.joinDate}
                                                name="joinDate"/>
                                     </FormGroup>
 

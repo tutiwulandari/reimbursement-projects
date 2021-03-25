@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 import { findReimburseId } from "../../actions/reimburseAction";
-import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
+import { convert_to_rupiah, convert_date_format } from '../../utils/converter';
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -11,7 +11,12 @@ import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCate
 import { watchFindAllReimburseFinance, watchFindReimburseFinanceById, watchFindReimburseFinanceByCategory } from './reimburseFinanceSagas';
 import { watchFindAllCategory } from './categorySagas';
 import { watchFindAllGrade, watchFindGradeById, watchSaveGrade } from "./gradeSagas";
-import { watchFindAllContract, watchFindContractById, watchSaveContract, watchUpdateContract} from "./detailContractSagas";
+import {
+    watchFindAllContract,
+    watchFindContractById,
+    watchSaveContract,
+    watchUpdateContract
+} from "./detailContractSagas";
 import {watchFindAllCount} from "./dashboardSagas";
 import { watchForgotPassword } from './forgotPasswordSagas';
 
@@ -24,7 +29,7 @@ export default function* rootSaga() {
         watchFindAllReimburseFinance(), watchFindReimburseFinanceById(), watchFindReimburseFinanceByCategory(),
         watchFindAllCategory(),
         watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(),
-        watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract(),
+        watchFindAllContract(),watchFindContractById(), watchUpdateContract(),watchSaveContract(),
         watchFindAllCount(),
         watchSaveVerified()
     ])

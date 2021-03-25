@@ -25,12 +25,9 @@ export default function Header() {
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div className="dropdown-divider" />
-                        {/*<a href="/hc/resetpassword" className="dropdown-item">*/}
-                        {/*  Reset Password*/}
-                        {/*</a>*/}
                         <ResetPassword/>
                         <div className="dropdown-divider" />
-                        <a href="#" className="dropdown-item">
+                        <a href="/" className="dropdown-item">
                            Logout
                         </a>
                     </div>

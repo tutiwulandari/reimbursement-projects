@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
-import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 
@@ -61,7 +60,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Habis Kontrak</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Penempatan</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Habis Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Action</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}></th>
 
                                             </tr>
                                             </thead>
@@ -92,12 +91,12 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.placement === null ? "belum ada data" : element.placement}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.endedContract === true ? "Tidak" : "Ya"}</td>
+                                                                {element.endedContract === true ? "Ya" : "Tidak"}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 <Link to={'/contract/'+ element.id }>
-                                                                    <Button style={{backgroundColor: "#292961"}}>
+                                                                    <button className="btn btn-outline-enigma">
                                                                         <FontAwesomeIcon icon={faEdit} className="float-left"/>
-                                                                    </Button>
+                                                                    </button>
                                                                 </Link>
 
                                                             </td>

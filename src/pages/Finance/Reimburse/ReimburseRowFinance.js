@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { findReimburseFinanceId } from './../../../actions/reimburseFinanceAction';
+import { findReimburseFinanceId } from '../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
 
 

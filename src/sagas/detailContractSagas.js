@@ -94,12 +94,11 @@ function* updateContract(action) {
 
 
 function* saveContract(action) {
-
+    console.log("SAGAS CONTRACT", action)
     let model = action.model;
     let result = yield axios
         .put (`/contract/${model.id}`, model)
         .then(data => {
-            // console.log("SAVE CONTRACT SAGAS", data)
             return {
                 type: SAVE_CONTRACT_SUCCESS,
                 data: data
