@@ -47,13 +47,13 @@ export default function Menu() {
                             </li>
                             <li className="nav-item">
                                 <Link to="/dashboard/hc/contract" className="nav-link">
-                                    <i className="far fa-list-alt"  />
+                                    <i className="far fa-list-alt nav-icon"  />
                                     <p style={{fontFamily:"roboto", fontSize:"18px"}}>Detail Kontrak</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/dashboard/hc/grade" className="nav-link">
-                                    <i className="far fa-circle-notch nav-icon" />
+                                    <i className="far fa-list-alt nav-icon" />
                                     <p style={{fontFamily:"roboto", fontSize:"18px"}}>Grade</p>
                                 </Link>
                             </li>

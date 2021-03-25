@@ -1,5 +1,11 @@
 import {
-    FIND_ALL_EMPLOYEE, FIND_EMPLOYEE_BY_ID, FIND_VERIFIED_BY_ID, SAVE_EMPLOYEE, SAVE_VERIFIED, UPDATE_EMPLOYEE
+    FIND_ALL_EMPLOYEE,
+    FIND_EMPLOYEE_BY_ID,
+    FIND_EMPLOYEE_BY_NAME,
+    FIND_VERIFIED_BY_ID,
+    SAVE_EMPLOYEE,
+    SAVE_VERIFIED,
+    UPDATE_EMPLOYEE
 } from '../constants/actionConstant';
 
 
@@ -48,5 +54,13 @@ export function findByIdVerified(id) {
     return {
         type:FIND_VERIFIED_BY_ID,
         id
+    }
+}
+
+export function findByName(model) {
+    console.log("find employee by name", model)
+    return {
+        type: FIND_EMPLOYEE_BY_NAME,
+        model
     }
 }

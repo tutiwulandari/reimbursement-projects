@@ -47,6 +47,12 @@ export const FIND_VERIFIED_BY_ID_SUCCESS  = "FIND_VERIFIED_BY_ID_SUCCESS"
 export const FIND_VERIFIED_BY_ID_FAILURE  = "FIND_VERIFIED_BY_ID_FAILURE"
 
 
+export const FIND_EMPLOYEE_BY_NAME          = "FIND_ EMPLOYEE_BY_NAME"
+export const FIND_EMPLOYEE_BY_NAME_SUCCESS  = "FIND_EMPLOYEE_BY_NAME_SUCCESS"
+export const FIND_EMPLOYEE_BY_NAME_FAILURE  = "FIND_EMPLOYEE_BY_ID_FAILURE"
+
+
+
 /* ================== */
 /*     GRADE      */
 /* ================== */

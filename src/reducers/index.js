@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux';
 import { registerEmployees } from './registerReducer';
-import { findAllEmployee, findEmployeeById, saveEmployee, updateEmployee, saveVerified} from "./employeeReducer";
+import {
+    findAllEmployee,
+    findEmployeeById,
+    saveEmployee,
+    updateEmployee,
+    saveVerified,
+    findEmployeeByName
+} from "./employeeReducer";
 import { loginEmployee } from "./loginReducer";
 import { findAllReimburse, findReimburseById, findReimburseByCategory } from './reimburseReducer';
 import { findAllCategory } from './categoryReducer';
@@ -19,6 +26,7 @@ const rootReducer = combineReducers({
     findAllContract, findContractById, updateContract, saveContract,
     findAllCount,
     findAllReimburseFinance, findReimburseFinanceById,
+    findEmployeeByName
 })
 
 export default rootReducer

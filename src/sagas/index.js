@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects'
 import { watchRegisterEmployee } from './registerSagas'
 import {
     watchFindAllEmployee,
-    watchFindEmployeeById,
+    watchFindEmployeeById, watchFindEmployeeByName,
     watchSaveEmployee, watchSaveVerified,
     watchUpdateEmployee
 } from './employeeSagas'
@@ -31,6 +31,7 @@ export default function* rootSaga() {
         watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(),
         watchFindAllContract(),watchFindContractById(), watchUpdateContract(),watchSaveContract(),
         watchFindAllCount(),
-        watchSaveVerified()
+        watchSaveVerified(),
+        watchFindEmployeeByName()
     ])
 }
