@@ -1,5 +1,5 @@
 
-import React from "react";
+ import React from "react";
 import NavigationSideBar from "../NavigationSideBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faMoneyBill} from "@fortawesome/free-solid-svg-icons";

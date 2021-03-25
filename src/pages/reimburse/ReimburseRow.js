@@ -6,7 +6,7 @@ import { convert_to_rupiah, convert_date_format } from './../../utils/converter'
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faFile, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -117,7 +117,6 @@ const ReimburseRow = ({
                 </button>
             </td>
 
-
             {/* ============ */}
             {/* MODAL DETAIL */}
             {/* ============ */}
@@ -144,7 +143,7 @@ const ReimburseRow = ({
 
                                 {reimburse?.statusReject ?
                                     <p className="p-enigma-bold">
-                                        <i className="fa fa-times" aria-hidden="true"></i> Rejected
+                                        <i className="fa fa-times" aria-hidden="true"></i> Ditolak
                                     </p>
                                     :
                                     <>
@@ -171,11 +170,11 @@ const ReimburseRow = ({
                                         {
                                             reimburse?.statusSuccess ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
+                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Selesai
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Done
+                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Selesai
                                                 </p>
                                         }
                                     </>
@@ -186,7 +185,7 @@ const ReimburseRow = ({
                         {/* Cost */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Cost</h5>
+                                <h5 className="text-enigma mb-3 bold">Biaya</h5>
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
                                 </p>
@@ -203,7 +202,7 @@ const ReimburseRow = ({
                         {/* User */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Employee</h5>
+                                <h5 className="text-enigma mb-3 bold">Karyawan</h5>
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
                                     </p>
@@ -216,13 +215,23 @@ const ReimburseRow = ({
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
+                        <div className="col-md-3">
+                            <div className="row">
+                                <h5 className="text-enigma mb-3 bold">File</h5>
+                                <Link target={"_blank"} to="your-link" style={{ color: "#292961" }}>
+                                    <p className="p-enigma-bold mb-0">
+                                        <FontAwesomeIcon icon={faFile} /> File </p>
+                                    <p className="p-enigma">NamaFile.pdf</p>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Row Kedua */}
                     <div className="row mt-3 offset-md-1">
 
-                        <h5 className="text-enigma mb-3 bold">Date</h5>
                         <div className="row">
+                            <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
