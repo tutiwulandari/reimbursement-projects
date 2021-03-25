@@ -1,7 +1,16 @@
 import {
-    FIND_ALL_REIMBURSE_FINANCE, FIND_ALL_REIMBURSE_FINANCE_FAILURE, FIND_ALL_REIMBURSE_FINANCE_SUCCESS,
-    FIND_REIMBURSE_FINANCE_BY_ID, FIND_REIMBURSE_FINANCE_BY_ID_SUCCESS, FIND_REIMBURSE_FINANCE_BY_ID_FAILURE, 
-    FIND_REIMBURSE_FINANCE_BY_CATEGORY, FIND_REIMBURSE_FINANCE_BY_CATEGORY_SUCCESS, FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE
+    FIND_ALL_REIMBURSE_FINANCE,
+    FIND_ALL_REIMBURSE_FINANCE_FAILURE,
+    FIND_ALL_REIMBURSE_FINANCE_SUCCESS,
+    FIND_REIMBURSE_FINANCE_BY_ID,
+    FIND_REIMBURSE_FINANCE_BY_ID_SUCCESS,
+    FIND_REIMBURSE_FINANCE_BY_ID_FAILURE,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY_SUCCESS,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE,
+    UPDATE_REIMBURSE_FINANCE,
+    UPDATE_REIMBURSE_FINANCE_SUCCESS,
+    UPDATE_REIMBURSE_FINANCE_FAILURE
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -61,6 +70,37 @@ export const findReimburseFinanceById = (state = initialState, action) => {
         default:
             return {
                 ...state,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+
+export const updateReimburseFinance = (state = initialState, action) => {
+    switch (action.type) {
+        case UPDATE_REIMBURSE_FINANCE:
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case UPDATE_REIMBURSE_FINANCE_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case UPDATE_REIMBURSE_FINANCE_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
                 isLoading: false,
                 error: null
             }

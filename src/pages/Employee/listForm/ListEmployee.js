@@ -432,8 +432,9 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                                 minWidth: "200px"
                                                             }}>
                                                                 <Link to={'/employee/' + element.id + '/isVerified'}>
-                                                                    <button className="btn btn-outline-enigma">
-                                                                        <FontAwesomeIcon icon={faCheck}/>
+                                                                    <button className="btn btn-outline-enigma" disabled ={element?.verifiedHc === true}>
+                                                                        <FontAwesomeIcon icon={faCheck}
+                                                                        />
                                                                     </button>
                                                                 </Link>
                                                             </td>

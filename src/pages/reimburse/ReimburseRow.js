@@ -1,31 +1,96 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom'
-import { findReimburseId } from "../../actions/reimburseAction";
+import { findBillById } from '../../actions/billAction';
+import { findReimburseId, updateReimburse } from "../../actions/reimburseAction";
 import { convert_to_rupiah, convert_date_format } from '../../utils/converter';
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Swal from 'sweetalert2'
+import { BiIdCard, BiUserPin, BiDownload, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
 /* Just for UI */
 
 
-const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+const ReimburseRow = ({
+                          data, index,
+                          updateReimburse, updatedReimburse,
+                          reimburse, findReimburseId,
+                          bill, findBillById,
+                      }) => {
 
+    const [modal, setModal] = useState(false)
+    const [status, setStatus] = useState()
+    const toggle = () => setModal(!modal)
+
+
+    useEffect(() => {
+        if (updatedReimburse) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Update Success',
+                showConfirmButton: false,
+                timer: 1000
+            })
+        }
+
+    }, [updatedReimburse])
+
+    useEffect(() => {
+        if (status) {
+            updateReimburse(status)
+        }
+    }, [status])
+
+
+    console.log("bill", bill);
     const getId = id => {
         findReimburseId(id)
+        findBillById(id)
     }
 
     /* Tooltip */
     const renderTooltip = props => (
         <Tooltip {...props}>Has been validated by admin finance</Tooltip>
     );
+
+
+    /* Handle Change Status */
+    const handleChangeStatus = (value, id) => {
+        switch (value) {
+            case "accepted":
+                setStatus({
+                    id,
+                    statusOnFinance: true,
+                    statusReject: false,
+                    statusOnHc: true,
+                })
+                break;
+            case "waiting":
+                setStatus({
+                    id,
+                    statusOnFinance: false,
+                    statusReject: false,
+                    statusOnHc: false,
+                })
+                break;
+            case "rejected":
+                setStatus({
+                    id,
+                    statusOnFinance: false,
+                    statusReject: true,
+                    statusOnHc: false,
+                })
+                break;
+            default:
+                break;
+        }
+    }
 
     return (
         <tr>
@@ -38,24 +103,25 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
                             <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
                         </OverlayTrigger> :
-                        <select className="custom-select td-width text-enigma border-enigma">
-                            <option selected={data.statusOnHc == true}> Waiting</option>
-                            <option selected={data.statusOnFinance == true}> Accepted</option>
-                            <option selected={data.statusReject == true}> Rejected </option>
+                        <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
+                                onChange={(e) => {
+                                    handleChangeStatus(e.target.value, data.id)
+                                }}>
+                            <option value="waiting" selected={data.statusOnHc == true}> Waiting</option>
+                            <option value="accepted" selected={data.statusOnFinance == true}> Accepted</option>
+                            <option value="rejected" selected={data.statusReject == true}> Rejected </option>
                         </select>
-
                 }
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
-                    onClick={() => {
-                        toggle();
-                        getId(data?.id);
-                    }}>
+                        onClick={() => {
+                            toggle();
+                            getId(data?.id);
+                        }}>
                     Detail
                 </button>
             </td>
-
 
             {/* ============ */}
             {/* MODAL DETAIL */}
@@ -83,38 +149,38 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
 
                                 {reimburse?.statusReject ?
                                     <p className="p-enigma-bold">
-                                        <i className="fa fa-times" aria-hidden="true"></i> Rejected
+                                        <i className="fa fa-times" aria-hidden="true"></i> Ditolak
                                     </p>
                                     :
                                     <>
                                         {
                                             reimburse?.statusOnHc ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
+                                                    <BiCheckboxChecked size="1.5em" /> Admin HC
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
+                                                    <BiCheckbox size="1.5em" /> Admin HC
                                                 </p>
                                         }
                                         {
                                             reimburse?.statusOnFinance ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
+                                                    <BiCheckboxChecked size="1.5em" /> Admin Finance
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
+                                                    <BiCheckbox size="1.5em" /> Admin Finance
                                                 </p>
                                         }
                                         {
                                             reimburse?.statusSuccess ?
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
+                                                    <BiCheckboxChecked size="1.5em" /> Selesai
                                                 </p>
                                                 :
                                                 <p className="p-enigma-bold">
-                                                    <i className="fa fa-square-o" aria-hidden="true"></i> Done
+                                                    <BiCheckbox size="1.5em" /> Selesai
                                                 </p>
                                         }
                                     </>
@@ -125,15 +191,15 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         {/* Cost */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Cost</h5>
+                                <h5 className="text-enigma mb-3 bold">Biaya</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
+                                    <BiMoney size="1.3em" /> Biaya Klaim
                                 </p>
                                 <p className="p-enigma">{reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
+                                    <BiMoney size="1.3em" /> Biaya Reimburse
                                 </p>
                                 <p className="p-enigma">{reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""}</p>
                             </div>
@@ -142,38 +208,48 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         {/* User */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Employee</h5>
-                                <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
-                                    </p>
+                                <h5 className="text-enigma mb-3 bold">Karyawan</h5>
+                                <p className="p-enigma-bold mb-0"> <BiUserPin size="1.3em" /> Nama </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
-                                <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-address-card-o" aria-hidden="true"></i> NIP
-                                    </p>
+                                <p className="p-enigma-bold mb-0"> <BiIdCard size="1.3em" /> NIP </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
+                        {
+                            bill?.code == 200 ?
+                                <div className="col-md-3">
+                                    <div className="row">
+                                        <h5 className="text-enigma mb-3 bold">File</h5>
+                                        <a target="_blank" href={bill.data.url} style={{ color: "#292961" }}>
+                                            <p className="p-enigma-bold mb-0">
+                                                <BiDownload size="1.2em" /> Unduh File
+                                            </p>
+                                            <p className="p-enigma">{bill.data.billImage}</p>
+                                        </a>
+                                    </div>
+                                </div> : ""
+                        }
                     </div>
 
                     {/* Row Kedua */}
                     <div className="row mt-3 offset-md-1">
 
-                        <h5 className="text-enigma mb-3 bold">Date</h5>
                         <div className="row">
+                            <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Pengajuan
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Mulai
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
@@ -183,16 +259,16 @@ const ReimburseRow = ({ data, index, reimburse, findReimburseId }) => {
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Pencairan
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Selesai
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>
@@ -211,10 +287,12 @@ const mapStateToProps = (state) => {
     return {
         reimburse: state.findReimburseById.data || [],
         isLoading: state.findReimburseById.isLoading,
+        updatedReimburse: state.updateReimburse.data,
+        bill: state.findBillById.data,
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseId }
+const mapDispatchToProps = { findReimburseId, updateReimburse, findBillById }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRow);

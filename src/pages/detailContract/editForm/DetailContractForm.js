@@ -1,4 +1,4 @@
-import {Input, Label} from "reactstrap";
+import {Input, Label, Spinner} from "reactstrap";
 import {useParams, useHistory} from "react-router-dom"
 import {connect} from "react-redux";
 import React, {useEffect, useState} from "react";
@@ -105,6 +105,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                 <div className="card-body bg-light" >
                                     <h1>Edit Detail Kontrak</h1>
+                                    <hr/>
                                     <div className="container">
                                         {
                                             !isLoading ?
@@ -240,9 +241,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
 
                                                 </form> :
-                                                <div>
-                                                    Loading...
-                                                </div>
+                                              <Spinner animation="grow" delay="2000"/>
                                         }
 
 

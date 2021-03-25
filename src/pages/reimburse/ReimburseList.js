@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import {findAllReimburse, findByCategory} from "../../actions/reimburseAction";
-import {findAllCategory} from './../../actions/categoryAction';
+import {findAllCategory} from '../../actions/categoryAction';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSortAmountDown} from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
@@ -35,10 +35,10 @@ function ReimburseList({
             <Menu/>
 
             <div className="content-wrapper">
-                <h1 style={{color: "black", marginTop: "20px", textAlign: "center"}}> LIST CLAIM REIMBURSEMENT</h1>
+                <h1 style={{color: "black", textAlign: "center"}}> Daftar Klaim</h1>
                 <select className="custom-select rounded-pill text-enigma border-enigma"
                         onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
-                    <option value="">Category</option>
+                    <option selected disabled hidden >Category</option>
                     {
                         categories.data?.map((category, index) => {
                             return (
@@ -50,7 +50,7 @@ function ReimburseList({
 
                 <div className="float-right" style={{marginRight: "5vh"}}>
                     <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option>Status</option>
+                        <option selected disabled hidden>Status</option>
                         <option>Waiting</option>
                         <option>Accepted</option>
                         <option>Success</option>

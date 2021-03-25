@@ -87,12 +87,8 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                        </Table>
 
                                    </div>
-
                                </div>
-
                            </div>
-
-
                        </div>
                    </div>
                </div>

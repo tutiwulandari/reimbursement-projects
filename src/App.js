@@ -12,6 +12,7 @@ import React from "react";
 import { Provider } from 'react-redux';
 import store from './configs/store';
 import routes from "./configs/routes";
+import 'reimburse.svg'
 
 
 function App() {

@@ -1,9 +1,9 @@
 import {findById, save} from "../../../actions/employeeAction";
 import {findAll} from "../../../actions/gradeAction";
 import {connect} from "react-redux";
-import {Link, useHistory, useParams} from "react-router-dom";
+import { useHistory, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {Input, Label} from "reactstrap";
+import {Input, Label, Spinner} from "reactstrap";
 import Header from "../../../dashboard/dashboardHc/Header";
 import Menu from "../../../dashboard/dashboardHc/Menu";
 import Footer from "../../../dashboard/dashboardHc/Footer";
@@ -64,6 +64,9 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         }
     }, [id, findById, grades])
 
+    if(savedEmployee) {
+
+    }
 
     const handleChange = (event) => {
         let name = event.target.name
@@ -101,7 +104,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <h1>Edit Data Karyawan</h1>
                                     <div className="container">
                                         {
-                                            grades ?
+                                           !isLoading ? grades &&
                                                 <form  onSubmit={handleClick}>
                                                     <div className="controls">
 
@@ -230,9 +233,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
 
                                                 </form> :
-                                                <div>
-                                                    Loading...
-                                                </div>
+                                                <Spinner animation="grow" delay="3000" color="#292961"/>
                                         }
 
 

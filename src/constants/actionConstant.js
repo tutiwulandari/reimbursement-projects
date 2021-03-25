@@ -180,3 +180,22 @@ export const FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE     = "FIND_REIMBURSE_FI
 export const UPDATE_REIMBURSE_FINANCE                       = "UPDATE_REIMBURSE_FINANCE"
 export const UPDATE_REIMBURSE_FINANCE_SUCCESS               = "UPDATE_REIMBURSE_FINANCE_SUCCESS"
 export const UPDATE_REIMBURSE_FINANCE_FAILURE               = "UPDATE_REIMBURSE_FINANCE_FAILURE"
+
+
+
+
+/* ============= */
+/*      BILL     */
+/* ============= */
+
+export const UPLOAD_FILE              = "UPLOAD_FILE"
+export const UPLOAD_FILE_SUCCESS      = "UPLOAD_FILE_SUCCESS"
+export const UPLOAD_FILE_FAILURE      = "UPLOAD_FILE_FAILURE"
+
+export const FIND_BILL_BY_ID          = "FIND_BILL_BY_ID"
+export const FIND_BILL_BY_ID_SUCCESS  = "FIND_BILL_BY_ID_SUCCESS"
+export const FIND_BILL_BY_ID_FAILURE  = "FIND_BILL_BY_ID_FAILURE"
+
+export const UPDATE_BILL              = "UPDATE_BILL"
+export const UPDATE_BILL_SUCCESS      = "UPDATE_BILL_SUCCESS"
+export const UPDATE_BILL_FAILURE      = "UPDATE_BILL_FAILURE"
