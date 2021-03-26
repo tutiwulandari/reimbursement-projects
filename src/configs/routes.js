@@ -16,6 +16,7 @@ import Error404 from './../pages/Error/Error404/Error404';
 import VerifiedForm from "../pages/Employee/verified";
 
 
+
 export default [
     {
         path: '/',
@@ -53,7 +54,7 @@ export default [
         exact: true
     },
     {
-        path: '/hc/resetpassword',
+        path: '/dashboard/hc/resetpassword',
         component: {ResetPassword},
         exact: true
     },
@@ -69,12 +70,12 @@ export default [
         exact: true
     },
     {
-        path: '/finance/dashboard',
+        path: '/dashboard/finance',
         component: <DashboardFinance />,
         exact: true
     },
     {
-        path: '/finance/reimburse',
+        path: '/dashboard/finance/reimburse',
         component: <ReimburseListFinance />,
         exact: true
     },
@@ -84,7 +85,7 @@ export default [
         exact: true
     },
     {
-        path: '/hc/reimburse',
+        path: '/dashboard/hc/reimburse',
         component: <ReimburseList />,
         exact: true
     },
@@ -100,7 +101,7 @@ export default [
     },
 
     {
-        path: '/hc/grade',
+        path: '/dashboard/hc/grade',
         component: <GradeList />,
         exact: true
     },

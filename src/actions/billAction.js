@@ -1,5 +1,6 @@
 import {
-UPLOAD_FILE, FIND_BILL_BY_ID
+
+    UPLOAD_FILE, FIND_BILL_BY_ID, UPDATE_BILL
 } from '../constants/actionConstant';
 
 
@@ -10,9 +11,19 @@ export function uploadFile(data) {
     }
 }
 
-export function findById(id) {
+
+export function findBillById(id) {
     return {
         type: FIND_BILL_BY_ID,
         id
     }
 }
+
+
+export function updateFile(data) {
+    return {
+        type: UPDATE_BILL,
+        data
+    }
+}
+

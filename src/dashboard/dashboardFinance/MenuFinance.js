@@ -1,5 +1,6 @@
 import React from "react";
 import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
+import {Link} from "react-router-dom";
 
 export default function MenuFinance() {
     return (
@@ -20,22 +21,20 @@ export default function MenuFinance() {
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeiew" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
-                            <a href="#" className="nav-link">
+                            <Link to="/dashboard/finance" className="nav-link">
                                 <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"white"}} />
                                 <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item has-treeview">
-                            <a href="/hc/reimbursement" className="nav-link">
+                            <Link  to= '/dashboard/finance/reimburse' className="nav-link">
                                 <i className="nav-icon fas fa-list" style={{fontSize:"20px"}} />
                                 <p style={{color:"black", fontSize:"20px",fontFamily:"roboto"}}>Reimbursement</p>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
-                {/* /.sidebar-menu */}
             </div>
-            {/* /.sidebar */}
         </aside>
     );
 }

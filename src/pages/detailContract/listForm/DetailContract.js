@@ -6,9 +6,8 @@ import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
-import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
-
+import {Table} from "reactstrap";
 
 
 function DetailContract({findAll, contracts, error, isLoading}) {
@@ -22,8 +21,8 @@ function DetailContract({findAll, contracts, error, isLoading}) {
             <Header/>
             <Menu/>
             <div className="content-wrapper">
-                <h1 style={{color:"black", marginTop:"10px", textAlign:"center"}}> DETAIL KONTRAK</h1>
                 <div className="content-header">
+                    <h1 style={{color:"black", textAlign:"center", marginBottom:"5vh"}}> DETAIL KONTRAK</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
@@ -48,7 +47,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                         </div>
                                     </div>
                                     <div className="card-body table-responsive p-0" style={{height:"300px"}}>
-                                        <table className="table table-head-fixed text-nowrap">
+                                        <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
@@ -61,7 +60,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Habis Kontrak</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Penempatan</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Habis Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Action</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}> Edit</th>
 
                                             </tr>
                                             </thead>
@@ -92,12 +91,12 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.placement === null ? "belum ada data" : element.placement}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.endedContract === true ? "Tidak" : "Ya"}</td>
+                                                                {element.endedContract === true ? "Ya" : "Tidak"}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 <Link to={'/contract/'+ element.id }>
-                                                                    <Button style={{backgroundColor: "#292961"}}>
+                                                                    <button className="btn btn-outline-enigma">
                                                                         <FontAwesomeIcon icon={faEdit} className="float-left"/>
-                                                                    </Button>
+                                                                    </button>
                                                                 </Link>
 
                                                             </td>
@@ -106,7 +105,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 })
                                             }
                                             </tbody>
-                                        </table>
+                                        </Table>
                                     </div>
                                 </div>
                             </div>

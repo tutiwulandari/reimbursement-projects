@@ -10,11 +10,15 @@ import {
     SAVE_EMPLOYEE,
     SAVE_EMPLOYEE_SUCCESS,
     SAVE_EMPLOYEE_FAILURE,
-    FIND_VERIFIED_BY_ID,
-    FIND_VERIFIED_BY_ID_SUCCESS,
-    FIND_VERIFIED_BY_ID_FAILURE,
     SAVE_VERIFIED,
-    SAVE_VERIFIED_FAILURE, SAVE_VERIFIED_SUCCESS
+    SAVE_VERIFIED_FAILURE,
+    SAVE_VERIFIED_SUCCESS,
+    FIND_EMPLOYEE_BY_NAME,
+    FIND_EMPLOYEE_BY_NAME_SUCCESS,
+    FIND_EMPLOYEE_BY_NAME_FAILURE,
+    FIND_EMPLOYEE_BY_STATUS,
+    FIND_EMPLOYEE_BY_STATUS_SUCCESS,
+    FIND_EMPLOYEE_BY_STATUS_FAILURE
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -121,39 +125,6 @@ export const saveEmployee = (state = {...initialState}, action) => {
             }
     }
 }
-//
-// export const findVerifiedById = (state = {...initialState, data: false}, action) => {
-//     console.log("ACTION", action)
-//     switch (action.type) {
-//         case FIND_VERIFIED_BY_ID:
-//             return {
-//                 ...state,
-//                 data: null,
-//                 isLoading: true
-//             };
-//         case FIND_VERIFIED_BY_ID_SUCCESS:
-//             return {
-//                 data: action.data,
-//                 isLoading: false,
-//                 error: null
-//             }
-//         case FIND_VERIFIED_BY_ID_FAILURE:
-//             return {
-//                 data: false,
-//                 isLoading: false,
-//                 error: action.error
-//             }
-//         default:
-//             return {
-//                 ...state,
-//                 isLoading: false,
-//                 error: null
-//             }
-//     }
-// }
-//
-//
-
 export const saveVerified = (state = {...initialState}, action) => {
     switch (action.type) {
         case SAVE_VERIFIED:
@@ -169,6 +140,67 @@ export const saveVerified = (state = {...initialState}, action) => {
                 error: null
             };
         case SAVE_VERIFIED_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+
+export const findEmployeeByName = (state = {...initialState}, action) => {
+    switch (action.type) {
+        case FIND_EMPLOYEE_BY_NAME:
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case FIND_EMPLOYEE_BY_NAME_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case FIND_EMPLOYEE_BY_NAME_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+export const findEmployeeByStatus = (state = {...initialState}, action) => {
+    switch (action.type) {
+        case FIND_EMPLOYEE_BY_STATUS:
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case FIND_EMPLOYEE_BY_STATUS_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case FIND_EMPLOYEE_BY_STATUS_FAILURE:
             return {
                 data: null,
                 isLoading: false,

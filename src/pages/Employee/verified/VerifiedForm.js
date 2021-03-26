@@ -4,6 +4,7 @@ import {Link, useParams, useHistory} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findById, saveVerified} from "../../../actions/employeeAction";
+import swal from "sweetalert";
 
 function VerifiedForm({verified, findById, isLoading, saveVerified, error, savedVerified}) {
     const {id} = useParams()
@@ -23,6 +24,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
     },[id, verified])
 
 
+    //ngambil verfiedHc dari tabel employee
     useEffect(() => {
         if(verified) {
             setVerified(verified?.verifiedHc)
@@ -34,7 +36,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
         if(verified) {
             setVerifikasi( {
                 id: verified?.id,
-                 verifiedHc: verified?.verifiedHc === null? null : verified?.verifiedHc
+                verifiedHc: verified?.verifiedHc === null? null : verified?.verifiedHc
             })
         }
     }, [data])
@@ -58,6 +60,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
     useEffect(() => {
         if (savedVerified) {
+            swal("Berhasil","berhasil diverifikasi!", "success")
             history.push("/dashboard/hc/employee")
         }
     }, [savedVerified, history])
@@ -97,7 +100,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
                     <Link to="/dashboard/hc/employee">
                         <Button type="submit" onClick={handleSubmit}
-                                // disabled={setVerifikasi(false) }
+                            // disabled={setVerifikasi(false) }
                                 style={{backgroundColor: "#292961", color: "white"}}>
                             Submit
                         </Button>
@@ -106,7 +109,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
                 </Modal.Footer>
             </Modal.Dialog>
         </div>
-)
+    )
 }
 
 const mapStateToProps = (state) => {

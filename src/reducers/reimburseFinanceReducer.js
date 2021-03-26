@@ -1,15 +1,12 @@
 import {
-    FIND_ALL_REIMBURSE_FINANCE, 
-    FIND_ALL_REIMBURSE_FINANCE_FAILURE, 
+    FIND_ALL_REIMBURSE_FINANCE,
+    FIND_ALL_REIMBURSE_FINANCE_FAILURE,
     FIND_ALL_REIMBURSE_FINANCE_SUCCESS,
-    FIND_REIMBURSE_FINANCE_BY_ID, 
-    FIND_REIMBURSE_FINANCE_BY_ID_SUCCESS, 
+    FIND_REIMBURSE_FINANCE_BY_ID,
+    FIND_REIMBURSE_FINANCE_BY_ID_SUCCESS,
     FIND_REIMBURSE_FINANCE_BY_ID_FAILURE,
-    FIND_REIMBURSE_FINANCE_BY_CATEGORY, 
-    FIND_REIMBURSE_FINANCE_BY_CATEGORY_SUCCESS, 
-    FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE,
-    UPDATE_REIMBURSE_FINANCE, 
-    UPDATE_REIMBURSE_FINANCE_SUCCESS, 
+    UPDATE_REIMBURSE_FINANCE,
+    UPDATE_REIMBURSE_FINANCE_SUCCESS,
     UPDATE_REIMBURSE_FINANCE_FAILURE
 } from "../constants/actionConstant";
 
@@ -77,7 +74,7 @@ export const findReimburseFinanceById = (state = initialState, action) => {
 }
 
 
-export const updateReimburse = (state = initialState, action) => {
+export const updateReimburseFinance = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_REIMBURSE_FINANCE:
             return {

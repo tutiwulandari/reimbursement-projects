@@ -4,61 +4,73 @@ import { Link } from 'react-router-dom'
 import { findReimburseFinanceId, updateReimburseFinance } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
 import { isEmpty } from '../../../utils/validation';
-import { uploadFile } from './../../../actions/billAction';
-
+import { uploadFile, findBillById, updateFile } from './../../../actions/billAction';
 
 /* Just for UI */
+import { BiUpload } from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCheckSquare, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ModalFooter } from 'reactstrap';
 import Swal from 'sweetalert2'
+import { BiIdCard, BiUserPin, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
+import { FaRegTimesCircle } from "react-icons/fa"
+import { AiOutlineFilePdf } from "react-icons/ai"
 /* Just for UI */
 
 
 const ReimburseRowFinance = ({
-    element, index,
-    reimburse, findReimburseFinanceId,
-    uploadedFile, uploadFile,
-    updatedReimburse, updateReimburseFinance
-}) => {
+
+                                 element, index,
+                                 reimburse, findReimburseFinanceId,
+                                 uploadedFile, uploadFile,
+                                 updatedReimburse, updateReimburseFinance,
+                                 bill, findBillById,
+                                 updatedFile, updateFile
+                             }) => {
 
     const [file, setFile] = useState()
     const [status, setStatus] = useState()
 
-    console.log("status", updatedReimburse)
-    useEffect(() => {
-        if (status) {
-            console.log("status", status)
-            updateReimburseFinance(status)
-        }
-    },[status])
 
     useEffect(() => {
-        if (uploadedFile) {
-            if (uploadedFile?.data?.code == 200) {
+        if (updatedReimburse) {
+            window.location.reload();
+        }
+    }, [updatedReimburse])
+
+
+    useEffect(() => {
+        if (status) {
+            updateReimburseFinance(status)
+        }
+    }, [status])
+
+    useEffect(() => {
+        if (updatedFile) {
+            if (updatedFile?.data?.code === 200 || updatedFile?.data?.code === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
-                    text: 'Data berhasil diubah',
+                    text: 'Upload file berhasil',
                     showConfirmButton: false,
                     timer: 1500
                 })
             }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Something went wrong!',
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
-            }
+            // else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: 'Upload file gagal!',
+            //         showConfirmButton: false,
+            //         timer: 1500,
+            //     })
+            // }
         }
-    }, [uploadedFile])
+    }, [updatedFile])
 
 
     /* Tooltip */
@@ -77,24 +89,24 @@ const ReimburseRowFinance = ({
 
     const getId = id => {
         findReimburseFinanceId(id)
+        findBillById(id)
     }
-
 
     /* Handle Change File */
     const handleChangeFile = e => {
         setFile(e.target.files[0]);
     }
-    
+
     /* Handle Change Status */
     const handleChangeStatus = (value, id) => {
         if (value == "finance") {
             setStatus({
-                id: id,
+                id,
                 statusSuccess: false
             })
         } else {
             setStatus({
-                id: id,
+                id,
                 statusSuccess: true
             })
         }
@@ -110,26 +122,26 @@ const ReimburseRowFinance = ({
                     id: reimburse.id,
                     file: reader
                 }
-                uploadFile(result)
+                updateFile(result)
                 setModal2(!toggle2)
             }
             else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Something went wrong!',
+                    title: 'Error',
+                    text: 'File tidak boleh kosong!',
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1500,
                 })
             }
         }
         catch (err) {
             Swal.fire({
                 icon: 'error',
-                title: 'Ooops..',
+                title: 'Error',
                 text: err,
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
             })
         }
     }
@@ -141,31 +153,31 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                <select className="custom-select td-width text-enigma border-enigma" 
-                onChange={(e) => {
-                    handleChangeStatus(e.target.value, element.id)
-                }}>
-                    <option value="finance" selected={element?.statusOnFinance == true}> Waiting </option>
-                    <option value="success" selected={element?.statusSuccess == true}> Success </option>
+                <select className="custom-select td-width text-enigma border-enigma"
+                        onChange={(e) => {
+                            handleChangeStatus(e.target.value, element.id)
+                        }}>
+                    <option value="finance" selected={element?.statusOnFinance == true}> Proses </option>
+                    <option value="success" selected={element?.statusSuccess == true}> Selesai </option>
                 </select>
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
-                    onClick={() => {
-                        toggle();
-                        getId(element?.id);
-                    }}>
+                        onClick={() => {
+                            toggle();
+                            getId(element?.id);
+                        }}>
                     Detail
                 </button>
             </td>
             <td>
                 {element?.statusSuccess ?
                     <button className="btn btn-outline-enigma"
-                        onClick={() => {
-                            toggle2();
-                            getId(element?.id);
-                        }}>
-                        <FontAwesomeIcon icon={faUpload} />
+                            onClick={() => {
+                                toggle2();
+                                getId(element?.id);
+                            }}>
+                        <BiUpload size="1.2em" />
                     </button> : ""
                 }
             </td>
@@ -198,32 +210,33 @@ const ReimburseRowFinance = ({
                                     {
                                         reimburse?.statusOnHc ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin HC
-                                                </p>
+
+                                                <BiCheckboxChecked size="1.5em" /> Admin HC
+                                            </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin HC
-                                                </p>
-                                    }
+                                                <BiCheckbox size="1.5em" /> Admin HC
+                                            </p>                                    }
                                     {
                                         reimburse?.statusOnFinance ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Admin Finance
-                                                </p>
+                                                <BiCheckboxChecked size="1.5em" /> Admin Finance
+                                            </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Admin Finance
-                                                </p>
+                                                <BiCheckbox size="1.5em" /> Admin Finance
+                                            </p>
                                     }
                                     {
                                         reimburse?.statusSuccess ?
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-check-square-o" aria-hidden="true"></i> Done
-                                                </p>
+
+                                                <BiCheckboxChecked size="1.5em" /> Selesai
+                                            </p>
                                             :
                                             <p className="p-enigma-bold">
-                                                <i className="fa fa-square-o" aria-hidden="true"></i> Done
-                                                </p>
+                                                <BiCheckbox size="1.5em" /> Selesai
+                                            </p>
                                     }
                                 </>
                             </div>
@@ -232,15 +245,15 @@ const ReimburseRowFinance = ({
                         {/* Cost */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Cost</h5>
+                                <h5 className="text-enigma mb-3 bold">Biaya</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Klaim
+                                    <BiMoney size="1.3em" /> Biaya Klaim
                                 </p>
                                 <p className="p-enigma">{reimburse?.claimFee ? convert_to_rupiah(reimburse.claimFee) : ""}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-money" aria-hidden="true"></i> Biaya Reimburse
+                                    <BiMoney size="1.3em" /> Biaya Reimburse
                                 </p>
                                 <p className="p-enigma">{reimburse?.borneCost ? convert_to_rupiah(reimburse.borneCost) : ""}</p>
                             </div>
@@ -249,16 +262,16 @@ const ReimburseRowFinance = ({
                         {/* User */}
                         <div className="col-md-3">
                             <div className="row">
-                                <h5 className="text-enigma mb-3 bold">Employee</h5>
+                                <h5 className="text-enigma mb-3 bold">Karyawan</h5>
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-user-circle-o" aria-hidden="true"></i> Nama
-                                    </p>
+                                    <BiUserPin size="1.3em" /> Nama
+                                </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-address-card-o" aria-hidden="true"></i> NIP
-                                    </p>
+                                    <BiIdCard size="1.3em" /> NIP
+                                </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
@@ -267,20 +280,20 @@ const ReimburseRowFinance = ({
                     {/* Row Kedua */}
                     <div className="row mt-3 offset-md-1">
 
-                        <h5 className="text-enigma mb-3 bold">Date</h5>
+                        <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pengajuan
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Pengajuan
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Mulai
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Mulai
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
@@ -290,16 +303,16 @@ const ReimburseRowFinance = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Pencairan
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Pencairan
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <i className="fa fa-calendar-o" aria-hidden="true"></i> Tanggal Selesai
-                                    </p>
+                                    <BiCalendar size="1.3em" /> Tanggal Selesai
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>
@@ -327,16 +340,17 @@ const ReimburseRowFinance = ({
                                 reimburse?.statusSuccess ?
                                     <div className="col-md-12">
                                         <h6 className="text-enigma bold">Upload File</h6>
-                                        <p className="p-enigma mt-0 mb-3">*Format file PDF</p>
-                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" accept="application/pdf" />
+                                        <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
+                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control"/>
                                     </div> : ""
                             }
                             <hr />
                             <div className="col-md-12 mb-1">
                                 <button type="button" onClick={toggle2}
-                                    className="btn btn-outline-enigma pull-right">Cancel</button>
+
+                                        className="btn btn-outline-enigma pull-right">Cancel</button>
                                 <button type="button" onClick={handleSubmit}
-                                    className="btn btn-enigma pull-right mr-3">Upload</button>
+                                        className="btn btn-enigma pull-right mr-3">Upload</button>
                             </div>
                         </div>
                     </form>
@@ -353,11 +367,13 @@ const mapStateToProps = (state) => {
         reimburse: state.findReimburseFinanceById.data || [],
         isLoading: state.findReimburseFinanceById.isLoading,
         uploadedFile: state.uploadFile.data,
-        updatedReimburse: state.updateReimburse.data
+        updatedReimburse: state.updateReimburseFinance.data,
+        bill: state.findBillById.data,
+        updatedFile: state.updateFile.data
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance }
+const mapDispatchToProps = { findReimburseFinanceId, uploadFile, updateReimburseFinance, findBillById, updateFile }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseRowFinance);

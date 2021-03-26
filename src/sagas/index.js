@@ -1,28 +1,49 @@
-import { all } from 'redux-saga/effects'
-import { watchRegisterEmployee } from './registerSagas'
-import { watchUploadFile, watchBillById } from './billSaga'
-import { watchFindAllEmployee, watchFindEmployeeById, watchSaveEmployee, watchUpdateEmployee, watchSaveVerified } from './employeeSagas'
-import { watchLoginEmployee } from "./loginSagas";
-import { watchFindAllReimburse, watchFindReimburseById, watchFindReimburseByCategory } from './reimburseSagas';
-import { watchFindAllReimburseFinance, watchFindReimburseFinanceById, watchFindReimburseFinanceByCategory } from './reimburseFinanceSagas';
-import { watchFindAllCategory } from './categorySagas';
-import { watchFindAllGrade, watchFindGradeById, watchSaveGrade } from "./gradeSagas";
-import { watchFindAllContract, watchFindContractById, watchSaveContract, watchUpdateContract } from "./detailContractSagas";
-import { watchFindAllCount } from "./dashboardSagas";
-import { watchForgotPassword } from './forgotPasswordSagas';
+import {all} from 'redux-saga/effects'
+import {watchRegisterEmployee} from './registerSagas'
+import {
+    watchFindAllEmployee,
+    watchFindEmployeeById, watchFindEmployeeByName, watchFindEmployeeByStatus,
+    watchSaveEmployee, watchSaveVerified,
+    watchUpdateEmployee
+} from './employeeSagas'
+import {watchLoginEmployee} from "./loginSagas";
+import {
+    watchFindAllReimburse,
+    watchFindReimburseById,
+    watchFindReimburseByCategory,
+    watchUpdateReimburse
+} from './reimburseSagas';
+import {
+    watchFindAllReimburseFinance,
+    watchFindReimburseFinanceById,
+    watchFindReimburseFinanceByCategory, watchUpdateReimburseFinance
+} from './reimburseFinanceSagas';
+
+import {watchFindAllCategory} from './categorySagas';
+import {watchFindAllGrade, watchFindGradeById, watchSaveGrade} from "./gradeSagas";
+import {
+    watchFindAllContract,
+    watchFindContractById,
+    watchSaveContract,
+    watchUpdateContract
+} from "./detailContractSagas";
+import {watchFindAllCount} from "./dashboardSagas";
+import {watchForgotPassword} from './forgotPasswordSagas';
+import {watchBillById, watchUpdateFile, watchUploadFile} from "./billSagas";
 
 
 export default function* rootSaga() {
     yield all([
         watchLoginEmployee(), watchRegisterEmployee(), watchForgotPassword(),
-        watchFindAllEmployee(), watchFindEmployeeById(), watchUpdateEmployee(), watchSaveEmployee(),
-        watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),
-        watchFindAllReimburseFinance(), watchFindReimburseFinanceById(), watchFindReimburseFinanceByCategory(),
+        watchFindAllEmployee(), watchFindEmployeeById(), watchUpdateEmployee(), watchSaveEmployee(),watchFindEmployeeByName(),
+        watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),watchUpdateReimburse(),
         watchFindAllCategory(),
         watchFindAllGrade(), watchFindGradeById(), watchSaveGrade(),
-        watchFindAllContract(),watchFindContractById(), watchSaveContract(), watchUpdateContract(),
-        watchSaveVerified(),
+        watchFindAllContract(), watchFindContractById(), watchUpdateContract(), watchSaveContract(),
         watchFindAllCount(),
-        watchUploadFile(), watchBillById()
+        watchSaveVerified(),
+        watchUploadFile(), watchBillById(), watchUpdateFile(),
+        watchFindEmployeeByStatus(),
+        watchFindAllReimburseFinance(),  watchFindReimburseFinanceById(),  watchFindReimburseFinanceByCategory(),watchUpdateReimburseFinance(),
     ])
 }

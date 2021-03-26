@@ -1,5 +1,6 @@
 import React from "react";
 import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
+import {Link} from "react-router-dom";
 
 export default function Menu() {
     return (
@@ -19,16 +20,16 @@ export default function Menu() {
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
-                            <a href="/dashboard/hc" className="nav-link active" style={{backgroundColor:"#292961"}}>
+                            <Link to="/dashboard/hc" className="nav-link active" style={{backgroundColor:"#292961"}}>
                                 <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"black"}} />
                                 <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item has-treeview">
-                            <a href="/dashboard/hc/reimburse" className="nav-link">
+                            <Link to="/dashboard/hc/reimburse" className="nav-link">
                                 <i className="nav-icon fas fa-list" style={{fontSize:"20px"}} />
                                 <p style={{color:"black", fontSize:"20px",fontFamily:"roboto"}}>Reimbursement</p>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item has-treeview menu-open">
                             <a href="#" className="nav-link">
@@ -39,16 +40,22 @@ export default function Menu() {
                             </a>
                         <ul className="nav nav-treeview">
                             <li className="nav-item">
-                                <a href="/dashboard/hc/employee" className="nav-link">
-                                    <i className="far fa-circle nav-icon" />
-                                    <p style={{fontFamily:"roboto", fontSize:"16px"}}>List Karyawan</p>
-                                </a>
+                                <Link to="/dashboard/hc/employee" className="nav-link">
+                                    <i className="far fa-bar-chart nav-icon" />
+                                    <p style={{fontFamily:"roboto", fontSize:"18px"}}> Daftar Karyawan</p>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a href="/dashboard/hc/contract" className="nav-link">
-                                    <i className="far fa-circle nav-icon" />
-                                    <p style={{fontFamily:"roboto", fontSize:"16px"}}>Detail Kontrak</p>
-                                </a>
+                                <Link to="/dashboard/hc/contract" className="nav-link">
+                                    <i className="far fa-list-alt nav-icon"  />
+                                    <p style={{fontFamily:"roboto", fontSize:"18px"}}>Detail Kontrak</p>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/dashboard/hc/grade" className="nav-link">
+                                    <i className="far fa-list-alt nav-icon" />
+                                    <p style={{fontFamily:"roboto", fontSize:"18px"}}>Grade</p>
+                                </Link>
                             </li>
                         </ul>
                         </li>

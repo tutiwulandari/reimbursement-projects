@@ -1,46 +1,53 @@
-import {Modal, Button, Container, Form, FormGroup} from "react-bootstrap";
-import {Input, Label} from "reactstrap";
-import {Link, useParams, useHistory} from "react-router-dom";
+import {Input, Label, Spinner} from "reactstrap";
+import {useParams, useHistory} from "react-router-dom"
 import {connect} from "react-redux";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {findById, save} from "../../../actions/detailContractAction";
-import {findAll} from "../../../actions/employeeAction";
 import Header from "../../../dashboard/dashboardHc/Header";
 import Menu from "../../../dashboard/dashboardHc/Menu";
 import Footer from "../../../dashboard/dashboardHc/Footer";
+import "../../../assets/css/DetailContractFom.css"
+import swal from "sweetalert";
 
 
-function DetailContractForm({ contract, findById, isLoading, save, error, savedContract}) {
+function DetailContractForm({contract, findById, isLoading, save, error, savedContract}) {
 
     const {id} = useParams();
     const history = useHistory();
     const [data, setData] = useState({})
     const [employeeId, setEmployeeId] = useState("")
-    const [testFullname, setFullname] = useState({})
 
 
-
-    console.log("Error", error)
     let typeContract = ["PROBABITION", "PKWT"]
     let benefitRegistrationStatus = ["ON_PROCESS", "DONE"]
-    let endedContract = ["YA", "TIDAK"]
 
-    useEffect(() => {
-        if (data) {
-            console.log("DETAIL FORM DATA", data)
-        }
-    }, [data])
 
-    useEffect(() => {
-        if (contract) {
-            console.log("DETAIL FORM", contract)
-            setEmployeeId(contract.employeeId.id)
-        }
-    }, [contract])
 
     useEffect(() => {
         findById(id)
     }, [])
+
+    useEffect(() => {
+    }, [data])
+
+
+    useEffect(() => {
+        if (id && contract) {
+            setData({
+                id: contract?.id,
+                employeeId: contract.employeeId.id,
+                typeContract: contract.typeContract === null ? null : contract.typeContract,
+                benefitRegistrationStatus: contract.benefitRegistrationStatus === null ? null : contract?.benefitRegistrationStatus,
+                startDateContract: contract.startDateContract === null ? null : contract.startDateContract,
+                endDateContract: contract.endDateContract === null ? null : contract.endDateContract,
+                dateOfAcceptancePermanentEmployee: contract.dateOfAcceptancePermanentEmployee === null ? null : contract.dateOfAcceptancePermanentEmployee,
+                dateOfResignation: contract.dateOfResignation === null ? null : contract.dateOfResignation,
+                placement: contract.placement === null ? null : contract.placement,
+                endedContract: contract.endedContract === null ? null : contract.endedContract,
+            })
+        }
+    }, [id, contract])
+
 
 
     useEffect(() => {
@@ -51,153 +58,207 @@ function DetailContractForm({ contract, findById, isLoading, save, error, savedC
 
 
     useEffect(() => {
-       if(contract) {
-           setFullname({
-               id: contract?.id,
-               employeeId: contract?.employeeId.id,
-               typeContract: contract?.typeContract,
-               benefitRegistrationStatus: contract?.benefitRegistrationStatus,
-               startDateContract: contract?.startDateContract,
-               endDateContract: contract?.endDateContract,
-               dateOfAcceptancePermanentEmployee: contract?.dateOfAcceptancePermanentEmployee,
-               dateOfResignation: contract?.dateOfResignation,
-               placement: contract?.placement,
-               endedContract: contract?.endedContract
-           })
-       }
-    },[data])
-    console.log("COBA LAGI", testFullname)
-
-
-    useEffect(() => {
-        if (id && contract) {
-            setData(contract)
+        if (contract) {
+            console.log("DETAIL FORM", contract)
+            setEmployeeId(contract.employeeId.id)
         }
-    }, [id, contract])
+    }, [contract])
 
-
-    useEffect(() => {
-        if (savedContract) {
-            history.push("/dashboard/hc/contract")
-        }
-    }, [savedContract, history])
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log("SUBMITTTT")
-        save(testFullname)
-    }
-
-    console.log("REQUESS", data)
+    console.log("employee", employeeId)
 
 
     const handleChange = (event) => {
         let name = event.target.name
         let value = event.target.value
-        setFullname({...testFullname, [name]: value})
+        setData({...data, [name]: value})
     }
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log("CLICK")
+        save(data)
+    }
+
+    useEffect(() => {
+        if (savedContract) {
+            swal("Berhasil", "Data karyawan berhasil ditambahkan!", "success")
+            history.push("/dashboard/hc/contract")
+        }
+    }, [savedContract, history])
+
+    console.log("data", data)
+    // console.log("contract", contract)
+
 
     return (
         <div>
             <Header/>
             <Menu/>
-            <Modal.Dialog style={{marginTop: "30px"}}>
-                <Modal.Header closeButton style={{backgroundColor: "#292961"}}>
-                    <Modal.Title style={{color: "white"}}> Edit Detail Kontrak</Modal.Title>
-                </Modal.Header>
+            <div className="content-wrapper">
+                <div className=" text-center mt-0 ">
 
-                <Container>
-                    <div>
-                        {
-                            !isLoading ?
+                    <div className="row ">
+                        <div className="col-lg-7 mx-auto">
 
-                                <Form>
+                            <div className="card mt-5 mx-auto p-4 bg-light">
 
-                                    <FormGroup>
-                                        <Label> Status Asuransi</Label>
-                                        <Input onChange={handleChange} type="select"
-                                               name="benefitRegistrationStatus" value={data?.benefitRegistrationStatus}>
-                                            {
-                                                benefitRegistrationStatus.map((element, index) =>
-                                                    <option selected={element.id === data?.benefitRegistrationStatus} key={index} value={element}>
-                                                        {element}
-                                                    </option>
-                                                )
-                                            }
-                                        </Input>
-                                    </FormGroup>
+                                <div className="card-body bg-light" >
+                                    <h1>Edit Detail Kontrak</h1>
+                                    <hr/>
+                                    <div className="container">
+                                        {
+                                            !isLoading ?
+                                                <form  onSubmit={handleSubmit}>
+                                                    <div className="controls">
 
-                                    <FormGroup>
-                                        <Label> Tanggal Karyawan Tetap</Label>
-                                        <Input type="date" onChange={handleChange}
-                                               value={data?.dateOfAcceptancePermanentEmployee || ''}
-                                               name="dateOfAcceptancePermanentEmployee"/>
-                                    </FormGroup>
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Status Asuransi</Label>
+                                                                    <Input onChange={handleChange} type="select"
+                                                                           name="benefitRegistrationStatus" value={data?.benefitRegistrationStatus}>
+                                                                        <option selected disabled hidden>-- Choose --</option>
+                                                                        {
+                                                                            data?.benefitRegistrationStatus === null ?
+                                                                                benefitRegistrationStatus.map((element, index) =>
+                                                                                    <option key={index} value={element}>
+                                                                                        {element}
+                                                                                    </option>
+                                                                                ) : (
+                                                                                    benefitRegistrationStatus.map((element, index) =>
+                                                                                        <option
+                                                                                            selected={element === data?.benefitRegistrationStatus}
+                                                                                            key={index} value={element}>
+                                                                                            {element}
+                                                                                        </option>
+                                                                                    )
+                                                                                )
+                                                                        }
+                                                                    </Input>
+                                                                </div>
 
-                                    <FormGroup>
-                                        <Label> Tipe Kontrak </Label>
-                                        <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
-                                               name="typeContract">
-                                            {
-                                                typeContract.map((element, index) =>
-                                                    <option selected={ element.id === data?.typeContract} key={index} value={element} >
-                                                        {element}
-                                                    </option>
-                                                )
-                                            }
-                                        </Input>
-                                    </FormGroup>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Tipe Kontrak </Label>
+                                                                    <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
+                                                                           name="typeContract">
+                                                                        <option selected disabled hidden>-- Choose --</option>
+                                                                        {
+                                                                            data?.typeContract === null ?
+                                                                                typeContract.map((element, index) =>
+                                                                                    <option key={index} value={element}>
+                                                                                        {element}
+                                                                                    </option>
+                                                                                ) : (
+                                                                                    typeContract.map((element, index) =>
+                                                                                        <option selected={element === data?.typeContract}
+                                                                                                key={index}
+                                                                                                value={element}>
+                                                                                            {element}
+                                                                                        </option>
+                                                                                    )
+                                                                                )
+                                                                        }
+                                                                    </Input>
 
-                                    <FormGroup>
-                                        <Label> Tanggal Resign </Label>
-                                        <Input type="date" onChange={handleChange} value={testFullname?.dateOfResignation || ''}
-                                               name="dateOfResignation"/>
-                                    </FormGroup>
+                                                                </div>
 
-                                    <FormGroup>
-                                        <Label> Tanggal Mulai Kontrak </Label>
-                                        <Input type="date" onChange={handleChange} value={testFullname?.startDateContract || ''}
-                                               name="startDateContract"/>
-                                    </FormGroup>
+                                                            </div>
 
-                                    <FormGroup>
-                                        <Label> Tanggal Habis Kontrak </Label>
-                                        <Input type="date" onChange={handleChange} value={testFullname?.endDateContract || ''}
-                                               name="endDateContract"/>
-                                    </FormGroup>
+                                                        </div>
 
-                                    <FormGroup>
-                                        <Label> Penempatan</Label>
-                                        <Input onChange={handleChange} type="text" value={testFullname?.placement || ''}
-                                               name="placement"/>
-                                    </FormGroup>
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Tanggal Resign </Label>
+                                                                    <Input type="date" onChange={handleChange}
+                                                                           value={data?.dateOfResignation === null ? null : data?.dateOfResignation }
+                                                                           name="dateOfResignation"/>
 
-                                    <FormGroup>
-                                        <Label> Habis Kontrak</Label>
-                                        <Input type="select"  onChange={handleChange} name="endedContract">
-                                            <option value="true"> YA</option>
-                                            <option value="false"> TIDAK</option>
-                                        </Input>
-                                    </FormGroup>
-                                </Form> :
-                                <div>
-                                    Loading...
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Tanggal Mulai Kontrak </Label>
+                                                                    <Input type="date" onChange={handleChange}
+                                                                           value={data?.startDateContract  === null ? null : data?.startDateContract}
+                                                                           name="startDateContract"/>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Tanggal Habis Kontrak </Label>
+                                                                    <Input type="date" onChange={handleChange}
+                                                                           value={data?.endDateContract  === null ? null : data?.endDateContract} name="endDateContract"/>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Penempatan</Label>
+                                                                    <Input onChange={handleChange} type="text"
+                                                                           value={data.placement  === null ? null : data?.placement} name="placement"/>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
+                                                                    <Label> Habis Kontrak</Label>
+                                                                    <Input type="select" onChange={handleChange} name="endedContract">
+                                                                        <option selected disabled hidden>-- Choose --</option>
+                                                                        <option value={true}> YA</option>
+                                                                        <option value={false}>TIDAK</option>
+                                                                    </Input>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <Input type="submit" value="Simpan" onClick={handleSubmit} style={{backgroundColor: "#292961", color: "white"}}>
+                                                                    Simpan
+                                                                </Input>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </form> :
+                                              <Spinner animation="grow" delay="2000"/>
+                                        }
+
+
+                                    </div>
+
                                 </div>
-                        }
+
+                            </div>
+
+                        </div>
 
                     </div>
-                </Container>
-                <Modal.Footer>
-                    <Link to="/dashboard/hc/contract">
-                        <Button style={{backgroundColor: "black"}}>Back</Button>
-                    </Link>
 
-                    <Button type="submit" onClick={handleSubmit} style={{backgroundColor: "#292961", color: "white"}}>
-                        Submit
-                    </Button>
-                </Modal.Footer>
-            </Modal.Dialog>
+                </div>
+            </div>
             <Footer/>
+
         </div>
     )
 }
@@ -206,11 +267,11 @@ const mapStateToProps = (state) => {
     return {
         contract: state.findContractById.data || null,
         isLoading: state.findContractById.isLoading,
-        savedContract: state.savedContract,
-        // error: state.findContractById.error || state.savedContract.error,
+        savedContract: state.saveContract.data,
+        error: state.findContractById.error || state.saveContract.error,
         update: state.updateContract
     }
 }
-const mapDispatchToProps = {findById, save, findAll}
+const mapDispatchToProps = {findById, save}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContractForm)
