@@ -8,7 +8,7 @@ import Header from "../../../dashboard/dashboardHc/Header";
 import Menu from "../../../dashboard/dashboardHc/Menu";
 import Footer from "../../../dashboard/dashboardHc/Footer";
 import "../../../assets/css/EmployeeForm.css"
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 
 function EmployeeForm({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
@@ -50,7 +50,13 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
     useEffect(() => {
         if (savedEmployee) {
-            swal("Berhasil", "Data karyawan berhasil ditambahkan!", "success")
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Data karyawan berhasil ditambahkan!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push("/dashboard/hc/employee");
         }
     }, [savedEmployee, history])

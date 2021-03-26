@@ -4,7 +4,7 @@ import {Link, useParams, useHistory} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findById, saveVerified} from "../../../actions/employeeAction";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 function VerifiedForm({verified, findById, isLoading, saveVerified, error, savedVerified}) {
     const {id} = useParams()
@@ -60,7 +60,13 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
     useEffect(() => {
         if (savedVerified) {
-            swal("Berhasil","berhasil diverifikasi!", "success")
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'berhasil diverifikasi!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push("/dashboard/hc/employee")
         }
     }, [savedVerified, history])

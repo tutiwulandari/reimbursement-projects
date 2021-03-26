@@ -25,36 +25,6 @@ const ReimburseRow = ({
     reimburse, findReimburseId,
     bill, findBillById,
 }) => {
-    const [modal, setModal] = useState(false)
-    const [status, setStatus] = useState()
-    const toggle = () => setModal(!modal)
-
-
-    useEffect(() => {
-        if (updatedReimburse) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Update Success',
-                showConfirmButton: false,
-                timer: 1000
-            })
-        }
-
-    }, [updatedReimburse])
-
-    useEffect(() => {
-        if (status) {
-            updateReimburse(status)
-        }
-    },[status])
-
-const ReimburseRow = ({
-                          data, index,
-                          updateReimburse, updatedReimburse,
-                          reimburse, findReimburseId,
-                          bill, findBillById,
-                      }) => {
 
     const [modal, setModal] = useState(false)
     const [status, setStatus] = useState()
@@ -89,9 +59,8 @@ const ReimburseRow = ({
 
     /* Tooltip */
     const renderTooltip = props => (
-        <Tooltip {...props}>Berhasil di validasi admin finance</Tooltip>
+        <Tooltip {...props}>Has been validated by admin finance</Tooltip>
     );
-
 
 
     /* Handle Change Status */
@@ -138,9 +107,9 @@ const ReimburseRow = ({
                             <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
                         </OverlayTrigger> :
                         <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
-                                onChange={(e) => {
-                                    handleChangeStatus(e.target.value, data.id)
-                                }}>
+                            onChange={(e) => {
+                                handleChangeStatus(e.target.value, data.id)
+                            }}>
                             <option value="waiting" selected={data.statusOnHc == true}> Waiting</option>
                             <option value="accepted" selected={data.statusOnFinance == true}> Accepted</option>
                             <option value="rejected" selected={data.statusReject == true}> Rejected </option>
@@ -149,10 +118,10 @@ const ReimburseRow = ({
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
-                        onClick={() => {
-                            toggle();
-                            getId(data?.id);
-                        }}>
+                    onClick={() => {
+                        toggle();
+                        getId(data?.id);
+                    }}>
                     Detail
                 </button>
             </td>
