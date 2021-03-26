@@ -1,22 +1,26 @@
-import React, {useEffect} from 'react'
-import {connect} from "react-redux";
-import {findAllReimburse, findByCategory} from "../../actions/reimburseAction";
-import {findAllCategory} from '../../actions/categoryAction';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSortAmountDown} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect } from 'react'
+import { connect } from "react-redux";
+import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
+import { findAllCategory } from '../../actions/categoryAction';
+
+
+/* Just for UI */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
 import Header from "../../dashboard/dashboardHc/Header";
 import Menu from "../../dashboard/dashboardHc/Menu";
 import Footer from "../../dashboard/dashboardHc/Footer";
-import {Table} from "reactstrap";
+import { Table } from "reactstrap";
+/* Just for UI */
 
 
 function ReimburseList({
-                           reimbursements, findAllReimburse,
-                           categories, findAllCategory,
-                           findByCategory, rCategory,
-                           isLoading
-                       }) {
+    reimbursements, findAllReimburse,
+    categories, findAllCategory,
+    findByCategory, rCategory,
+    isLoading
+}) {
 
     const handleChangeCategory = (e) => {
         let value = e.target.value
@@ -31,14 +35,14 @@ function ReimburseList({
     return (
         <div>
 
-            <Header/>
-            <Menu/>
+            <Header />
+            <Menu />
 
             <div className="content-wrapper">
-                <h1 style={{color: "black", textAlign: "center"}}> Daftar Klaim</h1>
+                <h1 style={{ color: "black", textAlign: "center" }}> Daftar Klaim</h1>
                 <select className="custom-select rounded-pill text-enigma border-enigma"
-                        onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
-                    <option selected disabled hidden >Category</option>
+                    onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
+                    <option selected disabled hidden >Kategori</option>
                     {
                         categories.data?.map((category, index) => {
                             return (
@@ -48,29 +52,29 @@ function ReimburseList({
                     }
                 </select>
 
-                <div className="float-right" style={{marginRight: "5vh"}}>
+                <div className="float-right" style={{ marginRight: "5vh" }}>
                     <select className="custom-select rounded-pill text-enigma border-enigma">
                         <option selected disabled hidden>Status</option>
-                        <option>Waiting</option>
-                        <option>Accepted</option>
-                        <option>Success</option>
-                        <option>Rejected</option>
+                        <option>Menunggu</option>
+                        <option>Disetujui</option>
+                        <option>Selesai</option>
+                        <option>Ditolak</option>
                     </select>
                 </div>
                 <div className="content-header">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card" style={{height: "70vh"}}>
+                                <div className="card" style={{ height: "70vh" }}>
                                     <div className="card-header">
                                         <h3 className="card-title">
 
                                         </h3>
                                         <div className="card-tools">
-                                            <div className="input-group input-group-sm" style={{width: "150px"}}>
+                                            <div className="input-group input-group-sm" style={{ width: "150px" }}>
                                                 <input type="text" name="table_search"
-                                                       className="form-control float-right"
-                                                       placeholder="Search"/>
+                                                    className="form-control float-right"
+                                                    placeholder="Search" />
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
                                                         <i className="fas fa-search">
@@ -85,32 +89,32 @@ function ReimburseList({
 
                                     </div>
 
-                                    <div className="card-body table-responsive p-0" style={{height: "300px"}}>
+                                    <div className="card-body table-responsive p-0" style={{ height: "300px" }}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
-                                            <tr>
-                                                <th><FontAwesomeIcon icon={faSortAmountDown}/></th>
-                                                <th>Kategori Klaim</th>
-                                                <th>Karyawan</th>
-                                                <th>Status</th>
-                                                <th>Detail</th>
-                                            </tr>
+                                                <tr>
+                                                    <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
+                                                    <th>Kategori</th>
+                                                    <th>Karyawan</th>
+                                                    <th>Status</th>
+                                                    <th>Detail</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            {
-                                                isLoading ? "Loading" :
-                                                    rCategory.length == 0 ?
-                                                        reimbursements.data?.list?.map((element, index) => {
-                                                            return (
-                                                                <ReimburseRow index={index} data={element}/>
-                                                            )
-                                                        }) : rCategory?.length == 0 ? "Data is empty" :
-                                                        rCategory.map((value, key) => {
-                                                            return (
-                                                                <ReimburseRow index={key} data={value}/>
-                                                            )
-                                                        })
-                                            }
+                                                {
+                                                    isLoading ? "Loading" :
+                                                        rCategory.length == 0 ?
+                                                            reimbursements.data?.list?.map((element, index) => {
+                                                                return (
+                                                                    <ReimburseRow index={index} data={element} />
+                                                                )
+                                                            }) : rCategory?.length == 0 ? "Data is empty" :
+                                                                rCategory.map((value, key) => {
+                                                                    return (
+                                                                        <ReimburseRow index={key} data={value} />
+                                                                    )
+                                                                })
+                                                }
                                             </tbody>
                                         </Table>
                                     </div>
@@ -120,7 +124,7 @@ function ReimburseList({
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
@@ -136,6 +140,6 @@ const mapStateToProps = (state) => {
 }
 
 /* Action */
-const mapDispatchToProps = {findAllReimburse, findByCategory, findAllCategory}
+const mapDispatchToProps = { findAllReimburse, findByCategory, findAllCategory }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseList);

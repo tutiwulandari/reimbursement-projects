@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
-import { findAllReimburseFinance } from './../../../actions/reimburseFinanceAction';
+import { findAllReimburseFinance, findByCategory } from './../../../actions/reimburseFinanceAction';
+import { findAllCategory } from '../../../actions/categoryAction';
+
+
+/* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
 import Header from "../../../dashboard/dashboardHc/Header";
 import Footer from "../../../dashboard/dashboardHc/Footer";
 import { Table } from "reactstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+/* Just for UI */
 
 
-function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
+function ReimburseListFinance({
+    reimbursements, findAllReimburseFinance,
+    categories, findAllCategory,
+    findByCategory, rCategory,
+}) {
+
+    const handleChangeCategory = (e) => {
+        let value = e.target.value
+        findByCategory(value)
+    }
 
     useEffect(() => {
         findAllReimburseFinance()
+        findAllCategory()
     }, [])
 
     return (
@@ -24,8 +39,15 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                 <h1 style={{ color: "black", textAlign: "center" }}> DAFTAR KLAIM REIMBURSEMENT</h1>
 
                 <select className="custom-select rounded-pill text-enigma border-enigma"
-                    style={{ width: "30vh", marginLeft: "5vh" }}>
-                    <option value="">Category</option>
+                    onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
+                    <option value="">Kategori</option>
+                    {
+                        categories.data?.map((category, index) => {
+                            return (
+                                <option value={category.id}>{category.categoryName}</option>
+                            )
+                        })
+                    }
                 </select>
 
                 <div className="float-right" style={{ marginRight: "5vh" }}>
@@ -73,16 +95,22 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                                     <th>Karyawan</th>
                                                     <th>Status</th>
                                                     <th>Detail</th>
-                                                    <th>Upload</th>
+                                                    <th>Unggah</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
-                                                    reimbursements.data?.map((element, index) => {
-                                                        return (
-                                                            <ReimburseRowFinance element={element} index={index} />
-                                                        )
-                                                    })
+                                                    rCategory.length == 0 ?
+                                                        reimbursements.data?.map((element, index) => {
+                                                            return (
+                                                                <ReimburseRowFinance index={index} element={element} />
+                                                            )
+                                                        }) : rCategory?.length == 0 ? "Data is empty" :
+                                                            rCategory.map((value, key) => {
+                                                                return (
+                                                                    <ReimburseRowFinance index={key} element={value} />
+                                                                )
+                                                            })
                                                 }
                                             </tbody>
                                         </Table>
@@ -109,10 +137,12 @@ const mapStateToProps = (state) => {
     return {
         reimbursements: state.findAllReimburseFinance.data || [],
         isLoading: state.findAllReimburseFinance.isLoading,
+        categories: state.findAllCategory.data || [],
+        rCategory: state.findReimburseFinanceByCategory.data || [],
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findAllReimburseFinance }
+const mapDispatchToProps = { findAllReimburseFinance, findAllCategory, findByCategory }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseListFinance);
