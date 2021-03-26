@@ -17,7 +17,6 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
     }, [])
 
     return (
-<<<<<<< HEAD
         <div>
             <Header />
             <MenuFinance />
