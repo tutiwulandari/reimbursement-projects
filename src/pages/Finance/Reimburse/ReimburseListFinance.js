@@ -19,16 +19,14 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
             <div className="row mt-5">
                 <div className="col-md-2">
                     <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option value="">Category</option>
+                        <option value="">Kategori</option>
                     </select>
                 </div>
                 <div className="col-md-2">
                     <select className="custom-select rounded-pill text-enigma border-enigma">
                         <option>Status</option>
-                        <option>Waiting</option>
-                        <option>Accepted</option>
-                        <option>Success</option>
-                        <option>Rejected</option>
+                        <option>Proses</option>
+                        <option>Selesai</option>
                     </select>
                 </div>
                 <div className="offset-md-5 col-md-3">
@@ -42,8 +40,8 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                             <thead className="bg-enigma">
                                 <tr>
                                     <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
-                                    <th>Category</th>
-                                    <th>Employee</th>
+                                    <th>Kategori</th>
+                                    <th>Karyawan</th>
                                     <th>Status</th>
                                     <th>Detail</th>
                                     <th>Upload</th>
