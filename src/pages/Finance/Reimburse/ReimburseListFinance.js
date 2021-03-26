@@ -21,6 +21,41 @@ function ReimburseListFinance({
     findByCategory, rCategory,
 }) {
 
+    const [search, setSearch] = useState()
+    const [status, setStatus] = useState()
+    const [rSearch, setRSearch] = useState()
+    const [rStatus, setRStatus] = useState()
+
+    useEffect(() => {
+        if (search) {
+            setRSearch(reimbursements.data?.filter(r => r.employeeId.fullname == search))
+        }
+    }, [search])
+
+    useEffect(() => {
+        if (status) {
+            switch (status) {
+                case "selesai":
+                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == true))
+                    break;
+                case "proses":
+                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == false))
+                    break;
+                default:
+                    setRStatus(null)
+                    break;
+            }
+        }
+    }, [status])
+
+    const handleChangeStatus = (e) => {
+        setStatus(e.target.value)
+    }
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
     const handleChangeCategory = (e) => {
         let value = e.target.value
         findByCategory(value)
@@ -30,6 +65,7 @@ function ReimburseListFinance({
         findAllReimburseFinance()
         findAllCategory()
     }, [])
+
 
     return (
         <div>
@@ -51,12 +87,11 @@ function ReimburseListFinance({
                 </select>
 
                 <div className="float-right" style={{ marginRight: "5vh" }}>
-                    <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option>Status</option>
-                        <option>Menunggu</option>
-                        <option>Disetujui</option>
-                        <option>Sukses</option>
-                        <option>Ditolak</option>
+                    <select className="custom-select rounded-pill text-enigma border-enigma"
+                        onChange={handleChangeStatus}>
+                        <option value="all">Status</option>
+                        <option value="proses">Proses</option>
+                        <option value="selesai">Selesai</option>
                     </select>
                 </div>
 
@@ -72,9 +107,8 @@ function ReimburseListFinance({
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{ width: "150px" }}>
-                                                <input type="text" name="table_search"
-                                                    className="form-control float-right"
-                                                    placeholder="Search" />
+                                                <input type="text" name="table_search" className="form-control float-right" placeholder="Search"
+                                                    onChange={handleSearch} />
 
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
@@ -100,17 +134,29 @@ function ReimburseListFinance({
                                             </thead>
                                             <tbody>
                                                 {
-                                                    rCategory.length == 0 ?
-                                                        reimbursements.data?.map((element, index) => {
+                                                    rSearch && rSearch != "" ?
+                                                        rSearch?.map((element, index) => {
                                                             return (
                                                                 <ReimburseRowFinance index={index} element={element} />
                                                             )
-                                                        }) : rCategory?.length == 0 ? "Data is empty" :
-                                                            rCategory.map((value, key) => {
+                                                        }) :
+                                                        rStatus ?
+                                                            rStatus?.map((element, index) => {
                                                                 return (
-                                                                    <ReimburseRowFinance index={key} element={value} />
+                                                                    <ReimburseRowFinance index={index} element={element} />
                                                                 )
-                                                            })
+                                                            }) :
+                                                            rCategory.length == 0 ?
+                                                                reimbursements.data?.map((element, index) => {
+                                                                    return (
+                                                                        <ReimburseRowFinance index={index} element={element} />
+                                                                    )
+                                                                }) : rCategory?.length == 0 ? "Data is empty" :
+                                                                    rCategory.map((value, key) => {
+                                                                        return (
+                                                                            <ReimburseRowFinance index={key} element={value} />
+                                                                        )
+                                                                    })
                                                 }
                                             </tbody>
                                         </Table>

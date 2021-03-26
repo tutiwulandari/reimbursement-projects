@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { findAllReimburse, findByCategory } from "../../actions/reimburseAction";
 import { findAllCategory } from '../../actions/categoryAction';
@@ -22,6 +22,47 @@ function ReimburseList({
     isLoading
 }) {
 
+    const [search, setSearch] = useState()
+    const [status, setStatus] = useState()
+    const [rSearch, setRSearch] = useState()
+    const [rStatus, setRStatus] = useState()
+
+    useEffect(() => {
+        if (search) {
+            setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
+        }
+    }, [search])
+
+    useEffect(() => {
+        if (status) {
+            switch (status) {
+                case "menunggu":
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusOnHc == false))
+                    break;
+                case "disetujui":
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusOnHc == true))
+                    break;
+                case "selesai":
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusSuccess == true))
+                    break;
+                case "ditolak":
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusReject == true))
+                    break;
+                default:
+                    setRStatus(null)
+                    break;
+            }
+        }
+    }, [status])
+
+    const handleChangeStatus = (e) => {
+        setStatus(e.target.value)
+    }
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
     const handleChangeCategory = (e) => {
         let value = e.target.value
         findByCategory(value)
@@ -42,7 +83,7 @@ function ReimburseList({
                 <h1 style={{ color: "black", textAlign: "center" }}> Daftar Klaim</h1>
                 <select className="custom-select rounded-pill text-enigma border-enigma"
                     onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
-                    <option selected disabled hidden >Kategori</option>
+                    <option>Kategori</option>
                     {
                         categories.data?.map((category, index) => {
                             return (
@@ -53,12 +94,13 @@ function ReimburseList({
                 </select>
 
                 <div className="float-right" style={{ marginRight: "5vh" }}>
-                    <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option selected disabled hidden>Status</option>
-                        <option>Menunggu</option>
-                        <option>Disetujui</option>
-                        <option>Selesai</option>
-                        <option>Ditolak</option>
+                    <select className="custom-select rounded-pill text-enigma border-enigma"
+                        onChange={handleChangeStatus}>
+                        <option value="all">Status</option>
+                        <option value="menunggu">Menunggu</option>
+                        <option value="disetujui">Disetujui</option>
+                        <option value="selesai">Selesai</option>
+                        <option value="ditolak">Ditolak</option>
                     </select>
                 </div>
                 <div className="content-header">
@@ -72,9 +114,8 @@ function ReimburseList({
                                         </h3>
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{ width: "150px" }}>
-                                                <input type="text" name="table_search"
-                                                    className="form-control float-right"
-                                                    placeholder="Search" />
+                                                <input type="text" name="table_search" className="form-control float-right" placeholder="Search"
+                                                    onChange={handleSearch} />
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
                                                         <i className="fas fa-search">
@@ -102,18 +143,29 @@ function ReimburseList({
                                             </thead>
                                             <tbody>
                                                 {
-                                                    isLoading ? "Loading" :
-                                                        rCategory.length == 0 ?
-                                                            reimbursements.data?.list?.map((element, index) => {
+                                                    rSearch && rSearch != "" ?
+                                                        rSearch?.map((element, index) => {
+                                                            return (
+                                                                <ReimburseRow index={index} data={element} />
+                                                            )
+                                                        }) :
+                                                        rStatus ?
+                                                            rStatus?.map((element, index) => {
                                                                 return (
                                                                     <ReimburseRow index={index} data={element} />
                                                                 )
-                                                            }) : rCategory?.length == 0 ? "Data is empty" :
-                                                                rCategory.map((value, key) => {
+                                                            }) :
+                                                            rCategory.length == 0 ?
+                                                                reimbursements.data?.list?.map((element, index) => {
                                                                     return (
-                                                                        <ReimburseRow index={key} data={value} />
+                                                                        <ReimburseRow index={index} data={element} />
                                                                     )
-                                                                })
+                                                                }) : rCategory?.length == 0 ? "Data is empty" :
+                                                                    rCategory.map((value, key) => {
+                                                                        return (
+                                                                            <ReimburseRow index={key} data={value} />
+                                                                        )
+                                                                    })
                                                 }
                                             </tbody>
                                         </Table>
