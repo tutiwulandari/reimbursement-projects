@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faEdit} from "@fortawesome/free-solid-svg-icons";
@@ -22,15 +22,6 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
         findAll()
     }, []);
 
-    // useEffect(()=>{
-    //     findByName()
-    // }, [findByName])
-
-    // useEffect(() => {
-    //     if(searchName) {
-    //         employees = name
-    //     }
-    // }, []);
 
     useEffect(() => {
         setKaryawan({...employees})

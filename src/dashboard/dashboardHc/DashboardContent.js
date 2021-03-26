@@ -1,118 +1,164 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {findAll} from "../../actions/dashboardAction";
 import {connect} from "react-redux";
-import {Card, Col, Row} from "react-bootstrap";
+import {Card, Col, ProgressBar, Row} from "react-bootstrap";
 import ChartGender from "../../pages/chart/ChartGender";
+import Doughnut from "../../pages/doughnut";
+import  Image from "../../assets/image/dashboard.svg"
 
 function DashboardContent({findAll, dashboards, error, isLoading}) {
 
-    useEffect(()=> {
+    // const [test, setTest] = useState({
+    //     date: new Date()
+    // })
+
+    useEffect(() => {
         findAll()
     }, [])
 
+    const useDate = ()=> {
+        const locale = 'id'
 
-    return(
-      <div>
-          <div className="content-wrapper">
-              <div className="row">
-                  <div className="col-12">
-                      <div className="card"  style={{height:"70vh"}}>
-                          <div className="card-header">
+        const [today, setToday] = useState(new Date())
 
-                              <Row style={{marginTop:"5vh"}}>
-                                  <Col md={6} xl={4}>
-                                      <Card>
-                                          <Card.Body>
-                                              <h6 className='mb-4'>Jumlah Karyawan </h6>
-                                              <div className="row d-flex align-items-center">
-                                                  <div className="col-9">
-                                                      <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-arrow-up text-c-green f-30 m-r-5"/>
-                                                          {dashboards?.data?.countEmployee}
-                                                      </h3>
-                                                  </div>
-                                                  {/*<div className="col-3 text-right">*/}
-                                                  {/*    <p className="m-b-0">50%</p>*/}
-                                                  {/*</div>*/}
-                                              </div>
-                                              <div className="progress m-t-30" style={{height: '7px'}}>
-                                                  <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"/>
-                                              </div>
-                                          </Card.Body>
-                                      </Card>
-                                  </Col>
-                                  <Col md={6} xl={4}>
-                                      <Card>
-                                          <Card.Body>
-                                              <h6 className='mb-4'>Jumlah Karyawan Aktif</h6>
-                                              <div className="row d-flex align-items-center">
-                                                  <div className="col-9">
-                                                      <h3 className="f-w-300 d-flex align-items-center m-b-0">
-                                                          <i className="feather icon-arrow-down text-c-red f-30 m-r-5"/>
-                                                          {dashboards?.data?.countEmployeeActive}
-                                                      </h3>
-                                                  </div>
+        useEffect(() => {
+            const timer = setInterval( () => {
+                setToday(new Date())
+            }, 60 * 1000)
+            return () => {
+                clearInterval(timer)
+            }
+        })
 
-                                                  <div className="col-3 text-right">
-                                                      <h3 className="m-b-0">
-                                                          {/*<i> {dasboards?.data?.countDataDashboard} </i>*/}
-                                                      </h3>
-                                                  </div>
-                                              </div>
-                                              <div className="progress m-t-30" style={{height: '7px'}}>
-                                                  <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '35%'}} aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"/>
-                                              </div>
-                                          </Card.Body>
-                                      </Card>
-                                  </Col>
-                                  <Col xl={4}>
-                                      <Card>
-                                          <Card.Body>
-                                              <h6 className='mb-4'>Jumlah Klaim Reimburse</h6>
-                                              <div className="row d-flex align-items-center">
-                                                  <div className="col-9">
-                                                      <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-arrow-up text-c-green f-30 m-r-5"/>
-                                                          {dashboards?.data?.countEmployeeReimburse}
-                                                      </h3>
-                                                  </div>
+        const day = today.toLocaleDateString(locale, {weekday: 'long'})
+        const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, {month:'long'}, {year:'number'})}\n\n`
+        const hour = today.getHours();
+        const wish =  `Selamat ${(hour < 12 && 'Pagi') || (hour < 17 && 'Siang') || 'Malam'}, `;
 
-                                              </div>
-                                              <div className="progress m-t-30" style={{height: '7px'}}>
-                                                  <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '70%'}} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"/>
-                                              </div>
-                                          </Card.Body>
-                                      </Card>
-                                  </Col>
-                              </Row>
-                              <Row>
-                                  <Col>
-                                      <ChartGender/>
-                                  </Col>
-                              </Row>
-                          </div>
+        const time = today.toLocaleTimeString(locale,{hour:'numeric', hour12: true, minute:'numeric'})
+        return {
+            date,
+            time,
+            wish
+        }
+    }
 
-                      </div>
+    let year = new Date().getFullYear()
+    console.log("coba lagi", useDate())
 
+    return (
+        <div>
+            <div className="content-wrapper">
+                <Card>
+                    <div className="row">
+                        <div style={{height:"30vh", marginTop:"5vh"}}>
+                            <h3 style={{fontFamily:"roboto", marginLeft:"10vh"}}> {useDate().wish} Super Admin Enigmanians!
+                                <p>
+                                    {useDate().date}
+                                    {year} {''}
+                                    {useDate().time}
+                                </p>
+                            </h3>
+                            <div className="float-right" style={{marginTop:"-20vh", marginRight:"20vh"}}>
+                                <img src={Image} alt="image"/>
+                            </div>
+                        </div>
+                    </div>
+                </Card>
 
-                  </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div>
+                            {/*<div className="card-header">*/}
+                                <Row style={{marginTop: "5vh"}}>
+                                    <Col md={6} xl={6}>
+                                        {/*card */}
+                                        <Card>
+                                            <Card.Body>
+                                                <ChartGender/>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                    <Col md={6} xl={6}>
+                                        {/*card*/}
+                                        <Card>
+                                            <Card.Body>
+                                                <Doughnut/>
+                                                {/*<div className="tl-card px-0">*/}
+                                                {/*    <h3>Jumlah Karyawan </h3>*/}
+                                                {/*    <div data-v-d55cb4fc="" className="data-chart mt-3 px-4">*/}
+                                                {/*        <div data-v-8b9a2924="" data-v-d55cb4fc="" className="progress-chart">*/}
+                                                {/*            <div data-v-8b9a2924="" className="wrapper-progress-bar">*/}
+                                                {/*            <span data-v-8b9a2924="" title="Permanent :  3" className="data-fill" style={{width: "60%", backgroundColor: "rgb(0, 155, 222)"}}/>*/}
+                                                {/*                <span data-v-8b9a2924="" title="Contract :  1" className="data-fill" style={{width: "20%", backgroundColor: "rgb(249, 109, 1)"}}/>*/}
+                                                {/*            </div>*/}
 
+                                                            {/*<ProgressBar>*/}
+                                                            {/*    <ProgressBar striped variant="success" now={dashboards?.data?.counttEmployeePKWT} key={1} />*/}
+                                                            {/*    <ProgressBar variant="warning" now={dashboards?.data?.countEmployeeProbabition} key={2} />*/}
+                                                            {/*</ProgressBar>*/}
 
-              </div>
+                                                        {/*    <div data-v-8b9a2924="" className="bottom-text-progress">*/}
+                                                        {/*        <small data-v-8b9a2924="" className="mr-auto">0%</small>*/}
+                                                        {/*        <small data-v-8b9a2924="">100%</small>*/}
+                                                        {/*    </div>*/}
+                                                        {/*</div>*/}
 
+                                                {/*        <div data-v-d55cb4fc="" className="legend-custom-cart pb-4">*/}
+                                                {/*            <p data-v-d55cb4fc="" className="d-flex py-2">*/}
+                                                {/*                <span data-v-d55cb4fc="">Total</span>*/}
+                                                {/*                <span data-v-d55cb4fc="" className="ml-auto">5</span>*/}
+                                                {/*            </p>*/}
 
-          </div>
+                                                {/*            <p data-v-d55cb4fc="" className="d-flex py-2">*/}
+                                                {/*            <span data-v-d55cb4fc="" className="label-circle"*/}
+                                                {/*                  style={{backgroundColor: "rgb(0, 155, 222)", width:"2vh", height:"3vh"}}>{'\u00A0'}</span>*/}
+                                                {/*                <span data-v-d55cb4fc="">Permanent</span>*/}
+                                                {/*                <span data-v-d55cb4fc="" className="ml-auto">*/}
+                                                {/*            <span data-v-d55cb4fc="">3</span>*/}
+                                                {/*            <span data-v-d55cb4fc="" className="ml-3">60.0%</span>*/}
+                                                {/*            </span>*/}
+                                                {/*            </p>*/}
+                                                {/*            <p data-v-d55cb4fc="" className="d-flex py-2">*/}
+                                                {/*            <span data-v-d55cb4fc="" className="label-circle"*/}
+                                                {/*                  style={{backgroundColor: "rgb(249, 109,1)", width:"2vh", height:"3vh"}}>{'\u00A0'}</span>*/}
+                                                {/*                <span data-v-d55cb4fc="">Kontrak</span>*/}
+                                                {/*                <span data-v-d55cb4fc="" className="ml-auto">*/}
+                                                {/*            <span data-v-d55cb4fc="">1</span>*/}
+                                                {/*            </span>*/}
+                                                {/*                <span data-v-d55cb4fc="" className="ml-3">20.0%</span>*/}
 
-      </div>
+                                                {/*            </p>*/}
+
+                                                {/*        </div>*/}
+
+                                                {/*    </div>*/}
+
+                                                {/*</div>*/}
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            {/*</div>*/}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        dashboards : state.findAllCount.data || null,
-        error : state.findAllCount.error,
+        dashboards: state.findAllCount.data || null,
+        error: state.findAllCount.error,
         isLoading: state.findAllCount.isLoading
 
     }
 }
 
-const mapDispatchToProps = {findAll}
+const mapDispatchToProps =
+    {
+        findAll
+    }
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContent)
