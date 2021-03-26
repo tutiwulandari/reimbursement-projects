@@ -40,7 +40,7 @@ function ReimburseList({
                     setRStatus(reimbursements.data?.list?.filter(r => r.statusOnHc == false))
                     break;
                 case "disetujui":
-                    setRStatus(reimbursements.data?.list?.filter(r => r.statusOnHc == true))
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusOnHc == true && r.statusSuccess == false))
                     break;
                 case "selesai":
                     setRStatus(reimbursements.data?.list?.filter(r => r.statusSuccess == true))
