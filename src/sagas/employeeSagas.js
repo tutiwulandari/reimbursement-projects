@@ -6,8 +6,13 @@ import {
     FIND_ALL_EMPLOYEE_SUCCESS,
     FIND_EMPLOYEE_BY_ID,
     FIND_EMPLOYEE_BY_ID_FAILURE,
-    FIND_EMPLOYEE_BY_ID_SUCCESS, FIND_EMPLOYEE_BY_NAME, FIND_EMPLOYEE_BY_NAME_FAILURE,
+    FIND_EMPLOYEE_BY_ID_SUCCESS,
+    FIND_EMPLOYEE_BY_NAME,
+    FIND_EMPLOYEE_BY_NAME_FAILURE,
     FIND_EMPLOYEE_BY_NAME_SUCCESS,
+    FIND_EMPLOYEE_BY_STATUS,
+    FIND_EMPLOYEE_BY_STATUS_FAILURE,
+    FIND_EMPLOYEE_BY_STATUS_SUCCESS,
     FIND_VERIFIED_BY_ID,
     FIND_VERIFIED_BY_ID_FAILURE,
     FIND_VERIFIED_BY_ID_SUCCESS,
@@ -134,6 +139,27 @@ export function* findEmployeeByName(action) {
     yield put(result)
 }
 
+
+export function* findEmployeeByStatus(action) {
+    console.log("Find by name", action)
+    let model = action.model;
+    let result = yield axios
+        .post("/filter-status-employee", model)
+        .then(data=> {
+            return {
+                type: FIND_EMPLOYEE_BY_STATUS_SUCCESS,
+                data: data
+            }
+        })
+        .catch(error => {
+            return {
+                type: FIND_EMPLOYEE_BY_STATUS_FAILURE,
+                error: error
+            }
+        })
+    yield put(result)
+}
+
 export function* watchFindAllEmployee() {
     yield takeLatest(FIND_ALL_EMPLOYEE, findAllEmployee)
 }
@@ -156,4 +182,8 @@ export function* watchSaveVerified() {
 
 export function* watchFindEmployeeByName() {
     yield takeLatest(FIND_EMPLOYEE_BY_NAME, findEmployeeByName)
+}
+
+export function* watchFindEmployeeByStatus() {
+    yield takeLatest(FIND_EMPLOYEE_BY_STATUS, findEmployeeByStatus)
 }

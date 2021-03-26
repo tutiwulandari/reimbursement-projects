@@ -15,7 +15,10 @@ import {
     SAVE_VERIFIED_SUCCESS,
     FIND_EMPLOYEE_BY_NAME,
     FIND_EMPLOYEE_BY_NAME_SUCCESS,
-    FIND_EMPLOYEE_BY_NAME_FAILURE
+    FIND_EMPLOYEE_BY_NAME_FAILURE,
+    FIND_EMPLOYEE_BY_STATUS,
+    FIND_EMPLOYEE_BY_STATUS_SUCCESS,
+    FIND_EMPLOYEE_BY_STATUS_FAILURE
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -168,6 +171,36 @@ export const findEmployeeByName = (state = {...initialState}, action) => {
                 error: null
             };
         case FIND_EMPLOYEE_BY_NAME_FAILURE:
+            return {
+                data: null,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
+                data: null,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+export const findEmployeeByStatus = (state = {...initialState}, action) => {
+    switch (action.type) {
+        case FIND_EMPLOYEE_BY_STATUS:
+            return {
+                ...state,
+                data: null,
+                isLoading: true
+            }
+        case FIND_EMPLOYEE_BY_STATUS_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            };
+        case FIND_EMPLOYEE_BY_STATUS_FAILURE:
             return {
                 data: null,
                 isLoading: false,

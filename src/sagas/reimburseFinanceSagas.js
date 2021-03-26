@@ -10,7 +10,7 @@ import {
 } from "../constants/actionConstant";
 
 
-function* findAllRimburseFinance() {
+function* findAllReimburseFinance() {
     let result = yield axios
         .get('/reimburse/filter-status-finance')
         .then(response => {
@@ -29,7 +29,7 @@ function* findAllRimburseFinance() {
 }
 
 
-function* findRimburseFinanceById(action) {
+function* findReimburseFinanceById(action) {
     let result = yield axios.get(`/reimburse/${action.id}`)
         .then(response => {
             return ({
@@ -47,7 +47,7 @@ function* findRimburseFinanceById(action) {
 }
 
 
-function* findRimburseFinanceByCategory(action) {
+function* findReimburseFinanceByCategory(action) {
 
     let result = yield axios
         .post(`/reimburse/filter-category`, action.data)
@@ -93,15 +93,15 @@ function* updateReimburseFinance(action) {
 
 
 export function* watchFindAllReimburseFinance() {
-    yield takeLatest(FIND_ALL_REIMBURSE_FINANCE, findAllRimburseFinance)
+    yield takeLatest(FIND_ALL_REIMBURSE_FINANCE, findAllReimburseFinance)
 }
 
 export function* watchFindReimburseFinanceById() {
-    yield takeLatest(FIND_REIMBURSE_FINANCE_BY_ID, findRimburseFinanceById)
+    yield takeLatest(FIND_REIMBURSE_FINANCE_BY_ID, findReimburseFinanceById)
 }
 
 export function* watchFindReimburseFinanceByCategory() {
-    yield takeLatest(FIND_REIMBURSE_FINANCE_BY_CATEGORY, findRimburseFinanceByCategory)
+    yield takeLatest(FIND_REIMBURSE_FINANCE_BY_CATEGORY, findReimburseFinanceByCategory)
 }
 
 export function* watchUpdateReimburseFinance() {

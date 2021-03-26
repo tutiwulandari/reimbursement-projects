@@ -1,7 +1,7 @@
 import {
     FIND_ALL_EMPLOYEE,
     FIND_EMPLOYEE_BY_ID,
-    FIND_EMPLOYEE_BY_NAME,
+    FIND_EMPLOYEE_BY_NAME, FIND_EMPLOYEE_BY_STATUS,
     FIND_VERIFIED_BY_ID,
     SAVE_EMPLOYEE,
     SAVE_VERIFIED,
@@ -61,6 +61,14 @@ export function findByName(model) {
     console.log("find employee by name", model)
     return {
         type: FIND_EMPLOYEE_BY_NAME,
+        model
+    }
+}
+
+export function findEmployeeByStatus(model) {
+    console.log("find employee by status", model)
+    return {
+        type: FIND_EMPLOYEE_BY_STATUS,
         model
     }
 }

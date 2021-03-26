@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-import { findReimburseFinanceId, updateReimburseFinance } from '../../../actions/reimburseFinanceAction';
+import { Link } from 'react-router-dom'
+import { findReimburseFinanceId, updateReimburseFinance } from './../../../actions/reimburseFinanceAction';
 import { convert_to_rupiah, convert_date_format } from '../../../utils/converter';
-import { uploadFile, findBillById, updateFile } from '../../../actions/billAction';
+import { isEmpty } from '../../../utils/validation';
+import { uploadFile, findBillById, updateFile } from './../../../actions/billAction';
 
 
 /* Just for UI */
 import { BiUpload } from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faTimes  } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCheckSquare, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ModalFooter } from 'reactstrap';
 import Swal from 'sweetalert2'
 import { BiIdCard, BiUserPin, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
+import { FaRegTimesCircle } from "react-icons/fa"
+import { AiOutlineFilePdf } from "react-icons/ai"
 /* Just for UI */
 
 
@@ -32,13 +39,6 @@ const ReimburseRowFinance = ({
     useEffect(() => {
         if (updatedReimburse) {
             window.location.reload();
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Success',
-            //     text: 'Update Success',
-            //     showConfirmButton: false,
-            //     timer: 1000
-            // })
         }
     }, [updatedReimburse])
 
@@ -50,8 +50,8 @@ const ReimburseRowFinance = ({
     }, [status])
 
     useEffect(() => {
-        if (uploadedFile) {
-            if (uploadedFile?.data?.code == 200 || updatedFile?.data?.code == 200) {
+        if (updatedFile) {
+            if (updatedFile?.data?.code === 200 || updatedFile?.data?.code === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -60,17 +60,17 @@ const ReimburseRowFinance = ({
                     timer: 1500
                 })
             }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Something went wrong!',
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
-            }
+            // else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: 'Upload file gagal!',
+            //         showConfirmButton: false,
+            //         timer: 1500,
+            //     })
+            // }
         }
-    }, [uploadedFile])
+    }, [updatedFile])
 
 
     /* Tooltip */
@@ -116,43 +116,32 @@ const ReimburseRowFinance = ({
     const handleSubmit = () => {
         try {
             if (file) {
-                if (bill) {
-                    const reader = new FormData()
-                    reader.append('file', file)
-                    const result = {
-                        id: reimburse.id,
-                        file: reader
-                    }
-                    updateFile(result)
+                const reader = new FormData()
+                reader.append('file', file)
+                const result = {
+                    id: reimburse.id,
+                    file: reader
                 }
-                else {
-                    const reader = new FormData()
-                    reader.append('file', file)
-                    const result = {
-                        id: reimburse.id,
-                        file: reader
-                    }
-                    uploadFile(result)
-                }
+                updateFile(result)
                 setModal2(!toggle2)
             }
             else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Something went wrong!',
+                    title: 'Error',
+                    text: 'File tidak boleh kosong!',
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1500,
                 })
             }
         }
         catch (err) {
             Swal.fire({
                 icon: 'error',
-                title: 'Ooops..',
+                title: 'Error',
                 text: err,
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
             })
         }
     }
@@ -168,8 +157,8 @@ const ReimburseRowFinance = ({
                         onChange={(e) => {
                             handleChangeStatus(e.target.value, element.id)
                         }}>
-                    <option value="finance" selected={element?.statusOnFinance === true}> Waiting </option>
-                    <option value="success" selected={element?.statusSuccess === true}> Success </option>
+                    <option value="finance" selected={element?.statusOnFinance == true}> Proses </option>
+                    <option value="success" selected={element?.statusSuccess == true}> Selesai </option>
                 </select>
             </td>
             <td>
@@ -294,7 +283,7 @@ const ReimburseRowFinance = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Pengajuan
+                                    <BiCalendar size="1.3em" /> Tanggal Pengajuan
                                 </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
@@ -302,7 +291,7 @@ const ReimburseRowFinance = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Mulai
+                                    <BiCalendar size="1.3em" /> Tanggal Mulai
                                 </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
@@ -313,7 +302,7 @@ const ReimburseRowFinance = ({
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Pencairan
+                                    <BiCalendar size="1.3em" /> Tanggal Pencairan
                                 </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
@@ -321,7 +310,7 @@ const ReimburseRowFinance = ({
                             </div>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em"/> Tanggal Selesai
+                                    <BiCalendar size="1.3em" /> Tanggal Selesai
                                 </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
@@ -350,8 +339,8 @@ const ReimburseRowFinance = ({
                                 reimburse?.statusSuccess ?
                                     <div className="col-md-12">
                                         <h6 className="text-enigma bold">Upload File</h6>
-                                        <p className="p-enigma mt-0 mb-3">*Format file PDF</p>
-                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" accept="application/pdf" />
+                                        <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
+                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control"/>
                                     </div> : ""
                             }
                             <hr />

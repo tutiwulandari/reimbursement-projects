@@ -6,7 +6,7 @@ import {
     saveEmployee,
     updateEmployee,
     saveVerified,
-    findEmployeeByName
+    findEmployeeByName, findEmployeeByStatus
 } from "./employeeReducer";
 import { loginEmployee } from "./loginReducer";
 import { findAllReimburse, findReimburseById, findReimburseByCategory, updateReimburse } from './reimburseReducer';
@@ -30,6 +30,7 @@ const rootReducer = combineReducers({
     findAllReimburseFinance, findReimburseFinanceById,
     findEmployeeByName,
     uploadFile, findBillById, updateFile,
+    findEmployeeByStatus
 })
 
 export default rootReducer

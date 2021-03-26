@@ -56,7 +56,7 @@ const ReimburseRow = ({
 
     /* Tooltip */
     const renderTooltip = props => (
-        <Tooltip {...props}>Has been validated by admin finance</Tooltip>
+        <Tooltip {...props}>Berhasil di validasi admin finance</Tooltip>
     );
 
 

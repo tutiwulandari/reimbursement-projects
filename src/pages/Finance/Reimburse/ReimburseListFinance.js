@@ -21,7 +21,7 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
            <Header/>
            <MenuFinance/>
            <div className="content-wrapper">
-               <h1 style={{color:"black", textAlign:"center"}}> LIST KLAIM REIMBURSEMENT</h1>
+               <h1 style={{color:"black", textAlign:"center"}}> DAFTAR KLAIM REIMBURSEMENT</h1>
 
                        <select className="custom-select rounded-pill text-enigma border-enigma"
                                style={{width: "30vh", marginLeft: "5vh"}}>
@@ -31,10 +31,10 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                <div className="float-right" style={{marginRight: "5vh"}}>
                        <select className="custom-select rounded-pill text-enigma border-enigma">
                            <option>Status</option>
-                           <option>Waiting</option>
-                           <option>Accepted</option>
-                           <option>Success</option>
-                           <option>Rejected</option>
+                           <option>Menunggu</option>
+                           <option>Disetujui</option>
+                           <option>Sukses</option>
+                           <option>Ditolak</option>
                        </select>
                    </div>
 
@@ -72,14 +72,15 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                                <th>Kategori</th>
                                                <th>Karyawan</th>
                                                <th>Status</th>
-                                               <th>Action</th>
+                                               <th>Detail</th>
+                                               <th>Upload</th>
                                            </tr>
                                            </thead>
                                            <tbody>
                                            {
                                                reimbursements.data?.map((element, index) => {
                                                    return (
-                                                       <ReimburseRowFinance data={element} index={index}/>
+                                                       <ReimburseRowFinance element={element} index={index}/>
                                                    )
                                                })
                                            }
