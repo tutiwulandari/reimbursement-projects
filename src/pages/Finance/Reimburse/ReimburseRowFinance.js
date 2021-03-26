@@ -23,14 +23,13 @@ import { AiOutlineFilePdf } from "react-icons/ai"
 
 
 const ReimburseRowFinance = ({
-
-                                 element, index,
-                                 reimburse, findReimburseFinanceId,
-                                 uploadedFile, uploadFile,
-                                 updatedReimburse, updateReimburseFinance,
-                                 bill, findBillById,
-                                 updatedFile, updateFile
-                             }) => {
+    element, index,
+    reimburse, findReimburseFinanceId,
+    uploadedFile, uploadFile,
+    updatedReimburse, updateReimburseFinance,
+    bill, findBillById,
+    updatedFile, updateFile
+}) => {
 
     const [file, setFile] = useState()
     const [status, setStatus] = useState()
@@ -51,7 +50,7 @@ const ReimburseRowFinance = ({
 
     useEffect(() => {
         if (updatedFile) {
-            if (updatedFile?.data?.code === 200 || updatedFile?.data?.code === 200) {
+            if (updatedFile?.data?.code == 200 || updatedFile?.data?.code == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -60,15 +59,15 @@ const ReimburseRowFinance = ({
                     timer: 1500
                 })
             }
-            // else {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Error',
-            //         text: 'Upload file gagal!',
-            //         showConfirmButton: false,
-            //         timer: 1500,
-            //     })
-            // }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Upload file gagal!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            }
         }
     }, [updatedFile])
 
@@ -154,29 +153,29 @@ const ReimburseRowFinance = ({
             <td>{element.employeeId.fullname}</td>
             <td>
                 <select className="custom-select td-width text-enigma border-enigma"
-                        onChange={(e) => {
-                            handleChangeStatus(e.target.value, element.id)
-                        }}>
+                    onChange={(e) => {
+                        handleChangeStatus(e.target.value, element.id)
+                    }}>
                     <option value="finance" selected={element?.statusOnFinance == true}> Proses </option>
                     <option value="success" selected={element?.statusSuccess == true}> Selesai </option>
                 </select>
             </td>
             <td>
                 <button className="btn btn-outline-enigma mr-3"
-                        onClick={() => {
-                            toggle();
-                            getId(element?.id);
-                        }}>
+                    onClick={() => {
+                        toggle();
+                        getId(element?.id);
+                    }}>
                     Detail
                 </button>
             </td>
             <td>
                 {element?.statusSuccess ?
                     <button className="btn btn-outline-enigma"
-                            onClick={() => {
-                                toggle2();
-                                getId(element?.id);
-                            }}>
+                        onClick={() => {
+                            toggle2();
+                            getId(element?.id);
+                        }}>
                         <BiUpload size="1.2em" />
                     </button> : ""
                 }
@@ -210,13 +209,13 @@ const ReimburseRowFinance = ({
                                     {
                                         reimburse?.statusOnHc ?
                                             <p className="p-enigma-bold">
-
                                                 <BiCheckboxChecked size="1.5em" /> Admin HC
                                             </p>
                                             :
                                             <p className="p-enigma-bold">
                                                 <BiCheckbox size="1.5em" /> Admin HC
-                                            </p>                                    }
+                                            </p>
+                                    }
                                     {
                                         reimburse?.statusOnFinance ?
                                             <p className="p-enigma-bold">
@@ -230,13 +229,12 @@ const ReimburseRowFinance = ({
                                     {
                                         reimburse?.statusSuccess ?
                                             <p className="p-enigma-bold">
-
                                                 <BiCheckboxChecked size="1.5em" /> Selesai
-                                            </p>
+                                        </p>
                                             :
                                             <p className="p-enigma-bold">
                                                 <BiCheckbox size="1.5em" /> Selesai
-                                            </p>
+                                        </p>
                                     }
                                 </>
                             </div>
@@ -265,63 +263,63 @@ const ReimburseRowFinance = ({
                                 <h5 className="text-enigma mb-3 bold">Karyawan</h5>
                                 <p className="p-enigma-bold mb-0">
                                     <BiUserPin size="1.3em" /> Nama
-                                </p>
+                                    </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.fullname}</p>
                             </div>
                             <div className="row">
                                 <p className="p-enigma-bold mb-0">
                                     <BiIdCard size="1.3em" /> NIP
-                                </p>
+                                    </p>
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
-                    </div>
+                    </div >
 
                     {/* Row Kedua */}
-                    <div className="row mt-3 offset-md-1">
+                    < div className="row mt-3 offset-md-1" >
 
                         <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Pengajuan
-                                </p>
+                                    </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
-                            </div>
+                            </div >
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Mulai
-                                </p>
+                                    </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
-                            </div>
-                        </div>
+                            </div >
+                        </div >
 
                         <div className="row">
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Pencairan
-                                </p>
+                                    </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
-                            </div>
+                            </div >
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Selesai
-                                </p>
+                                    </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>
-                            </div>
-                        </div>
+                            </div >
+                        </div >
 
-                    </div>
-                </ModalBody>
-            </Modal>
+                    </div >
+                </ModalBody >
+            </Modal >
 
 
 
@@ -341,22 +339,22 @@ const ReimburseRowFinance = ({
                                     <div className="col-md-12">
                                         <h6 className="text-enigma bold">Upload File</h6>
                                         <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
-                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control"/>
+                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" />
                                     </div> : ""
                             }
                             <hr />
                             <div className="col-md-12 mb-1">
                                 <button type="button" onClick={toggle2}
 
-                                        className="btn btn-outline-enigma pull-right">Cancel</button>
+                                    className="btn btn-outline-enigma pull-right">Cancel</button>
                                 <button type="button" onClick={handleSubmit}
-                                        className="btn btn-enigma pull-right mr-3">Upload</button>
+                                    className="btn btn-enigma pull-right mr-3">Upload</button>
                             </div>
                         </div>
                     </form>
                 </ModalBody>
             </Modal>
-        </tr>
+        </tr >
     )
 }
 

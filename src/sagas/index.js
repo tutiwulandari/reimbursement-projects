@@ -32,6 +32,7 @@ import {watchForgotPassword} from './forgotPasswordSagas';
 import {watchBillById, watchUpdateFile, watchUploadFile} from "./billSagas";
 
 
+
 export default function* rootSaga() {
     yield all([
         watchLoginEmployee(), watchRegisterEmployee(), watchForgotPassword(),
@@ -45,5 +46,6 @@ export default function* rootSaga() {
         watchUploadFile(), watchBillById(), watchUpdateFile(),
         watchFindEmployeeByStatus(),
         watchFindAllReimburseFinance(),  watchFindReimburseFinanceById(),  watchFindReimburseFinanceByCategory(),watchUpdateReimburseFinance(),
+        watchUploadFile(), watchBillById(), watchUpdateFile()
     ])
 }

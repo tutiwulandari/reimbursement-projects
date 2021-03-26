@@ -16,7 +16,7 @@ import { findAllContract, findContractById, updateContract, saveContract } from 
 import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
 import { findAllReimburseFinance, findReimburseFinanceById, updateReimburseFinance } from './reimburseFinanceReducer';
-import {findBillById, updateFile, uploadFile} from "../actions/billAction";
+import { uploadFile, findBillById, updateFile } from './billReducer';
 
 const rootReducer = combineReducers({
     registerEmployees, loginEmployee, forgotPassword,

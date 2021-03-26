@@ -81,6 +81,7 @@ function* updateReimburseFinance(action) {
             data: response
         };
     }).catch(err => {
+        console.log("status error", err);
         return {
             type: UPDATE_REIMBURSE_FINANCE_FAILURE,
             error: err
