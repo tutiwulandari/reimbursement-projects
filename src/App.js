@@ -15,38 +15,6 @@ import 'reimburse.svg'
 import Error404 from './pages/Error/Error404/Error404';
 
 
-function filter(route, index) {
-    let path = route.path
-    switch (path) {
-        case "dashboard/hc":
-            if (localStorage.getItem('role') != "1") {
-                <Route key={index} path='*' exact={false}>
-                    <Error404 />
-                </Route>
-            }
-            else {
-                <Route key={index} path={route.path} exact={route.exact}>
-                    {route.component}
-                </Route>
-            }
-            break;
-        case "dashboard/finance":
-            if (localStorage.getItem('role') != "2") {
-                <Route key={index} path='*' exact={false}>
-                    <Error404 />
-                </Route>
-            }
-            else {
-                <Route key={index} path={route.path} exact={route.exact}>
-                    {route.component}
-                </Route>
-            }
-            break;
-        default:
-            break;
-    }
-}
-
 function App() {
     return (
         <div >
@@ -58,6 +26,31 @@ function App() {
                                 <Route key={index} path={route.path} exact={route.exact}>
                                     {route.component}
                                 </Route>)
+
+
+                            // routes.map((route, index) => {
+                            //     let path = route.path
+
+                            //     if (path.match("dashboard/hc")) {
+                            //         if (localStorage.getItem('role') == "1") {
+                            //             <Route key={index} path={route.path} exact={route.exact}>
+                            //                 {route.component}
+                            //             </Route>
+                            //         }
+                            //         else {
+                            //             <Route key={index} path='*' exact={false}>
+                            //                 <Error404 />
+                            //             </Route>
+                            //         }
+                            //     }
+                            //     else {
+                            //         <Route key={index} path='*' exact={false}>
+                            //             <Error404 />
+                            //         </Route>
+                            //     }
+                            // })
+
+
                         }
                     </Switch>
                 </Router>
