@@ -15,11 +15,12 @@ import { findAllGrade, findGradeById, saveGrade, updateGrade } from "./gradeRedu
 import { findAllContract, findContractById, updateContract, saveContract } from "./detailContractReducer";
 import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
+import { resetPassword } from './resetPasswordReducer';
 import { findAllReimburseFinance, findReimburseFinanceById, updateReimburseFinance, findReimburseFinanceByCategory } from './reimburseFinanceReducer';
 import { uploadFile, findBillById, updateFile } from './billReducer';
 
 const rootReducer = combineReducers({
-    registerEmployees, loginEmployee, forgotPassword,
+    registerEmployees, loginEmployee, forgotPassword, resetPassword,
     findAllEmployee, findEmployeeById, saveEmployee, updateEmployee,saveVerified,
     findAllReimburse, findReimburseById, findReimburseByCategory, updateReimburseFinance,
     findAllCategory, updateReimburse,

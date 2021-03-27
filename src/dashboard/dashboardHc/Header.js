@@ -1,7 +1,17 @@
+import { LocalGasStationOutlined } from "@material-ui/icons";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import ResetPassword from "../../pages/resetPassword";
 
 export default function Header() {
+
+    const history = useHistory();
+    function logout() {
+        localStorage.removeItem('email')
+        localStorage.removeItem('role')
+        history.push("/")
+    }
+
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light" style={{backgroundColor:"#292961"}}>
             {/* Left navbar links */}
@@ -27,9 +37,9 @@ export default function Header() {
                         <div className="dropdown-divider" />
                         <ResetPassword/>
                         <div className="dropdown-divider" />
-                        <a href="/" className="dropdown-item">
+                        <button onClick={logout} className="dropdown-item">
                            Logout
-                        </a>
+                        </button>
                     </div>
                 </li>
 

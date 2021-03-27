@@ -1,21 +1,37 @@
-import {Modal, Button, Container, Form} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import {useState} from "react";
+import { useEffect, useState } from "react";
+import { Modal, Button, Container, Form } from "react-bootstrap";
+import { resetPassword } from '../../actions/resetPasswordAction';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux"
+import Swal from 'sweetalert2'
 
-function ResetPassword() {
-    const [values, setValues] =useState({
-        password:"",
-        confirmPassword:""
+
+function ResetPassword({ status, resetPassword }) {
+
+    useEffect(() => {
+        if (status) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: 'Ubah kata sandi berhasil',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    },[status])
+
+    const [data, setData] = useState({
+        email: localStorage.getItem('email'),
+        password: ""
     })
 
-    const[error, setError] = useState({})
-    const [show, setShow] = useState(false);
+    const [error, setError] = useState({})
+    const [show, setShow] = useState(false)
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const textDanger = {color: "red", fontSize: "12px"}
+    const textDanger = { color: "red", fontSize: "12px" }
 
 
-    //Modal
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -23,20 +39,40 @@ function ResetPassword() {
         let error_ = {};
         let isValid_ = true;
 
-        if(password.length < 8) {
+        if (password.length < 8) {
             isValid_ = false;
-            error_["password"] = "please enter your password"
+            error_["password"] = "Kata sandi minimal 8 karakter"
         }
 
-        if(password !== confirmPassword ) {
+        if (password !== confirmPassword) {
             isValid_ = false;
-            error_["confirm_password"] = "please check your password confirm";
+            error_["confirm_password"] = "Konfirmasi kata sandi tidak cocok";
         }
         setError(error_)
         return isValid_
     }
 
-    return(
+
+    function handleChange(e) {
+        const key = e.target.name
+        const value = e.target.value
+        if (key == "password") {
+            setPassword(value)
+            setData({ ...data, [key]: value })
+        }
+        if (key == "confirmPassword") {
+            setConfirmPassword(value)
+        }
+    }
+
+    const handleSubmit = () => {
+        if (validate()) {
+            resetPassword(data)
+            setShow(false)
+        }
+    }
+
+    return (
         <div>
             <Button variant="white" onClick={handleShow}>
                 Reset Password
@@ -49,30 +85,39 @@ function ResetPassword() {
 
                 <Container>
                     <Form>
-                        <Form.Group controlId="formBasicPassword" style={{marginTop:"10px"}}>
+                        <Form.Group controlId="formBasicPassword" style={{ marginTop: "10px" }}>
                             <Form.Label >Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" name="password"
-                          />
+                            <Form.Control onChange={handleChange} type="password" placeholder="Enter password" name="password"
+                            />
                         </Form.Group>
                         <div style={textDanger}>{error.password}</div>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="confirmPassword"/>
+                            <Form.Control onChange={handleChange} type="password" placeholder="Password" name="confirmPassword" />
                         </Form.Group>
                         <div style={textDanger}>{error.confirm_password}</div>
                     </Form>
                 </Container>
 
                 <Modal.Footer>
-                    <Link to="/dashboard/hc">
-                        <Button style={{backgroundColor:"black"}}>Back</Button>
-                    </Link>
-                    <Button type="submit" style={{backgroundColor:"#292961"}}>Save</Button>
+                    <Button onClick={handleSubmit} type="submit" style={{ backgroundColor: "#292961" }}>Reset</Button>
+                    <Button onClick={handleClose} style={{ backgroundColor: "white", borderColor: "#292961", color: "#292961" }}>Batal</Button>
                 </Modal.Footer>
             </Modal>
         </div>
     )
 }
 
-export default ResetPassword;
+/* Reducer */
+const mapStateToProps = (state) => {
+    return {
+        status: state.resetPassword.data,
+        isLoading: state.resetPassword.isLoading,
+    }
+}
+
+/* Action */
+const mapDispatchToProps = { resetPassword }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)
