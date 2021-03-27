@@ -7,8 +7,7 @@ export default function Header() {
 
     const history = useHistory();
     function logout() {
-        localStorage.removeItem('email')
-        localStorage.removeItem('role')
+        localStorage.clear()
         history.push("/")
     }
 
