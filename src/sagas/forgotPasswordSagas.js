@@ -12,7 +12,7 @@ import {
 function* forgotPassword(action) {
     console.log("action type",action.type);
     console.log("action data",action.data);
-    let result = yield axios
+    let result = yield axios     
         .post('/forgot-password', action.data)
         .then(response => {
             console.log("response from saga", response);
