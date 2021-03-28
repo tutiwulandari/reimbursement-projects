@@ -5,6 +5,8 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findById, saveVerified} from "../../../actions/employeeAction";
 import swal from "sweetalert";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function VerifiedForm({verified, findById, isLoading, saveVerified, error, savedVerified}) {
     const {id} = useParams()
@@ -12,6 +14,12 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
     const [data, setData] = useState({})
     const [testVerified, setVerified] = useState({})
     const[verifikasi, setVerifikasi] = useState({})
+
+
+    //Modal
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true)
 
     useEffect( () => {
         findById(id)
@@ -36,12 +44,10 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
         if(verified) {
             setVerifikasi( {
                 id: verified?.id,
-                verifiedHc: verified?.verifiedHc === null? null : verified?.verifiedHc
+                verifiedHc: verified?.verifiedHc
             })
         }
     }, [data])
-
-    console.log("COBA YAA", verifikasi)
 
 
     const handleSubmit = (event) => {
@@ -56,7 +62,7 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
         setVerifikasi({...verifikasi, [name]: value})
     }
 
-    console.log("verifikasi", verifikasi)
+    console.log("verifikasi", testVerified)
 
     useEffect(() => {
         if (savedVerified) {
@@ -67,7 +73,11 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
     return (
         <div>
-            <Modal.Dialog style={{marginTop: "30px"}}>
+            <button className="btn btn-outline-enigma" disabled={verifikasi?.verifiedHc === true}>
+                <FontAwesomeIcon icon={faCheck} onClick={handleShow}/>
+            </button>
+
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton style={{backgroundColor: "#292961"}}>
                     <Modal.Title style={{color: "white"}}> Status Registrasi Karyawan</Modal.Title>
                 </Modal.Header>
@@ -100,14 +110,13 @@ function VerifiedForm({verified, findById, isLoading, saveVerified, error, saved
 
                     <Link to="/dashboard/hc/employee">
                         <Button type="submit" onClick={handleSubmit}
-                            // disabled={setVerifikasi(false) }
                                 style={{backgroundColor: "#292961", color: "white"}}>
                             Submit
                         </Button>
                     </Link>
 
                 </Modal.Footer>
-            </Modal.Dialog>
+            </Modal>
         </div>
     )
 }

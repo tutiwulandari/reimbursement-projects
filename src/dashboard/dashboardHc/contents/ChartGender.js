@@ -1,7 +1,7 @@
-import {findAll} from "../../actions/dashboardAction";
+import {findAll} from "../../../actions/dashboardAction";
 import {connect} from "react-redux";
 import {useEffect} from "react";
-import {Doughnut} from 'react-chartjs-2';
+import { Pie} from 'react-chartjs-2';
 
 function ChartGender({findAll, dashboards, error, isLoading}) {
 
@@ -10,19 +10,19 @@ function ChartGender({findAll, dashboards, error, isLoading}) {
     }, [])
 
     const state = {
-        labels: ['PKWT', 'PROBABITION'],
+        labels: ['PEREMPUAN', 'LAKI-LAKI'],
         datasets: [
             {
-                label: 'Tipe Kontrak',
+                label: 'Jenis Kelamin',
                 backgroundColor: [
-                    '#B21F00',
-                    '#C9DE00',
+                    '#292961',
+                    '#FFDEAD',
                 ],
                 hoverBackgroundColor: [
-                    '#501800',
-                    '#4B5000',
+                    '#000080',
+                    '#FFDEAD',
                 ],
-                data: [dashboards?.data?.countEmployeePKWT, dashboards?.data?.countEmployeeProbabition]
+                data: [dashboards?.data?.countEmployeeFemale, dashboards?.data?.countEmployeeMale]
             }
         ]
     }
@@ -30,12 +30,12 @@ function ChartGender({findAll, dashboards, error, isLoading}) {
     return(
         <div>
 
-            <Doughnut
+            <Pie
                 data={state}
                 options={{
                     title:{
                         display:true,
-                        text:'Jumlah Karyawan Berdasarkan Tipe Kontrak',
+                        text:'Jumlah Karyawan Berdasarkan Jenis Kelamin',
                         fontSize:20
                     },
                     legend:{

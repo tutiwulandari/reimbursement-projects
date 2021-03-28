@@ -2,7 +2,7 @@ import React from "react";
 import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
 import {Link} from "react-router-dom";
 
-export default function Menu() {
+export default function MenuHc() {
     return (
         <aside className="main-sidebar sidebar-light-gray-dark elevation-4" style={{backgroundColor:"white"}}>
             <a href="index3.html" className="brand-link" style={{padding:"20px"}}>

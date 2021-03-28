@@ -94,14 +94,14 @@ const ReimburseRow = ({
 
     return (
         <tr>
-            <td>{index + 1}</td>
-            <td>{data.categoryId.categoryName}</td>
-            <td>{data.employeeId.fullname}</td>
-            <td>
+            <td style={{textAlign:"center"}}>{index + 1}</td>
+            <td style={{textAlign:"center"}}>{data.categoryId.categoryName}</td>
+            <td style={{textAlign:"center"}}>{data.employeeId.fullname}</td>
+            <td style={{textAlign:"center"}}>
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
+                            <button className="btn btn-outline-enigma" style={{ width: "125px"}}> Success </button>
                         </OverlayTrigger> :
                         <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
                                 onChange={(e) => {
@@ -113,8 +113,8 @@ const ReimburseRow = ({
                         </select>
                 }
             </td>
-            <td>
-                <button className="btn btn-outline-enigma mr-3"
+            <td style={{textAlign:"center"}}>
+                <button  className="btn btn-outline-enigma mr-3"
                         onClick={() => {
                             toggle();
                             getId(data?.id);

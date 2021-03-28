@@ -1,15 +1,14 @@
 import Login from "../pages/login/Login";
 import React from "react";
-import RoutesHc from "../dashboard/RoutesHc";
+import RoutesHc from "../dashboard/dashboardHc/RoutesHc";
 import ResetPassword from "../pages/resetPassword";
-import RoutesFinance from "../dashboard/RoutesFinance";
+import RoutesFinance from "../dashboard/dashboardFinance/RoutesFinance";
 import EmployeeForm from "../pages/Employee/editForm/EmployeeForm"
 import ListEmployee from "../pages/Employee/listForm/ListEmployee";
 import ReimburseList from "../pages/reimburse/ReimburseList";
 import DetailContract from "../pages/detailContract/listForm/DetailContract";
 import Success from "../pages/registration/Success";
 import { ReimburseForm } from "../pages/reimburse";
-import DashboardFinance from "../SideBar/finance/DashboardFinance";
 import { GradeList } from "../pages/grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 import Error404 from './../pages/Error/Error404/Error404';
@@ -72,11 +71,6 @@ export default [
     {
         path: '/register-success',
         component: <Success />,
-        exact: true
-    },
-    {
-        path: '/dashboard/finance',
-        component: <DashboardFinance />,
         exact: true
     },
     {

@@ -1,23 +1,69 @@
-import {Modal, Button, Container, Form} from "react-bootstrap";
+import {Modal, Button, Container, Form, InputGroup, FormControl} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUnlockAlt} from "@fortawesome/free-solid-svg-icons";
+import IconButton from "@material-ui/core/IconButton";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {reset} from "../../actions/resetPasswordAction"
+import {connect} from "react-redux";
+import {findAll} from "../../actions/employeeAction";
 
-function ResetPassword() {
+function ResetPassword({resetPas, isLoading, reset, employees, findAll}) {
+
     const [values, setValues] =useState({
         password:"",
         confirmPassword:""
     })
 
+
+    useEffect( ()=> {
+        findAll()
+    },[])
+
     const[error, setError] = useState({})
     const [show, setShow] = useState(false);
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [data, setData] = useState({})
     const textDanger = {color: "red", fontSize: "12px"}
 
 
     //Modal
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => setShow(true)
+
+    const handleChange = (e) => {
+        let name= e.target.name;
+        let value = e.target.value;
+        setValues({...values, [name]:value})
+    }
+
+    const handleSubmit = (e) => {
+        console.log("CLICK")
+        e.preventDefault();
+        if(validate()) {
+            resetPas(data)
+        }
+    }
+    useEffect( ()=> {
+        if(resetPas) {
+            setData({
+                idLogin : employees?.data?.data?.login.id,
+                password: employees?.data?.data?.login.password
+            })
+        }
+    })
+
+    console.log("data", data)
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    }
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
 
     function validate() {
         let error_ = {};
@@ -36,6 +82,8 @@ function ResetPassword() {
         return isValid_
     }
 
+    console.log("employee", employees)
+
     return(
         <div>
             <Button variant="white" onClick={handleShow}>
@@ -48,17 +96,55 @@ function ResetPassword() {
                 </Modal.Header>
 
                 <Container>
-                    <Form>
-                        <Form.Group controlId="formBasicPassword" style={{marginTop:"10px"}}>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group style={{marginTop:"10px"}}>
                             <Form.Label >Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" name="password"
-                          />
+                            <InputGroup>
+                                <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
+                                <FormControl name="password"
+                                             value={values.password}
+                                             type={values.showPassword ? "text" : "password"}
+                                             placeholder="Enter Password"
+                                             onChange={handleChange}
+                                             aria-describedby="basic-addon2"
+                                             style={{ height: "38px" }}/>
+
+                                <InputGroup.Prepend position="end">
+                                    <InputGroup.Text id="basic-addon2" style={{ height: "38px" }}>
+                                        <IconButton onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}>
+                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                            </InputGroup>
                         </Form.Group>
                         <div style={textDanger}>{error.password}</div>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group>
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="confirmPassword"/>
+                            <InputGroup>
+                                <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
+                                <FormControl id="password"
+                                             name="confirmPassword"
+                                             value={values.confirmPassword}
+                                             type={values.showPassword ? "text" : "password"}
+                                             placeholder="Re-enter Password"
+                                             onChange={handleChange}
+                                             aria-describedby="basic-addon2"
+                                             style={{ height: "38px" }}
+                                />
+                                <InputGroup.Prepend position="end">
+                                    <InputGroup.Text id="basic-addon2" style={{ height: "38px" }}>
+                                        <IconButton onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}>
+                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+
+                            </InputGroup>
+
                         </Form.Group>
                         <div style={textDanger}>{error.confirm_password}</div>
                     </Form>
@@ -66,13 +152,23 @@ function ResetPassword() {
 
                 <Modal.Footer>
                     <Link to="/dashboard/hc">
-                        <Button style={{backgroundColor:"black"}}>Back</Button>
+                        <Button style={{backgroundColor:"black"}}>Kembali</Button>
                     </Link>
-                    <Button type="submit" style={{backgroundColor:"#292961"}}>Save</Button>
+                    <Button onClick={handleSubmit} type="submit" style={{backgroundColor:"#292961"}}>Simpan</Button>
                 </Modal.Footer>
             </Modal>
         </div>
     )
 }
 
-export default ResetPassword;
+const mapStateToProps = (state) => {
+    return {
+        employees: state.findAllEmployee.data || null,
+        resetPass : state.resetPassword.data || null,
+        isLoading: state.resetPassword.isLoading
+    }
+}
+
+const mapDispatchToProps = {reset, findAll}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)

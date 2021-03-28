@@ -5,10 +5,10 @@ import {findAllCategory} from '../../actions/categoryAction';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSortAmountDown} from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
-import Header from "../../dashboard/dashboardHc/Header";
-import Menu from "../../dashboard/dashboardHc/Menu";
-import Footer from "../../dashboard/dashboardHc/Footer";
 import {Table} from "reactstrap";
+import Header from "../../dashboard/Header";
+import MenuHc from "../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../dashboard/Footer";
 
 
 function ReimburseList({
@@ -32,10 +32,10 @@ function ReimburseList({
         <div>
 
             <Header/>
-            <Menu/>
+            <MenuHc/>
 
             <div className="content-wrapper">
-                <h1 style={{color: "black", textAlign: "center"}}> Daftar Klaim</h1>
+                <h1 style={{color: "black", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Pengembalian Dana</h1>
                 <select className="custom-select rounded-pill text-enigma border-enigma"
                         onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
                     <option selected disabled hidden >Category</option>
@@ -89,11 +89,11 @@ function ReimburseList({
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr>
-                                                <th><FontAwesomeIcon icon={faSortAmountDown}/></th>
-                                                <th>Kategori Klaim</th>
-                                                <th>Karyawan</th>
-                                                <th>Status</th>
-                                                <th>Detail</th>
+                                                <th style={{textAlign:"center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
+                                                <th style={{textAlign:"center"}}>Kategori Klaim</th>
+                                                <th style={{textAlign:"center"}}>Karyawan</th>
+                                                <th style={{textAlign:"center"}}>Status</th>
+                                                <th style={{textAlign:"center"}}>Detail</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -120,7 +120,6 @@ function ReimburseList({
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

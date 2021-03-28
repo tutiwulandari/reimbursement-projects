@@ -1,41 +1,40 @@
-import {findAll} from "../../actions/dashboardAction";
+import {findAll} from "../../../actions/dashboardAction";
 import {connect} from "react-redux";
 import {useEffect} from "react";
-import {Doughnut, Pie} from 'react-chartjs-2';
+import {Doughnut} from "react-chartjs-2";
 
-function ChartGender({findAll, dashboards, error, isLoading}) {
+function DoughnutTypeEmployee({findAll, dashboards, error, isLoading}) {
 
-    useEffect(()=> {
+    useEffect(() => {
         findAll()
     }, [])
 
     const state = {
-        labels: ['FEMALE', 'MALE'],
+        labels: ['PKWT', 'PROBABITION'],
         datasets: [
             {
-                label: 'Jenis Kelamin',
+                label: 'Tipe Kontrak',
                 backgroundColor: [
-                    '#B21F00',
-                    '#C9DE00',
+                    '#292961',
+                    '#FFDEAD'
                 ],
                 hoverBackgroundColor: [
-                    '#501800',
-                    '#4B5000',
+                    '#292961',
+                    '#FFDEAD'
                 ],
-                data: [dashboards?.data?.countEmployeeFemale, dashboards?.data?.countEmployeeMale]
+                data: [dashboards?.data?.countEmployeeTypeOnsite, dashboards?.data?.countEmployeeTypeOffice]
             }
         ]
     }
-
     return(
         <div>
 
-            <Pie
+            <Doughnut
                 data={state}
                 options={{
                     title:{
                         display:true,
-                        text:'Jumlah Karyawan Berdasarkan Jenis Kelamin',
+                        text:'Jumlah Karyawan Berdasarkan Tipe Karyawan',
                         fontSize:20
                     },
                     legend:{
@@ -47,6 +46,7 @@ function ChartGender({findAll, dashboards, error, isLoading}) {
         </div>
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         dashboards : state.findAllCount.data || null,
@@ -57,4 +57,4 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {findAll}
-export default connect(mapStateToProps, mapDispatchToProps)(ChartGender)
+export default connect(mapStateToProps, mapDispatchToProps)(DoughnutTypeEmployee)

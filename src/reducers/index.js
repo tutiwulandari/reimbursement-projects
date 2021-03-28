@@ -17,6 +17,7 @@ import { findAllCount } from "./dashboardReducer";
 import { forgotPassword } from './forgotPasswordReducer';
 import { findAllReimburseFinance, findReimburseFinanceById, updateReimburseFinance } from './reimburseFinanceReducer';
 import {findBillById, updateFile, uploadFile} from "../actions/billAction";
+import {resetPassword} from "./resetPasswordReducer";
 
 
 const rootReducer = combineReducers({
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     findAllReimburseFinance, findReimburseFinanceById,
     findEmployeeByName,
     uploadFile, findBillById, updateFile,
-    findEmployeeByStatus
+    findEmployeeByStatus,
+    resetPassword,
 })
 
 export default rootReducer

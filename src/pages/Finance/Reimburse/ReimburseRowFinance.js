@@ -6,7 +6,6 @@ import { convert_to_rupiah, convert_date_format } from '../../../utils/converter
 import { isEmpty } from '../../../utils/validation';
 import { uploadFile, findBillById, updateFile } from './../../../actions/billAction';
 
-
 /* Just for UI */
 import { BiUpload } from "react-icons/bi"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,7 +50,7 @@ const ReimburseRowFinance = ({
 
     useEffect(() => {
         if (updatedFile) {
-            if (updatedFile?.data?.code === 200 || updatedFile?.data?.code === 200) {
+            if (updatedFile?.data?.code == 200 || updatedFile?.data?.code == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -60,15 +59,15 @@ const ReimburseRowFinance = ({
                     timer: 1500
                 })
             }
-            // else {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Error',
-            //         text: 'Upload file gagal!',
-            //         showConfirmButton: false,
-            //         timer: 1500,
-            //     })
-            // }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Upload file gagal!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            }
         }
     }, [updatedFile])
 
@@ -274,10 +273,10 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">{reimburse?.employeeId?.nip}</p>
                             </div>
                         </div>
-                    </div>
+                    </div >
 
                     {/* Row Kedua */}
-                    <div className="row mt-3 offset-md-1">
+                    < div className="row mt-3 offset-md-1" >
 
                         <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                         <div className="row">
@@ -288,7 +287,7 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
-                            </div>
+                            </div >
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Mulai
@@ -296,8 +295,8 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
-                            </div>
-                        </div>
+                            </div >
+                        </div >
 
                         <div className="row">
                             <div className="col-md-3">
@@ -307,7 +306,7 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
-                            </div>
+                            </div >
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Selesai
@@ -315,12 +314,12 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>
-                            </div>
-                        </div>
+                            </div >
+                        </div >
 
-                    </div>
-                </ModalBody>
-            </Modal>
+                    </div >
+                </ModalBody >
+            </Modal >
 
 
 
@@ -340,12 +339,13 @@ const ReimburseRowFinance = ({
                                     <div className="col-md-12">
                                         <h6 className="text-enigma bold">Upload File</h6>
                                         <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
-                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control"/>
+                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" />
                                     </div> : ""
                             }
                             <hr />
                             <div className="col-md-12 mb-1">
                                 <button type="button" onClick={toggle2}
+
                                         className="btn btn-outline-enigma pull-right">Cancel</button>
                                 <button type="button" onClick={handleSubmit}
                                         className="btn btn-enigma pull-right mr-3">Upload</button>
@@ -354,7 +354,7 @@ const ReimburseRowFinance = ({
                     </form>
                 </ModalBody>
             </Modal>
-        </tr>
+        </tr >
     )
 }
 

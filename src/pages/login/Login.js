@@ -142,7 +142,6 @@ const Login = ({ loginEmployee, login, isLoading }) => {
     return (
         <main style={{backgroundColor: "white"}}>
             <NavigationHome/>
-            {/* <Navigation /> */}
             <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
                 <Container style={{ marginTop: "50px" }}>
                     <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }}>

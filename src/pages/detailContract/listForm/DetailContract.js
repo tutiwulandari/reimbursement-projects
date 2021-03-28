@@ -1,25 +1,57 @@
-import Header from "../../../dashboard/dashboardHc/Header";
-import Menu from "../../../dashboard/dashboardHc/Menu";
-import Footer from "../../../dashboard/dashboardHc/Footer";
-import React, {useEffect} from "react";
+import Header from "../../../dashboard/Header";
+import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../../dashboard/Footer";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Table} from "reactstrap";
+import {findByName} from "../../../actions/employeeAction";
 
 
-function DetailContract({findAll, contracts, error, isLoading}) {
+function DetailContract({findAll, contracts, error, isLoading, findByName, name}) {
+
+    const [searchName, setSearch] = useState({
+        fullname:""
+    })
+
+    const [employee, setEmployee] = useState({})
 
     useEffect( () => {
         findAll()
     }, [])
 
+
+    useEffect( ()=> {
+        setEmployee({...contracts})
+    },[contracts])
+
+    useEffect( ()=> {
+        setEmployee({
+            data: name?.data
+        })
+    },[name])
+
+
+    const onSubmit = () => {
+        findByName(searchName)
+        console.log("CLICK")
+    }
+
+    const handleChange = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+        setSearch({...searchName, [name]: value})
+    }
+    console.log("FULLNAME", name)
+    console.log("employee", contracts)
+
     return(
         <div>
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
                     <h1 style={{color:"black", textAlign:"center", marginBottom:"5vh"}}> DETAIL KONTRAK</h1>
@@ -34,13 +66,17 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width:"150px"}}>
-                                                <input type="text" name="table_search" className="form-control float-right"
-                                                       placeholder="Search"/>
+                                                <input type="text" className="form-control float-right"
+                                                       placeholder="Search"
+                                                       name="fullname"
+                                                value={searchName?.fullname}
+                                                       onChange={handleChange}
+                                                />
 
                                                 <div className="input-group-append">
-                                                    <button type="submit" className="btn btn-default">
+                                                    <button type="submit" className="btn btn-default"
+                                                    onClick={onSubmit}>
                                                         <i className="fas fa-search">
-
                                                         </i></button>
                                                 </div>
                                             </div>
@@ -66,10 +102,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                             </thead>
                                             <tbody>
                                             {
-                                                console.log("DATA CONTRACT", contracts?.data)
-                                            }
-                                            {
-                                                contracts?.data.map((element, index) => {
+                                                employee?.data?.map((element, index) => {
                                                     return (
                                                         <tr style={{textAlign: "center"}} >
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
@@ -125,10 +158,11 @@ const mapStateToProps = (state) => {
     return {
         contracts: state.findAllContract.data || null,
         error: state.findAllContract.error,
-        isLoading: state.findAllContract.isLoading
+        isLoading: state.findAllContract.isLoading,
+        name: state.findEmployeeByName.data
 
     }
 }
 
-const mapDispatchToProps = {findAll}
+const mapDispatchToProps = {findAll, findByName}
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContract)

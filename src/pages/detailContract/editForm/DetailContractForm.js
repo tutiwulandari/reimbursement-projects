@@ -3,11 +3,11 @@ import {useParams, useHistory} from "react-router-dom"
 import {connect} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {findById, save} from "../../../actions/detailContractAction";
-import Header from "../../../dashboard/dashboardHc/Header";
-import Menu from "../../../dashboard/dashboardHc/Menu";
-import Footer from "../../../dashboard/dashboardHc/Footer";
 import "../../../assets/css/DetailContractFom.css"
 import swal from "sweetalert";
+import Header from "../../../dashboard/Header";
+import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../../dashboard/Footer";
 
 
 function DetailContractForm({contract, findById, isLoading, save, error, savedContract}) {
@@ -94,7 +94,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
     return (
         <div>
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className=" text-center mt-0 ">
 

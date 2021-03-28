@@ -30,6 +30,7 @@ import {
 import {watchFindAllCount} from "./dashboardSagas";
 import {watchForgotPassword} from './forgotPasswordSagas';
 import {watchBillById, watchUpdateFile, watchUploadFile} from "./billSagas";
+import {watchResetPassword} from "./resetPasswordSagas";
 
 
 export default function* rootSaga() {
@@ -45,6 +46,7 @@ export default function* rootSaga() {
         watchUploadFile(), watchBillById(), watchUpdateFile(),
         watchFindEmployeeByStatus(),
         watchFindAllReimburseFinance(),  watchFindReimburseFinanceById(),  watchFindReimburseFinanceByCategory(),watchUpdateReimburseFinance(),
+        watchResetPassword()
 
     ])
 }

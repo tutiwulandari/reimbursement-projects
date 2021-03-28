@@ -4921,7 +4921,7 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 
 
 /*!
- * jQuery UI Menu 1.12.1
+ * jQuery UI MenuHc 1.12.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -4929,7 +4929,7 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
  * http://jquery.org/license
  */
 
-//>>label: Menu
+//>>label: MenuHc
 //>>group: Widgets
 //>>description: Creates nestable menus.
 //>>docs: http://api.jqueryui.com/menu/
@@ -14036,7 +14036,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			this._refreshMenu();
 		} else {
 
-			// Menu clears focus on close, reset focus to selected item
+			// MenuHc clears focus on close, reset focus to selected item
 			this._removeClass( this.menu.find( ".ui-state-active" ), null, "ui-state-active" );
 			this.menuInstance.focus( null, this._getSelectedItem() );
 		}
