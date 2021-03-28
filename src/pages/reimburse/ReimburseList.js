@@ -33,7 +33,6 @@ function ReimburseList({
 
             <Header/>
             <MenuHc/>
-
             <div className="content-wrapper">
                 <h1 style={{color: "black", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Pengembalian Dana</h1>
                 <select className="custom-select rounded-pill text-enigma border-enigma"
@@ -120,6 +119,7 @@ function ReimburseList({
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }
