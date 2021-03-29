@@ -19,11 +19,11 @@ export default function MenuFinance() {
 
             <div className="sidebar">
                 <nav className="mt-2">
-                    <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeiew" role="menu" data-accordion="false">
+                    <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
-                            <Link to="/dashboard/finance" className="nav-link">
-                                <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"white"}} />
-                                <p style={{color:"black", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
+                            <Link to="/dashboard/finance" className="nav-link active" style={{backgroundColor:"#292961"}}>
+                                <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"black"}} />
+                                <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
                             </Link>
                         </li>
                         <li className="nav-item has-treeview">

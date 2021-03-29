@@ -1,8 +1,8 @@
 import Login from "../pages/login/Login";
 import React from "react";
-import RoutesHc from "../dashboard/RoutesHc";
+import RoutesHc from "../dashboard/dashboardHc/RoutesHc";
 import ResetPassword from "../pages/resetPassword";
-import RoutesFinance from "../dashboard/RoutesFinance";
+import RoutesFinance from "../dashboard/dashboardFinance/RoutesFinance";
 import EmployeeForm from "../pages/Employee/editForm/EmployeeForm"
 import ListEmployee from "../pages/Employee/listForm/ListEmployee";
 import ReimburseList from "../pages/reimburse/ReimburseList";
@@ -67,11 +67,6 @@ export default [
     {
         path: '/register-success',
         component: <Success />,
-        exact: true
-    },
-    {
-        path: '/dashboard/finance',
-        component: <DashboardFinance />,
         exact: true
     },
     {

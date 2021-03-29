@@ -1,13 +1,14 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {findAll, findByName} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import Menu from "../../../dashboard/dashboardHc/Menu";
-import Header from "../../../dashboard/dashboardHc/Header";
-import Footer from "../../../dashboard/dashboardHc/Footer";
+import Header from "../../../dashboard/Header";
+import Footer from "../../../dashboard/Footer";
+import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
+import VerifiedForm from "../verified";
 
 function ListEmployee({findAll, findByName, employees, error, isLoading, name}) {
 
@@ -22,15 +23,6 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
         findAll()
     }, []);
 
-    // useEffect(()=>{
-    //     findByName()
-    // }, [findByName])
-
-    // useEffect(() => {
-    //     if(searchName) {
-    //         employees = name
-    //     }
-    // }, []);
 
     useEffect(() => {
         setKaryawan({...employees})
@@ -57,16 +49,12 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
         setSearch({...searchName, [name]:value})
     }
     console.log("FULLNAME", searchName)
-
-
-
-
     console.log("LIST", employees)
 
     return (
         <div>
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
                     <h1 style={{color: "black", textAlign: "center", marginBottom:"2vh"}}> DAFTAR KARYAWAN</h1>
@@ -278,7 +266,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {console.log("COBA", employees.data?.data)}
+
                                             {
                                                 karyawan?.data?.data?.map((element, index) => {
                                                     return (
@@ -431,12 +419,13 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
                                                             }}>
-                                                                <Link to={'/employee/' + element.id + '/isVerified'}>
-                                                                    <button className="btn btn-outline-enigma" disabled ={element?.verifiedHc === true}>
-                                                                        <FontAwesomeIcon icon={faCheck}
-                                                                        />
-                                                                    </button>
-                                                                </Link>
+                                                                {/*<Link to={'/employee/' + element.id + '/isVerified'}>*/}
+                                                                {/*    <button className="btn btn-outline-enigma" disabled ={element?.verifiedHc === true}>*/}
+                                                                {/*        <FontAwesomeIcon icon={faCheck}*/}
+                                                                {/*        />*/}
+                                                                {/*    </button>*/}
+                                                                {/*</Link>*/}
+                                                                <VerifiedForm/>
                                                             </td>
 
                                                             <td style={{
@@ -445,12 +434,13 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
                                                             }}>
-                                                                <Link to={'/employee/' + element.id}>
-                                                                    <button className="btn btn-outline-enigma">
-                                                                        <FontAwesomeIcon icon={faEdit}
-                                                                                         className="float-left"/>
-                                                                    </button>
-                                                                </Link>
+                                                                {/*<EmployeeForm/>*/}
+                                                                    <Link to={'/employee/' + element.id}>
+                                                                        <button className="btn btn-outline-enigma">
+                                                                            <FontAwesomeIcon icon={faEdit}
+                                                                                             className="float-left"/>
+                                                                        </button>
+                                                                    </Link>
                                                             </td>
                                                         </tr>
                                                     )

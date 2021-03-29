@@ -345,7 +345,6 @@ const ReimburseRowFinance = ({
                             <hr />
                             <div className="col-md-12 mb-1">
                                 <button type="button" onClick={toggle2}
-
                                     className="btn btn-outline-enigma pull-right">Cancel</button>
                                 <button type="button" onClick={handleSubmit}
                                     className="btn btn-enigma pull-right mr-3">Upload</button>

@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
     findAllReimburseFinance, findReimburseFinanceById, findReimburseFinanceByCategory,
     findEmployeeByName,
     uploadFile, findBillById, updateFile,
-    findEmployeeByStatus
+    findEmployeeByStatus,
 })
 
 export default rootReducer

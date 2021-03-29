@@ -92,10 +92,10 @@ const ReimburseRow = ({
 
     return (
         <tr>
-            <td>{index + 1}</td>
-            <td>{data.categoryId.categoryName}</td>
-            <td>{data.employeeId.fullname}</td>
-            <td>
+            <td style={{textAlign:"center"}}>{index + 1}</td>
+            <td style={{textAlign:"center"}}>{data.categoryId.categoryName}</td>
+            <td style={{textAlign:"center"}}>{data.employeeId.fullname}</td>
+            <td style={{textAlign:"center"}}>
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>

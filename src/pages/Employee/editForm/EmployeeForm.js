@@ -4,11 +4,11 @@ import {connect} from "react-redux";
 import { useHistory, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Input, Label, Spinner} from "reactstrap";
-import Header from "../../../dashboard/dashboardHc/Header";
-import Menu from "../../../dashboard/dashboardHc/Menu";
-import Footer from "../../../dashboard/dashboardHc/Footer";
 import "../../../assets/css/EmployeeForm.css"
 import Swal from 'sweetalert2';
+import Header from "../../../dashboard/Header";
+import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../../dashboard/Footer";
 
 
 function EmployeeForm({employee, findById, isLoading, save, findAll, error, grades, savedEmployee}) {
@@ -97,7 +97,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     return (
         <div >
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className=" text-center mt-0 ">
 
@@ -110,7 +110,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                     <h1>Edit Data Karyawan</h1>
                                     <div className="container">
                                         {
-                                           !isLoading ? grades &&
+                                            !isLoading ? grades &&
                                                 <form  onSubmit={handleClick}>
                                                     <div className="controls">
 

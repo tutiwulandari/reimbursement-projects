@@ -1,6 +1,3 @@
-import Header from "../../../dashboard/dashboardHc/Header";
-import Menu from "../../../dashboard/dashboardHc/Menu";
-import Footer from "../../../dashboard/dashboardHc/Footer";
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
@@ -8,6 +5,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Table} from "reactstrap";
+import Header from "../../../dashboard/Header";
+import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../../dashboard/Footer";
 
 
 function DetailContract({findAll, contracts, error, isLoading}) {
@@ -19,7 +19,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
     return(
         <div>
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
                     <h1 style={{color:"black", textAlign:"center", marginBottom:"5vh"}}> DETAIL KONTRAK</h1>

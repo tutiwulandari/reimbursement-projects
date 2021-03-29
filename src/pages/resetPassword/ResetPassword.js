@@ -33,7 +33,8 @@ function ResetPassword({ status, resetPassword }) {
 
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => setShow(true)
+    
 
     function validate() {
         let error_ = {};
@@ -51,7 +52,6 @@ function ResetPassword({ status, resetPassword }) {
         setError(error_)
         return isValid_
     }
-
 
     function handleChange(e) {
         const key = e.target.name
@@ -92,7 +92,7 @@ function ResetPassword({ status, resetPassword }) {
                         </Form.Group>
                         <div style={textDanger}>{error.password}</div>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group>
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control onChange={handleChange} type="password" placeholder="Password" name="confirmPassword" />
                         </Form.Group>
@@ -108,6 +108,7 @@ function ResetPassword({ status, resetPassword }) {
         </div>
     )
 }
+
 
 /* Reducer */
 const mapStateToProps = (state) => {

@@ -1,7 +1,7 @@
 import { LocalGasStationOutlined } from "@material-ui/icons";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import ResetPassword from "../../pages/resetPassword";
+import ResetPassword from "../pages/resetPassword";
 
 export default function Header() {
 

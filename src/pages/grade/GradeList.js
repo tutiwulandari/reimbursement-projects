@@ -7,9 +7,9 @@ import {faSave} from '@fortawesome/free-solid-svg-icons/faSave';
 import Swal from 'sweetalert2'
 import {convert_to_rupiah} from '../../utils/converter';
 import {Table} from "reactstrap";
-import Header from "../../dashboard/dashboardHc/Header";
-import Menu from "../../dashboard/dashboardHc/Menu";
-import Footer from "../../dashboard/dashboardHc/Footer";
+import Header from "../../dashboard/Header";
+import MenuHc from "../../dashboard/dashboardHc/MenuHc";
+import Footer from "../../dashboard/Footer";
 
 
 function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
@@ -87,7 +87,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
     return (
         <div>
             <Header/>
-            <Menu/>
+            <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
                     <h1 style={{color: "black",marginBottom:"3vh", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Reimbursement</h1>
