@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {findById, save} from "../../../actions/detailContractAction";
 import "../../../assets/css/DetailContractFom.css"
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import Header from "../../../dashboard/Header";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import Footer from "../../../dashboard/Footer";
@@ -82,13 +82,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
     useEffect(() => {
         if (savedContract) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: 'Data karyawan berhasil ditambahkan!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            swal("Berhasil", "Data karyawan berhasil ditambahkan!", "success")
             history.push("/dashboard/hc/contract")
         }
     }, [savedContract, history])
@@ -147,6 +141,20 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                             </div>
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
+                                                                    <Label> Tanggal Penetapan Karyawan Tetap </Label>
+                                                                    <Input type="date" onChange={handleChange}
+                                                                           value={data?.dateOfAcceptancePermanentEmployee === null ? null : data?.dateOfAcceptancePermanentEmployee }
+                                                                           name="dateOfAcceptancePermanentEmployee"/>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
                                                                     <Label> Tipe Kontrak </Label>
                                                                     <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
                                                                            name="typeContract">
@@ -172,10 +180,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 </div>
 
                                                             </div>
-
-                                                        </div>
-
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Resign </Label>
@@ -185,6 +189,10 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
+
+
+                                                        </div>
+                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Mulai Kontrak </Label>
@@ -194,9 +202,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
-
-                                                        </div>
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Habis Kontrak </Label>
@@ -205,7 +210,9 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
+                                                        </div>
 
+                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Penempatan</Label>
@@ -215,10 +222,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 </div>
 
                                                             </div>
-
-                                                        </div>
-
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Habis Kontrak</Label>
@@ -247,7 +250,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
 
                                                 </form> :
-                                              <Spinner animation="grow" delay="2000"/>
+                                                <Spinner animation="grow" delay="2000"/>
                                         }
 
 

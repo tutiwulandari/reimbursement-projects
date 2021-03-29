@@ -21,8 +21,8 @@ export default function MenuHc() {
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
                             <Link to="/dashboard/hc" className="nav-link active" style={{backgroundColor:"#292961"}}>
-                                <i className="nav-icon fas fa-tachometer-alt" style={{fontSize:"20px", backgroundColor:"black"}} />
-                                <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Dashboard</p>
+                                <i className="nav-icon fas fa-home" style={{fontSize:"20px"}} />
+                                <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Beranda</p>
                             </Link>
                         </li>
                         <li className="nav-item has-treeview">
