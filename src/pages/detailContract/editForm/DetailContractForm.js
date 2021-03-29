@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {findById, save} from "../../../actions/detailContractAction";
 import "../../../assets/css/DetailContractFom.css"
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import Header from "../../../dashboard/Header";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import Footer from "../../../dashboard/Footer";
@@ -82,13 +82,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
     useEffect(() => {
         if (savedContract) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: 'Data karyawan berhasil ditambahkan!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            swal("Berhasil", "Data karyawan berhasil ditambahkan!", "success")
             history.push("/dashboard/hc/contract")
         }
     }, [savedContract, history])
@@ -247,7 +241,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
 
                                                 </form> :
-                                              <Spinner animation="grow" delay="2000"/>
+                                                <Spinner animation="grow" delay="2000"/>
                                         }
 
 

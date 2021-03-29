@@ -7,7 +7,7 @@ import { convert_to_rupiah, convert_date_format } from './../../utils/converter'
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFile, faSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faEye, faFile, faSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -105,20 +105,19 @@ const ReimburseRow = ({
                             onChange={(e) => {
                                 handleChangeStatus(e.target.value, data.id)
                             }}>
-                            <option value="waiting" selected={data.statusOnHc == true}> Menunggu</option>
-                            <option value="accepted" selected={data.statusOnFinance == true}> Disetujui</option>
-                            <option value="rejected" selected={data.statusReject == true}> Ditolak </option>
+                            <option value="waiting" selected={data.statusOnHc === true}> Menunggu</option>
+                            <option value="accepted" selected={data.statusOnFinance === true}> Disetujui</option>
+                            <option value="rejected" selected={data.statusReject === true}> Ditolak </option>
                         </select>
                 }
             </td>
             <td>
-                <button className="btn btn-outline-enigma mr-3"
+                <FontAwesomeIcon icon={faEye}
                     onClick={() => {
                         toggle();
                         getId(data?.id);
-                    }}>
-                    Detail
-                </button>
+                    }}  style={{justifyContent:"center"}}/>
+
             </td>
 
             {/* ============ */}

@@ -2,16 +2,18 @@ import React, {useEffect, useState} from "react";
 import {Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
-import {findAll, findByName} from "../../../actions/employeeAction";
+import {findAll, findByName, saveVerified} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Header from "../../../dashboard/Header";
 import Footer from "../../../dashboard/Footer";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
-import VerifiedForm from "../verified";
+import swal from "sweetalert";
 
-function ListEmployee({findAll, findByName, employees, error, isLoading, name}) {
 
+function ListEmployee({findAll, findByName, employees, error, isLoading, name, savedVerified, saveVerified}) {
+
+    const [verifikasi, setVerifikasi] = useState()
     const [searchName, setSearch] = useState({
         fullname: ""
     });
@@ -28,9 +30,9 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
         setKaryawan({...employees})
     }, [employees])
 
-    useEffect(()=> {
+    useEffect(() => {
         setKaryawan({
-            data : name
+            data: name
         })
     }, [name])
 
@@ -46,7 +48,31 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
     const handleChange = (event) => {
         let name = event.target.name;
         let value = event.target.value
-        setSearch({...searchName, [name]:value})
+        setSearch({...searchName, [name]: value})
+    }
+
+    useEffect(() => {
+        if (verifikasi) {
+            saveVerified(verifikasi)
+            swal("Berhasil","berhasil diverifikasi!", "success")
+        }
+    }, [verifikasi])
+
+
+    const handleChangeVerified = (value, id) => {
+        switch (value) {
+            case "verified":
+                setVerifikasi({
+                    id,
+                    verifiedHc: true
+                })
+                break;
+            default:
+                setVerifikasi({
+                    id,
+                    verifiedHc: false
+                })
+        }
     }
     console.log("FULLNAME", searchName)
     console.log("LIST", employees)
@@ -57,7 +83,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color: "black", textAlign: "center", marginBottom:"2vh"}}> DAFTAR KARYAWAN</h1>
+                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh"}}> DAFTAR KARYAWAN</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
@@ -250,19 +276,20 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                     maxWidth: "200px"
                                                 }}>Status Verifikasi
                                                 </th>
+                                                {/*<th style={{*/}
+                                                {/*    verticalAlign: "middle",*/}
+                                                {/*    textAlign: "center",*/}
+                                                {/*    minWidth: "200px",*/}
+                                                {/*    maxWidth: "200px"*/}
+                                                {/*}}>Verifikasi*/}
+                                                {/*</th>*/}
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
                                                     minWidth: "200px",
                                                     maxWidth: "200px"
-                                                }}>Verifikasi
+                                                }}> Edit Data
                                                 </th>
-                                                <th style={{
-                                                    verticalAlign: "middle",
-                                                    textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
-                                                }}> Edit Data</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -411,23 +438,26 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                                 textAlign: "center",
                                                                 maxWidth: "200px",
                                                                 minWidth: "200px"
-                                                            }}> {element.verifiedHc === true ? "verifikasi" : "belum diverifikasi"}</td>
-
-                                                            <td style={{
-                                                                verticalAlign: "middle",
-                                                                textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
                                                             }}>
-                                                                {/*<Link to={'/employee/' + element.id + '/isVerified'}>*/}
-                                                                {/*    <button className="btn btn-outline-enigma" disabled ={element?.verifiedHc === true}>*/}
-                                                                {/*        <FontAwesomeIcon icon={faCheck}*/}
-                                                                {/*        />*/}
-                                                                {/*    </button>*/}
-                                                                {/*</Link>*/}
-                                                                <VerifiedForm/>
-                                                            </td>
 
+                                                                {
+                                                                    element?.verifiedHc ? "Sudah diverifikasi" :
+                                                                        <select onChange={(e) => {
+                                                                            handleChangeVerified(e.target.value, element.id)
+                                                                        }}>
+                                                                            <option value="verified"
+                                                                                    selected={element?.verifiedHc === true}> Verifikasi
+                                                                            </option>
+                                                                            <option value="notVerified"
+                                                                                    selected={element.verifiedHc === false}> Belum
+                                                                                diverifikasi
+                                                                            </option>
+                                                                        </select>
+
+                                                                }
+
+
+                                                            </td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
@@ -435,12 +465,12 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
                                                                 minWidth: "200px"
                                                             }}>
                                                                 {/*<EmployeeForm/>*/}
-                                                                    <Link to={'/employee/' + element.id}>
-                                                                        <button className="btn btn-outline-enigma">
-                                                                            <FontAwesomeIcon icon={faEdit}
-                                                                                             className="float-left"/>
-                                                                        </button>
-                                                                    </Link>
+                                                                <Link to={'/employee/' + element.id}>
+                                                                    <button className="btn btn-outline-enigma">
+                                                                        <FontAwesomeIcon icon={faEdit}
+                                                                                         className="float-left"/>
+                                                                    </button>
+                                                                </Link>
                                                             </td>
                                                         </tr>
                                                     )
@@ -464,14 +494,16 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name}) 
     )
 }
 
+
 const mapStateToProps = (state) => {
     return {
         employees: state.findAllEmployee.data || [],
         error: state.findAllEmployee.error,
         isLoading: state.findAllEmployee.isLoading,
-        name: state.findEmployeeByName.data
+        name: state.findEmployeeByName.data,
+        savedVerified: state.saveVerified.data,
 
     }
 }
-const mapDispatchToProps = {findAll, findByName}
+const mapDispatchToProps = {findAll, findByName, saveVerified}
 export default connect(mapStateToProps, mapDispatchToProps)(ListEmployee);

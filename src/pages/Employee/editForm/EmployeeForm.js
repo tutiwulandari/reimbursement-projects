@@ -1,7 +1,7 @@
 import {findById, save} from "../../../actions/employeeAction";
 import {findAll} from "../../../actions/gradeAction";
 import {connect} from "react-redux";
-import { useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Input, Label, Spinner} from "reactstrap";
 import "../../../assets/css/EmployeeForm.css"
@@ -70,7 +70,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
         }
     }, [id, findById, grades])
 
-    if(savedEmployee) {
+    if (savedEmployee) {
 
     }
 
@@ -95,7 +95,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
     }
 
     return (
-        <div >
+        <div>
             <Header/>
             <MenuHc/>
             <div className="content-wrapper">
@@ -106,25 +106,32 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
 
                             <div className="card mt-5 mx-auto p-4 bg-light">
 
-                                <div className="card-body bg-light" >
-                                    <h1>Edit Data Karyawan</h1>
+                                <div className="card-body bg-light">
+                                    <h1 style={{fontFamily: "roboto"}}>Edit Data Karyawan</h1>
+                                    <hr/>
                                     <div className="container">
                                         {
                                             !isLoading ? grades &&
-                                                <form  onSubmit={handleClick}>
+                                                <form onSubmit={handleClick}>
                                                     <div className="controls">
 
                                                         <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
-                                                                    <Input onChange={handleChange} value={data?.id || ''}
+                                                                    <Input onChange={handleChange}
+                                                                           value={data?.id || ''}
                                                                            type="text" name="id" hidden={true}/>
 
-                                                                    <Label style={{fontFamily: "roboto"}}>
+                                                                    <Label style={{
+                                                                        fontFamily: "roboto",
+                                                                        textAlign: "left"
+                                                                    }}>
                                                                         NIP
                                                                     </Label>
                                                                     <Input onChange={handleChange}
-                                                                           type="text" value={data?.nip === null ? '' : data?.nip} name="nip"/>
+                                                                           type="text"
+                                                                           value={data?.nip === null ? '' : data?.nip}
+                                                                           name="nip"/>
 
                                                                 </div>
 
@@ -132,18 +139,23 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label style={{fontFamily: "roboto"}}>Grade</Label>
-                                                                    <Input type="select" onChange={e => onSelectChange(e)}>
+                                                                    <Input type="select"
+                                                                           onChange={e => onSelectChange(e)}>
 
-                                                                        <option selected disabled hidden>-- Pilihan --</option>
+                                                                        <option selected disabled hidden>-- Pilihan --
+                                                                        </option>
                                                                         {
                                                                             data?.gradeId === null ?
                                                                                 gradesModel.data?.map((element, index) =>
-                                                                                    <option key={index} value={element.id}>
+                                                                                    <option key={index}
+                                                                                            value={element.id}>
                                                                                         {element.grade}
                                                                                     </option>
                                                                                 ) : gradesModel.data?.map((element, index) =>
-                                                                                    <option selected={element.id === data?.gradeId} key={index}
-                                                                                            value={element.id}>
+                                                                                    <option
+                                                                                        selected={element.id === data?.gradeId}
+                                                                                        key={index}
+                                                                                        value={element.id}>
                                                                                         {element.grade}
                                                                                     </option>
                                                                                 )
@@ -159,20 +171,24 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                         <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
-                                                                    <Label htmlFor="join_date" style={{fontFamily: "roboto"}}>Tanggal Bergabung</Label>
+                                                                    <Label htmlFor="join_date"
+                                                                           style={{fontFamily: "roboto"}}>Tanggal
+                                                                        Bergabung</Label>
                                                                     <Input onChange={handleChange} type="date"
-                                                                           value={data?.joinDate  === null ? '' : data?.joinDate}
+                                                                           value={data?.joinDate === null ? '' : data?.joinDate}
                                                                            name="joinDate"/>
 
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
-                                                                    <Label style={{fontFamily: "roboto"}}>Status Karyawan</Label>
+                                                                    <Label style={{fontFamily: "roboto"}}>Status
+                                                                        Karyawan</Label>
                                                                     <Input onChange={handleChange} type="select"
                                                                            name="employeeStatus">
 
-                                                                        <option selected disabled hidden>-- Pilihan--</option>
+                                                                        <option selected disabled hidden>-- Pilihan--
+                                                                        </option>
                                                                         {
                                                                             data?.employeeStatus === null ?
                                                                                 employeeStatus.map((element, index) =>
@@ -181,9 +197,10 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                                                     </option>
                                                                                 ) : (
                                                                                     employeeStatus.map((element, index) =>
-                                                                                        <option selected={element === data?.employeeStatus}
-                                                                                                key={index}
-                                                                                                value={element}>
+                                                                                        <option
+                                                                                            selected={element === data?.employeeStatus}
+                                                                                            key={index}
+                                                                                            value={element}>
                                                                                             {element}
                                                                                         </option>
                                                                                     )
@@ -199,19 +216,24 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                         <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
-                                                                    <Label style={{fontFamily: "roboto"}}> Tipe Karyawan</Label>
-                                                                    <Input onChange={handleChange} type="select" name="employeeType">
-                                                                        <option selected disabled hidden>-- Pilihan--</option>
+                                                                    <Label style={{fontFamily: "roboto"}}> Tipe
+                                                                        Karyawan</Label>
+                                                                    <Input onChange={handleChange} type="select"
+                                                                           name="employeeType">
+                                                                        <option selected disabled hidden>-- Pilihan--
+                                                                        </option>
                                                                         {
                                                                             data?.employeeType === null ?
                                                                                 employeeType.map((element, index) =>
-                                                                                    <option  key={index} value={element}>
+                                                                                    <option key={index} value={element}>
                                                                                         {element}
                                                                                     </option>
                                                                                 ) : (
                                                                                     employeeType.map((element, index) =>
-                                                                                        <option selected={element === data?.employeeType} key={index}
-                                                                                                value={element}>
+                                                                                        <option
+                                                                                            selected={element === data?.employeeType}
+                                                                                            key={index}
+                                                                                            value={element}>
                                                                                             {element}
                                                                                         </option>
                                                                                     )
@@ -227,7 +249,11 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                         </div>
                                                         <div className="row">
                                                             <div className="col-md-12">
-                                                                <Input type="submit" value="Simpan" onClick={handleClick} style={{backgroundColor: "#292961", color: "white"}}>
+                                                                <Input type="submit" value="Simpan"
+                                                                       onClick={handleClick} style={{
+                                                                    backgroundColor: "#292961",
+                                                                    color: "white"
+                                                                }}>
                                                                     Simpan
                                                                 </Input>
 

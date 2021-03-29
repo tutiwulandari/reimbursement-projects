@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {Card, Col, Row} from "react-bootstrap";
 import ChartGender from "./ChartGender";
 import  Image from "../../../assets/image/dashboard.svg"
-import LineGraphEmployee from "./BarChart";
 import {CardBody} from "reactstrap";
 import DoughnutTypeContract from "./DoughnutTypeContract";
 import DoughnutTypeEmployee from "./DoughnutTypeEmployee";
