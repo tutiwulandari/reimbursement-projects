@@ -20,11 +20,6 @@ export default function Header() {
                         <i className="fas fa-bars" style={{backgroundColor:"white", fontSize:"20px"}}/>
                     </a>
                 </li>
-                <li className="nav-item d-none d-sm-inline-block">
-                    <a href="/dasboard/hc" className="nav-link" style={{color:"white", fontFamily:"roboto"}}>
-                        <i className="fa fa-home" style={{fontSize:"20px"}}/>
-                    </a>
-                </li>
 
             </ul>
             <ul className="navbar-nav ml-auto">

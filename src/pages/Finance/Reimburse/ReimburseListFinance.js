@@ -78,7 +78,7 @@ function ReimburseListFinance({
 
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
-                        <option valu="" selected disabled hidden>Kategori</option>
+                        <option value="" selected disabled hidden>Kategori</option>
                         {
                             categories.data?.map((category, index) => {
                                 return (
@@ -128,7 +128,7 @@ function ReimburseListFinance({
                                                 <thead>
                                                 <tr>
                                                     <th><FontAwesomeIcon icon={faSortAmountDown}/></th>
-                                                    <th selected disabled hidden>Kategori</th>
+                                                    <th>Kategori</th>
                                                     <th>Karyawan</th>
                                                     <th>Status</th>
                                                     <th>Detail</th>
