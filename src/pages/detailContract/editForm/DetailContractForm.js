@@ -141,6 +141,20 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                             </div>
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
+                                                                    <Label> Tanggal Penetapan Karyawan Tetap </Label>
+                                                                    <Input type="date" onChange={handleChange}
+                                                                           value={data?.dateOfAcceptancePermanentEmployee === null ? null : data?.dateOfAcceptancePermanentEmployee }
+                                                                           name="dateOfAcceptancePermanentEmployee"/>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <div className="form-group">
                                                                     <Label> Tipe Kontrak </Label>
                                                                     <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
                                                                            name="typeContract">
@@ -166,10 +180,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 </div>
 
                                                             </div>
-
-                                                        </div>
-
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Resign </Label>
@@ -179,6 +189,10 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
+
+
+                                                        </div>
+                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Mulai Kontrak </Label>
@@ -188,9 +202,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
-
-                                                        </div>
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Tanggal Habis Kontrak </Label>
@@ -199,7 +210,9 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
 
                                                                 </div>
                                                             </div>
+                                                        </div>
 
+                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Penempatan</Label>
@@ -209,10 +222,6 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 </div>
 
                                                             </div>
-
-                                                        </div>
-
-                                                        <div className="row">
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
                                                                     <Label> Habis Kontrak</Label>
