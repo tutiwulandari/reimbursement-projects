@@ -14,6 +14,7 @@ import { GradeList } from "../pages/grade";
 import ReimburseListFinance from "../pages/Finance/Reimburse/ReimburseListFinance";
 import Error404 from './../pages/Error/Error404/Error404';
 import VerifiedForm from "../pages/Employee/verified";
+import PageList from "../pages/pagin/PageList";
 
 
 
@@ -100,6 +101,13 @@ export default [
         component: <GradeList />,
         exact: true
     },
+
+    {
+        path: '/pagin',
+        component: <PageList />,
+        exact: true
+    },
+    
     {
         path: '*',
         component: <Error404/>,
