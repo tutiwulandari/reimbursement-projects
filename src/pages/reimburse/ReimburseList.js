@@ -8,18 +8,11 @@ import { findAllCategory } from '../../actions/categoryAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
-<<<<<<< HEAD
-import Header from "../../dashboard/dashboardHc/Header";
-import Menu from "../../dashboard/dashboardHc/Menu";
-import Footer from "../../dashboard/dashboardHc/Footer";
+import Header from './../../dashboard/Header';
+import Footer from './../../dashboard/Footer';
+import MenuHc from './../../dashboard/dashboardHc/MenuHc';
 import { Table } from "reactstrap";
 /* Just for UI */
-=======
-import {Table} from "reactstrap";
-import Header from "../../dashboard/Header";
-import MenuHc from "../../dashboard/dashboardHc/MenuHc";
-import Footer from "../../dashboard/Footer";
->>>>>>> origin/32-dashboardFinance2
 
 
 function ReimburseList({
@@ -83,18 +76,11 @@ function ReimburseList({
     return (
         <div>
 
-<<<<<<< HEAD
             <Header />
-            <Menu />
+            <MenuHc />
 
             <div className="content-wrapper">
                 <h1 style={{ color: "black", textAlign: "center" }}> Daftar Klaim</h1>
-=======
-            <Header/>
-            <MenuHc/>
-            <div className="content-wrapper">
-                <h1 style={{color: "black", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Pengembalian Dana</h1>
->>>>>>> origin/32-dashboardFinance2
                 <select className="custom-select rounded-pill text-enigma border-enigma"
                     onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
                     <option>Kategori</option>
@@ -147,7 +133,6 @@ function ReimburseList({
                                     <div className="card-body table-responsive p-0" style={{ height: "300px" }}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
-<<<<<<< HEAD
                                                 <tr>
                                                     <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                                     <th>Kategori</th>
@@ -155,15 +140,6 @@ function ReimburseList({
                                                     <th>Status</th>
                                                     <th>Detail</th>
                                                 </tr>
-=======
-                                            <tr>
-                                                <th style={{textAlign:"center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
-                                                <th style={{textAlign:"center"}}>Kategori Klaim</th>
-                                                <th style={{textAlign:"center"}}>Karyawan</th>
-                                                <th style={{textAlign:"center"}}>Status</th>
-                                                <th style={{textAlign:"center"}}>Detail</th>
-                                            </tr>
->>>>>>> origin/32-dashboardFinance2
                                             </thead>
                                             <tbody>
                                                 {
