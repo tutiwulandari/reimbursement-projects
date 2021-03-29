@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import store from './configs/store';
 import routes from "./configs/routes";
 import 'reimburse.svg'
+import Error404 from './pages/Error/Error404/Error404';
 
 
 function App() {
@@ -25,6 +26,31 @@ function App() {
                                 <Route key={index} path={route.path} exact={route.exact}>
                                     {route.component}
                                 </Route>)
+
+
+                            // routes.map((route, index) => {
+                            //     let path = route.path
+
+                            //     if (path.match("dashboard/hc")) {
+                            //         if (localStorage.getItem('role') == "1") {
+                            //             <Route key={index} path={route.path} exact={route.exact}>
+                            //                 {route.component}
+                            //             </Route>
+                            //         }
+                            //         else {
+                            //             <Route key={index} path='*' exact={false}>
+                            //                 <Error404 />
+                            //             </Route>
+                            //         }
+                            //     }
+                            //     else {
+                            //         <Route key={index} path='*' exact={false}>
+                            //             <Error404 />
+                            //         </Route>
+                            //     }
+                            // })
+
+
                         }
                     </Switch>
                 </Router>

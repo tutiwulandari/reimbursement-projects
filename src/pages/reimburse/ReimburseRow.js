@@ -33,13 +33,7 @@ const ReimburseRow = ({
 
     useEffect(() => {
         if (updatedReimburse) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Update Success',
-                showConfirmButton: false,
-                timer: 1000
-            })
+            window.location.reload();
         }
 
     }, [updatedReimburse])
@@ -59,7 +53,7 @@ const ReimburseRow = ({
 
     /* Tooltip */
     const renderTooltip = props => (
-        <Tooltip {...props}>Has been validated by admin finance</Tooltip>
+        <Tooltip {...props}>Divalidasi oleh Admin Finance</Tooltip>
     );
 
 
@@ -104,15 +98,15 @@ const ReimburseRow = ({
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Success </button>
+                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Selesai </button>
                         </OverlayTrigger> :
                         <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
                             onChange={(e) => {
                                 handleChangeStatus(e.target.value, data.id)
                             }}>
-                            <option value="waiting" selected={data.statusOnHc == true}> Waiting</option>
-                            <option value="accepted" selected={data.statusOnFinance == true}> Accepted</option>
-                            <option value="rejected" selected={data.statusReject == true}> Rejected </option>
+                            <option value="waiting" selected={data.statusOnHc == true}> Menunggu</option>
+                            <option value="accepted" selected={data.statusOnFinance == true}> Disetujui</option>
+                            <option value="rejected" selected={data.statusReject == true}> Ditolak </option>
                         </select>
                 }
             </td>
@@ -227,7 +221,7 @@ const ReimburseRow = ({
                                         <h5 className="text-enigma mb-3 bold">File</h5>
                                         <a target="_blank" href={bill.data.url} style={{ color: "#292961" }}>
                                             <p className="p-enigma-bold mb-0">
-                                                <BiDownload size="1.2em" /> Unduh File
+                                                <BiDownload size="1.2em" /> Unduh
                                             </p>
                                             <p className="p-enigma">{bill.data.billImage}</p>
                                         </a>

@@ -7,7 +7,10 @@ import {
     FIND_REIMBURSE_FINANCE_BY_ID_FAILURE,
     UPDATE_REIMBURSE_FINANCE,
     UPDATE_REIMBURSE_FINANCE_SUCCESS,
-    UPDATE_REIMBURSE_FINANCE_FAILURE
+    UPDATE_REIMBURSE_FINANCE_FAILURE,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY_SUCCESS,
+    FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE,
 } from "../constants/actionConstant";
 
 const initialState = {
@@ -98,6 +101,35 @@ export const updateReimburseFinance = (state = initialState, action) => {
             return {
                 ...state,
                 data: null,
+                isLoading: false,
+                error: null
+            }
+    }
+}
+
+
+export const findReimburseFinanceByCategory = (state = initialState, action) => {
+    switch (action.type) {
+        case FIND_REIMBURSE_FINANCE_BY_CATEGORY:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case FIND_REIMBURSE_FINANCE_BY_CATEGORY_SUCCESS:
+            return {
+                data: action.data,
+                isLoading: false,
+                error: null
+            }
+        case FIND_REIMBURSE_FINANCE_BY_CATEGORY_FAILURE:
+            return {
+                data: false,
+                isLoading: false,
+                error: action.error
+            }
+        default:
+            return {
+                ...state,
                 isLoading: false,
                 error: null
             }

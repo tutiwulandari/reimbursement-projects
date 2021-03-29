@@ -1,20 +1,71 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
-import { findAllReimburseFinance } from './../../../actions/reimburseFinanceAction';
+import { findAllReimburseFinance, findByCategory } from './../../../actions/reimburseFinanceAction';
+import { findAllCategory } from '../../../actions/categoryAction';
+
+
+/* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
 import Header from "../../../dashboard/dashboardHc/Header";
 import Footer from "../../../dashboard/dashboardHc/Footer";
 import { Table } from "reactstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
+/* Just for UI */
 
 
-function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
+function ReimburseListFinance({
+    reimbursements, findAllReimburseFinance,
+    categories, findAllCategory,
+    findByCategory, rCategory,
+}) {
+
+    const [search, setSearch] = useState()
+    const [status, setStatus] = useState()
+    const [rSearch, setRSearch] = useState()
+    const [rStatus, setRStatus] = useState()
+
+    useEffect(() => {
+        if (search) {
+            setRSearch(reimbursements.data?.filter(r => r.employeeId.fullname == search))
+        }
+    }, [search])
+
+    useEffect(() => {
+        if (status) {
+            switch (status) {
+                case "selesai":
+                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == true))
+                    break;
+                case "proses":
+                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == false))
+                    break;
+                default:
+                    setRStatus(null)
+                    break;
+            }
+        }
+    }, [status])
+
+    const handleChangeStatus = (e) => {
+        setStatus(e.target.value)
+    }
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const handleChangeCategory = (e) => {
+        let value = e.target.value
+        findByCategory(value)
+    }
 
     useEffect(() => {
         findAllReimburseFinance()
+        findAllCategory()
     }, [])
+
 
     return (
         <div>
@@ -24,17 +75,23 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                 <h1 style={{ color: "black", textAlign: "center" }}> DAFTAR KLAIM REIMBURSEMENT</h1>
 
                 <select className="custom-select rounded-pill text-enigma border-enigma"
-                    style={{ width: "30vh", marginLeft: "5vh" }}>
-                    <option value="">Category</option>
+                    onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
+                    <option value="">Kategori</option>
+                    {
+                        categories.data?.map((category, index) => {
+                            return (
+                                <option value={category.id}>{category.categoryName}</option>
+                            )
+                        })
+                    }
                 </select>
 
                 <div className="float-right" style={{ marginRight: "5vh" }}>
-                    <select className="custom-select rounded-pill text-enigma border-enigma">
-                        <option>Status</option>
-                        <option>Menunggu</option>
-                        <option>Disetujui</option>
-                        <option>Sukses</option>
-                        <option>Ditolak</option>
+                    <select className="custom-select rounded-pill text-enigma border-enigma"
+                        onChange={handleChangeStatus}>
+                        <option value="all">Status</option>
+                        <option value="proses">Proses</option>
+                        <option value="selesai">Selesai</option>
                     </select>
                 </div>
 
@@ -50,9 +107,8 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{ width: "150px" }}>
-                                                <input type="text" name="table_search"
-                                                    className="form-control float-right"
-                                                    placeholder="Search" />
+                                                <input type="text" name="table_search" className="form-control float-right" placeholder="Search"
+                                                    onChange={handleSearch} />
 
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
@@ -73,16 +129,34 @@ function ReimburseListFinance({ reimbursements, findAllReimburseFinance }) {
                                                     <th>Karyawan</th>
                                                     <th>Status</th>
                                                     <th>Detail</th>
-                                                    <th>Upload</th>
+                                                    <th>Unggah</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
-                                                    reimbursements.data?.map((element, index) => {
-                                                        return (
-                                                            <ReimburseRowFinance element={element} index={index} />
-                                                        )
-                                                    })
+                                                    rSearch && rSearch != "" ?
+                                                        rSearch?.map((element, index) => {
+                                                            return (
+                                                                <ReimburseRowFinance index={index} element={element} />
+                                                            )
+                                                        }) :
+                                                        rStatus ?
+                                                            rStatus?.map((element, index) => {
+                                                                return (
+                                                                    <ReimburseRowFinance index={index} element={element} />
+                                                                )
+                                                            }) :
+                                                            rCategory.length == 0 ?
+                                                                reimbursements.data?.map((element, index) => {
+                                                                    return (
+                                                                        <ReimburseRowFinance index={index} element={element} />
+                                                                    )
+                                                                }) : rCategory?.length == 0 ? "Data is empty" :
+                                                                    rCategory.map((value, key) => {
+                                                                        return (
+                                                                            <ReimburseRowFinance index={key} element={value} />
+                                                                        )
+                                                                    })
                                                 }
                                             </tbody>
                                         </Table>
@@ -109,10 +183,12 @@ const mapStateToProps = (state) => {
     return {
         reimbursements: state.findAllReimburseFinance.data || [],
         isLoading: state.findAllReimburseFinance.isLoading,
+        categories: state.findAllCategory.data || [],
+        rCategory: state.findReimburseFinanceByCategory.data || [],
     }
 }
 
 /* Action */
-const mapDispatchToProps = { findAllReimburseFinance }
+const mapDispatchToProps = { findAllReimburseFinance, findAllCategory, findByCategory }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReimburseListFinance);

@@ -152,7 +152,7 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                <select className="custom-select td-width text-enigma border-enigma"
+                <select className="custom-select td-width text-enigma border-enigma" style={{ width: "135px" }}
                     onChange={(e) => {
                         handleChangeStatus(e.target.value, element.id)
                     }}>
@@ -367,7 +367,7 @@ const mapStateToProps = (state) => {
         uploadedFile: state.uploadFile.data,
         updatedReimburse: state.updateReimburseFinance.data,
         bill: state.findBillById.data,
-        updatedFile: state.updateFile.data
+        updatedFile: state.updateFile.data,
     }
 }
 

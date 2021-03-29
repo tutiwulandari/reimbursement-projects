@@ -3,27 +3,27 @@ import axios from 'axios'
 // import axios from './../configs/api';
 
 import {
-    FORGOT_PASSWORD,
-    FORGOT_PASSWORD_SUCCESS,
-    FORGOT_PASSWORD_FAILURE
+    RESET_PASSWORD,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILURE
 } from '../constants/actionConstant'
 
 
-function* forgotPassword(action) {
+function* resetPassword(action) {
     console.log("action type",action.type);
     console.log("action data",action.data);
-    let result = yield axios     
-        .post('/forgot-password', action.data)
+    let result = yield axios
+        .post('/reset-password', action.data)
         .then(response => {
             console.log("response from saga", response);
             return {
-                type: FORGOT_PASSWORD_SUCCESS,
+                type: RESET_PASSWORD_SUCCESS,
                 data: response
             }
         })
         .catch(error => {
             return {
-                type: FORGOT_PASSWORD_FAILURE,
+                type: RESET_PASSWORD_FAILURE,
                 error
             }
         });
@@ -31,6 +31,6 @@ function* forgotPassword(action) {
 }
 
 
-export function* watchForgotPassword() {
-    yield takeLatest(FORGOT_PASSWORD, forgotPassword)
+export function* watchResetPassword() {
+    yield takeLatest(RESET_PASSWORD, resetPassword)
 }

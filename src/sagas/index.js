@@ -29,13 +29,14 @@ import {
 } from "./detailContractSagas";
 import {watchFindAllCount} from "./dashboardSagas";
 import {watchForgotPassword} from './forgotPasswordSagas';
+import {watchResetPassword} from './resetPasswordSagas';
 import {watchBillById, watchUpdateFile, watchUploadFile} from "./billSagas";
 
 
 
 export default function* rootSaga() {
     yield all([
-        watchLoginEmployee(), watchRegisterEmployee(), watchForgotPassword(),
+        watchLoginEmployee(), watchRegisterEmployee(), watchForgotPassword(), watchResetPassword(),
         watchFindAllEmployee(), watchFindEmployeeById(), watchUpdateEmployee(), watchSaveEmployee(),watchFindEmployeeByName(),
         watchFindAllReimburse(), watchFindReimburseById(), watchFindReimburseByCategory(),watchUpdateReimburse(),
         watchFindAllCategory(),

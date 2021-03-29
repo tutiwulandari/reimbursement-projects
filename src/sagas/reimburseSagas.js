@@ -50,7 +50,6 @@ function* findReimburseById(action) {
 
 
 function* findReimburseByCategory(action) {
-
     let result = yield axios
         .post(`/reimburse/filter-category`, action.data)
         .then(response => {
