@@ -79,7 +79,7 @@ const ForgetPassword = ({ status, forgotPassword, isLoading }) => {
         <div>
 
             <a className="pass" onClick={toggle} href="#" style={{ textAlign: "right", color: "#292961" }}>
-                Forgot Password?
+                Lupa Kata Sandi?
             </a>
 
             <Modal isOpen={modal} toggle={toggle}>

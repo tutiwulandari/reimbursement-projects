@@ -85,7 +85,7 @@ function ReimburseList({
                     <h1 style={{color: "black", textAlign: "center", fontFamily: "roboto"}}> DAFTAR KLAIM</h1>
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
-                        <option>Kategori</option>
+                        <option selected disabled hidden>Kategori</option>
                         {
                             categories.data?.map((category, index) => {
                                 return (
@@ -98,7 +98,7 @@ function ReimburseList({
                     <div className="float-right" style={{marginRight: "5vh"}}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                                 onChange={handleChangeStatus}>
-                            <option value="all">Status</option>
+                            <option value="all" selected disabled hidden>Status</option>
                             <option value="menunggu">Menunggu</option>
                             <option value="disetujui">Disetujui</option>
                             <option value="selesai">Selesai</option>
