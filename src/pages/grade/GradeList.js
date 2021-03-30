@@ -123,12 +123,12 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
-                                            <tr>
+                                            <tr >
                                                 <th>Grade</th>
                                                 <th>Biaya Melahirkan</th>
                                                 <th>Biaya Kacamata</th>
-                                                <th>Biaya Hotel</th>
-                                                <th>Biaya Makan</th>
+                                                <th>Biaya Perjalanan Dinas</th>
+                                                <th>Biaya Pelatihan</th>
                                                 <th>Biaya Transportasi</th>
                                                 <th>Edit</th>
                                             </tr>

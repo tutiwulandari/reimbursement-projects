@@ -54,7 +54,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
     useEffect(() => {
         if (verifikasi) {
             saveVerified(verifikasi)
-            swal("Berhasil","berhasil diverifikasi!", "success")
+            swal("Berhasil", "berhasil diverifikasi!", "success")
         }
     }, [verifikasi])
 
@@ -114,7 +114,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
                                         <Table className="table table-head-fixed text-nowrap" hover>
                                             <thead>
-                                            <tr>
+                                            <tr style={{fontFamily:"verdana"}}>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
@@ -276,13 +276,6 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                     maxWidth: "200px"
                                                 }}>Status Verifikasi
                                                 </th>
-                                                {/*<th style={{*/}
-                                                {/*    verticalAlign: "middle",*/}
-                                                {/*    textAlign: "center",*/}
-                                                {/*    minWidth: "200px",*/}
-                                                {/*    maxWidth: "200px"*/}
-                                                {/*}}>Verifikasi*/}
-                                                {/*</th>*/}
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
@@ -292,7 +285,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style={{fontFamily:"verdana"}}>
 
                                             {
                                                 karyawan?.data?.data?.map((element, index) => {
@@ -483,10 +476,19 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                             </div>
                         </div>
                     </div>
-
+                    <div>
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination" >
+                                <li className="page-item"><a className="page-link" href="#">Previous</a></li>
+                                <input className="page-item" style={{width:"3%"}}/>
+                                <li className="page-item"><a className="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
 
+
+            </div>
             <Footer/>
         </div>
 
