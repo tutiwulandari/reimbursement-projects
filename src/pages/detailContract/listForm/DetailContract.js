@@ -2,7 +2,14 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
+import {
+    faEdit,
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
@@ -84,11 +91,11 @@ function DetailContract({findAll, contracts, error, isLoading}) {
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color:"black", textAlign:"center", marginBottom:"5vh"}}> DETAIL KONTRAK</h1>
+                    <h1 style={{color:"black", textAlign:"center", marginBottom:"2vh"}}> DETAIL KONTRAK</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card">
+                                <div className="card" style={{height:"60vh"}}>
                                     <div className="card-header">
                                         <h3 className="card-title">
 
@@ -112,7 +119,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr style={{fontFamily:"verdana"}}>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>#</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Status Asuransi</th>
@@ -185,7 +192,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                         <Container>
                             <Row>
                                 <Col>
-                                    <div className="float-left text-dark">
+                                    <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
                                         Showing Page of {currentPage} of {totalPages}
                                     </div>
                                     <div className="float-right" >

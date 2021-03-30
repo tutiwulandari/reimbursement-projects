@@ -6,12 +6,19 @@ import {findAllCategory} from '../../actions/categoryAction';
 
 /* Just for UI */
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSortAmountDown} from '@fortawesome/free-solid-svg-icons';
+import {
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from '@fortawesome/free-solid-svg-icons';
 import ReimburseRow from './ReimburseRow';
 import Header from './../../dashboard/Header';
 import Footer from './../../dashboard/Footer';
 import MenuHc from './../../dashboard/dashboardHc/MenuHc';
-import {Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
+import {FormControl} from "react-bootstrap";
 
 /* Just for UI */
 
@@ -25,6 +32,7 @@ function ReimburseList({
 
     const [search, setSearch] = useState()
     const [status, setStatus] = useState()
+    const [c, setC] = useState()
     const [rSearch, setRSearch] = useState()
     const [rStatus, setRStatus] = useState()
 
@@ -33,6 +41,68 @@ function ReimburseList({
             setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
         }
     }, [search])
+
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemPerPage = 10;
+    let total = reimbursements?.data?.total
+    const  totalPages = Math.ceil(total/itemPerPage);
+    const  pageNumCss = {
+        width: "45px",
+        border: "1px solid #292961",
+        color: "#292961",
+        textAlign: "center",
+        fontWeight:"bold"
+    }
+
+    const onReload = () => {
+        findAllReimburse(currentPage)
+    }
+
+    useEffect( () => {
+        if(currentPage) {
+            onReload()
+        }
+    }, [currentPage])
+
+
+    const changePage = event => {
+        let targetPage = parseInt(event.target.value)
+        event.target.name = targetPage;
+    }
+
+    const firstPage = () => {
+        let firstPage = 1;
+        if (currentPage > firstPage) {
+            setCurrentPage(firstPage)
+            onReload()
+        }
+    }
+
+    const prevPage = () => {
+        let prevPage = 1;
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - prevPage)
+            onReload()
+        }
+    }
+
+    const lastPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(condition)
+            onReload()
+        }
+    }
+
+
+    const nextPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(currentPage + 1)
+            onReload()
+        }
+    }
 
     useEffect(() => {
         if (status) {
@@ -64,15 +134,23 @@ function ReimburseList({
         setSearch(e.target.value)
     }
 
+    useEffect( () => {
+        if(c) {
+            findByCategory(c)
+        }
+    }, [c])
+
     const handleChangeCategory = (e) => {
         let value = e.target.value
-        findByCategory(value)
+        setC(value)
     }
 
     useEffect(() => {
-        findAllReimburse()
+        findAllReimburse(currentPage)
         findAllCategory()
     }, [])
+
+    console.log("ENIGMA", reimbursements)
 
     return (
         <div>
@@ -82,7 +160,7 @@ function ReimburseList({
 
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color: "black", textAlign: "center", fontFamily: "roboto"}}> DAFTAR KLAIM</h1>
+                    <h1 style={{color: "black", textAlign: "center", fontFamily: "roboto"}}> DAFTAR KLAIM REIMBURSEMENT</h1>
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
                         <option selected disabled hidden>Kategori</option>
@@ -95,7 +173,7 @@ function ReimburseList({
                         }
                     </select>
 
-                    <div className="float-right" style={{marginRight: "5vh"}}>
+                    <div className="float-right" style={{marginRight: "5vh", fontFamily:"verdana"}}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                                 onChange={handleChangeStatus}>
                             <option value="all" selected disabled hidden>Status</option>
@@ -109,7 +187,7 @@ function ReimburseList({
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="card" style={{height: "70vh"}}>
+                                    <div className="card" style={{height: "55vh"}}>
                                         <div className="card-header">
                                             <h3 className="card-title">
 
@@ -136,7 +214,7 @@ function ReimburseList({
                                         <div className="card-body table-responsive p-0" style={{height: "300px"}}>
                                             <Table className="table table-head-fixed text-nowrap">
                                                 <thead>
-                                                <tr>
+                                                <tr style={{fontFamily:"verdana"}}>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}>Kategori</th>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}>Karyawan</th>
@@ -178,6 +256,46 @@ function ReimburseList({
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {  search == null && status == null && c == null ?
+                        total > 10 ?
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                        Showing Page of {currentPage} of {totalPages}
+                                    </div>
+                                    <div className="float-right" >
+                                        <InputGroup size="md">
+                                            <InputGroupAddon addonType="prepend">
+                                                <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastBackward} />
+                                                    {' '}First
+                                                </Button>
+                                                <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepBackward} />
+                                                    {' '}Previous
+                                                </Button>
+                                            </InputGroupAddon>
+                                            <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
+                                            <InputGroupAddon addonType="append">
+                                                <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepForward} />
+                                                    {' '}  Next
+                                                </Button>
+                                                <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastForward} />
+                                                    {' '}Last
+                                                </Button>
+                                            </InputGroupAddon>
+                                        </InputGroup>
+                                    </div>
+                                </Col>
+
+                            </Row>
+                        </Container> : null : null
+                    }
                 </div>
             </div>
             <Footer/>

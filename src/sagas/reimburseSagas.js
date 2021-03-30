@@ -10,13 +10,15 @@ import {
 } from "../constants/actionConstant";
 
 
-function* findAllReimburse() {
+function* findAllReimburse(action) {
+    action.page -= 1
     let result = yield axios
-        .get('/reimburse')
+        .get('/reimburse?page='+ action.page)
         .then(response => {
             return {
                 type: FIND_ALL_REIMBURSE_SUCCESS,
-                data: response.data
+                data: response.data,
+                total: response.data.total
             }
         })
         .catch(error => {

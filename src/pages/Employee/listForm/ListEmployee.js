@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
 import {findAll, findByName, saveVerified} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -9,6 +9,7 @@ import Header from "../../../dashboard/Header";
 import Footer from "../../../dashboard/Footer";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import swal from "sweetalert";
+import {FormControl} from "react-bootstrap";
 
 
 function ListEmployee({findAll, findByName, employees, error, isLoading, name, savedVerified, saveVerified}) {
@@ -32,12 +33,12 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
 
     useEffect(() => {
         setKaryawan({
-            data: name
+            data:{
+                list: name?.data
+            }
         })
     }, [name])
 
-
-    console.log("KARYAWAN", karyawan)
 
 
     const onSubmit = () => {
@@ -59,6 +60,65 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
     }, [verifikasi])
 
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemPerPage = 10;
+    const total = karyawan?.data?.total
+    const totalPages = Math.ceil(total/itemPerPage);
+    const  pageNumCss = {
+        width: "45px",
+        border: "1px solid #292961",
+        color: "#292961",
+        textAlign: "center",
+        fontWeight:"bold"
+    }
+
+    const onReload = () => {
+        findAll(currentPage)
+    }
+
+    useEffect( () => {
+        if(currentPage) {
+            onReload()
+        }
+    }, [currentPage])
+
+    const changePage = event => {
+        let targetPage = parseInt(event.target.value)
+        event.target.name = targetPage;
+    }
+
+    const firstPage = () => {
+        let firstPage = 1;
+        if (currentPage > firstPage) {
+            setCurrentPage(firstPage)
+            onReload()
+        }
+    }
+
+    const prevPage = () => {
+        let prevPage = 1;
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - prevPage)
+            onReload()
+        }
+    }
+
+    const lastPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(condition)
+            onReload()
+        }
+    }
+
+    const nextPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(currentPage + 1)
+            onReload()
+        }
+    }
+
     const handleChangeVerified = (value, id) => {
         switch (value) {
             case "verified":
@@ -75,7 +135,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
         }
     }
     console.log("FULLNAME", searchName)
-    console.log("LIST", employees)
+    console.log("LIST", karyawan)
 
     return (
         <div>
@@ -87,7 +147,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card" style={{height: "70vh"}}>
+                                <div className="card" style={{height: "60vh"}}>
                                     <div className="card-header">
                                         <h3 className="card-title">
 
@@ -115,6 +175,11 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                         <Table className="table table-head-fixed text-nowrap" hover>
                                             <thead>
                                             <tr style={{fontFamily:"verdana"}}>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center"
+                                                }}>#
+                                                </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
@@ -286,11 +351,16 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                             </tr>
                                             </thead>
                                             <tbody style={{fontFamily:"verdana"}}>
+                                            {
+                                                console.log("COBA ya", karyawan)
+                                            }
 
                                             {
-                                                karyawan?.data?.data?.map((element, index) => {
+                                                karyawan?.data?.list?.map((element, index) => {
                                                     return (
                                                         <tr style={{textAlign: "center"}}>
+                                                            <td style={{textAlign: "center"}}>
+                                                                {element.employeeId === null ? "belum ada data" : (currentPage-1)*10+index+1}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
@@ -476,17 +546,46 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <nav aria-label="Page navigation example">
-                            <ul className="pagination" >
-                                <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                                <input className="page-item" style={{width:"3%"}}/>
-                                <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
 
+                { total > 10 ?
+
+                    <Container>
+                        <Row>
+                            <Col>
+                                <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                    Showing Page of {currentPage} of {totalPages}
+                                </div>
+                                <div className="float-right" >
+                                    <InputGroup size="md">
+                                        <InputGroupAddon addonType="prepend">
+                                            <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
+                                                <FontAwesomeIcon icon={faFastBackward} />
+                                                {' '}First
+                                            </Button>
+                                            <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
+                                                <FontAwesomeIcon icon={faStepBackward} />
+                                                {' '}Previous
+                                            </Button>
+                                        </InputGroupAddon>
+                                        <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
+                                        <InputGroupAddon addonType="append">
+                                            <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
+                                                <FontAwesomeIcon icon={faStepForward} />
+                                                {' '}  Next
+                                            </Button>
+                                            <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
+                                                <FontAwesomeIcon icon={faFastForward} />
+                                                {' '}Last
+                                            </Button>
+                                        </InputGroupAddon>
+                                    </InputGroup>
+                                </div>
+                            </Col>
+
+                        </Row>
+                    </Container> : null
+                }
+            </div>
 
             </div>
             <Footer/>
