@@ -22,6 +22,8 @@ import ReimburseList from './pages/reimburse/ReimburseList';
 import DetailContract from './pages/detailContract/listForm/DetailContract';
 import ReimburseListFinance from './pages/Finance/Reimburse/ReimburseListFinance';
 import GradeList from './pages/grade/GradeList';
+import DetailContractForm from './pages/detailContract/editForm/DetailContractForm';
+import VerifiedForm from './pages/Employee/verified/VerifiedForm';
 
 function App() {
     const [role] = useState(localStorage.getItem("role"))
@@ -58,6 +60,14 @@ function App() {
                         <Route path="/dashboard/hc/contract" exact render={() => (
                             role != "1" ?
                                 <Redirect to="/" /> : <DetailContract></DetailContract>
+                        )} />
+                        <Route path="/contract/:id" exact render={() => (
+                            role != "1" ?
+                                <Redirect to="/" /> : <DetailContractForm></DetailContractForm> 
+                        )} />
+                        <Route path="/employee/:id/isVerified" exact render={() => (
+                            role != "1" ?
+                                <Redirect to="/" /> : <VerifiedForm></VerifiedForm>  
                         )} />
                         <Route path="/dashboard/hc/grade" exact render={() => (
                             role != "1" ?
