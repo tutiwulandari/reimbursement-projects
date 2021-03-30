@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import Image from "../../assets/image/dashboard.svg";
-import ChartGender from "../dashboardHc/contents/ChartGender";
-import DoughnutTypeContract from "../dashboardHc/contents/DoughnutTypeContract";
 import {CardBody} from "reactstrap";
-import LineGraphEmployee from "../dashboardHc/contents/BarChart";
-import DoughnutTypeEmployee from "../dashboardHc/contents/DoughnutTypeEmployee";
 import {findAll} from "../../actions/dashboardAction";
 import {connect} from "react-redux";
 import DoughnutFinance from "./DoughnutFinance";
+import ChartStatus from "./ChartStatus";
 
 function ContentFinance() {
     let year = new Date().getFullYear()
@@ -72,10 +69,17 @@ function ContentFinance() {
 
                         <div>
                             <Row style={{display:"flex", justifyContent:"center"}}>
-                                <Col md={8}>
+                                <Col md={6}>
                                     <Card>
                                         <CardBody>
                                             <DoughnutFinance/>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                                <Col md={6}>
+                                    <Card>
+                                        <CardBody>
+                                            <ChartStatus/>
                                         </CardBody>
                                     </Card>
                                 </Col>
