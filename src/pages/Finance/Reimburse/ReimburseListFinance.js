@@ -7,11 +7,18 @@ import {findAllCategory} from '../../../actions/categoryAction';
 /* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
-import {Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSortAmountDown} from '@fortawesome/free-solid-svg-icons';
+import {
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from '@fortawesome/free-solid-svg-icons';
 import Header from "../../../dashboard/Header";
 import Footer from "../../../dashboard/Footer";
+import {FormControl} from "react-bootstrap";
 
 /* Just for UI */
 
@@ -24,23 +31,86 @@ function ReimburseListFinance({
 
     const [search, setSearch] = useState()
     const [status, setStatus] = useState()
+    const [c, setC] = useState()
     const [rSearch, setRSearch] = useState()
     const [rStatus, setRStatus] = useState()
 
     useEffect(() => {
         if (search) {
-            setRSearch(reimbursements.data?.filter(r => r.employeeId.fullname == search))
+            setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
         }
     }, [search])
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemPerPage = 10;
+    let total = reimbursements?.data?.total
+    const  totalPages = Math.ceil(total/itemPerPage);
+    const  pageNumCss = {
+        width: "45px",
+        border: "1px solid #292961",
+        color: "#292961",
+        textAlign: "center",
+        fontWeight:"bold"
+    }
+
+    const onReload = () => {
+        findAllReimburseFinance(currentPage)
+    }
+
+    useEffect( () => {
+        if(currentPage) {
+            onReload()
+        }
+    }, [currentPage])
+
+
+    const changePage = event => {
+        let targetPage = parseInt(event.target.value)
+        event.target.name = targetPage;
+    }
+
+    const firstPage = () => {
+        let firstPage = 1;
+        if (currentPage > firstPage) {
+            setCurrentPage(firstPage)
+            onReload()
+        }
+    }
+
+    const prevPage = () => {
+        let prevPage = 1;
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - prevPage)
+            onReload()
+        }
+    }
+
+    const lastPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(condition)
+            onReload()
+        }
+    }
+
+
+    const nextPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(currentPage + 1)
+            onReload()
+        }
+    }
+
 
     useEffect(() => {
         if (status) {
             switch (status) {
                 case "selesai":
-                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == true))
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusSuccess == true))
                     break;
                 case "proses":
-                    setRStatus(reimbursements.data?.filter(r => r.statusSuccess == false))
+                    setRStatus(reimbursements.data?.list?.filter(r => r.statusSuccess == false))
                     break;
                 default:
                     setRStatus(null)
@@ -59,11 +129,12 @@ function ReimburseListFinance({
 
     const handleChangeCategory = (e) => {
         let value = e.target.value
-        findByCategory(value)
+        setC(value)
+        // findByCategory(value)
     }
 
     useEffect(() => {
-        findAllReimburseFinance()
+        findAllReimburseFinance(currentPage)
         findAllCategory()
     }, [])
 
@@ -151,7 +222,7 @@ function ReimburseListFinance({
                                                                 )
                                                             }) :
                                                             rCategory.length == 0 ?
-                                                                reimbursements.data?.map((element, index) => {
+                                                                reimbursements.data?.list?.map((element, index) => {
                                                                     return (
                                                                         <ReimburseRowFinance index={index}
                                                                                              element={element}/>
@@ -173,6 +244,46 @@ function ReimburseListFinance({
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {  search == null && status == null && c == null ?
+                        total > 10 ?
+                            <Container>
+                                <Row>
+                                    <Col>
+                                        <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                            Showing Page of {currentPage} of {totalPages}
+                                        </div>
+                                        <div className="float-right" >
+                                            <InputGroup size="md">
+                                                <InputGroupAddon addonType="prepend">
+                                                    <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
+                                                        <FontAwesomeIcon icon={faFastBackward} />
+                                                        {' '}First
+                                                    </Button>
+                                                    <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
+                                                        <FontAwesomeIcon icon={faStepBackward} />
+                                                        {' '}Previous
+                                                    </Button>
+                                                </InputGroupAddon>
+                                                <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
+                                                <InputGroupAddon addonType="append">
+                                                    <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
+                                                        <FontAwesomeIcon icon={faStepForward} />
+                                                        {' '}  Next
+                                                    </Button>
+                                                    <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
+                                                        <FontAwesomeIcon icon={faFastForward} />
+                                                        {' '}Last
+                                                    </Button>
+                                                </InputGroupAddon>
+                                            </InputGroup>
+                                        </div>
+                                    </Col>
+
+                                </Row>
+                            </Container> : null : null
+                    }
                 </div>
             </div>
             <Footer/>

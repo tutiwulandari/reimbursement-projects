@@ -10,9 +10,10 @@ import {
 } from "../constants/actionConstant";
 
 
-function* findAllReimburseFinance() {
+function* findAllReimburseFinance(action) {
+    action.page -= 1
     let result = yield axios
-        .get('/reimburse/filter-status-finance')
+        .get('/reimburse/page/finance?page=' + action.page)
         .then(response => {
             return {
                 type: FIND_ALL_REIMBURSE_FINANCE_SUCCESS,
