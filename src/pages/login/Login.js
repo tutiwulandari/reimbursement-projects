@@ -189,7 +189,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                         <div className="text-danger">{error.email}</div>
                                     </Form.Group>
                                     <Form.Group controlId="password" className="mb-2" style={{ width: "300px" }}>
-                                        <Form.Label htmlFor="password">Password</Form.Label>
+                                        <Form.Label htmlFor="password">Kata Sandi</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
                                             <FormControl id="password"
@@ -221,7 +221,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                             width: "300px",
                                             marginBottom: "20px"
                                         }}>
-                                        Sign In
+                                        Login
                                     </Button>
                                     <br />
                                     <div className="row">
