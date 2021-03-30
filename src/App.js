@@ -65,10 +65,6 @@ function App() {
                             role != "1" ?
                                 <Redirect to="/" /> : <DetailContractForm></DetailContractForm> 
                         )} />
-                        <Route path="/employee/:id/isVerified" exact render={() => (
-                            role != "1" ?
-                                <Redirect to="/" /> : <VerifiedForm></VerifiedForm>  
-                        )} />
                         <Route path="/dashboard/hc/grade" exact render={() => (
                             role != "1" ?
                                 <Redirect to="/" /> : <GradeList></GradeList> 
