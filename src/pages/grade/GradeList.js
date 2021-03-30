@@ -18,16 +18,9 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
     const [number, setNumber] = useState("")
     const [data, setData] = useState({})
 
-    const [coba, setCoba] = useState({
-        giveBirthCost: "0"
-    })
-
     useEffect(() => {
         findAll()
-        setCoba({
-            giveBirthCost: "_giveBirthCost"
-        })
-    }, [])
+    },[])
 
     useEffect(() => {
         if (savedGrade) {
@@ -35,14 +28,14 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
         }
     }, [savedGrade])
 
+    console.log("grade", grades);
+
     useEffect(() => {
         if (number != "") {
             setData(grade)
         }
     }, [grade])
 
-
-    console.log("data", data);
 
     const handleChange = (e) => {
         let name = e.target.name
@@ -103,19 +96,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width: "150px"}}>
-                                                {/*<input type="text" name="table_search"*/}
-                                                {/*       className="form-control float-right"*/}
-                                                {/*       placeholder="Search"/>*/}
-                                                {/*<div className="input-group-append">*/}
-                                                {/*    <button type="submit" className="btn btn-default">*/}
-                                                {/*        <i className="fas fa-search">*/}
-                                                {/*        </i>*/}
-                                                {/*    </button>*/}
-
-                                                {/*</div>*/}
-
                                             </div>
-
                                         </div>
 
                                     </div>
@@ -129,7 +110,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                 <th>Biaya Kacamata</th>
                                                 <th>Biaya Perjalanan Dinas</th>
                                                 <th>Biaya Pelatihan</th>
-                                                <th>Biaya Transportasi</th>
+                                                <th>Biaya Ansuransi</th>
                                                 <th>Edit</th>
                                             </tr>
                                             </thead>
@@ -153,16 +134,6 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.hotelCost}
-                                                                               onChange={handleChange}
-                                                                               name="hotelCost"/>
-                                                                        : convert_to_rupiah(element.hotelCost)
-                                                                }
-                                                            </td>
-                                                            <td>
-                                                                {
-                                                                    isEdit && number == element.id ?
-                                                                        <input className="form-control" type="text"
                                                                                value={data?.glasessCost}
                                                                                onChange={handleChange}
                                                                                name="glasessCost"/>
@@ -173,19 +144,29 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.transportationCost}
+                                                                               value={data?.officialTravelCost}
                                                                                onChange={handleChange}
-                                                                               name="transportationCost"/>
-                                                                        : convert_to_rupiah(element.transportationCost)
+                                                                               name="officialTravelCost"/>
+                                                                        : convert_to_rupiah(element.officialTravelCost)
                                                                 }
                                                             </td>
                                                             <td>
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.mealCost}
-                                                                               onChange={handleChange} name="mealCost"/>
-                                                                        : convert_to_rupiah(element.mealCost)
+                                                                               value={data?.trainingCost}
+                                                                               onChange={handleChange}
+                                                                               name="trainingCost"/>
+                                                                        : convert_to_rupiah(element.trainingCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.insuranceCost}
+                                                                               onChange={handleChange} name="insuranceCost"/>
+                                                                        : convert_to_rupiah(element.insuranceCost)
                                                                 }
                                                             </td>
                                                             <td>
@@ -197,9 +178,6 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                             : <FontAwesomeIcon icon={faEdit}/>
                                                                     }
                                                                 </button>
-                                                                {/* <Link to={`/hc/grade/${element.id}`} className="btn btn-outline-enigma">
-                                                        <FontAwesomeIcon icon={faEdit} />
-                                                    </Link> */}
                                                             </td>
                                                         </tr>
                                                     )
