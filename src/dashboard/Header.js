@@ -32,7 +32,7 @@ export default function Header() {
                         <ResetPassword/>
                         <div className="dropdown-divider" />
                         <button onClick={logout} className="dropdown-item">
-                           Logout
+                           Keluar
                         </button>
                     </div>
                 </li>

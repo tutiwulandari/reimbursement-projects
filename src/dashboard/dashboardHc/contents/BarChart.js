@@ -15,6 +15,7 @@ function BarChart({findAll, dashboards, error, isLoading}) {
         datasets: [
             {
                 label:"klaim pengembalian dana",
+                display:true,
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: [

@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
+import {
+    faEdit,
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from "@fortawesome/free-solid-svg-icons";
 import {findAll, findByName, saveVerified} from "../../../actions/employeeAction";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -158,7 +165,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                 <input type="text" className="form-control float-right"
                                                        name="fullname"
                                                        value={searchName?.fullname}
-                                                       placeholder="Search"
+                                                       placeholder="Cari.."
                                                        onChange={handleChange}/>
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default"
@@ -178,174 +185,174 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center"
-                                                }}>#
+                                                }}><FontAwesomeIcon icon={faSortAmountDown}/>
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Nama Lengkap
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Tempat Lahir
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Tanggal Lahir
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>NIK
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Jenis Kelamin
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Agama
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Golongan Darah
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Status pernikahan
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Jumlah Anak
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Nama Ibu Kandung
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Nama Istri/Suami
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Nama Bank
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Nomer Rekening
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "350px",
+                                                    maxWidth: "350px"
                                                 }}>Alamat KTP
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "350px",
+                                                    maxWidth: "350px"
                                                 }}>Alamat Domisili
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Kodepos KTP
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "350px",
+                                                    maxWidth: "350px"
                                                 }}>Alamat NPWP
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>NIP
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Tanggal Bergabung
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Status Karyawan
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Tipe Karyawan
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Grade
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}>Status Verifikasi
                                                 </th>
                                                 <th style={{
                                                     verticalAlign: "middle",
                                                     textAlign: "center",
-                                                    minWidth: "200px",
-                                                    maxWidth: "200px"
+                                                    minWidth: "250px",
+                                                    maxWidth: "250px"
                                                 }}> Edit Data
                                                 </th>
                                             </tr>
@@ -364,143 +371,143 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px",
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px",
                                                                 position: "sticky"
                                                             }}>{element.fullname === null ? "belum ada data" : element.fullname}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.placeOfBirth === null ? "belum ada data" : element.placeOfBirth}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.dateOfBirth === null ? "belum ada data" : element.dateOfBirth}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.nik === null ? "belum ada data" : element.nik}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.gender === null ? "belum ada data" : element.gender}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.religion === null ? "belum ada data" : element.religion}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.bloodType === null ? "belum ada data" : element.bloodType}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.maritalStatus === null ? "belum ada data" : element.maritalStatus}</td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.numberOfChildren === null ? "belum ada data" : element.numberOfChildren}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.biologicalMothersName === null ? "belum ada data" : element.biologicalMothersName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.spouseName === null ? "belum ada data" : element.spouseName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.accountName === null ? "belum ada data" : element.accountName}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.accountNumber === null ? "belum ada data" : element.accountNumber}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.ktpAddress === null ? "belum ada data" : element.ktpAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.residenceAddress === null ? "belum ada data" : element.residenceAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.postalCodeOfIdCard === null ? "belum ada data" : element.postalCodeOfIdCard}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "350px",
+                                                                minWidth: "350px"
                                                             }}>{element.npwpAddress === null ? "belum ada data" : element.npwpAddress}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.nip === null ? "belum ada data" : element.nip}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.joinDate === null ? "belum ada data" : element.joinDate}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.employeeStatus === null ? "belum ada data" : element.employeeStatus}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element.employeeType === null ? "belum ada data" : element.employeeType}</td>
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>{element?.grade === null ? "belum ada data" : element?.grade?.grade}</td>
 
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>
 
                                                                 {
@@ -524,8 +531,8 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                             <td style={{
                                                                 verticalAlign: "middle",
                                                                 textAlign: "center",
-                                                                maxWidth: "200px",
-                                                                minWidth: "200px"
+                                                                maxWidth: "250px",
+                                                                minWidth: "250px"
                                                             }}>
                                                                 {/*<EmployeeForm/>*/}
                                                                 <Link to={'/employee/' + element.id}>
@@ -553,29 +560,29 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                         <Row>
                             <Col>
                                 <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
-                                    Showing Page of {currentPage} of {totalPages}
+                                   Menampilkan halaman {currentPage} dari {totalPages}
                                 </div>
                                 <div className="float-right" >
                                     <InputGroup size="md">
                                         <InputGroupAddon addonType="prepend">
                                             <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
                                                 <FontAwesomeIcon icon={faFastBackward} />
-                                                {' '}First
+                                                {' '}Pertama
                                             </Button>
                                             <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
                                                 <FontAwesomeIcon icon={faStepBackward} />
-                                                {' '}Previous
+                                                {' '}Sebelumnya
                                             </Button>
                                         </InputGroupAddon>
                                         <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                         <InputGroupAddon addonType="append">
                                             <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
                                                 <FontAwesomeIcon icon={faStepForward} />
-                                                {' '}  Next
+                                                {' '}Selanjutnya
                                             </Button>
                                             <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
                                                 <FontAwesomeIcon icon={faFastForward} />
-                                                {' '}Last
+                                                {' '}Terakhir
                                             </Button>
                                         </InputGroupAddon>
                                     </InputGroup>

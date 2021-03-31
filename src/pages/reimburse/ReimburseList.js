@@ -163,7 +163,7 @@ function ReimburseList({
                     <h1 style={{color: "black", textAlign: "center", fontFamily: "roboto"}}> DAFTAR KLAIM REIMBURSEMENT</h1>
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
-                        <option selected disabled hidden>Kategori</option>
+                        <option selected disabled hidden style={{fontFamily:"verdana"}}>Kategori</option>
                         {
                             categories.data?.map((category, index) => {
                                 return (
@@ -195,7 +195,7 @@ function ReimburseList({
                                             <div className="card-tools">
                                                 <div className="input-group input-group-sm" style={{width: "150px"}}>
                                                     <input type="text" name="table_search"
-                                                           className="form-control float-right" placeholder="Search"
+                                                           className="form-control float-right" placeholder="Cari.."
                                                            onChange={handleSearch}/>
                                                     <div className="input-group-append">
                                                         <button type="submit" className="btn btn-default">
@@ -215,7 +215,7 @@ function ReimburseList({
                                             <Table className="table table-head-fixed text-nowrap">
                                                 <thead>
                                                 <tr style={{fontFamily:"verdana"}}>
-                                                    <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
+                                                    <th style={{verticalAlign: "middle", textAlign: "center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}>Kategori</th>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}>Karyawan</th>
                                                     <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}>Status</th>
@@ -264,29 +264,29 @@ function ReimburseList({
                             <Row>
                                 <Col>
                                     <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
-                                        Showing Page of {currentPage} of {totalPages}
+                                       Menampilkan Halaman  {currentPage} dari {totalPages}
                                     </div>
                                     <div className="float-right" >
                                         <InputGroup size="md">
                                             <InputGroupAddon addonType="prepend">
                                                 <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faFastBackward} />
-                                                    {' '}First
+                                                    {' '}Pertama
                                                 </Button>
                                                 <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faStepBackward} />
-                                                    {' '}Previous
+                                                    {' '}Sebelumnya
                                                 </Button>
                                             </InputGroupAddon>
                                             <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                             <InputGroupAddon addonType="append">
                                                 <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faStepForward} />
-                                                    {' '}  Next
+                                                    {' '}  Selanjutnya
                                                 </Button>
                                                 <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faFastForward} />
-                                                    {' '}Last
+                                                    {' '}Terakhir
                                                 </Button>
                                             </InputGroupAddon>
                                         </InputGroup>

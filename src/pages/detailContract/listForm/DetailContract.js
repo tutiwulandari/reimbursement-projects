@@ -104,7 +104,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width:"150px"}}>
                                                 <input type="text" name="table_search" className="form-control float-right"
-                                                       placeholder="Search"/>
+                                                       placeholder="Cari.."/>
 
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
@@ -119,7 +119,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr style={{fontFamily:"verdana"}}>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Status Asuransi</th>
@@ -136,7 +136,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                             </thead>
                                             <tbody style={{fontFamily:"verdana"}}>
                                             {
-                                                console.log("DATA CONTRACT", contracts?.data?.list)
+                                                console.log("DATA CONTRACT", contracts)
                                             }
                                             {
                                                 contracts?.data?.list?.map((element, index) => {
@@ -193,29 +193,29 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                             <Row>
                                 <Col>
                                     <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
-                                        Showing Page of {currentPage} of {totalPages}
+                                       Menampilkan halaman {currentPage} dari {totalPages}
                                     </div>
                                     <div className="float-right" >
                                         <InputGroup size="md">
                                             <InputGroupAddon addonType="prepend">
                                                 <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faFastBackward} />
-                                                    {' '}First
+                                                    {' '}Pertama
                                                 </Button>
                                                 <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faStepBackward} />
-                                                    {' '}Previous
+                                                    {' '}Sebelumnya
                                                 </Button>
                                             </InputGroupAddon>
                                             <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                             <InputGroupAddon addonType="append">
                                                 <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faStepForward} />
-                                                    {' '}  Next
+                                                    {' '} Selanjutnya
                                                 </Button>
                                                 <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faFastForward} />
-                                                    {' '}Last
+                                                    {' '}Terakhir
                                                 </Button>
                                             </InputGroupAddon>
                                         </InputGroup>

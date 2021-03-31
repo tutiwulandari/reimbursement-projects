@@ -181,7 +181,7 @@ function ReimburseListFinance({
                                             <div className="card-tools">
                                                 <div className="input-group input-group-sm" style={{width: "150px"}}>
                                                     <input type="text" name="table_search"
-                                                           className="form-control float-right" placeholder="Search"
+                                                           className="form-control float-right" placeholder="Cari.."
                                                            onChange={handleSearch}/>
 
                                                     <div className="input-group-append">

@@ -16,7 +16,7 @@ import {put, takeLatest} from "redux-saga/effects";
 function* findAllContract(action) {
     action.page -= 1
     let result = yield axios
-        .get('/contract?page='+ action.page)
+        .get('/contract/page?page='+ action.page)
         .then(response => {
             return {
                 type: FIND_ALL_CONTRACT_SUCCESS,
