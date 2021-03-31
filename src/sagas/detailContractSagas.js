@@ -13,13 +13,15 @@ import {
 } from "../constants/actionConstant";
 import {put, takeLatest} from "redux-saga/effects";
 
-function* findAllContract() {
+function* findAllContract(action) {
+    action.page -= 1
     let result = yield axios
-        .get('/contract')
+        .get('/contract/page?page='+ action.page)
         .then(response => {
             return {
                 type: FIND_ALL_CONTRACT_SUCCESS,
-                data: response.data
+                data: response.data,
+                total: response.data.total
             }
         })
         .catch(error => {

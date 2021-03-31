@@ -10,19 +10,21 @@ import {
     SAVE_GRADE_SUCCESS,
     UPDATE_GRADE
 } from "../constants/actionConstant";
-import axios from "../configs/api";
+import axios from 'axios'
+
 
 function* findAllGrade() {
     let result = yield axios
         .get('/grades')
         .then(response => {
+            console.log("grade response", response);
             return {
                 type: FIND_ALL_GRADE_SUCCESS,
                 data: response.data
             }
         })
         .catch(error => {
-            console.log(error);
+            console.log("grade error", error);
             return {
                 type: FIND_ALL_GRADE_FAILURE,
                 error
