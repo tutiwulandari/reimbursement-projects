@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom'
 import { findBillById } from '../../actions/billAction';
 import { findReimburseId, updateReimburse } from "../../actions/reimburseAction";
-import { convert_to_rupiah, convert_date_format } from './../../utils/converter';
+import { convert_to_rupiah, convert_date_format } from '../../utils/converter';
 
 /* Just for UI */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCheck, faEye, faFile, faSquare, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEye, faTimes} from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody } from 'reactstrap';
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Swal from 'sweetalert2'
 import { BiIdCard, BiUserPin, BiDownload, BiCheckbox, BiCheckboxChecked, BiMoney, BiCalendar } from "react-icons/bi"
-import { FaRegTimesCircle, FaDownload } from "react-icons/fa"
-import { AiOutlineFilePdf } from "react-icons/ai"
 /* Just for UI */
 
 
 
 const ReimburseRow = ({
-    data, index,
-    updateReimburse, updatedReimburse,
-    reimburse, findReimburseId,
-    bill, findBillById,
-}) => {
+                          data, index,
+                          updateReimburse, updatedReimburse,
+                          reimburse, findReimburseId,
+                          bill, findBillById,
+                      }) => {
 
     const [modal, setModal] = useState(false)
     const [status, setStatus] = useState()
     const toggle = () => setModal(!modal)
 
 
-
     useEffect(() => {
         if (updatedReimburse) {
-            window.location.reload();
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: 'Reimburse berhasil di perbarui',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
 
     }, [updatedReimburse])
@@ -54,7 +56,7 @@ const ReimburseRow = ({
 
     /* Tooltip */
     const renderTooltip = props => (
-        <Tooltip {...props}>Divalidasi oleh Admin Finance</Tooltip>
+        <Tooltip {...props}>Berhasil di validasi admin finance</Tooltip>
     );
 
 
@@ -92,32 +94,33 @@ const ReimburseRow = ({
 
     return (
         <tr>
-            <td style={{textAlign:"center"}}>{index + 1}</td>
-            <td style={{textAlign:"center"}}>{data.categoryId.categoryName}</td>
-            <td style={{textAlign:"center"}}>{data.employeeId.fullname}</td>
-            <td style={{textAlign:"center"}}>
+            <td style={{textAlign:"center", fontFamily:"verdana"}}>{index + 1}</td>
+            <td style={{textAlign:"center", fontFamily:"verdana"}}>{data.categoryId.categoryName}</td>
+            <td style={{textAlign:"center", fontFamily:"verdana"}}>{data.employeeId.fullname}</td>
+            <td style={{textAlign:"center", fontFamily:"verdana"}}>
                 {
                     data.statusSuccess == true ?
                         <OverlayTrigger placement="bottom" overlay={renderTooltip}>
-                            <button className="btn btn-outline-enigma" style={{ width: "125px" }}> Selesai </button>
+                            <button className="btn btn-outline-enigma" style={{ width: "125px"}}> Sukses </button>
                         </OverlayTrigger> :
                         <select className="custom-select text-enigma border-enigma" style={{ width: "125px" }}
-                            onChange={(e) => {
-                                handleChangeStatus(e.target.value, data.id)
-                            }}>
-                            <option value="waiting" selected={data.statusOnHc === true}> Menunggu</option>
-                            <option value="accepted" selected={data.statusOnFinance === true}> Disetujui</option>
-                            <option value="rejected" selected={data.statusReject === true}> Ditolak </option>
+                                onChange={(e) => {
+                                    handleChangeStatus(e.target.value, data.id)
+                                }}>
+                            <option value="waiting" selected={data.statusOnHc == true}> Menunggu</option>
+                            <option value="accepted" selected={data.statusOnFinance == true}> Diterima</option>
+                            <option value="rejected" selected={data.statusReject == true}> Ditolak </option>
                         </select>
                 }
             </td>
-            <td>
-                <FontAwesomeIcon icon={faEye}
-                    onClick={() => {
-                        toggle();
-                        getId(data?.id);
-                    }}  style={{justifyContent:"center"}}/>
-
+            <td style={{textAlign:"center"}}>
+                <button  className="btn btn-outline-enigma mr-3"
+                        onClick={() => {
+                            toggle();
+                            getId(data?.id);
+                        }}>
+                   <FontAwesomeIcon icon={faEye}/>
+                </button>
             </td>
 
             {/* ============ */}
@@ -221,7 +224,7 @@ const ReimburseRow = ({
                                         <h5 className="text-enigma mb-3 bold">File</h5>
                                         <a target="_blank" href={bill.data.url} style={{ color: "#292961" }}>
                                             <p className="p-enigma-bold mb-0">
-                                                <BiDownload size="1.2em" /> Unduh
+                                                <BiDownload size="1.2em" /> Unduh File
                                             </p>
                                             <p className="p-enigma">{bill.data.billImage}</p>
                                         </a>
@@ -238,7 +241,7 @@ const ReimburseRow = ({
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Pengajuan
-                                    </p>
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
@@ -246,7 +249,7 @@ const ReimburseRow = ({
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Mulai
-                                    </p>
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
                                 </p>
@@ -257,7 +260,7 @@ const ReimburseRow = ({
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Pencairan
-                                    </p>
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
@@ -265,7 +268,7 @@ const ReimburseRow = ({
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
                                     <BiCalendar size="1.3em" /> Tanggal Selesai
-                                    </p>
+                                </p>
                                 <p className="p-enigma">
                                     {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
                                 </p>

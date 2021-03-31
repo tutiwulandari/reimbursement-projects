@@ -170,7 +170,7 @@ const ReimburseRowFinance = ({
                 </button>
             </td>
             <td>
-                {element?.statusSuccess ?
+                { element?.statusSuccess ?
                     <button className="btn btn-outline-enigma"
                         onClick={() => {
                             toggle2();

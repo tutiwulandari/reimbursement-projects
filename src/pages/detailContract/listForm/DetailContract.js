@@ -1,13 +1,21 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findAll} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {
+    faEdit,
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import {Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import Footer from "../../../dashboard/Footer";
+import {FormControl} from "react-bootstrap";
 
 
 function DetailContract({findAll, contracts, error, isLoading}) {
@@ -16,17 +24,78 @@ function DetailContract({findAll, contracts, error, isLoading}) {
         findAll()
     }, [])
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemPerPage = 10;
+    const total = contracts?.data.total
+    const  totalPages = Math.ceil(total/itemPerPage);
+    const  pageNumCss = {
+        width: "45px",
+        border: "1px solid #292961",
+        color: "#292961",
+        textAlign: "center",
+        fontWeight:"bold"
+    }
+
+    const onReload = () => {
+        findAll(currentPage)
+    }
+
+    useEffect( () => {
+        if(currentPage) {
+            onReload()
+        }
+    }, [currentPage])
+
+    const changePage = event => {
+        let targetPage = parseInt(event.target.value)
+        event.target.name = targetPage;
+    }
+
+    const firstPage = () => {
+        let firstPage = 1;
+        if (currentPage > firstPage) {
+            setCurrentPage(firstPage)
+            onReload()
+        }
+    }
+
+    const prevPage = () => {
+        let prevPage = 1;
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - prevPage)
+            onReload()
+        }
+    }
+
+    const lastPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(condition)
+            onReload()
+        }
+    }
+
+    const nextPage = () => {
+        let condition = Math.ceil(total /itemPerPage);
+        if (currentPage < condition) {
+            setCurrentPage(currentPage + 1)
+            onReload()
+        }
+    }
+    console.log("total", total)
+    console.log("contracts", contracts)
+
     return(
         <div>
             <Header/>
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color:"black", textAlign:"center", marginBottom:"5vh"}}> DETAIL KONTRAK</h1>
+                    <h1 style={{color:"black", textAlign:"center", marginBottom:"2vh"}}> DETAIL KONTRAK</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card">
+                                <div className="card" style={{height:"60vh"}}>
                                     <div className="card-header">
                                         <h3 className="card-title">
 
@@ -35,7 +104,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width:"150px"}}>
                                                 <input type="text" name="table_search" className="form-control float-right"
-                                                       placeholder="Search"/>
+                                                       placeholder="Cari.."/>
 
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default">
@@ -49,7 +118,8 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                     <div className="card-body table-responsive p-0" style={{height:"300px"}}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
-                                            <tr>
+                                            <tr style={{fontFamily:"verdana"}}>
+                                                <th style={{verticalAlign: "middle", textAlign: "center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Status Asuransi</th>
@@ -64,14 +134,16 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style={{fontFamily:"verdana"}}>
                                             {
-                                                console.log("DATA CONTRACT", contracts?.data)
+                                                console.log("DATA CONTRACT", contracts)
                                             }
                                             {
-                                                contracts?.data.map((element, index) => {
+                                                contracts?.data?.list?.map((element, index) => {
                                                     return (
                                                         <tr style={{textAlign: "center"}} >
+                                                            <td style={{textAlign: "center"}}>
+                                                                {element.employeeId === null ? "belum ada data" : (currentPage-1)*10+index+1}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.employeeId === null ? "belum ada data" : element.employeeId.fullname}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
@@ -106,12 +178,53 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                             }
                                             </tbody>
                                         </Table>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div>
+                    { total > 10 ?
+
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                       Menampilkan halaman {currentPage} dari {totalPages}
+                                    </div>
+                                    <div className="float-right" >
+                                        <InputGroup size="md">
+                                            <InputGroupAddon addonType="prepend">
+                                                <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastBackward} />
+                                                    {' '}Pertama
+                                                </Button>
+                                                <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepBackward} />
+                                                    {' '}Sebelumnya
+                                                </Button>
+                                            </InputGroupAddon>
+                                            <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
+                                            <InputGroupAddon addonType="append">
+                                                <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepForward} />
+                                                    {' '} Selanjutnya
+                                                </Button>
+                                                <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastForward} />
+                                                    {' '}Terakhir
+                                                </Button>
+                                            </InputGroupAddon>
+                                        </InputGroup>
+                                    </div>
+                                </Col>
+
+                            </Row>
+                        </Container> : null
+                    }
                 </div>
             </div>
             <Footer/>
@@ -125,7 +238,8 @@ const mapStateToProps = (state) => {
     return {
         contracts: state.findAllContract.data || null,
         error: state.findAllContract.error,
-        isLoading: state.findAllContract.isLoading
+        isLoading: state.findAllContract.isLoading,
+        // total: state.findAllContract.total
 
     }
 }

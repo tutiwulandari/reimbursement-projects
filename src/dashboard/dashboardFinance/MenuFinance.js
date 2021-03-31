@@ -1,6 +1,8 @@
 import React from "react";
 import Image1 from "../../assets/image/undraw_female_avatar_w3jk.svg"
 import {Link} from "react-router-dom";
+import {GoHome} from "react-icons/go";
+import {GrMoney} from "react-icons/gr";
 
 export default function MenuFinance() {
     return (
@@ -22,13 +24,13 @@ export default function MenuFinance() {
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-item has-treeview" >
                             <Link to="/dashboard/finance" className="nav-link active" style={{backgroundColor:"#292961"}}>
-                                <i className="nav-icon fas fa-home" style={{fontSize:"20px"}} />
+                                <GoHome className="nav-icon"/>
                                 <p style={{color:"white", fontSize:"20px", fontFamily:"roboto"}}>Beranda</p>
                             </Link>
                         </li>
                         <li className="nav-item has-treeview">
                             <Link  to= '/dashboard/finance/reimburse' className="nav-link">
-                                <i className="nav-icon fas fa-list" style={{fontSize:"20px"}} />
+                                <GrMoney className="nav-icon"/>
                                 <p style={{color:"black", fontSize:"20px",fontFamily:"roboto"}}>Reimbursement</p>
                             </Link>
                         </li>

@@ -25,7 +25,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
     });
 
     const emailUser = ["arsytamawisa@gmail.com", "solehsolihin2021@gmail.com"]
-    
+
     let responseGoogle = response => {
         const email = response.profileObj.email;
         console.log(email);
@@ -55,6 +55,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
 
 
     const [error, setError] = useState({})
+    const [role, setRole] = useState()
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -64,51 +65,37 @@ const Login = ({ loginEmployee, login, isLoading }) => {
         event.preventDefault()
     }
 
-    console.log("login", login)
 
     useEffect(() => {
-
-        if (localStorage.getItem('email') === "" || localStorage.getItem('email') == null) {
-            if (login) {
-                if (login?.data?.code === 200) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'sukses',
-                        text: 'Login sukses...',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                    if (login.data?.data?.role.id === 1) {
-                        localStorage.setItem('email', login.data.data.email)
-                        // localStorage.setItem("token",  login.data.data.email)
-                        localStorage.setItem('role', '1')
-                        history.push("/dashboard/hc")
-                    } else {
-                        localStorage.setItem('email', login.data.data.email)
-                        // localStorage.setItem("token",  login.data.data.email)
-                        localStorage.setItem('role', '2')
-                        history.push("/dashboard/finance")
-                    }
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Ooops..',
-                        text: 'Login Gagal!',
-                        showConfirmButton: false,
-                        timer: 2000,
-                    })
-                }
-            }
-        } else {
-            if (localStorage.getItem('role') === '1') {
-                history.push("/dashboard/hc")
-            }
-            else {
-                history.push("/dashboard/finance")
+        if (login) {
+            if (login?.data?.code === 200) {
+                setRole(login.data?.data?.role.id)
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops..',
+                    text: 'Login Gagal!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             }
         }
+    }, [login])
 
-    })
+
+    useEffect(() => {
+        if (role) {
+            if (role == "1" || role == 1) {
+                localStorage.setItem('email', login.data.data.email)
+                localStorage.setItem('role', '1')
+                window.location.replace('/dashboard/hc')
+            } else {
+                localStorage.setItem('email', login.data.data.email)
+                localStorage.setItem('role', '2')
+                window.location.replace("/dashboard/finance")
+            }
+        }
+    }, [role])
 
 
     function handleChange(e) {
@@ -202,7 +189,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                         <div className="text-danger">{error.email}</div>
                                     </Form.Group>
                                     <Form.Group controlId="password" className="mb-2" style={{ width: "300px" }}>
-                                        <Form.Label htmlFor="password">Password</Form.Label>
+                                        <Form.Label htmlFor="password">Kata Sandi</Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text> <FontAwesomeIcon icon={faUnlockAlt} /></InputGroup.Text>
                                             <FormControl id="password"
@@ -234,7 +221,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                             width: "300px",
                                             marginBottom: "20px"
                                         }}>
-                                        Sign In
+                                        Login
                                     </Button>
                                     <br />
                                     <div className="row">

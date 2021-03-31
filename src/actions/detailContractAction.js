@@ -1,8 +1,9 @@
 import {FIND_ALL_CONTRACT, FIND_CONTRACT_BY_ID, SAVE_CONTRACT, UPDATE_CONTRACT} from "../constants/actionConstant";
 
-export function findAll() {
+export function findAll(page) {
     return {
-        type: FIND_ALL_CONTRACT
+        type: FIND_ALL_CONTRACT,
+        page:page
 
     }
 }
