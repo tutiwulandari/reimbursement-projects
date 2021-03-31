@@ -39,7 +39,7 @@ function* uploadFile(action) {
 
 
 function* findBillById(action) {
-    let result = yield axios.get(`/bill/${action.id}/file`)
+    let result = yield axios.get(`/bill/${action.id}/file/employee`)
         .then(response => {
             return ({
                 type: FIND_BILL_BY_ID_SUCCESS,

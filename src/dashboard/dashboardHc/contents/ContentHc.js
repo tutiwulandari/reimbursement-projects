@@ -45,7 +45,6 @@ function ContentHc({findAll, dashboards, error, isLoading}) {
     }
 
 
-
     return (
         <div>
             <div className="content-wrapper">

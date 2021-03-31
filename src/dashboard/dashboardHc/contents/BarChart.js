@@ -15,7 +15,7 @@ function BarChart({findAll, dashboards, error, isLoading}) {
         datasets: [
             {
                 label:"klaim pengembalian dana",
-                display:true,
+                display:false,
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: [
@@ -46,12 +46,12 @@ function BarChart({findAll, dashboards, error, isLoading}) {
                 options={{
                     title:{
                         display:true,
-                        text:'Jumlah Klaim Pengembalian Dana',
+                        text:'Jumlah Klaim Reimbursement Berdasarkan Kategori',
                         fontSize:20
                     },
                     legend:{
-                        display:true,
-                        position:'top'
+                        display:false,
+                        position:'right'
                     }
                 }}
             />

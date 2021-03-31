@@ -162,8 +162,7 @@ function ReimburseListFinance({
                             })
                         }
                     </select>
-
-                    <div className="float-right" style={{ marginRight: "5vh" }}>
+                    <div className="float-right" style={{marginRight: "2vh"}}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeStatus}>
                             <option value="all" selected disabled hidden>Status</option>
@@ -176,7 +175,7 @@ function ReimburseListFinance({
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="card" style={{ height: "70vh" }}>
+                                    <div className="card" style={{height: "60vh"}}>
                                         <div className="card-header">
                                             <h3 className="card-title">
 
@@ -210,9 +209,16 @@ function ReimburseListFinance({
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {
-                                                        rSearch && rSearch != "" ?
-                                                            rSearch?.map((element, index) => {
+                                                {
+
+                                                    rSearch && rSearch != "" ?
+                                                        rSearch?.map((element, index) => {
+                                                            return (
+                                                                <ReimburseRowFinance index={index} element={element}/>
+                                                            )
+                                                        }) :
+                                                        rStatus ?
+                                                            rStatus?.map((element, index) => {
                                                                 return (
                                                                     <ReimburseRowFinance index={index} element={element} />
                                                                 )
@@ -254,8 +260,8 @@ function ReimburseListFinance({
                             <Container>
                                 <Row>
                                     <Col>
-                                        <div className="float-left text-dark" style={{ fontFamily: "verdana" }}>
-                                            Showing Page of {currentPage} of {totalPages}
+                                        <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                           Menampilkan halaman {currentPage} dari {totalPages}
                                         </div>
                                         <div className="float-right" >
                                             <InputGroup size="md">
