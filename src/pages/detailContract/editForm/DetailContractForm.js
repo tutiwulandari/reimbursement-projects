@@ -226,11 +226,27 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 <div className="form-group">
                                                                     <Label> Habis Kontrak</Label>
                                                                     <Input type="select" onChange={handleChange} name="endedContract">
-                                                                        <option selected disabled hidden>-- Choose --</option>
-                                                                        <option value={true}> YA</option>
-                                                                        <option value={false}>TIDAK</option>
+                                                                    {/*    <option selected disabled hidden>-- Choose --</option>*/}
+                                                                    {/*    <option value={true}> YA</option>*/}
+                                                                    {/*    <option value={false}>TIDAK</option>*/}
+                                                                    {
+                                                                        data?.endedContract === null ?
+                                                                            <>
+                                                                                <option selected disabled hidden>-- Choose --</option>
+                                                                                <option value={true}> YA</option>
+                                                                                <option value={false}>TIDAK</option>
+                                                                            </>
+                                                                            :
+                                                                            <>
+                                                                                <option selected={true === data?.endedContract}
+                                                                                        value={true}>YA
+                                                                                </option>
+                                                                                <option selected={false === data?.endedContract}
+                                                                                        value={false}>Tidak
+                                                                                </option>
+                                                                            </>
+                                                                    }
                                                                     </Input>
-
                                                                 </div>
 
                                                             </div>
