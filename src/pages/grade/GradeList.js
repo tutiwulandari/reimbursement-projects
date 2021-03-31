@@ -127,9 +127,9 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                 <th>Grade</th>
                                                 <th>Biaya Melahirkan</th>
                                                 <th>Biaya Kacamata</th>
-                                                <th>Biaya Hotel</th>
-                                                <th>Biaya Makan</th>
-                                                <th>Biaya Transportasi</th>
+                                                <th>Biaya Pelatihan</th>
+                                                <th>Biaya Perjalanan Dinas</th>
+                                                <th>Biaya Ansuransi</th>
                                                 <th>Edit</th>
                                             </tr>
                                             </thead>
@@ -153,16 +153,6 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.hotelCost}
-                                                                               onChange={handleChange}
-                                                                               name="hotelCost"/>
-                                                                        : convert_to_rupiah(element.hotelCost)
-                                                                }
-                                                            </td>
-                                                            <td>
-                                                                {
-                                                                    isEdit && number == element.id ?
-                                                                        <input className="form-control" type="text"
                                                                                value={data?.glasessCost}
                                                                                onChange={handleChange}
                                                                                name="glasessCost"/>
@@ -173,19 +163,29 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.transportationCost}
+                                                                               value={data?.trainingCost}
                                                                                onChange={handleChange}
-                                                                               name="transportationCost"/>
-                                                                        : convert_to_rupiah(element.transportationCost)
+                                                                               name="trainingCost"/>
+                                                                        : convert_to_rupiah(element.trainingCost)
                                                                 }
                                                             </td>
                                                             <td>
                                                                 {
                                                                     isEdit && number == element.id ?
                                                                         <input className="form-control" type="text"
-                                                                               value={data?.mealCost}
-                                                                               onChange={handleChange} name="mealCost"/>
-                                                                        : convert_to_rupiah(element.mealCost)
+                                                                               value={data?.officialTravelCost}
+                                                                               onChange={handleChange}
+                                                                               name="officialTravelCost"/>
+                                                                        : convert_to_rupiah(element.officialTravelCost)
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    isEdit && number == element.id ?
+                                                                        <input className="form-control" type="text"
+                                                                               value={data?.insuranceCost}
+                                                                               onChange={handleChange} name="insuranceCost"/>
+                                                                        : convert_to_rupiah(element.insuranceCost)
                                                                 }
                                                             </td>
                                                             <td>
