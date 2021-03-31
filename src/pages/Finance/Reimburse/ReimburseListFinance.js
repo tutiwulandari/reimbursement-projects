@@ -19,7 +19,6 @@ import {
 import Header from "../../../dashboard/Header";
 import Footer from "../../../dashboard/Footer";
 import { FormControl } from "react-bootstrap";
-
 /* Just for UI */
 
 
@@ -29,18 +28,19 @@ function ReimburseListFinance({
     findByCategory, rCategory,
 }) {
 
+    const [c, setC] = useState()
     const [search, setSearch] = useState()
     const [status, setStatus] = useState()
-    const [c, setC] = useState()
     const [rSearch, setRSearch] = useState()
     const [rStatus, setRStatus] = useState()
 
-    // useEffect(() => {
-    //     if (search) {
-    //         setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
-    //     }
-    // }, [search])
+    useEffect(() => {
+        findAllReimburseFinance(currentPage)
+        findAllCategory()
+    }, [])
 
+
+    /* Search */
     const [currentPage, setCurrentPage] = useState(1)
     const itemPerPage = 10;
     let total = reimbursements?.data?.total
@@ -62,7 +62,6 @@ function ReimburseListFinance({
             onReload()
         }
     }, [currentPage])
-
 
     const changePage = event => {
         let targetPage = parseInt(event.target.value)
@@ -93,7 +92,6 @@ function ReimburseListFinance({
         }
     }
 
-
     const nextPage = () => {
         let condition = Math.ceil(total / itemPerPage);
         if (currentPage < condition) {
@@ -101,6 +99,14 @@ function ReimburseListFinance({
             onReload()
         }
     }
+
+    const handleSearchEnter = (e) => {
+        if (e.key == 'Enter') {
+            setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname.toLowerCase().match(search.toLowerCase())))
+            e.preventDefault()
+        }
+    }
+    /* Search */
 
 
     useEffect(() => {
@@ -130,17 +136,17 @@ function ReimburseListFinance({
     const handleChangeCategory = (e) => {
         let value = e.target.value
         setC(value)
-        // findByCategory(value)
     }
+
+    useEffect(() => {
+        if (c) {
+            findByCategory(c)
+        }
+    }, [c])
 
     const handleSearchSubmit = () => {
         setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname.toLowerCase().match(search.toLowerCase())))
     }
-
-    useEffect(() => {
-        findAllReimburseFinance(currentPage)
-        findAllCategory()
-    }, [])
 
 
     return (
@@ -153,7 +159,7 @@ function ReimburseListFinance({
 
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                         onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
-                        <option value="" selected disabled hidden>Kategori</option>
+                        <option>Kategori</option>
                         {
                             categories.data?.map((category, index) => {
                                 return (
@@ -162,10 +168,10 @@ function ReimburseListFinance({
                             })
                         }
                     </select>
-                    <div className="float-right" style={{marginRight: "2vh"}}>
+                    <div className="float-right" style={{ marginRight: "2vh" }}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeStatus}>
-                            <option value="all" selected disabled hidden>Status</option>
+                            <option value="all" selected>Status</option>
                             <option value="proses">Proses</option>
                             <option value="selesai">Selesai</option>
                         </select>
@@ -175,23 +181,19 @@ function ReimburseListFinance({
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="card" style={{height: "60vh"}}>
+                                    <div className="card" style={{ height: "60vh" }}>
                                         <div className="card-header">
-                                            <h3 className="card-title">
-
-                                            </h3>
-
+                                            <h3 className="card-title"></h3>
                                             <div className="card-tools">
                                                 <div className="input-group input-group-sm" style={{ width: "150px" }}>
                                                     <input type="text" name="table_search"
-                                                        className="form-control float-right" placeholder="Cari.." onChange={handleSearch}/>
-
+                                                        className="form-control float-right" placeholder="Cari.."
+                                                        onChange={handleSearch} onKeyPress={handleSearchEnter} />
                                                     <div className="input-group-append">
                                                         <button type="submit" className="btn btn-default" onClick={handleSearchSubmit}>
                                                             <i className="fas fa-search">
                                                             </i>
                                                         </button>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,40 +211,28 @@ function ReimburseListFinance({
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {
-
-                                                    rSearch && rSearch != "" ?
-                                                        rSearch?.map((element, index) => {
-                                                            return (
-                                                                <ReimburseRowFinance index={index} element={element}/>
-                                                            )
-                                                        }) :
-                                                        rStatus ?
-                                                            rStatus?.map((element, index) => {
-                                                                return (
-                                                                    <ReimburseRowFinance index={index} element={element} />
-                                                                )
+                                                    {
+                                                        rSearch && rSearch != "" ?
+                                                            rSearch?.map((element, index) => {
+                                                                return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
                                                             }) :
                                                             rStatus ?
                                                                 rStatus?.map((element, index) => {
-                                                                    return (
-                                                                        <ReimburseRowFinance index={index}
-                                                                            element={element} />
-                                                                    )
+                                                                    return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
                                                                 }) :
-                                                                rCategory.length == 0 ?
-                                                                    reimbursements.data?.list?.map((element, index) => {
-                                                                        return (
-                                                                            <ReimburseRowFinance index={index}
-                                                                                element={element} />
-                                                                        )
-                                                                    }) : rCategory?.length == 0 ? "Data is empty" :
-                                                                        rCategory.map((value, key) => {
-                                                                            return (
-                                                                                <ReimburseRowFinance index={key}
-                                                                                    element={value} />
-                                                                            )
-                                                                        })
+                                                                rStatus ?
+                                                                    rStatus?.map((element, index) => {
+                                                                        return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
+                                                                    }) :
+                                                                    rCategory.length == 0 ?
+                                                                        reimbursements.data?.list?.map((element, index) => {
+                                                                            return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
+                                                                        }) :
+                                                                        rCategory?.length == 0 ?
+                                                                            "Data is empty" :
+                                                                            rCategory.map((value, key) => {
+                                                                                return (<ReimburseRowFinance index={key} element={value} currentPage={currentPage} />)
+                                                                            })
                                                     }
                                                 </tbody>
                                             </Table>
@@ -260,8 +250,8 @@ function ReimburseListFinance({
                             <Container>
                                 <Row>
                                     <Col>
-                                        <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
-                                           Menampilkan halaman {currentPage} dari {totalPages}
+                                        <div className="float-left text-dark" style={{ fontFamily: "verdana" }}>
+                                            Menampilkan halaman {currentPage} dari {totalPages}
                                         </div>
                                         <div className="float-right" >
                                             <InputGroup size="md">
@@ -272,14 +262,14 @@ function ReimburseListFinance({
                                                     </Button>
                                                     <Button onClick={prevPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faStepBackward} />
-                                                        {' '}Previous
+                                                        {' '}
                                                     </Button>
                                                 </InputGroupAddon>
                                                 <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                                 <InputGroupAddon addonType="append">
                                                     <Button onClick={nextPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faStepForward} />
-                                                        {' '}  Next
+                                                        {' '}
                                                     </Button>
                                                     <Button onClick={lastPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faFastForward} />
@@ -289,7 +279,6 @@ function ReimburseListFinance({
                                             </InputGroup>
                                         </div>
                                     </Col>
-
                                 </Row>
                             </Container> : null : null
                     }

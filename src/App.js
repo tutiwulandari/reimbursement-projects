@@ -24,6 +24,7 @@ import ReimburseListFinance from './pages/Finance/Reimburse/ReimburseListFinance
 import GradeList from './pages/grade/GradeList';
 import DetailContractForm from './pages/detailContract/editForm/DetailContractForm';
 import VerifiedForm from './pages/Employee/verified/VerifiedForm';
+import Success from './pages/registration/Success';
 
 function App() {
     const [role] = useState(localStorage.getItem("role"))
@@ -34,6 +35,9 @@ function App() {
                     <Switch>
                         <Route path="/" exact>
                             <Login></Login>
+                        </Route>
+                        <Route path="/register-success" exact>
+                            <Success></Success>
                         </Route>
 
                         {/* Admin HC */}

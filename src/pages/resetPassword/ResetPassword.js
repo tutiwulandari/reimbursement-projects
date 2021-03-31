@@ -75,7 +75,7 @@ function ResetPassword({ status, resetPassword }) {
     return (
         <div>
             <Button variant="white" onClick={handleShow}>
-                Reset Kata Sandi
+                Ubah Kata Sandi
             </Button>
 
             <Modal show={show} onHide={handleClose}>

@@ -68,13 +68,14 @@ const Login = ({ loginEmployee, login, isLoading }) => {
 
     useEffect(() => {
         if (login) {
-            if (login?.data?.code === 200) {
+            if (login?.data?.message == "Login Success") {
                 setRole(login.data?.data?.role.id)
-            } else {
+            }
+            else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ooops..',
-                    text: 'Login Gagal!',
+                    title: 'Login Gagal',
+                    text: 'Email atau password salah',
                     showConfirmButton: false,
                     timer: 2000,
                 })

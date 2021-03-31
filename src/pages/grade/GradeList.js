@@ -97,27 +97,12 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                             <div className="col-12">
                                 <div className="card" style={{height: "70vh"}}>
                                     <div className="card-header">
-                                        <h3 className="card-title">
-
-                                        </h3>
+                                        <h3 className="card-title"></h3>
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width: "150px"}}>
-                                                {/*<input type="text" name="table_search"*/}
-                                                {/*       className="form-control float-right"*/}
-                                                {/*       placeholder="Search"/>*/}
-                                                {/*<div className="input-group-append">*/}
-                                                {/*    <button type="submit" className="btn btn-default">*/}
-                                                {/*        <i className="fas fa-search">*/}
-                                                {/*        </i>*/}
-                                                {/*    </button>*/}
-
-                                                {/*</div>*/}
-
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <div className="card-body table-responsive p-0" style={{height: "300px"}}>
@@ -129,7 +114,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                 <th>Biaya Kacamata</th>
                                                 <th>Biaya Pelatihan</th>
                                                 <th>Biaya Perjalanan Dinas</th>
-                                                <th>Biaya Ansuransi</th>
+                                                <th>Biaya Asuransi</th>
                                                 <th>Edit</th>
                                             </tr>
                                             </thead>
@@ -197,9 +182,6 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                                                                             : <FontAwesomeIcon icon={faEdit}/>
                                                                     }
                                                                 </button>
-                                                                {/* <Link to={`/hc/grade/${element.id}`} className="btn btn-outline-enigma">
-                                                        <FontAwesomeIcon icon={faEdit} />
-                                                    </Link> */}
                                                             </td>
                                                         </tr>
                                                     )
