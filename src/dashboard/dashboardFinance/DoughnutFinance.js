@@ -45,7 +45,7 @@ function DoughnutFinance({findAll, dashboards, error, isLoading}) {
                 options={{
                     title:{
                         display:true,
-                        text:'Jumlah Klaim Pengembalian Dana',
+                        text:'Klaim Pengembalian Dana Berdasarkan Kategori',
                         fontSize:20
                     },
                     legend:{

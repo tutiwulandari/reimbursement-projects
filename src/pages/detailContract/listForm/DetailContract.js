@@ -155,11 +155,11 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.employeeId === null ? "belum ada data" : element.employeeId.nip}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus}</td>
+                                                                {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus == "ON_PROCESS"? "PROSES" : "SELESAI"}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.dateOfAcceptancePermanentEmployee === null ? "belum ada data" : element.dateOfAcceptancePermanentEmployee}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.typeContract === null ? "belum ada data" : element.typeContract}</td>
+                                                                {element.typeContract === null ? "belum ada data" : element.typeContract== "PKWT"? "PKWT" : "PROBITION"}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
                                                                 {element.dateOfResignation === null ? "belum ada data" : element.dateOfResignation}</td>
                                                             <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>

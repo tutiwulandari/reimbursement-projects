@@ -37,7 +37,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                 id: contract?.id,
                 employeeId: contract.employeeId.id,
                 typeContract: contract.typeContract === null ? null : contract.typeContract,
-                benefitRegistrationStatus: contract.benefitRegistrationStatus === null ? null : contract?.benefitRegistrationStatus,
+                benefitRegistrationStatus: contract.benefitRegistrationStatus === null ? null : contract?.benefitRegistrationStatus ,
                 startDateContract: contract.startDateContract === null ? null : contract.startDateContract,
                 endDateContract: contract.endDateContract === null ? null : contract.endDateContract,
                 dateOfAcceptancePermanentEmployee: contract.dateOfAcceptancePermanentEmployee === null ? null : contract.dateOfAcceptancePermanentEmployee,
@@ -129,8 +129,8 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                                     benefitRegistrationStatus.map((element, index) =>
                                                                                         <option
                                                                                             selected={element === data?.benefitRegistrationStatus}
-                                                                                            key={index} value={element}>
-                                                                                            {element}
+                                                                                            key={index} value={element }>
+                                                                                            {element  == "ON_PROCESS" ? "PROSES" : "SELESAI"}
                                                                                         </option>
                                                                                     )
                                                                                 )
@@ -170,7 +170,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                                         <option selected={element === data?.typeContract}
                                                                                                 key={index}
                                                                                                 value={element}>
-                                                                                            {element}
+                                                                                            {element == "PKWT" ? "PKWT" : "PROBITION"}
                                                                                         </option>
                                                                                     )
                                                                                 )

@@ -37,7 +37,7 @@ function ChartStatus({findAll, dashboards}) {
                 options={{
                     title:{
                         display:true,
-                        text:'Jumlah Klaim Pengembalian Dana',
+                        text:'Klaim Pengembalian Dana Berdasarkan Status',
                         fontSize:20
                     },
                     legend:{

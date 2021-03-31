@@ -56,6 +56,14 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
         let name = event.target.name;
         let value = event.target.value
         setSearch({...searchName, [name]: value})
+
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            findByName(searchName)
+            event.preventDefault()
+        }
     }
 
     useEffect(() => {
@@ -165,7 +173,9 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                        name="fullname"
                                                        value={searchName?.fullname}
                                                        placeholder="Cari.."
-                                                       onChange={handleChange}/>
+                                                       onChange={handleChange}
+                                                       onKeyPress={handleKeyPress}
+                                                />
                                                 <div className="input-group-append">
                                                     <button type="submit" className="btn btn-default"
                                                             onClick={onSubmit}>
