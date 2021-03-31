@@ -289,22 +289,22 @@ function ReimburseList({
                                                 <InputGroupAddon addonType="prepend">
                                                     <Button onClick={firstPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faFastBackward} />
-                                                        {' '}Pertama
+                                                        {' '}First
                                                 </Button>
                                                     <Button onClick={prevPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faStepBackward} />
-                                                        {' '}Sebelumnya
+                                                        {' '}
                                                 </Button>
                                                 </InputGroupAddon>
                                                 <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                                 <InputGroupAddon addonType="append">
                                                     <Button onClick={nextPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faStepForward} />
-                                                        {' '}  Selanjutnya
+                                                        {' '}
                                                 </Button>
                                                     <Button onClick={lastPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faFastForward} />
-                                                        {' '}Terakhir
+                                                        {' '}Last
                                                 </Button>
                                                 </InputGroupAddon>
                                             </InputGroup>
