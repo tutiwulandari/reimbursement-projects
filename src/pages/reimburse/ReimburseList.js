@@ -36,11 +36,11 @@ function ReimburseList({
     const [rSearch, setRSearch] = useState()
     const [rStatus, setRStatus] = useState()
 
-    useEffect(() => {
-        if (search) {
-            setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
-        }
-    }, [search])
+    // useEffect(() => {
+    //     if (search) {
+    //         setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname == search))
+    //     }
+    // }, [search])
 
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -134,6 +134,10 @@ function ReimburseList({
         setSearch(e.target.value)
     }
 
+    const handleSearchSubmit = () => {
+        setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname.toLowerCase().match(search.toLowerCase())))
+    }
+
     useEffect( () => {
         if(c) {
             findByCategory(c)
@@ -198,7 +202,7 @@ function ReimburseList({
                                                            className="form-control float-right" placeholder="Cari.."
                                                            onChange={handleSearch}/>
                                                     <div className="input-group-append">
-                                                        <button type="submit" className="btn btn-default">
+                                                        <button type="submit" className="btn btn-default" onClick={handleSearchSubmit}>
                                                             <i className="fas fa-search">
                                                             </i>
                                                         </button>
