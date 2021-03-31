@@ -11,7 +11,7 @@ import {
     faStepForward
 } from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import Footer from "../../../dashboard/Footer";
@@ -139,6 +139,12 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 console.log("DATA CONTRACT", contracts)
                                             }
                                             {
+                                                isLoading ?
+                                                    <td className={'justifyContent'}>
+                                                        <Spinner animation="border" role="status">
+                                                            <span className="sr-only">Loading...</span>
+                                                        </Spinner>
+                                                    </td> :
                                                 contracts?.data?.list?.map((element, index) => {
                                                     return (
                                                         <tr style={{textAlign: "center"}} >
@@ -187,6 +193,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                 </div>
                 <div>
+
                     { total > 10 ?
 
                         <Container>
@@ -239,7 +246,6 @@ const mapStateToProps = (state) => {
         contracts: state.findAllContract.data || null,
         error: state.findAllContract.error,
         isLoading: state.findAllContract.isLoading,
-        // total: state.findAllContract.total
 
     }
 }

@@ -17,7 +17,7 @@ import ReimburseRow from './ReimburseRow';
 import Header from './../../dashboard/Header';
 import Footer from './../../dashboard/Footer';
 import MenuHc from './../../dashboard/dashboardHc/MenuHc';
-import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Table} from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
 import {FormControl} from "react-bootstrap";
 
 /* Just for UI */
@@ -165,6 +165,12 @@ function ReimburseList({
                             onChange={handleChangeCategory} style={{width: "30vh", marginLeft: "5vh"}}>
                         <option selected disabled hidden style={{fontFamily:"verdana"}}>Kategori</option>
                         {
+                            isLoading ?
+                                <td className={'justifyContent'}>
+                                    <Spinner animation="border" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </Spinner>
+                                </td> :
                             categories.data?.map((category, index) => {
                                 return (
                                     <option value={category.id}>{category.categoryName}</option>
@@ -224,6 +230,12 @@ function ReimburseList({
                                                 </thead>
                                                 <tbody>
                                                 {
+                                                    isLoading ?
+                                                        <td className={'justifyContent'}>
+                                                            <Spinner animation="border" role="status">
+                                                                <span className="sr-only">Loading...</span>
+                                                            </Spinner>
+                                                        </td> :
                                                     rSearch && rSearch != "" ?
                                                         rSearch?.map((element, index) => {
                                                             return (
