@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findAll, findByName} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faFastBackward, faFastForward, faSortAmountDown, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {InputGroupAddon, Spinner, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
