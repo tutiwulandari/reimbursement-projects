@@ -149,8 +149,8 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
         }
     }
     console.log("FULLNAME", searchName)
-    console.log("LIST", karyawan)
-    console.log("name", name?.data)
+    console.log("karyawan", karyawan)
+    console.log("name", name)
 
 
     return (
@@ -369,9 +369,6 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                             </tr>
                                             </thead>
                                             <tbody style={{fontFamily: "verdana"}}>
-                                            {
-                                                console.log("COBA ya", karyawan)
-                                            }
 
                                             {
                                                 isLoading ?

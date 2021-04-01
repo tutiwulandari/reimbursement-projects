@@ -170,7 +170,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                                         <option selected={element === data?.typeContract}
                                                                                                 key={index}
                                                                                                 value={element}>
-                                                                                            {element == "PKWT" ? "PKWT" : "PROBITION"}
+                                                                                            {element == "PROBABITION" ? "PROBITION" : "PKWT"}
                                                                                         </option>
                                                                                     )
                                                                                 )

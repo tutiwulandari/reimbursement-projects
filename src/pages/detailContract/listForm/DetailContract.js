@@ -2,7 +2,14 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {findAll, findByName} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
+import {
+    faEdit,
+    faFastBackward,
+    faFastForward,
+    faSortAmountDown,
+    faStepBackward,
+    faStepForward
+} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {InputGroupAddon, Spinner, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
@@ -12,67 +19,65 @@ import {Col, Container, FormControl, InputGroup, Row} from "react-bootstrap";
 import {Button} from "@themesberg/react-bootstrap";
 
 
-function DetailContract({findAll, contracts, error, isLoading, findByName, name}) {
+function DetailContract({findAll, contracts, error, isLoading, }) {
 
-    const[searchName, setSearch] = useState({
-        fullname:""
-    })
+    console.log("", )
 
-    const [contract, setContract] = useState(null)
+    const [searchName, setSearch] = useState("")
 
-    useEffect( () => {
+    const [contract, setContract] = useState(contracts)
+
+    useEffect(() => {
         findAll()
     }, [])
 
 
-    useEffect( ()=> {
+    useEffect(() => {
         setContract(
-            {
-                ...contracts
-            })
-    },[contracts])
+            {...contracts})
+    }, [contracts])
 
-    useEffect(()=> {
+
+    const onSubmit = () => {
+        let filter = contracts?.data?.list?.filter(kontrak => kontrak.employeeId.fullname.toLowerCase().match(searchName))
         setContract({
-            data: name
-        })
-    },[name])
-
-
-    const onSubmit = (event) => {
-        findByName(searchName)
+                data : {
+                    list : filter
+                }
+            }
+    )
     }
 
+
     const handleChange = (event) => {
-        let name = event.target.name;
-        let value = event.target.value
-        setSearch({...searchName, [name]: value})
+        setSearch(event.target.value)
     }
 
     const handleKeyPress = (event) => {
-        if (event.key == 'Enter') {
-            findByName(searchName)
+        if (event.key === 'Enter') {
+            onSubmit()
             event.preventDefault()
         }
     }
+
     const [currentPage, setCurrentPage] = useState(1)
     const itemPerPage = 10;
     const total = contract?.data?.total
-    const  totalPages = Math.ceil(total/itemPerPage);
-    const  pageNumCss = {
+    const totalPages = Math.ceil(total / itemPerPage);
+    const pageNumCss = {
         width: "45px",
         border: "1px solid #292961",
         color: "#292961",
         textAlign: "center",
-        fontWeight:"bold"
+        fontWeight: "bold"
     }
 
     const onReload = () => {
         findAll(currentPage)
     }
 
-    useEffect( () => {
-        if(currentPage) {
+    useEffect(() => {
+        if (currentPage) {
             onReload()
         }
     }, [currentPage])
@@ -99,7 +104,7 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
     }
 
     const lastPage = () => {
-        let condition = Math.ceil(total /itemPerPage);
+        let condition = Math.ceil(total / itemPerPage);
         if (currentPage < condition) {
             setCurrentPage(condition)
             onReload()
@@ -107,7 +112,7 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
     }
 
     const nextPage = () => {
-        let condition = Math.ceil(total /itemPerPage);
+        let condition = Math.ceil(total / itemPerPage);
         if (currentPage < condition) {
             setCurrentPage(currentPage + 1)
             onReload()
@@ -115,17 +120,16 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
     }
 
 
-    console.log("Contract", contract)
+    console.log("contract", contract)
     console.log("search", searchName)
-    console.log("search", name)
 
-    return(
+    return (
         <div>
             <Header/>
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color:"black", textAlign:"center", marginBottom:"2vh"}}> DETAIL KONTRAK</h1>
+                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh"}}> DETAIL KONTRAK</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
@@ -136,7 +140,7 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
                                         </h3>
 
                                         <div className="card-tools">
-                                            <div className="input-group input-group-sm" style={{width:"150px"}}>
+                                            <div className="input-group input-group-sm" style={{width: "150px"}}>
                                                 <input type="text" name="fullname"
                                                        value={searchName?.fullname}
                                                        className="form-control float-right"
@@ -155,22 +159,89 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="card-body table-responsive p-0" style={{height:"300px"}}>
+                                    <div className="card-body table-responsive p-0" style={{height: "300px"}}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
                                             <tr>
-                                                <th style={{verticalAlign: "middle", textAlign: "center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Status Asuransi</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Karyawan Tetap</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tipe Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Resign</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Mulai Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Tanggal Habis Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Penempatan</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Habis Kontrak</th>
-                                                <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}> Edit</th>
+                                                <th style={{verticalAlign: "middle", textAlign: "center"}}>
+                                                    <FontAwesomeIcon icon={faSortAmountDown}/></th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Nama Lengkap
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>NIP
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Status Asuransi
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Tanggal Karyawan Tetap
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Tipe Kontrak
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Tanggal Resign
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Tanggal Mulai Kontrak
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Tanggal Habis Kontrak
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Penempatan
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}>Habis Kontrak
+                                                </th>
+                                                <th style={{
+                                                    verticalAlign: "middle",
+                                                    textAlign: "center",
+                                                    maxWidth: "250px",
+                                                    minWidth: "250px"
+                                                }}> Edit
+                                                </th>
 
                                             </tr>
                                             </thead>
@@ -185,36 +256,93 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
                                                             <span className="sr-only">Loading...</span>
                                                         </Spinner>
                                                     </td> :
+
                                                     contract?.data?.list?.map((element, index) => {
                                                         return (
-                                                            <tr style={{textAlign: "center"}} >
+                                                            <tr style={{textAlign: "center"}}>
                                                                 <td style={{textAlign: "center"}}>
-                                                                    {element.employeeId === null ? "belum ada data" : (currentPage-1)*10+index+1}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.employeeId === null ? "belum ada data" : (currentPage - 1) * 10 + index + 1}</td>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.employeeId === null ? "belum ada data" : element.employeeId.fullname}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.employeeId === null ? "belum ada data" : element.employeeId.nip}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus
-                                                                    === 'ON_PROCESS'? 'PROSES': 'SELESAI'}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    === 'ON_PROCESS' ? 'PROSES' : 'SELESAI'}</td>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.dateOfAcceptancePermanentEmployee === null ? "belum ada data" : element.dateOfAcceptancePermanentEmployee}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract ==-'PROBABITION'? 'PROBITION': 'PKWT'}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
+                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract == -'PROBABITION' ? 'PROBITION' : 'PKWT'}</td>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.dateOfResignation === null ? "belum ada data" : element.dateOfResignation}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.startDateContract === null ? "belum ada data" : element.startDateContract}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.endDateContract === null ? "belum ada data" : element.startDateContract}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.placement === null ? "belum ada data" : element.placement}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
                                                                     {element.endedContract === true ? "Ya" : "Tidak"}</td>
-                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                    <Link to={'/contract/'+ element.id }>
+                                                                <td style={{
+                                                                    verticalAlign: "middle",
+                                                                    textAlign: "center",
+                                                                    maxWidth: "250px",
+                                                                    minWidth: "250px"
+                                                                }}>
+                                                                    <Link to={'/contract/' + element.id}>
                                                                         <button className="btn btn-outline-enigma">
-                                                                            <FontAwesomeIcon icon={faEdit} className="float-left"/>
+                                                                            <FontAwesomeIcon icon={faEdit}
+                                                                                             className="float-left"/>
                                                                         </button>
                                                                     </Link>
 
@@ -233,34 +361,43 @@ function DetailContract({findAll, contracts, error, isLoading, findByName, name}
 
                 </div>
                 <div>
-                    { total > 10 ?
+                    {total > 10 ?
 
                         <Container>
                             <Row>
                                 <Col>
-                                    <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
+                                    <div className="float-left text-dark" style={{fontFamily: "verdana"}}>
                                         Menampilkan halaman {currentPage} dari {totalPages}
                                     </div>
-                                    <div className="float-right" >
+                                    <div className="float-right">
                                         <InputGroup size="md">
                                             <InputGroupAddon addonType="prepend">
-                                                <Button onClick={firstPage} type="button" style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === 1 ? true : false}>
-                                                    <FontAwesomeIcon icon={faFastBackward} />
+                                                <Button onClick={firstPage} type="button"
+                                                        style={{backgroundColor: "#292961", color: "white"}}
+                                                        disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastBackward}/>
                                                     {' '}Pertama
                                                 </Button>
-                                                <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
-                                                    <FontAwesomeIcon icon={faStepBackward} />
+                                                <Button onClick={prevPage} type="button"
+                                                        style={{backgroundColor: "#292961", color: "white"}}
+                                                        disabled={currentPage === 1 ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepBackward}/>
                                                     {' '}
                                                 </Button>
                                             </InputGroupAddon>
-                                            <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
+                                            <FormControl onChange={changePage} style={pageNumCss} name="currentPage"
+                                                         value={currentPage}/>
                                             <InputGroupAddon addonType="append">
-                                                <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
-                                                    <FontAwesomeIcon icon={faStepForward} />
+                                                <Button onClick={nextPage} type="button"
+                                                        style={{backgroundColor: "#292961", color: "white"}}
+                                                        disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faStepForward}/>
                                                     {' '}
                                                 </Button>
-                                                <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
-                                                    <FontAwesomeIcon icon={faFastForward} />
+                                                <Button onClick={lastPage} type="button"
+                                                        style={{backgroundColor: "#292961", color: "white"}}
+                                                        disabled={currentPage === totalPages ? true : false}>
+                                                    <FontAwesomeIcon icon={faFastForward}/>
                                                     {' '}Terakhir
                                                 </Button>
                                             </InputGroupAddon>
@@ -286,10 +423,8 @@ const mapStateToProps = (state) => {
         contracts: state.findAllContract.data || null,
         error: state.findAllContract.error,
         isLoading: state.findAllContract.isLoading,
-        name: state.findContractByName.data,
-
     }
 }
 
-const mapDispatchToProps = {findAll, findByName}
+const mapDispatchToProps = {findAll}
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContract)

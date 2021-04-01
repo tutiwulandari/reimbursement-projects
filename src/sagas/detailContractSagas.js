@@ -69,7 +69,7 @@ export function* findContractByName(action) {
     let model = action.model;
     let result = yield axios
         .post("/contract/filter-name", model)
-        .then(data=> {
+        .then(data => {
             return {
                 type: FIND_CONTRACT_BY_NAME_SUCCESS,
                 data: data

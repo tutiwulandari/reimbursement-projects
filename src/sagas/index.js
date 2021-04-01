@@ -23,9 +23,9 @@ import {watchFindAllCategory} from './categorySagas';
 import {watchFindAllGrade, watchFindGradeById, watchSaveGrade} from "./gradeSagas";
 import {
     watchFindAllContract,
-    watchFindContractById, watchFindContractByName,
+    watchFindContractById,
     watchSaveContract,
-    watchUpdateContract
+    watchUpdateContract, watchFindContractByName
 } from "./detailContractSagas";
 import {watchFindAllCount} from "./dashboardSagas";
 import {watchForgotPassword} from './forgotPasswordSagas';
