@@ -150,6 +150,8 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
     }
     console.log("FULLNAME", searchName)
     console.log("LIST", karyawan)
+    console.log("name", name?.data)
+
 
     return (
         <div>
@@ -172,7 +174,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                 <input type="text" className="form-control float-right"
                                                        name="fullname"
                                                        value={searchName?.fullname}
-                                                       placeholder="Cari.."
+                                                       placeholder="Cari karyawan.."
                                                        onChange={handleChange}
                                                        onKeyPress={handleKeyPress}
                                                 />
@@ -592,7 +594,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                         style={{backgroundColor: "#292961", color: "white"}}
                                                         disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faStepBackward}/>
-                                                    {' '}Sebelumnya
+                                                    {' '}
                                                 </Button>
                                             </InputGroupAddon>
                                             <FormControl onChange={changePage} style={pageNumCss} name="currentPage"
@@ -602,7 +604,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
                                                         style={{backgroundColor: "#292961", color: "white"}}
                                                         disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faStepForward}/>
-                                                    {' '}Selanjutnya
+                                                    {' '}
                                                 </Button>
                                                 <Button onClick={lastPage} type="button"
                                                         style={{backgroundColor: "#292961", color: "white"}}

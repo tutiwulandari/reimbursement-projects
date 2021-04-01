@@ -1,4 +1,10 @@
-import {FIND_ALL_CONTRACT, FIND_CONTRACT_BY_ID, SAVE_CONTRACT, UPDATE_CONTRACT} from "../constants/actionConstant";
+import {
+    FIND_ALL_CONTRACT,
+    FIND_CONTRACT_BY_ID,
+    FIND_CONTRACT_BY_NAME,
+    SAVE_CONTRACT,
+    UPDATE_CONTRACT
+} from "../constants/actionConstant";
 
 export function findAll(page) {
     return {
@@ -29,5 +35,12 @@ export function update(payload) {
     return {
         type: UPDATE_CONTRACT,
         payload
+    }
+}
+
+export function findByName(model) {
+    return {
+        type: FIND_CONTRACT_BY_NAME,
+        model
     }
 }

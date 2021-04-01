@@ -8,7 +8,6 @@ import {
     FIND_GRADE_BY_ID_SUCCESS,
     SAVE_GRADE, SAVE_GRADE_FAILURE,
     SAVE_GRADE_SUCCESS,
-    UPDATE_GRADE
 } from "../constants/actionConstant";
 import axios from 'axios'
 

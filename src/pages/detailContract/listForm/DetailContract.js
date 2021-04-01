@@ -1,32 +1,63 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {findAll} from "../../../actions/detailContractAction";
+import {findAll, findByName} from "../../../actions/detailContractAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {
-    faEdit,
-    faFastBackward,
-    faFastForward,
-    faSortAmountDown,
-    faStepBackward,
-    faStepForward
-} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faFastBackward, faFastForward, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
+import {InputGroupAddon, Spinner, Table} from "reactstrap";
 import Header from "../../../dashboard/Header";
 import MenuHc from "../../../dashboard/dashboardHc/MenuHc";
 import Footer from "../../../dashboard/Footer";
-import {FormControl} from "react-bootstrap";
+import {Col, Container, FormControl, InputGroup, Row} from "react-bootstrap";
+import {Button} from "@themesberg/react-bootstrap";
 
 
-function DetailContract({findAll, contracts, error, isLoading}) {
+function DetailContract({findAll, contracts, error, isLoading, findByName, name}) {
+
+    const[searchName, setSearch] = useState({
+        fullname:""
+    })
+
+    const [contract, setContract] = useState(null)
 
     useEffect( () => {
         findAll()
     }, [])
 
+
+    useEffect( ()=> {
+        setContract(
+            {
+                ...contracts
+            })
+    },[contracts])
+
+    useEffect(()=> {
+        setContract({
+            data: name
+        })
+    },[name])
+
+
+    const onSubmit = (event) => {
+        findByName(searchName)
+    }
+
+    const handleChange = (event) => {
+        let name = event.target.name;
+        let value = event.target.value
+        setSearch({...searchName, [name]: value})
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            findByName(searchName)
+            event.preventDefault()
+        }
+    }
     const [currentPage, setCurrentPage] = useState(1)
     const itemPerPage = 10;
-    const total = contracts?.data.total
+    const total = contract?.data?.total
     const  totalPages = Math.ceil(total/itemPerPage);
     const  pageNumCss = {
         width: "45px",
@@ -82,8 +113,11 @@ function DetailContract({findAll, contracts, error, isLoading}) {
             onReload()
         }
     }
-    console.log("total", total)
-    console.log("contracts", contracts)
+
+
+    console.log("Contract", contract)
+    console.log("search", searchName)
+    console.log("search", name)
 
     return(
         <div>
@@ -95,7 +129,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card" style={{height:"60vh"}}>
+                                <div className="card" style={{height: "60vh"}}>
                                     <div className="card-header">
                                         <h3 className="card-title">
 
@@ -103,11 +137,17 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                                         <div className="card-tools">
                                             <div className="input-group input-group-sm" style={{width:"150px"}}>
-                                                <input type="text" name="table_search" className="form-control float-right"
-                                                       placeholder="Cari.."/>
+                                                <input type="text" name="fullname"
+                                                       value={searchName?.fullname}
+                                                       className="form-control float-right"
+                                                       placeholder="Cari karyawan..."
+                                                       onChange={handleChange} onKeyPress={handleKeyPress}
+                                                />
 
                                                 <div className="input-group-append">
-                                                    <button type="submit" className="btn btn-default">
+                                                    <button type="submit" className="btn btn-default"
+                                                            onClick={onSubmit}
+                                                    >
                                                         <i className="fas fa-search">
 
                                                         </i></button>
@@ -118,7 +158,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                     <div className="card-body table-responsive p-0" style={{height:"300px"}}>
                                         <Table className="table table-head-fixed text-nowrap">
                                             <thead>
-                                            <tr style={{fontFamily:"verdana"}}>
+                                            <tr>
                                                 <th style={{verticalAlign: "middle", textAlign: "center"}}><FontAwesomeIcon icon={faSortAmountDown}/></th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>Nama Lengkap</th>
                                                 <th style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>NIP</th>
@@ -134,9 +174,9 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                                             </tr>
                                             </thead>
-                                            <tbody style={{fontFamily:"verdana"}}>
+                                            <tbody>
                                             {
-                                                console.log("DATA CONTRACT", contracts)
+                                                console.log("DATA CONTRACT", contract)
                                             }
                                             {
                                                 isLoading ?
@@ -145,46 +185,46 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                             <span className="sr-only">Loading...</span>
                                                         </Spinner>
                                                     </td> :
-                                                contracts?.data?.list?.map((element, index) => {
-                                                    return (
-                                                        <tr style={{textAlign: "center"}} >
-                                                            <td style={{textAlign: "center"}}>
-                                                                {element.employeeId === null ? "belum ada data" : (currentPage-1)*10+index+1}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.employeeId === null ? "belum ada data" : element.employeeId.fullname}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.employeeId === null ? "belum ada data" : element.employeeId.nip}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus == "ON_PROCESS"? "PROSES" : "SELESAI"}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.dateOfAcceptancePermanentEmployee === null ? "belum ada data" : element.dateOfAcceptancePermanentEmployee}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.typeContract === null ? "belum ada data" : element.typeContract== "PKWT"? "PKWT" : "PROBITION"}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.dateOfResignation === null ? "belum ada data" : element.dateOfResignation}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.startDateContract === null ? "belum ada data" : element.startDateContract}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.endDateContract === null ? "belum ada data" : element.startDateContract}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.placement === null ? "belum ada data" : element.placement}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                {element.endedContract === true ? "Ya" : "Tidak"}</td>
-                                                            <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
-                                                                <Link to={'/contract/'+ element.id }>
-                                                                    <button className="btn btn-outline-enigma">
-                                                                        <FontAwesomeIcon icon={faEdit} className="float-left"/>
-                                                                    </button>
-                                                                </Link>
+                                                    contract?.data?.list?.map((element, index) => {
+                                                        return (
+                                                            <tr style={{textAlign: "center"}} >
+                                                                <td style={{textAlign: "center"}}>
+                                                                    {element.employeeId === null ? "belum ada data" : (currentPage-1)*10+index+1}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.employeeId === null ? "belum ada data" : element.employeeId.fullname}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.employeeId === null ? "belum ada data" : element.employeeId.nip}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.benefitRegistrationStatus === null ? "belum ada data" : element.benefitRegistrationStatus
+                                                                    === 'ON_PROCESS'? 'PROSES': 'SELESAI'}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.dateOfAcceptancePermanentEmployee === null ? "belum ada data" : element.dateOfAcceptancePermanentEmployee}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract ==-'PROBABITION'? 'PROBITION': 'PKWT'}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.dateOfResignation === null ? "belum ada data" : element.dateOfResignation}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.startDateContract === null ? "belum ada data" : element.startDateContract}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.endDateContract === null ? "belum ada data" : element.startDateContract}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.placement === null ? "belum ada data" : element.placement}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    {element.endedContract === true ? "Ya" : "Tidak"}</td>
+                                                                <td style={{verticalAlign: "middle", textAlign: "center", maxWidth: "250px", minWidth: "250px"}}>
+                                                                    <Link to={'/contract/'+ element.id }>
+                                                                        <button className="btn btn-outline-enigma">
+                                                                            <FontAwesomeIcon icon={faEdit} className="float-left"/>
+                                                                        </button>
+                                                                    </Link>
 
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
                                             }
                                             </tbody>
                                         </Table>
-
                                     </div>
                                 </div>
                             </div>
@@ -193,14 +233,13 @@ function DetailContract({findAll, contracts, error, isLoading}) {
 
                 </div>
                 <div>
-
                     { total > 10 ?
 
                         <Container>
                             <Row>
                                 <Col>
                                     <div className="float-left text-dark" style={{fontFamily:"verdana"}}>
-                                       Menampilkan halaman {currentPage} dari {totalPages}
+                                        Menampilkan halaman {currentPage} dari {totalPages}
                                     </div>
                                     <div className="float-right" >
                                         <InputGroup size="md">
@@ -211,14 +250,14 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                                                 </Button>
                                                 <Button onClick={prevPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === 1 ? true : false}>
                                                     <FontAwesomeIcon icon={faStepBackward} />
-                                                    {' '}Sebelumnya
+                                                    {' '}
                                                 </Button>
                                             </InputGroupAddon>
                                             <FormControl onChange={changePage} style={pageNumCss} name="currentPage" value={currentPage} />
                                             <InputGroupAddon addonType="append">
                                                 <Button onClick={nextPage} type="button"  style={{backgroundColor:"#292961", color:"white"}} disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faStepForward} />
-                                                    {' '} Selanjutnya
+                                                    {' '}
                                                 </Button>
                                                 <Button onClick={lastPage} type="button" style={{backgroundColor:"#292961", color:"white"}}  disabled={currentPage === totalPages ? true : false}>
                                                     <FontAwesomeIcon icon={faFastForward} />
@@ -233,6 +272,7 @@ function DetailContract({findAll, contracts, error, isLoading}) {
                         </Container> : null
                     }
                 </div>
+
             </div>
             <Footer/>
 
@@ -246,9 +286,10 @@ const mapStateToProps = (state) => {
         contracts: state.findAllContract.data || null,
         error: state.findAllContract.error,
         isLoading: state.findAllContract.isLoading,
+        name: state.findContractByName.data,
 
     }
 }
 
-const mapDispatchToProps = {findAll}
+const mapDispatchToProps = {findAll, findByName}
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContract)

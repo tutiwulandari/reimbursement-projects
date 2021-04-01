@@ -53,7 +53,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Data karyawan berhasil ditambahkan!',
+                text: 'Data karyawan berhasil diubah!',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -201,7 +201,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                                                             selected={element === data?.employeeStatus}
                                                                                             key={index}
                                                                                             value={element}>
-                                                                                            {element}
+                                                                                            {element == 'ACTIVE'? 'AKTIF': "TIDAK AKTIF"}
                                                                                         </option>
                                                                                     )
                                                                                 )

@@ -239,7 +239,7 @@ function ReimburseList({
                                                         isLoading ?
                                                             <td className={'justifyContent'}>
                                                                 <Spinner animation="border" role="status">
-                                                                    <span className="sr-only">Loading...</span>
+                                                                    <span className="sr-only">Memuat...</span>
                                                                 </Spinner>
                                                             </td> :
                                                             rSearch && rSearch != "" ?
@@ -289,7 +289,7 @@ function ReimburseList({
                                                 <InputGroupAddon addonType="prepend">
                                                     <Button onClick={firstPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faFastBackward} />
-                                                        {' '}First
+                                                        {' '}Pertama
                                                 </Button>
                                                     <Button onClick={prevPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faStepBackward} />
@@ -304,7 +304,7 @@ function ReimburseList({
                                                 </Button>
                                                     <Button onClick={lastPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faFastForward} />
-                                                        {' '}Last
+                                                        {' '}Terakhir
                                                 </Button>
                                                 </InputGroupAddon>
                                             </InputGroup>

@@ -155,7 +155,7 @@ const Login = ({ loginEmployee, login, isLoading }) => {
                                 {isLoading ?
                                     <>
                                         <div className="text-center text-md-center mb-2 mt-md-0">
-                                            <h3 className="mt-0">Tunggu Sebentar</h3>
+                                            <h3 className="mt-0">Mohon Tunggu</h3>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-4">
