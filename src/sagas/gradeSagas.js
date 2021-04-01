@@ -9,7 +9,8 @@ import {
     SAVE_GRADE, SAVE_GRADE_FAILURE,
     SAVE_GRADE_SUCCESS,
 } from "../constants/actionConstant";
-import axios from 'axios'
+// import axios from 'axios'
+import axios from '../configs/api'
 
 
 function* findAllGrade() {

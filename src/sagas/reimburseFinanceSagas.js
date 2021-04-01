@@ -1,6 +1,6 @@
 import { put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
-// import axios from '../configs/api'
+// import axios from "axios";
+import axios from '../configs/api'
 
 import {
     UPDATE_REIMBURSE_FINANCE_FAILURE, UPDATE_REIMBURSE_FINANCE_SUCCESS, UPDATE_REIMBURSE_FINANCE,

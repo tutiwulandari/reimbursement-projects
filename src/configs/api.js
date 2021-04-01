@@ -1,9 +1,5 @@
 import axios from "axios"
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + (localStorage.getItem('token') != null ?
-    localStorage.getItem('token') : "")
-axios.defaults.timeout = 10_000;
-
 axios.interceptors.response.use(function (response) {
     if (response.status !== 200) {
         throw new Error();
