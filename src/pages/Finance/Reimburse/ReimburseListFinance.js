@@ -7,7 +7,7 @@ import { findAllCategory } from '../../../actions/categoryAction';
 /* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
-import { Button, Col, Container, InputGroup, InputGroupAddon, Row, Table } from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFastBackward,
@@ -26,6 +26,7 @@ function ReimburseListFinance({
     reimbursements, findAllReimburseFinance,
     categories, findAllCategory,
     findByCategory, rCategory,
+    isLoading
 }) {
 
     const [c, setC] = useState()
@@ -213,6 +214,12 @@ function ReimburseListFinance({
                                                 </thead>
                                                 <tbody>
                                                     {
+                                                        isLoading ?
+                                                            <td className={'justifyContent'}>
+                                                                <Spinner animation="border" role="status">
+                                                                    <span className="sr-only">Memuat...</span>
+                                                                </Spinner>
+                                                            </td> :
                                                         rSearch && rSearch != "" ?
                                                             rSearch?.map((element, index) => {
                                                                 return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)

@@ -35,7 +35,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
         if (id && contract) {
             setData({
                 id: contract?.id,
-                employeeId: contract.employeeId.id,
+                employeeId: contract?.employeeId.id,
                 typeContract: contract.typeContract === null ? null : contract.typeContract,
                 benefitRegistrationStatus: contract.benefitRegistrationStatus === null ? null : contract?.benefitRegistrationStatus ,
                 startDateContract: contract.startDateContract === null ? null : contract.startDateContract,
@@ -60,7 +60,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
     useEffect(() => {
         if (contract) {
             console.log("DETAIL FORM", contract)
-            setEmployeeId(contract.employeeId.id)
+            setEmployeeId(contract?.employeeId.id)
         }
     }, [contract])
 
@@ -118,7 +118,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                     <Label> Status Asuransi</Label>
                                                                     <Input onChange={handleChange} type="select"
                                                                            name="benefitRegistrationStatus" value={data?.benefitRegistrationStatus}>
-                                                                        <option selected disabled hidden>-- Choose --</option>
+                                                                        <option selected disabled hidden>-- Pilihan --</option>
                                                                         {
                                                                             data?.benefitRegistrationStatus === null ?
                                                                                 benefitRegistrationStatus.map((element, index) =>
@@ -141,7 +141,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                             </div>
                                                             <div className="col-md-6">
                                                                 <div className="form-group">
-                                                                    <Label> Tanggal Penetapan Karyawan Tetap </Label>
+                                                                    <Label> Tanggal Karyawan Tetap </Label>
                                                                     <Input type="date" onChange={handleChange}
                                                                            value={data?.dateOfAcceptancePermanentEmployee === null ? null : data?.dateOfAcceptancePermanentEmployee }
                                                                            name="dateOfAcceptancePermanentEmployee"/>
@@ -158,7 +158,7 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                     <Label> Tipe Kontrak </Label>
                                                                     <Input type="select" defaultValue={data?.typeContract} onChange={handleChange}
                                                                            name="typeContract">
-                                                                        <option selected disabled hidden>-- Choose --</option>
+                                                                        <option selected disabled hidden>-- Pilihan --</option>
                                                                         {
                                                                             data?.typeContract === null ?
                                                                                 typeContract.map((element, index) =>
@@ -226,13 +226,10 @@ function DetailContractForm({contract, findById, isLoading, save, error, savedCo
                                                                 <div className="form-group">
                                                                     <Label> Habis Kontrak</Label>
                                                                     <Input type="select" onChange={handleChange} name="endedContract">
-                                                                    {/*    <option selected disabled hidden>-- Choose --</option>*/}
-                                                                    {/*    <option value={true}> YA</option>*/}
-                                                                    {/*    <option value={false}>TIDAK</option>*/}
                                                                     {
                                                                         data?.endedContract === null ?
                                                                             <>
-                                                                                <option selected disabled hidden>-- Choose --</option>
+                                                                                <option selected disabled hidden>-- Pilihan--</option>
                                                                                 <option value={true}> YA</option>
                                                                                 <option value={false}>TIDAK</option>
                                                                             </>

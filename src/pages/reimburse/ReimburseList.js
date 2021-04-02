@@ -231,7 +231,7 @@ function ReimburseList({
                                                         <th style={{ verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px" }}>Kategori</th>
                                                         <th style={{ verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px" }}>Karyawan</th>
                                                         <th style={{ verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px" }}>Status</th>
-                                                        <th >Detail</th>
+                                                        <th style={{ verticalAlign: "middle", textAlign: "center", minWidth: "200px", maxWidth: "200px" }}>Detail</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
