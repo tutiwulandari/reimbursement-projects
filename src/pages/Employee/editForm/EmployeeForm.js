@@ -1,7 +1,7 @@
 import {findById, save} from "../../../actions/employeeAction";
 import {findAll} from "../../../actions/gradeAction";
 import {connect} from "react-redux";
-import {useHistory, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Input, Label, Spinner} from "reactstrap";
 import "../../../assets/css/EmployeeForm.css"
@@ -129,7 +129,7 @@ function EmployeeForm({employee, findById, isLoading, save, findAll, error, grad
                                                                         NIP
                                                                     </Label>
                                                                     <Input onChange={handleChange}
-                                                                           type="text"
+                                                                           type="number"
                                                                            value={data?.nip === null ? '' : data?.nip}
                                                                            name="nip"/>
 

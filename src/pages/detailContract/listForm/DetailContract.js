@@ -297,7 +297,7 @@ function DetailContract({findAll, contracts, error, isLoading, }) {
                                                                     maxWidth: "250px",
                                                                     minWidth: "250px"
                                                                 }}>
-                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract == -'PROBABITION' ? 'PROBITION' : 'PKWT'}</td>
+                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract == 'PROBABITION' ? 'PROBITION' : 'PKWT'}</td>
                                                                 <td style={{
                                                                     verticalAlign: "middle",
                                                                     textAlign: "center",
@@ -332,7 +332,7 @@ function DetailContract({findAll, contracts, error, isLoading, }) {
                                                                     maxWidth: "250px",
                                                                     minWidth: "250px"
                                                                 }}>
-                                                                    {element.endedContract === true ? "Ya" : "Tidak"}</td>
+                                                                    {element.endedContract === null? "belum ada data" : element.endedContract == true ? "Ya" : "Tidak"}</td>
                                                                 <td style={{
                                                                     verticalAlign: "middle",
                                                                     textAlign: "center",

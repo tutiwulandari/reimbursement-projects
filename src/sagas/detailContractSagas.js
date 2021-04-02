@@ -1,5 +1,6 @@
 import axios from '../configs/api'
 // import axios from "axios";
+
 import {
     FIND_ALL_CONTRACT,
     FIND_ALL_CONTRACT_FAILURE,
@@ -106,8 +107,6 @@ function* saveContract(action) {
             }
         })
     yield put(result)
-    // console.log("SAGAS CONTRACT", model.id)
-
 }
 
 export function* watchFindAllContract() {

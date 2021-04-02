@@ -7,7 +7,7 @@ import { findAllCategory } from '../../../actions/categoryAction';
 /* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
-import { Button, Col, Container, InputGroup, InputGroupAddon, Row, Table } from "reactstrap";
+import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFastBackward,
@@ -26,6 +26,7 @@ function ReimburseListFinance({
     reimbursements, findAllReimburseFinance,
     categories, findAllCategory,
     findByCategory, rCategory,
+    isLoading
 }) {
 
     const [c, setC] = useState()
@@ -168,7 +169,7 @@ function ReimburseListFinance({
                             })
                         }
                     </select>
-                    <div className="float-right" style={{ marginRight: "2vh" }}>
+                    <div className="float-right" style={{ marginRight: "2vh", fontFamily:"verdana" }}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeStatus}>
                             <option value="all" selected>Status</option>
@@ -198,10 +199,11 @@ function ReimburseListFinance({
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="card-body table-responsive p-0" style={{ height: "300px" }}>
                                             <Table className="table table-head-fixed text-nowrap">
                                                 <thead>
-                                                    <tr>
+                                                    <tr style={{fontFamily:"verdana"}}>
                                                         <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                                         <th>Kategori</th>
                                                         <th>Karyawan</th>
@@ -212,6 +214,12 @@ function ReimburseListFinance({
                                                 </thead>
                                                 <tbody>
                                                     {
+                                                        isLoading ?
+                                                            <td className={'justifyContent'}>
+                                                                <Spinner animation="border" role="status">
+                                                                    <span className="sr-only">Memuat...</span>
+                                                                </Spinner>
+                                                            </td> :
                                                         rSearch && rSearch != "" ?
                                                             rSearch?.map((element, index) => {
                                                                 return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
@@ -244,7 +252,7 @@ function ReimburseListFinance({
                         </div>
                     </div>
                 </div>
-                <div>
+                <div style={{marginBottom:"5vh"}}>
                     {search == null && status == null && c == null ?
                         total > 10 ?
                             <Container>
@@ -258,7 +266,7 @@ function ReimburseListFinance({
                                                 <InputGroupAddon addonType="prepend">
                                                     <Button onClick={firstPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faFastBackward} />
-                                                        {' '}First
+                                                        {' '}Pertama
                                                     </Button>
                                                     <Button onClick={prevPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === 1 ? true : false}>
                                                         <FontAwesomeIcon icon={faStepBackward} />
@@ -273,7 +281,7 @@ function ReimburseListFinance({
                                                     </Button>
                                                     <Button onClick={lastPage} type="button" style={{ backgroundColor: "#292961", color: "white" }} disabled={currentPage === totalPages ? true : false}>
                                                         <FontAwesomeIcon icon={faFastForward} />
-                                                        {' '}Last
+                                                        {' '}Terakhir
                                                     </Button>
                                                 </InputGroupAddon>
                                             </InputGroup>

@@ -531,7 +531,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
 
                                                                     {
                                                                         element?.verifiedHc ? "Sudah diverifikasi" :
-                                                                            <select onChange={(e) => {
+                                                                            <select  className="custom-select" style={{width:"190px"}} onChange={(e) => {
                                                                                 handleChangeVerified(e.target.value, element.id)
                                                                             }}>
                                                                                 <option value="verified"
