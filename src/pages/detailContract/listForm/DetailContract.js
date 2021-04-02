@@ -297,7 +297,7 @@ function DetailContract({findAll, contracts, error, isLoading, }) {
                                                                     maxWidth: "250px",
                                                                     minWidth: "250px"
                                                                 }}>
-                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract == -'PROBABITION' ? 'PROBITION' : 'PKWT'}</td>
+                                                                    {element.typeContract === null ? "belum ada data" : element.typeContract == 'PROBABITION' ? 'PROBITION' : 'PKWT'}</td>
                                                                 <td style={{
                                                                     verticalAlign: "middle",
                                                                     textAlign: "center",

@@ -1,4 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
+import axios from '../configs/api'
+
+
 import {
     FIND_ALL_CONTRACT,
     FIND_ALL_CONTRACT_FAILURE,
