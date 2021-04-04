@@ -159,7 +159,7 @@ function ListEmployee({findAll, findByName, employees, error, isLoading, name, s
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh"}}> DAFTAR KARYAWAN</h1>
+                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh", fontFamily:"verdana"}}> DAFTAR KARYAWAN</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">

@@ -70,7 +70,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
                 if (result.isConfirmed) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Success',
+                        title: 'Sukses',
                         text: 'Data berhasil diubah',
                         showConfirmButton: false,
                         timer: 1500
@@ -90,7 +90,7 @@ function GradeList({findAll, findById, save, savedGrade, grades, grade}) {
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color: "black",marginBottom:"3vh", textAlign: "center", fontFamily:"roboto"}}> Daftar Klaim Reimbursement</h1>
+                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh", fontFamily:"verdana"}}> DAFTAR GRADE</h1>
 
                     <div className="container-fluid">
                         <div className="row">

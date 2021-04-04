@@ -129,7 +129,7 @@ function DetailContract({findAll, contracts, error, isLoading, }) {
             <MenuHc/>
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{color: "black", textAlign: "center", marginBottom: "2vh"}}> DETAIL KONTRAK</h1>
+                    <h1  style={{color: "black", textAlign: "center", marginBottom: "2vh", fontFamily:"verdana"}}> DETAIL KONTRAK</h1>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">

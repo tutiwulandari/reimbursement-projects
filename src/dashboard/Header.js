@@ -1,4 +1,3 @@
-import {LocalGasStationOutlined} from "@material-ui/icons";
 import React from "react";
 import {useHistory} from "react-router-dom";
 import ResetPassword from "../pages/resetPassword";
@@ -15,14 +14,15 @@ export default function Header() {
             text: 'Anda yakin ingin keluar?',
             icon: 'info',
             showCancelButton: true,
+            confirmButtonText: "Ya",
             confirmButtonColor: '#292961',
             cancelButtonColor: '#292961',
-            cancelButtonText: 'Batal'
+            cancelButtonText: 'Tidak'
         }).then(result => {
             if (result.isConfirmed) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success',
+                    title: 'Sukses',
                     showConfirmButton: false,
                     timer: 1500
                 })

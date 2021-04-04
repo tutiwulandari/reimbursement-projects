@@ -171,13 +171,13 @@ function ReimburseList({
 
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1 style={{ color: "black", textAlign: "center", fontFamily: "roboto" }}> DAFTAR KLAIM REIMBURSEMENT</h1>
+                    <h1  style={{color: "black", textAlign: "center", marginBottom: "2vh", fontFamily:"verdana"}}> DAFTAR KLAIM REIMBURSEMENT</h1>
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                         onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
                         <option selected style={{ fontFamily: "verdana" }}>Kategori</option>
                         {
                             isLoading ?
-                                <td className={'justifyContent'}>
+                                <td style={{ flex:"1", justifyContent:"center", alignItems:"center"}}>
                                     <Spinner animation="border" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </Spinner>
