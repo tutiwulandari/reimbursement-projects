@@ -10,7 +10,7 @@ function DoughnutFinance({findAll, dashboards, error, isLoading}) {
     }, [])
 
     const state = {
-        labels: ['Kacamata', 'Training', 'Melahirkan',
+        labels: ['Kacamata', 'Pelatihan', 'Melahirkan',
             'Asuransi', 'Perjalanan Dinas'],
         datasets: [
             {

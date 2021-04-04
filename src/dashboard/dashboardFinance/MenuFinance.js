@@ -8,7 +8,7 @@ export default function MenuFinance() {
     return (
         <aside className="main-sidebar sidebar-light-gray-dark elevation-4" style={{backgroundColor:"white"}}>
             {/* Brand Logo */}
-            <a href="index3.html" className="brand-link">
+            <Link to="/dashboard/finance" className="brand-link">
                 <img
                     src={Image1}
                     alt="enigmacamp"
@@ -16,7 +16,7 @@ export default function MenuFinance() {
                     style={{ opacity: ".8" }}
                 />
                 <span className="brand-text font-weight" style={{color:"black", fontFamily:"roboto"}}>Admin Finance</span>
-            </a>
+            </Link>
 
 
             <div className="sidebar">

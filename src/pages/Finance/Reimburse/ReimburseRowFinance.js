@@ -46,7 +46,7 @@ const ReimburseRowFinance = ({
             if (updatedFile?.data?.code == 200 || updatedFile?.data?.code == 200) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success',
+                    title: 'Sukses',
                     text: 'Upload file berhasil',
                     showConfirmButton: false,
                     timer: 1500
@@ -144,7 +144,7 @@ const ReimburseRowFinance = ({
             <td>{element.categoryId.categoryName}</td>
             <td>{element.employeeId.fullname}</td>
             <td>
-                <select className="custom-select td-width text-enigma border-enigma" style={{ width: "135px" }}
+                <select className="custom-select td-width text-enigma border-enigma" style={{ width: "160px" }}
                     onChange={(e) => {
                         handleChangeStatus(e.target.value, element.id)
                     }}>
