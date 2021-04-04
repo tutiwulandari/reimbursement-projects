@@ -231,6 +231,7 @@ const ReimburseRow = ({
                     <div className="row mt-3 offset-md-1">
 
                         <div className="row">
+
                             <h5 className="text-enigma mb-3 bold">Tanggal</h5>
                             <div className="col-md-3">
                                 <p className="p-enigma-bold mb-0">
@@ -240,14 +241,17 @@ const ReimburseRow = ({
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
                             </div>
-                            <div className="col-md-3">
-                                <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em" /> Tanggal Mulai
+                            {
+                                reimburse?.categoryId?.categoryName == "Pelatihan" || reimburse?.categoryId?.categoryName == "Pelatihan" ?
+                                    <div className="col-md-3">
+                                        <p className="p-enigma-bold mb-0">
+                                            <BiCalendar size="1.3em" /> Tanggal Mulai
                                 </p>
-                                <p className="p-enigma">
-                                    {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
-                                </p>
-                            </div>
+                                        <p className="p-enigma">
+                                            {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
+                                        </p>
+                                    </div> : ""
+                            }
                         </div>
 
                         <div className="row">
@@ -259,14 +263,17 @@ const ReimburseRow = ({
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
                             </div>
-                            <div className="col-md-3">
-                                <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em" /> Tanggal Selesai
-                                </p>
-                                <p className="p-enigma">
-                                    {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
-                                </p>
-                            </div>
+                            {
+                                reimburse?.categoryId?.categoryName == "Pelatihan" || reimburse?.categoryId?.categoryName == "Pelatihan" ?
+                                    <div className="col-md-3">
+                                        <p className="p-enigma-bold mb-0">
+                                            <BiCalendar size="1.3em" /> Tanggal Selesai
+                                        </p>
+                                        <p className="p-enigma">
+                                            {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
+                                        </p>
+                                    </div> : ""
+                            }
                         </div>
 
                     </div>

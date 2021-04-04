@@ -7,7 +7,7 @@ import { findAllCategory } from '../../../actions/categoryAction';
 /* Just for UI */
 import ReimburseRowFinance from './ReimburseRowFinance';
 import MenuFinance from "../../../dashboard/dashboardFinance/MenuFinance";
-import {Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table} from "reactstrap";
+import { Button, Col, Container, InputGroup, InputGroupAddon, Row, Spinner, Table } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFastBackward,
@@ -146,7 +146,9 @@ function ReimburseListFinance({
     }, [c])
 
     const handleSearchSubmit = () => {
-        setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname.toLowerCase().match(search.toLowerCase())))
+        if (search) {
+            setRSearch(reimbursements.data?.list?.filter(r => r.employeeId.fullname.toLowerCase().match(search.toLowerCase())))
+        }
     }
 
 
@@ -156,7 +158,7 @@ function ReimburseListFinance({
             <MenuFinance />
             <div className="content-wrapper">
                 <div className="content-header">
-                    <h1  style={{color: "black", textAlign: "center", marginBottom: "2vh", fontFamily:"verdana"}}> DAFTAR KLAIM REIMBURSEMENT</h1>
+                    <h1 style={{ color: "black", textAlign: "center", marginBottom: "2vh", fontFamily: "verdana" }}> DAFTAR KLAIM REIMBURSEMENT</h1>
 
                     <select className="custom-select rounded-pill text-enigma border-enigma"
                         onChange={handleChangeCategory} style={{ width: "30vh", marginLeft: "5vh" }}>
@@ -169,7 +171,7 @@ function ReimburseListFinance({
                             })
                         }
                     </select>
-                    <div className="float-right" style={{ marginRight: "2vh", fontFamily:"verdana" }}>
+                    <div className="float-right" style={{ marginRight: "2vh", fontFamily: "verdana" }}>
                         <select className="custom-select rounded-pill text-enigma border-enigma"
                             onChange={handleChangeStatus}>
                             <option value="all" selected>Status</option>
@@ -203,7 +205,7 @@ function ReimburseListFinance({
                                         <div className="card-body table-responsive p-0" style={{ height: "300px" }}>
                                             <Table className="table table-head-fixed text-nowrap">
                                                 <thead>
-                                                    <tr style={{fontFamily:"verdana"}}>
+                                                    <tr style={{ fontFamily: "verdana" }}>
                                                         <th><FontAwesomeIcon icon={faSortAmountDown} /></th>
                                                         <th>Kategori</th>
                                                         <th>Karyawan</th>
@@ -220,12 +222,8 @@ function ReimburseListFinance({
                                                                     <span className="sr-only">Memuat...</span>
                                                                 </Spinner>
                                                             </td> :
-                                                        rSearch && rSearch != "" ?
-                                                            rSearch?.map((element, index) => {
-                                                                return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
-                                                            }) :
-                                                            rStatus ?
-                                                                rStatus?.map((element, index) => {
+                                                            rSearch && rSearch != "" ?
+                                                                rSearch?.map((element, index) => {
                                                                     return (<ReimburseRowFinance index={index} element={element} currentPage={currentPage} />)
                                                                 }) :
                                                                 rStatus ?
@@ -252,7 +250,7 @@ function ReimburseListFinance({
                         </div>
                     </div>
                 </div>
-                <div style={{marginBottom:"5vh"}}>
+                <div style={{ marginBottom: "5vh" }}>
                     {search == null && status == null && c == null ?
                         total > 10 ?
                             <Container>

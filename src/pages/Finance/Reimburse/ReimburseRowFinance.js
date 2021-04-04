@@ -277,15 +277,18 @@ const ReimburseRowFinance = ({
                                 <p className="p-enigma">
                                     {reimburse?.dateOfClaimSubmission ? convert_date_format(reimburse.dateOfClaimSubmission) : ""}
                                 </p>
-                            </div >
-                            <div className="col-md-3">
-                                <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em" /> Tanggal Mulai
+                            </div>
+                            {
+                                reimburse?.categoryId?.categoryName == "Pelatihan" || reimburse?.categoryId?.categoryName == "Pelatihan" ?
+                                    <div className="col-md-3">
+                                        <p className="p-enigma-bold mb-0">
+                                            <BiCalendar size="1.3em" /> Tanggal Mulai
                                     </p>
-                                <p className="p-enigma">
-                                    {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
-                                </p>
-                            </div >
+                                        <p className="p-enigma">
+                                            {reimburse?.startDate ? convert_date_format(reimburse.startDate) : ""}
+                                        </p>
+                                    </div> : ""
+                            }
                         </div >
 
                         <div className="row">
@@ -297,14 +300,17 @@ const ReimburseRowFinance = ({
                                     {reimburse?.disbursementDate ? convert_date_format(reimburse.disbursementDate) : ""}
                                 </p>
                             </div >
-                            <div className="col-md-3">
-                                <p className="p-enigma-bold mb-0">
-                                    <BiCalendar size="1.3em" /> Tanggal Selesai
-                                    </p>
-                                <p className="p-enigma">
-                                    {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
-                                </p>
-                            </div >
+                            {
+                                reimburse?.categoryId?.categoryName == "Pelatihan" || reimburse?.categoryId?.categoryName == "Pelatihan" ?
+                                    <div className="col-md-3">
+                                        <p className="p-enigma-bold mb-0">
+                                            <BiCalendar size="1.3em" /> Tanggal Selesai
+                                        </p>
+                                        <p className="p-enigma">
+                                            {reimburse?.endDate ? convert_date_format(reimburse.endDate) : ""}
+                                        </p>
+                                    </div> : ""
+                            }
                         </div >
 
                     </div >
@@ -324,14 +330,11 @@ const ReimburseRowFinance = ({
                 <ModalBody>
                     <form encType="multipart/form-data">
                         <div className="row">
-                            {
-                                reimburse?.statusSuccess ?
-                                    <div className="col-md-12">
-                                        <h6 className="text-enigma bold">Upload File</h6>
-                                        <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
-                                        <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" />
-                                    </div> : ""
-                            }
+                            <div className="col-md-12">
+                                <h6 className="text-enigma bold">Upload File</h6>
+                                <p className="p-enigma mt-0 mb-3">*Format file (PDF/JPG/PNG/JPEG)</p>
+                                <input onChange={handleChangeFile} multiple name="file" type="file" className="form-control" />
+                            </div>
                             <hr />
                             <div className="col-md-12 mb-1">
                                 <button type="button" onClick={toggle2}
