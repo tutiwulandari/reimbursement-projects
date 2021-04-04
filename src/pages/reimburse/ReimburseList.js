@@ -245,24 +245,24 @@ function ReimburseList({
                                                             rSearch && rSearch != "" ?
                                                                 rSearch?.map((element, index) => {
                                                                     return (
-                                                                        <ReimburseRow index={index} data={element} />
+                                                                        <ReimburseRow index={index} data={element} currentPage={currentPage}/>
                                                                     )
                                                                 }) :
                                                                 rStatus ?
                                                                     rStatus?.map((element, index) => {
                                                                         return (
-                                                                            <ReimburseRow index={index} data={element} />
+                                                                            <ReimburseRow index={index} data={element} currentPage={currentPage}/>
                                                                         )
                                                                     }) :
                                                                     rCategory.length == 0 ?
                                                                         reimbursements.data?.list?.map((element, index) => {
                                                                             return (
-                                                                                <ReimburseRow index={index} data={element} />
+                                                                                <ReimburseRow index={index} data={element} currentPage={currentPage}/>
                                                                             )
                                                                         }) : rCategory?.length == 0 ? "Data is empty" :
                                                                             rCategory.map((value, key) => {
                                                                                 return (
-                                                                                    <ReimburseRow index={key} data={value} />
+                                                                                    <ReimburseRow index={key} data={value} currentPage={currentPage}/>
                                                                                 )
                                                                             })
                                                     }

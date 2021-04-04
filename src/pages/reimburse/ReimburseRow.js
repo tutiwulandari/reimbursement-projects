@@ -17,7 +17,7 @@ import { BiIdCard, BiUserPin, BiDownload, BiCheckbox, BiCheckboxChecked, BiMoney
 
 
 const ReimburseRow = ({
-    data, index,
+    data, index, currentPage,
     updateReimburse, updatedReimburse,
     reimburse, findReimburseId,
     bill, findBillById,
@@ -88,7 +88,7 @@ const ReimburseRow = ({
 
     return (
         <tr>
-            <td style={{ textAlign: "center", fontFamily: "verdana" }}>{index + 1}</td>
+            <td style={{ textAlign: "center", fontFamily: "verdana" }}>{(currentPage - 1) * 10 + index + 1}</td>
             <td style={{ textAlign: "center", fontFamily: "verdana" }}>{data.categoryId.categoryName}</td>
             <td style={{ textAlign: "center", fontFamily: "verdana" }}>{data.employeeId.fullname}</td>
             <td style={{ textAlign: "center", fontFamily: "verdana" }}>
